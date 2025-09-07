@@ -1,13 +1,10 @@
 import './App.scss'
 
-function App() {
-
+const App = () => {
   return (
-    <>
-      <h1>
-        Hello World! Edit <code>src/App.tsx</code> and save to test HMR
-      </h1>
-    </>
+    <div className="App">
+      <h1>The Scientific Officer</h1>
+    </div>
   )
 }
 
