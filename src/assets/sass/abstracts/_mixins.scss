@@ -1,0 +1,39 @@
+@use "sass:meta";
+@use "sass:math";
+@use "sass:map";
+@use "breakpoints" as *;
+
+@mixin mq($size, $direction: up) {
+  @if map.has-key($breakpoints, $size) {
+    $breakpoint: map.get($breakpoints, $size);
+    @if $direction == up {
+      @media screen and (min-width: $breakpoint) {
+        @content;
+      }
+    } @else if $direction == down {
+      @media screen and (max-width: $breakpoint) {
+        @content;
+      }
+    } @else {
+      @error 'Direction must be "up" or "down".';
+    }
+  } @else if meta.type-of($size) == number {
+    @if math.is-unitless($size) {
+      @error 'when using a number with @mq() make sure to include a unit';
+    } @else {
+      @if $direction == up {
+        @media screen and (min-width: $size) {
+          @content;
+        }
+      } @else if $direction == down {
+        @media screen and (max-width: $size) {
+          @content;
+        }
+      } @else {
+        @error 'Direction must be "up" or "down".';
+      }
+    }
+  } @else {
+    @error 'the keyword #{$size} is not in the $breakpoints map';
+  }
+}

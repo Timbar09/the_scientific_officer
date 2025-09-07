@@ -1,9 +1,9 @@
-import './App.scss'
-
 const App = () => {
   return (
-    <div className="App">
+    <div className="App container p-4">
       <h1>The Scientific Officer</h1>
+
+      <p className="fs-lg">Welcome to The Scientific Officer application!</p>
     </div>
   )
 }
