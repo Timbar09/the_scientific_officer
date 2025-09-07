@@ -1,3 +1,5 @@
+@use "../abstracts" as *;
+
 html {
   font-size: 16px;
 }
@@ -9,9 +11,14 @@ a:hover {
   color: #535bf2;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $ff-exo;
+  line-height: 1.2;
 }
 
 // button {
