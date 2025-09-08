@@ -1,6 +1,6 @@
 @use "../abstracts" as *;
 
-@each $key, $value in $spacing {
+@each $key, $value in $sizes {
   .m {
     &-#{$key} {
       margin: $value;
