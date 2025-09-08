@@ -1,0 +1,63 @@
+
+// Flexbox display and direction
+$flexbox: (
+  inline: inline-flex,
+  wrap: wrap,
+  nowrap: nowrap,
+  row: row,
+  row-reverse: row-reverse,
+  col: column,
+  col-reverse: column-reverse
+);
+
+// Justify and align items/content
+$placement: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+  evenly: space-evenly,
+  stretch: stretch,
+  baseline: baseline
+);
+
+// Align-content utility map
+$align-content: (
+  start: flex-start,
+  end: flex-end,
+  center: center,
+  between: space-between,
+  around: space-around,
+  stretch: stretch
+);
+
+// Flex grow/shrink utility map
+$flex-grow: (
+  0: 0,
+  1: 1,
+  2: 2
+);
+
+$flex-shrink: (
+  0: 0,
+  1: 1,
+  2: 2
+);
+
+$grid-columns: (
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  6: 6,
+  12: 12
+);
+
+// Documentation:
+// $flexbox: display, direction, and wrapping
+// $placement: justify-content and align-items values
+// $align-content: align-content values
+// $flex-grow/$flex-shrink: flex-grow and flex-shrink values
+
+// Grid utility maps

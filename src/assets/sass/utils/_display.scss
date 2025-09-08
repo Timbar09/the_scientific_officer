@@ -1,0 +1,17 @@
+@use "../abstracts" as *;
+
+// Basic display utility classes
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.none { display: none; }
+
+// Responsive display utility classes
+@each $break-name, $break-value in $breakpoints {
+  @include mq($break-name) {
+    .block-\@#{$break-name} { display: block; }
+    .inline-\@#{$break-name} { display: inline; }
+    .inline-block-\@#{$break-name} { display: inline-block; }
+    .none-\@#{$break-name} { display: none; }
+  }
+}

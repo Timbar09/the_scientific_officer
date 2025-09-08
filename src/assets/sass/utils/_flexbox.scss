@@ -1,0 +1,118 @@
+
+@use "../abstracts" as *;
+
+.flex {
+  display: flex;
+}
+
+@each $key, $value in $flexbox {
+  .flex-#{$key} {
+    flex-direction: $value;
+  }
+}
+
+@each $key, $value in $placement {
+  .jc-#{$key} {
+    justify-content: $value;
+  }
+}
+
+@each $key, $value in $placement {
+  .ai-#{$key} {
+    align-items: $value;
+  }
+}
+
+@each $key, $value in $align-content {
+  .ac-#{$key} {
+    align-content: $value;
+  }
+}
+
+@each $key, $value in $flex-grow {
+  .fg-#{$key} {
+    flex-grow: $value;
+  }
+}
+
+@each $key, $value in $flex-shrink {
+  .fs-#{$key} {
+    flex-shrink: $value;
+  }
+}
+
+@each $key, $value in $sizes {
+  .gap-#{$key} {
+    gap: $value;
+  }
+}
+
+@each $key, $value in $sizes {
+  .row-gap-#{$key} {
+    row-gap: $value;
+  }
+}
+
+@each $key, $value in $sizes {
+  .col-gap-#{$key} {
+    column-gap: $value;
+  }
+}
+
+// Responsive gap utility classes with .gap-@{breakpoint}-{size} naming
+@each $break-name, $break-value in $breakpoints {
+  @include mq($break-name) {
+    // Flex container
+    .flex-\@#{$break-name} {
+      display: flex;
+    }
+    // flex-direction
+    @each $key, $value in $flexbox {
+      .flex-\@#{$break-name}-#{$key} {
+        flex-direction: $value;
+      }
+    }
+    // justify-content
+    @each $key, $value in $placement {
+      .jc-\@#{$break-name}-#{$key} {
+        justify-content: $value;
+      }
+    }
+    // align-items
+    @each $key, $value in $placement {
+      .ai-\@#{$break-name}-#{$key} {
+        align-items: $value;
+      }
+    }
+    // align-content
+    @each $key, $value in $align-content {
+      .ac-\@#{$break-name}-#{$key} {
+        align-content: $value;
+      }
+    }
+    // flex-grow
+    @each $key, $value in $flex-grow {
+      .fg-\@#{$break-name}-#{$key} {
+        flex-grow: $value;
+      }
+    }
+    // flex-shrink
+    @each $key, $value in $flex-shrink {
+      .fs-\@#{$break-name}-#{$key} {
+        flex-shrink: $value;
+      }
+    }
+    // gap
+    @each $key, $value in $sizes {
+      .gap-\@#{$break-name}-#{$key} {
+        gap: $value;
+      }
+      .row-gap-\@#{$break-name}-#{$key} {
+        row-gap: $value;
+      }
+      .col-gap-\@#{$break-name}-#{$key} {
+        column-gap: $value;
+      }
+    }
+  }
+}

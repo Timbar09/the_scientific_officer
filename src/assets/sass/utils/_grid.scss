@@ -1,0 +1,29 @@
+
+@use "../abstracts" as *;
+
+.grid {
+  display: grid;
+}
+
+.grid-center {
+  justify-content: center;
+  align-items: center;
+}
+
+
+@each $col-name, $col-value in $grid-columns {
+  .grid-cols-#{$col-name} {
+    grid-template-columns: repeat(#{$col-value}, 1fr);
+  }
+}
+
+// Responsive grid columns and gaps
+@each $break-name, $break-value in $breakpoints {
+  @include mq($break-name) {
+    @each $col-name, $col-value in $grid-columns {
+      .grid-cols-\@#{$break-name}-#{$col-name} {
+        grid-template-columns: repeat(#{$col-value}, 1fr);
+      }
+    }
+  }
+}
