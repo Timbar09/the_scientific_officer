@@ -19,8 +19,8 @@
 }
 
 @function spacing($size) {
-  @if map.has-key($spacing, $size) {
-    @return map.get($spacing, $size);
+  @if map.has-key($sizes, $size) {
+    @return map.get($sizes, $size);
   } @else {
     @error '$spacing does not have that size!';
   }
