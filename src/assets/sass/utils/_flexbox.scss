@@ -1,11 +1,20 @@
-
 @use "../abstracts" as *;
 
 .flex {
   display: flex;
 }
 
-@each $key, $value in $flexbox {
+.flex-inline {
+  display: inline-flex;
+}
+
+@each $key, $value in $flex-wrap {
+  .flex-#{$key} {
+    flex-wrap: $value;
+  }
+}
+
+@each $key, $value in $flex-direction {
   .flex-#{$key} {
     flex-direction: $value;
   }
@@ -66,8 +75,17 @@
     .flex-\@#{$break-name} {
       display: flex;
     }
+    .flex-inline-\@#{$break-name} {
+      display: inline-flex;
+    }
+    // Flex wrap
+    @each $key, $value in $flex-wrap {
+      .flex-#{$key} {
+        flex-wrap: $value;
+      }
+    }
     // flex-direction
-    @each $key, $value in $flexbox {
+    @each $key, $value in $flex-direction {
       .flex-\@#{$break-name}-#{$key} {
         flex-direction: $value;
       }
