@@ -4,6 +4,8 @@ import Layout from "./layout";
 const App = () => {
   return (
     <div className="App bg-neutral-200 clr-neutral-500">
+      <div id="overlay" className="overlay" />
+
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<div>Home Page</div>} />

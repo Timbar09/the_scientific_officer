@@ -85,17 +85,21 @@ const Header = () => {
   const toggleNavMenu = () => {
     setIsNavOpen(!isNavOpen);
 
+    const overlay = document.getElementById("overlay")!;
+
     if (!isNavOpen) {
+      overlay.style.display = "block";
       document.body.style.overflow = "hidden";
     } else {
+      overlay.style.display = "none";
       document.body.style.overflow = "auto";
     }
   };
 
   return (
     <header className="header p-block-3" role="banner">
-      <div className="container p-inline-3 flex ai-center jc-between">
-        <div className="header__logo" role="logo">
+      <div className="container flex ai-center jc-between">
+        <div className="header__logo p-block-1 p-inline-3" role="logo">
           Scientific Officer
         </div>
 
