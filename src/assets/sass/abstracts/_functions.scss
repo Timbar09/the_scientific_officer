@@ -25,3 +25,11 @@
     @error '$spacing does not have that size!';
   }
 }
+
+@function radius($size) {
+  @if map.has-key($radii, $size) {
+    @return map.get($radii, $size);
+  } @else {
+    @error '$radii does not have that size!';
+  }
+}

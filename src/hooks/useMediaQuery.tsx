@@ -20,7 +20,10 @@ interface props {
   direction?: "up" | "down";
 }
 
-const useMediaQuery = ({ breakpoint, direction = "up" }: props): boolean => {
+export const useMediaQuery = ({
+  breakpoint,
+  direction = "up",
+}: props): boolean => {
   const query = `(${direction === "up" ? "min" : "max"}-width: ${
     BREAKPOINTS[breakpoint]
   })`;
@@ -43,5 +46,3 @@ const useMediaQuery = ({ breakpoint, direction = "up" }: props): boolean => {
 
   return matches;
 };
-
-export default useMediaQuery;

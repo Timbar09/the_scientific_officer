@@ -19,5 +19,15 @@ $font-sizes: (
   "6xl": 3.75rem,
 );
 
+$radii: (
+  none: 0,
+  xs: 0.25rem,
+  sm: 0.5rem,
+  md: 0.75rem,
+  lg: 1rem,
+  pill: 9999px,
+  circle: 50%,
+);
+
 $fw-400: 400;
 $fw-700: 700;
