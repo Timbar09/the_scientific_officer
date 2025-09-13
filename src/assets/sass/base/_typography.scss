@@ -47,7 +47,11 @@ button {
   background-color: clr(neutral, 900, 0.5);
   backdrop-filter: blur(4px);
   z-index: 10;
-  // display: none;
+  display: none;
+}
+
+.main {
+  padding-block-start: 5rem;
 }
 
 .container {

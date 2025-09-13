@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router";
+
 import Layout from "./layout";
+import Home from "./pages/Home";
 
 const App = () => {
   return (
@@ -8,7 +10,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<div>Home Page</div>} />
+          <Route index element={<Home />} />
           <Route path="/practice" element={<div>Practice Page</div>} />
           {/* <Route path="/mock-test" element={<div>Mock Test Page</div>} /> */}
           <Route path="/resources" element={<div>Resources Page</div>} />

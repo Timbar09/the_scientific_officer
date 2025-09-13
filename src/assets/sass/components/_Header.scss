@@ -8,13 +8,10 @@
   z-index: 1000;
 
   .container {
-    position: static;
-    background-color: clr(neutral, 200, 0.125);
-    backdrop-filter: blur(5px);
     border-radius: radius(pill);
 
     @include mq("md") {
-      padding-inline: spacing(4);
+      padding-inline: spacing(3);
       background-color: clr(neutral, 100);
       box-shadow: $shadow-lg;
     }
@@ -23,6 +20,7 @@
   &__logo {
     border-radius: radius(pill);
     background-color: clr(neutral, 100);
+    box-shadow: $shadow-md;
   }
 
   &__nav {
@@ -32,6 +30,7 @@
         color: clr(neutral, 700);
         background-color: clr(neutral, 100);
         border-radius: 50%;
+        box-shadow: $shadow-md;
         cursor: pointer;
         z-index: 1;
 
@@ -52,7 +51,7 @@
     &--menu {
       position: absolute;
       padding: 4.5rem spacing(3) spacing(5);
-      border-radius: radius(lg);
+      border-radius: 0 0 radius(lg) radius(lg);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       background-color: clr(neutral, 100);
       width: 100%;
