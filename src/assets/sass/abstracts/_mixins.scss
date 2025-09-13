@@ -37,3 +37,19 @@
     @error 'the keyword #{$size} is not in the $breakpoints map';
   }
 }
+
+@mixin before($content: "", $pos: absolute) {
+  &::before {
+    content: $content;
+    position: $pos;
+    @content;
+  }
+}
+
+@mixin after($content: "", $pos: absolute) {
+  &::after {
+    content: $content;
+    position: $pos;
+    @content;
+  }
+}
