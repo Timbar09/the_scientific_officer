@@ -2,9 +2,10 @@
 @use "color-palette" as *;
 @use "sizes" as *;
 
-@function clr($color, $shade) {
+@function clr($color, $shade, $opacity: 1) {
   @if map.has-key($colors, $color, $shade) {
-    @return map.get($colors, $color, $shade);
+    $base: map.get($colors, $color, $shade);
+    @return rgba($base, $opacity);
   } @else {
     @error '$colors does not have that color!';
   }
