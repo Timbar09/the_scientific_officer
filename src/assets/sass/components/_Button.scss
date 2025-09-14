@@ -1,0 +1,70 @@
+@use "../abstracts" as *;
+
+.btn {
+  border-radius: radius(pill);
+  padding: spacing(1) spacing(4);
+
+  &__primary {
+    font-weight: 700;
+    color: clr(primary, 100);
+    background: linear-gradient(65deg, clr(primary, 400), clr(primary, 600));
+    box-shadow: $shadow-sm;
+    transition: opacity 100ms ease, box-shadow 100ms ease, transform 50ms ease;
+
+    &:hover {
+      opacity: 0.9;
+      box-shadow: $shadow-md;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &__secondary {
+    --border-width: 0.125rem;
+
+    padding-block: calc(spacing(1) - var(--border-width));
+    font-weight: 700;
+    color: clr(primary, 500);
+    border: 0.125rem solid clr(primary, 300);
+    box-shadow: $shadow-sm;
+    transition: background-color 100ms ease, box-shadow 100ms ease,
+      transform 50ms ease, color 100ms ease, border-color 100ms ease;
+
+    &:hover {
+      color: clr(primary, 100);
+      background-color: clr(primary, 500);
+      box-shadow: $shadow-md;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      border-color: clr(primary, 400);
+      background-color: clr(primary, 400);
+      box-shadow: $shadow-sm;
+    }
+  }
+
+  &__tertiary {
+    font-weight: 600;
+    color: clr(primary, 700);
+    background-color: clr(neutral, 100);
+    box-shadow: $shadow-sm;
+    transition: background-color 100ms ease, box-shadow 100ms ease,
+      transform 50ms ease, color 100ms ease;
+
+    &:hover {
+      color: clr(primary, 900);
+      background-color: clr(primary, 100);
+      box-shadow: $shadow-md;
+    }
+
+    &:active {
+      transform: scale(0.98);
+      background-color: clr(neutral, 800);
+      box-shadow: $shadow-sm;
+    }
+  }
+}

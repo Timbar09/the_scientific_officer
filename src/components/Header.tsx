@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { NavLink } from "react-router";
-
 import { AnimatePresence, motion } from "motion/react";
 
 import { useMediaQuery } from "../hooks/useMediaQuery";
+
+import Button from "./Button";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -99,11 +100,14 @@ const Header = () => {
   return (
     <header className="header p-block-3" role="banner">
       <div className="container flex ai-center jc-between">
-        <div className="header__logo p-block-1 p-inline-3" role="logo">
-          Scientific Officer
+        <div
+          className="header__logo p-block-1 p-inline-3 fw-bold clr-neutral-700"
+          role="logo"
+        >
+          The Scientific Officer
         </div>
 
-        <nav className="header__nav" role="navigation">
+        <nav className="header__nav flex ai-center gap-5" role="navigation">
           <button
             className="header__nav--toggle__button grid p-1"
             aria-label="Toggle navigation menu"
@@ -123,6 +127,8 @@ const Header = () => {
           />
 
           {isTablet && <NavList />}
+
+          {isTablet && <Button />}
         </nav>
       </div>
     </header>
