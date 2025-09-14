@@ -52,6 +52,8 @@ button {
 
 .main {
   padding-block-start: 5rem;
+  padding-block-end: 2rem;
+  min-height: calc(100vh - 2rem);
 }
 
 .container {

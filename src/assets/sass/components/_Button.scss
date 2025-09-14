@@ -7,7 +7,7 @@
   &__primary {
     font-weight: 700;
     color: clr(primary, 100);
-    background: linear-gradient(65deg, clr(primary, 400), clr(primary, 600));
+    background: $clr-primary-gradient;
     box-shadow: $shadow-sm;
     transition: opacity 100ms ease, box-shadow 100ms ease, transform 50ms ease;
 
