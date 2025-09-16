@@ -1,4 +1,6 @@
 @use "sass:map";
+@use "sass:math";
+@use "sass:meta";
 @use "color-palette" as *;
 @use "sizes" as *;
 
@@ -33,4 +35,11 @@
   } @else {
     @error '$radii does not have that size!';
   }
+}
+
+@function rem($value, $base: 16) {
+  @if not(meta.type-of($value) == number and math.is-unitless($value)) {
+    @error '$value must be a number without a unit';
+  }
+  @return ($value / $base) * 1rem;
 }

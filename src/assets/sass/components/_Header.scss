@@ -14,6 +14,7 @@
       padding-inline: spacing(1);
       background-color: clr(neutral, 100);
       box-shadow: $shadow-lg;
+      border: $border;
     }
   }
 
@@ -100,7 +101,7 @@
           height: 0;
           background: $clr-primary-gradient;
           border-radius: radius(lg) radius(lg) 0 0;
-          transition: height 100ms ease;
+          transition: height 0ms ease;
         }
 
         &:hover {
@@ -111,6 +112,7 @@
           color: clr(primary, 900);
 
           &:before {
+            transition: height 200ms ease;
             height: var(--underline-height);
           }
         }
