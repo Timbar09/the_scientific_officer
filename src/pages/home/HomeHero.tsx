@@ -16,7 +16,7 @@ const HomeHero = () => {
   ];
 
   return (
-    <section className="home__hero main__section flex flex-col flex-@md-row jc-@md-between ai-center gap-5 p-block-end-5">
+    <section className="home__hero main__section flex flex-col flex-@md-row jc-@md-between ai-center gap-5">
       <div className="home__hero--text flex flex-col jc-center ai-center ai-@md-start gap-4 p-block-5">
         <h1 className="home__title fw-bold clr-primary-900">
           Ace the Scientific Officer Role

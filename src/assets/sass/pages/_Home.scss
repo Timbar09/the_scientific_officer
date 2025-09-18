@@ -1,6 +1,8 @@
 @use "../abstracts" as *;
 
 .home {
+  background: linear-gradient(135deg, clr(neutral, 100), clr(primary, 200));
+
   &__title {
     font-size: 3.5rem;
     margin-bottom: 1rem;
@@ -44,6 +46,45 @@
           object-fit: cover;
           border-radius: inherit;
         }
+      }
+    }
+  }
+
+  &__feature {
+    &--list {
+      padding-top: 5rem;
+      grid-template-columns: repeat(auto-fit, minmax(17em, 1fr));
+    }
+
+    &--item {
+      padding: 1.5rem;
+      text-align: center;
+      color: clr(primary, 200);
+      background: $clr-primary-gradient-mid;
+      border-radius: radius(lg);
+
+      @include mq(md) {
+        text-align: left;
+      }
+
+      &__icon {
+        span {
+          font-size: 2.25rem;
+          color: clr(primary, 100);
+          border-radius: radius(circle);
+          background: $clr-primary-gradient-dark;
+          box-shadow: $shadow-md;
+        }
+      }
+
+      &__title {
+        color: clr(primary, 100);
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+
+      &__description {
+        font-size: 1rem;
       }
     }
   }
