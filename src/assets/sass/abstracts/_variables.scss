@@ -5,10 +5,20 @@
 $ff-nunito: "Nunito", sans-serif;
 $ff-exo: "Exo 2", sans-serif;
 
-$clr-primary-gradient: linear-gradient(
+$clr-primary-gradient-light: linear-gradient(
+  65deg,
+  clr(primary, 200),
+  clr(primary, 400)
+);
+$clr-primary-gradient-mid: linear-gradient(
   65deg,
   clr(primary, 400),
   clr(primary, 600)
+);
+$clr-primary-gradient-dark: linear-gradient(
+  65deg,
+  clr(primary, 600),
+  clr(primary, 800)
 );
 
 $shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);

@@ -41,5 +41,5 @@
   @if not(meta.type-of($value) == number and math.is-unitless($value)) {
     @error '$value must be a number without a unit';
   }
-  @return ($value / $base) * 1rem;
+  @return math.div($value, $base) * 1rem;
 }
