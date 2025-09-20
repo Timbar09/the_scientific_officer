@@ -1,0 +1,36 @@
+@use "../abstracts/" as *;
+
+.footer {
+  padding-block-end: 5rem;
+  text-align: center;
+  font-size: 0.875rem;
+
+  @include mq(md) {
+    text-align: left;
+  }
+
+  a {
+    &:hover {
+      color: clr(neutral, 400);
+    }
+  }
+
+  &__top {
+    &--group {
+      &__item {
+        &:first-child {
+          max-width: 15rem;
+          margin: 0 auto;
+
+          @include mq(md) {
+            margin: 0;
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    border-top: rem(1) solid clr(neutral, 400, 0.2);
+  }
+}
