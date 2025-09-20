@@ -11,12 +11,21 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="/practice" element={<div>Practice Page</div>} />
+          <Route
+            path="/practice"
+            element={<div className="main">Practice Page</div>}
+          />
           {/* <Route path="/mock-test" element={<div>Mock Test Page</div>} /> */}
-          <Route path="/resources" element={<div>Resources Page</div>} />
+          <Route
+            path="/resources"
+            element={<div className="main">Resources Page</div>}
+          />
           {/* <Route path="/tips-and-strategies" element={<div></div>} /> */}
-          <Route path="/about" element={<div>About Page</div>} />
-          <Route path="*" element={<div>404 Not Found</div>} />
+          <Route
+            path="/about"
+            element={<div className="main">About Page</div>}
+          />
+          <Route path="*" element={<div className="main">404 Not Found</div>} />
         </Route>
       </Routes>
     </div>

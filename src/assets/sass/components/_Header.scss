@@ -11,7 +11,7 @@
     border-radius: radius(pill);
 
     @include mq("md") {
-      padding-inline: spacing(1);
+      padding-inline: spacing(2);
       background-color: clr(neutral, 100);
       box-shadow: $shadow-lg;
       border: $border;
