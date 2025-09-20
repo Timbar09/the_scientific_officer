@@ -1,8 +1,6 @@
 @use "../abstracts" as *;
 
 .home {
-  background: linear-gradient(135deg, clr(neutral, 100), clr(primary, 200));
-
   &__title {
     font-size: 3.5rem;
     margin-bottom: 1rem;
