@@ -14,8 +14,16 @@ const App = () => {
           <Route
             path="/practice"
             element={<div className="main">Practice Page</div>}
-          />
-          {/* <Route path="/mock-test" element={<div>Mock Test Page</div>} /> */}
+          >
+            <Route
+              path="questions"
+              element={<div className="main">Practice Questions Page</div>}
+            />
+            <Route
+              path="mock-test"
+              element={<div className="main">Mock Test Page</div>}
+            />
+          </Route>
           <Route
             path="/resources"
             element={<div className="main">Resources Page</div>}
