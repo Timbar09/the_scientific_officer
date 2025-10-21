@@ -12,23 +12,25 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route
-            path="/practice"
-            element={<div className="main">Practice Page</div>}
-          >
-            <Route
-              path="questions"
-              element={<div className="main">Practice Questions Page</div>}
-            />
-            <Route
-              path="mock-test"
-              element={<div className="main">Mock Test Page</div>}
-            />
-          </Route>
-          <Route
-            path="/resources"
-            element={<div className="main">Resources Page</div>}
+            path="/practice/questions"
+            element={<div className="main">Practice Questions Page</div>}
           />
-          {/* <Route path="/tips-and-strategies" element={<div></div>} /> */}
+          <Route
+            path="/practice/mock-test"
+            element={<div className="main">Mock Test Page</div>}
+          />
+          <Route
+            path="/resources/books"
+            element={<div className="main">Books Page</div>}
+          />
+          <Route
+            path="/resources/articles"
+            element={<div className="main">Articles Page</div>}
+          />
+          <Route
+            path="/resources/videos"
+            element={<div className="main">Videos Page</div>}
+          />
           <Route
             path="/about"
             element={<div className="main">About Page</div>}
