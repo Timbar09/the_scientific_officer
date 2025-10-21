@@ -138,8 +138,6 @@ const NavDropdown = ({
   isMobileMenu,
   closeDropdown,
 }: NavDropdownProps) => {
-  console.log("isMobileMenu", isMobileMenu);
-
   return isMobileMenu ? (
     <div key="modal" className="header__nav--list__dropdown p-block-1">
       <ul

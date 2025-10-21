@@ -63,6 +63,10 @@
       flex-direction: column;
       gap: 0.125em;
 
+      button {
+        background-color: clr(neutral, 100);
+      }
+
       &__link {
         position: relative;
         width: 100%;
@@ -77,10 +81,6 @@
           color: clr(neutral, 700);
           background-color: clr(neutral, 200);
         }
-
-        &:active {
-          background-color: clr(neutral, 300);
-        }
       }
 
       .header__nav--list__dropdown {
@@ -93,12 +93,28 @@
           box-shadow: none;
         }
 
-        .header__nav--list__link {
-          padding: spacing(1);
-          // border: $border;
-          border-radius: 0;
-          background-color: clr(neutral, 200, 0.75);
-          // margin-bottom: spacing(1);
+        .header__nav--list {
+          &__item {
+            z-index: 0;
+
+            &:first-child {
+              a {
+                border-radius: radius(md) radius(md) 0 0;
+              }
+            }
+
+            &:last-child {
+              a {
+                border-radius: 0 0 radius(md) radius(md);
+              }
+            }
+          }
+
+          &__link {
+            padding: spacing(1);
+            border-radius: 0;
+            background-color: clr(neutral, 200, 0.75);
+          }
         }
       }
     }

@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { useMediaQuery } from "../hooks/useMediaQuery";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
-import Button from "./Button";
+import Button from "../Button";
 import { MenuList, NavList } from "./NavLists";
 
 const Nav = () => {
