@@ -2,6 +2,12 @@ import { Routes, Route } from "react-router";
 
 import Layout from "./layout";
 import Home from "./pages/home";
+import PracticeQuestions from "./pages/questions";
+import MockTests from "./pages/mock";
+import Books from "./pages/books";
+import Articles from "./pages/articles";
+import Videos from "./pages/videos";
+import About from "./pages/about";
 
 const App = () => {
   return (
@@ -11,30 +17,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route
-            path="/practice/questions"
-            element={<div className="main">Practice Questions Page</div>}
-          />
-          <Route
-            path="/practice/mock-test"
-            element={<div className="main">Mock Test Page</div>}
-          />
-          <Route
-            path="/resources/books"
-            element={<div className="main">Books Page</div>}
-          />
-          <Route
-            path="/resources/articles"
-            element={<div className="main">Articles Page</div>}
-          />
-          <Route
-            path="/resources/videos"
-            element={<div className="main">Videos Page</div>}
-          />
-          <Route
-            path="/about"
-            element={<div className="main">About Page</div>}
-          />
+          <Route path="/practice/questions" element={<PracticeQuestions />} />
+          <Route path="/practice/mock-test" element={<MockTests />} />
+          <Route path="/resources/books" element={<Books />} />
+          <Route path="/resources/articles" element={<Articles />} />
+          <Route path="/resources/videos" element={<Videos />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<div className="main">404 Not Found</div>} />
         </Route>
       </Routes>
