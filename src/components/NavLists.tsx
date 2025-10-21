@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
 
-import { NavMenuItem, NavItem } from "./NavItems";
+import { NavMenuItem, NavLinkItem } from "./NavItems";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -67,12 +67,7 @@ export const NavList = () => {
       id="navigation-list"
     >
       {navLinks.map((link) => (
-        <NavItem
-          key={link.path}
-          item={link}
-          // isSubMenuOpen={isSubMenuOpen}
-          // setIsSubMenuOpen={setIsSubMenuOpen}
-        />
+        <NavLinkItem key={link.path} item={link} />
       ))}
     </ul>
   );

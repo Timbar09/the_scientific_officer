@@ -63,13 +63,14 @@
       flex-direction: column;
       gap: 0.125em;
 
-      &__item,
       &__link {
-        display: inline-block;
+        position: relative;
         width: 100%;
         text-align: center;
-        border-radius: radius(lg);
+        font-size: inherit;
+        // border-radius: radius(lg);
         cursor: pointer;
+        z-index: 1;
         transition: background-color 100ms ease;
 
         &:hover {
@@ -79,6 +80,25 @@
 
         &:active {
           background-color: clr(neutral, 300);
+        }
+      }
+
+      .header__nav--list__dropdown {
+        padding-block: 0;
+        position: relative;
+        text-align: center;
+
+        &--list {
+          padding: 0;
+          box-shadow: none;
+        }
+
+        .header__nav--list__link {
+          padding: spacing(1);
+          // border: $border;
+          border-radius: 0;
+          background-color: clr(neutral, 200, 0.75);
+          // margin-bottom: spacing(1);
         }
       }
     }
