@@ -1,17 +1,30 @@
 @use "../abstracts" as *;
 
 .btn {
-  padding: spacing(1) spacing(3);
+  $color: clr(primary, 100);
+
   border-radius: radius(pill);
   font-size: 1.0125rem;
 
+  &__icon {
+    padding: 0.125rem;
+    color: clr(primary, 500);
+    background-color: $color;
+    border-radius: radius(circle);
+
+    .material-symbols-outlined {
+      font-size: 1.25rem;
+    }
+  }
+
   &__primary {
+    $bg-color: $clr-primary-gradient-mid;
     $inner-shadow: inset 5px 5px 5px 0 clr(primary, 900, 0.05),
       inset -5px -5px 4px 0 clr(primary, 100, 0.05);
 
     font-weight: 700;
-    color: clr(primary, 100);
-    background: $clr-primary-gradient-mid;
+    color: $color;
+    background: $bg-color;
     box-shadow: $inner-shadow, $shadow-md;
     transition: opacity 100ms ease, box-shadow 100ms ease, transform 50ms ease;
 
@@ -32,14 +45,14 @@
     padding-block: calc(spacing(1) - var(--border-width));
     font-weight: 700;
     color: clr(primary, 500);
-    border: 0.125rem solid clr(primary, 300);
+    border: 0.125rem solid clr(primary, 500);
     box-shadow: $shadow-sm;
     transition: background-color 100ms ease, box-shadow 100ms ease,
       transform 50ms ease, color 100ms ease, border-color 100ms ease;
 
     &:hover {
       color: clr(primary, 100);
-      background-color: clr(primary, 500);
+      background-color: clr(primary, 400);
       box-shadow: $shadow-md;
     }
 
@@ -53,15 +66,14 @@
 
   &__tertiary {
     font-weight: 600;
-    color: clr(primary, 700);
-    background-color: clr(neutral, 100);
+    color: clr(primary, 500);
+    background-color: clr(primary, 100);
     box-shadow: $shadow-sm;
     transition: background-color 100ms ease, box-shadow 100ms ease,
       transform 50ms ease, color 100ms ease;
 
     &:hover {
-      color: clr(primary, 900);
-      background-color: clr(primary, 100);
+      background-color: clr(primary, 200);
       box-shadow: $shadow-md;
     }
 
