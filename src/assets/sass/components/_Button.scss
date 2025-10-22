@@ -6,15 +6,18 @@
   font-size: 1.0125rem;
 
   &__primary {
+    $inner-shadow: inset 5px 5px 5px 0 clr(primary, 900, 0.05),
+      inset -5px -5px 4px 0 clr(primary, 100, 0.05);
+
     font-weight: 700;
     color: clr(primary, 100);
     background: $clr-primary-gradient-mid;
-    box-shadow: $shadow-sm;
+    box-shadow: $inner-shadow, $shadow-md;
     transition: opacity 100ms ease, box-shadow 100ms ease, transform 50ms ease;
 
     &:hover {
       opacity: 0.9;
-      box-shadow: $shadow-md;
+      box-shadow: $inner-shadow, $shadow-lg;
     }
 
     &:active {
