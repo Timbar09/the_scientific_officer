@@ -8,11 +8,7 @@
   }
 
   .container {
-    min-height: 100vh;
-  }
-
-  &__header {
-    width: 100%;
+    height: max(100vh, 40rem);
   }
 
   &__title {
@@ -20,9 +16,17 @@
     color: clr(primary, 900);
   }
 
-  &__icon {
-    // font-size: 15rem;
-    font-size: clamp(10rem, 25vw, 15rem);
+  &__header {
+    width: 100%;
+
+    &--title {
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
+      color: clr(primary, 800);
+    }
+
+    &--icon {
+      font-size: clamp(8rem, 20vw, 15rem);
+    }
   }
 
   &__description {

@@ -12,9 +12,11 @@ const UnderConstruction = ({ page }: UnderConstructionProps) => {
 
   return (
     <div className="under-construction">
-      <div className="container flex jc-center ai-center flex-col gap-4">
+      <div className="container flex jc-center ai-center flex-col">
+        <h1 className="under-construction__title m-block-end-4">{page}</h1>
+
         <header className="under-construction__header flex flex-col flex-@md-row ai-center jc-center">
-          <h2 className="under-construction__title flex-@md flex-@md-col jc-@md-center">
+          <h2 className="under-construction__header--title flex-@md flex-@md-col jc-@md-center">
             {isMediumScreen ? (
               <>
                 <span>Page</span> <span>Under</span> <span>Construction</span>
@@ -24,10 +26,10 @@ const UnderConstruction = ({ page }: UnderConstructionProps) => {
             )}
           </h2>
 
-          <span className="under-construction__icon">🚧</span>
+          <span className="under-construction__header--icon">🚧</span>
         </header>
 
-        <p className="under-construction__description">
+        <p className="under-construction__description m-block-end-4">
           The {page} page is currently under construction. Please check back
           later!
         </p>
