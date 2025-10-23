@@ -1,4 +1,3 @@
-import { NavLink } from "react-router";
 import { useMediaQuery } from "../hooks/useMediaQuery";
 
 import Button from "./Button";
@@ -13,7 +12,7 @@ const UnderConstruction = ({ page }: UnderConstructionProps) => {
   return (
     <div className="under-construction">
       <div className="container flex jc-center ai-center flex-col">
-        <h1 className="under-construction__title m-block-end-4">{page}</h1>
+        <h1 className="under-construction__title m-block-end-4">{page} Page</h1>
 
         <header className="under-construction__header flex flex-col flex-@md-row ai-center jc-center">
           <h2 className="under-construction__header--title flex-@md flex-@md-col jc-@md-center">
@@ -34,8 +33,8 @@ const UnderConstruction = ({ page }: UnderConstructionProps) => {
           later!
         </p>
 
-        <Button variant="primary">
-          <NavLink to="/">Go Back Home</NavLink>
+        <Button to="/" icon={{ name: "Arrow_back" }}>
+          Go Back Home
         </Button>
       </div>
     </div>

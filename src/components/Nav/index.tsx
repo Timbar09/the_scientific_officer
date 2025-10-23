@@ -45,7 +45,7 @@ const Nav = () => {
 
       {isTablet && <NavList />}
 
-      {isTablet && <Button />}
+      {isTablet && <Button icon={{ name: "info" }}>Start Here!</Button>}
     </nav>
   );
 };
