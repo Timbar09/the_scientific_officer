@@ -51,11 +51,9 @@ const HomeFeatures = () => {
   return (
     <section className="home__feature main__section">
       <div className="container">
-        <h2 className="home__section--title clr-primary-900 m-block-end-3">
-          Everything You Need to Excel
-        </h2>
+        <h2 className="home__section--title">Everything You Need to Excel</h2>
 
-        <p className="home__feature--description">
+        <p className="home__section--description">
           Our platform provides comprehensive tools and resources designed
           specifically for animal science professionals.
         </p>

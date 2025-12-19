@@ -1,6 +1,7 @@
 import HomeHero from "./HomeHero";
 import HomeFeatures from "./HomeFeatures";
 import HomeMetrics from "./HomeMetrics";
+import HomePractice from "./HomePractice";
 
 const Home = () => {
   return (
@@ -10,6 +11,8 @@ const Home = () => {
       <HomeFeatures />
 
       <HomeMetrics />
+
+      <HomePractice />
     </main>
   );
 };

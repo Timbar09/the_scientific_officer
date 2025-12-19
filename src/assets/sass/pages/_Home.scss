@@ -23,12 +23,18 @@
     &--title {
       font-size: clamp(1.5rem, 3vw, 2rem);
       font-weight: 600;
+      color: clr(primary, 900);
+      margin-block-end: spacing(3);
       text-align: center;
       margin-bottom: 1rem;
 
       @include mq(md) {
         text-align: left;
       }
+    }
+
+    &--description {
+      max-width: max(40rem, 60%);
     }
   }
 
@@ -75,10 +81,6 @@
 
   &__feature {
     margin-top: 4rem;
-
-    &--description {
-      max-width: max(40rem, 60%);
-    }
 
     &--list {
       padding-top: 5rem;
