@@ -82,7 +82,15 @@
 
     &--list {
       padding-top: 5rem;
-      grid-template-columns: repeat(auto-fit, minmax(17em, 1fr));
+      grid-template-columns: 1fr;
+
+      @include mq(md) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include mq(lg) {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
 
     &--item {

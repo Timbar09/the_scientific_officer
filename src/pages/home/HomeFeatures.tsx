@@ -1,30 +1,17 @@
 const HomeFeatures = () => {
   const features = [
     {
-      icon: "Quiz",
+      icon: "Neurology",
       title: "Practice Questions",
       description:
         "Enhance your knowledge and skills with a variety of practice questions tailored for scientific officers, covering key topics and scenarios.",
       link: "/practice",
     },
     {
-      icon: "Science",
-      title: "Mock Tests",
+      icon: "menu_book",
+      title: "Resources",
       description:
-        "Simulate real exam conditions with our mock tests, designed to help you assess your readiness and improve your test-taking strategies.",
-      link: "/practice",
-    },
-    // {
-    //   icon: "Newspaper",
-    //   title: "Comprehensive Articles",
-    //   description:
-    //     "Access a wide range of articles covering essential topics for scientific officers, from research methodologies to regulatory compliance.",
-    // },
-    {
-      icon: "Stethoscope",
-      title: "Interactive Tools",
-      description:
-        "Utilize interactive tools and resources that aid in understanding complex scientific concepts and procedures relevant to your role.",
+        "Utilize curated resources including guides, tutorials, and reference materials to support your learning and professional development.",
       link: "/resources",
     },
     {
@@ -47,16 +34,29 @@ const HomeFeatures = () => {
     //   description:
     //     "Stay informed with regular updates on the latest industry trends, research findings, and best practices to keep your knowledge current.",
     // },
+    // {
+    //   icon: "Science",
+    //   title: "Mock Tests",
+    //   description:
+    //     "Simulate real exam conditions with our mock tests, designed to help you assess your readiness and improve your test-taking strategies.",
+    //   link: "/practice",
+    // },
+    // {
+    //   icon: "Newspaper",
+    //   title: "Comprehensive Articles",
+    //   description:
+    //     "Access a wide range of articles covering essential topics for scientific officers, from research methodologies to regulatory compliance.",
+    // },
   ];
   return (
     <section className="home__feature main__section">
-      <h2 className="home__feature--title sr-only">Features</h2>
+      <h2 className="home__section--title clr-primary-900 m-block-end-3">
+        Everything You Need to Excel
+      </h2>
 
-      <p className="home__feature--description sr-only">
-        Discover the key features of our platform that empower scientific
-        officers to excel in their roles. From comprehensive articles to
-        interactive tools, explore how we support your professional growth and
-        success.
+      <p className="home__feature--description">
+        Our platform provides comprehensive tools and resources designed
+        specifically for animal science professionals.
       </p>
 
       <ul className="home__feature--list grid gap-4">
