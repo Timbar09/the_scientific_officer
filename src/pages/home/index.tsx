@@ -1,14 +1,15 @@
 import HomeHero from "./HomeHero";
 import HomeFeatures from "./HomeFeatures";
+import HomeMetrics from "./HomeMetrics";
 
 const Home = () => {
   return (
     <main className="home main">
-      <div className="container">
-        <HomeHero />
+      <HomeHero />
 
-        <HomeFeatures />
-      </div>
+      <HomeFeatures />
+
+      <HomeMetrics />
     </main>
   );
 };

@@ -50,35 +50,37 @@ const HomeFeatures = () => {
   ];
   return (
     <section className="home__feature main__section">
-      <h2 className="home__section--title clr-primary-900 m-block-end-3">
-        Everything You Need to Excel
-      </h2>
+      <div className="container">
+        <h2 className="home__section--title clr-primary-900 m-block-end-3">
+          Everything You Need to Excel
+        </h2>
 
-      <p className="home__feature--description">
-        Our platform provides comprehensive tools and resources designed
-        specifically for animal science professionals.
-      </p>
+        <p className="home__feature--description">
+          Our platform provides comprehensive tools and resources designed
+          specifically for animal science professionals.
+        </p>
 
-      <ul className="home__feature--list grid gap-4">
-        {features.map((feature) => (
-          <li
-            className="home__feature--item flex flex-col gap-1"
-            key={feature.title}
-          >
-            <div className="home__feature--item__icon">
-              <span className="material-symbols-outlined p-2">
-                {feature.icon}
-              </span>
-            </div>
+        <ul className="home__feature--list grid gap-4">
+          {features.map((feature) => (
+            <li
+              className="home__feature--item flex flex-col gap-1"
+              key={feature.title}
+            >
+              <div className="home__feature--item__icon">
+                <span className="material-symbols-outlined p-2">
+                  {feature.icon}
+                </span>
+              </div>
 
-            <h3 className="home__feature--item__title">{feature.title}</h3>
+              <h3 className="home__feature--item__title">{feature.title}</h3>
 
-            <p className="home__feature--item__description">
-              {feature.description}
-            </p>
-          </li>
-        ))}
-      </ul>
+              <p className="home__feature--item__description">
+                {feature.description}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };
