@@ -48,17 +48,17 @@
     border: 0.125rem solid clr(primary, 500);
     box-shadow: $shadow-sm;
     transition: background-color 100ms ease, box-shadow 100ms ease,
-      transform 50ms ease, color 100ms ease, border-color 100ms ease;
+      transform 50ms ease, color 100ms ease;
 
     &:hover {
       color: clr(primary, 100);
       background-color: clr(primary, 400);
+      border-width: 0rem;
       box-shadow: $shadow-md;
     }
 
     &:active {
       transform: scale(0.98);
-      border-color: clr(primary, 400);
       background-color: clr(primary, 400);
       box-shadow: $shadow-sm;
     }

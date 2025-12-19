@@ -2,9 +2,34 @@
 
 .home {
   &__title {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     margin-bottom: 1rem;
     text-shadow: 2px 2px 4px clr(neutral, 100, 0.3);
+
+    span {
+      &:nth-child(2) {
+        @include mq(md) {
+          display: block;
+        }
+      }
+
+      &:last-child {
+        display: block;
+      }
+    }
+  }
+
+  &__section {
+    &--title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+
+      @include mq(md) {
+        text-align: left;
+      }
+    }
   }
 
   &__hero {
@@ -17,7 +42,7 @@
 
       @include mq(md) {
         text-align: left;
-        max-width: 20rem;
+        min-width: 20rem;
       }
     }
 
@@ -49,6 +74,12 @@
   }
 
   &__feature {
+    margin-top: 4rem;
+
+    &--description {
+      max-width: max(40rem, 60%);
+    }
+
     &--list {
       padding-top: 5rem;
       grid-template-columns: repeat(auto-fit, minmax(17em, 1fr));
@@ -57,8 +88,8 @@
     &--item {
       padding: 1.5rem;
       text-align: center;
-      color: clr(primary, 200);
-      background: $clr-primary-gradient-mid;
+      background: clr(primary, 500, 0.05);
+      border: $border;
       border-radius: radius(lg);
 
       @include mq(md) {
@@ -76,7 +107,7 @@
       }
 
       &__title {
-        color: clr(primary, 100);
+        color: clr(primary, 900);
         font-size: 1.25rem;
         margin-bottom: 0.5rem;
       }

@@ -17,16 +17,27 @@ const HomeHero = () => {
 
   return (
     <section className="home__hero main__section flex flex-col flex-@md-row jc-@md-between ai-center gap-5">
-      <div className="home__hero--text flex flex-col jc-center ai-center ai-@md-start gap-4 p-block-5">
-        <h1 className="home__title fw-bold clr-primary-900">
-          Ace the Scientific Officer Role
+      <div className="home__hero--text p-block-5">
+        <p className="clr-primary-500">For Animal Science Professionals</p>
+
+        <h1 className="home__title fw-bold clr-primary-900 m-block-end-4 p-block-end-2">
+          <span>Master</span> <span>Animal Science</span>{" "}
+          <span>Through Practice</span>
         </h1>
 
-        <Button>
-          <Link to="/articles" className="clr-inherit">
-            Explore Articles
-          </Link>
-        </Button>
+        <div className="flex jc-center jc-@md-start gap-3">
+          <Button>
+            <Link to="/articles" className="clr-inherit">
+              Start Practicing
+            </Link>
+          </Button>
+
+          <Button variant="secondary">
+            <Link to="/resources" className="clr-inherit">
+              Browse Resources
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="home__hero--image">
