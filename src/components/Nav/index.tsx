@@ -8,6 +8,7 @@ import { MenuList, NavList } from "./NavLists";
 const Nav = () => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const isTablet: boolean = useMediaQuery({ breakpoint: "md" });
+  const isLaptop: boolean = useMediaQuery({ breakpoint: "lg" });
 
   const toggleNavMenu = () => {
     setIsNavOpen(!isNavOpen);
@@ -45,7 +46,7 @@ const Nav = () => {
 
       {isTablet && <NavList />}
 
-      {isTablet && <Button icon={{ name: "info" }}>Start Here!</Button>}
+      {isLaptop && <Button icon={{ name: "heart_plus" }}>Contribute</Button>}
     </nav>
   );
 };

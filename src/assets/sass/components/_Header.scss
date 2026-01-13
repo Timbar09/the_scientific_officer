@@ -11,7 +11,7 @@
     border-radius: radius(pill);
 
     @include mq("md") {
-      padding-inline: spacing(2);
+      padding: spacing(1);
       background-color: clr(neutral, 100);
       box-shadow: $shadow-lg;
       border: $border;
@@ -120,6 +120,7 @@
     }
 
     &--list {
+      padding-inline-end: spacing(4);
       &__item {
         position: relative;
 
@@ -140,18 +141,22 @@
         position: relative;
         font-size: inherit;
         font-weight: 600;
-        padding: spacing(3) 0;
+        // padding: spacing(3) 0;
         border-radius: radius(lg);
         transition: color 100ms ease;
 
         @include before() {
           left: 0;
-          bottom: 0;
+          bottom: -1.025rem;
           width: 100%;
           height: 0;
           background: $clr-primary-gradient-mid;
           border-radius: radius(lg) radius(lg) 0 0;
           transition: height 0ms ease;
+
+          @include mq("lg") {
+            bottom: -1.15rem;
+          }
         }
 
         &:hover {
