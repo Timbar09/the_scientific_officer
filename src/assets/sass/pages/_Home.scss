@@ -94,38 +94,6 @@
         grid-template-columns: repeat(4, 1fr);
       }
     }
-
-    &--item {
-      padding: 1.5rem;
-      text-align: center;
-      background: clr(primary, 500, 0.05);
-      border: $border;
-      border-radius: radius(lg);
-
-      @include mq(md) {
-        text-align: left;
-      }
-
-      &__icon {
-        span {
-          font-size: 2.25rem;
-          color: clr(primary, 100);
-          border-radius: radius(circle);
-          background: $clr-primary-gradient-dark;
-          box-shadow: $shadow-md;
-        }
-      }
-
-      &__title {
-        color: clr(primary, 900);
-        font-size: 1.25rem;
-        margin-bottom: 0.5rem;
-      }
-
-      &__description {
-        font-size: 1rem;
-      }
-    }
   }
 
   &__metric {
@@ -142,13 +110,19 @@
       }
     }
 
-    &--text {
+    &--info {
       @include mq(md) {
-        max-width: 20rem;
+        max-width: 80%;
+        margin-inline: auto;
+        padding-inline: spacing(3);
       }
 
       @include mq(lg) {
         max-width: 30rem;
+      }
+
+      .home__section--title {
+        margin-block-end: 0.5rem;
       }
     }
   }

@@ -1,3 +1,5 @@
+import Card from "../../components/Card";
+
 const HomeFeatures = () => {
   const features = [
     {
@@ -48,6 +50,7 @@ const HomeFeatures = () => {
     //     "Access a wide range of articles covering essential topics for scientific officers, from research methodologies to regulatory compliance.",
     // },
   ];
+
   return (
     <section className="home__feature main__section">
       <div className="container">
@@ -64,17 +67,11 @@ const HomeFeatures = () => {
               className="home__feature--item flex flex-col gap-1"
               key={feature.title}
             >
-              <div className="home__feature--item__icon">
-                <span className="material-symbols-outlined p-2">
-                  {feature.icon}
-                </span>
-              </div>
-
-              <h3 className="home__feature--item__title">{feature.title}</h3>
-
-              <p className="home__feature--item__description">
-                {feature.description}
-              </p>
+              <Card
+                icon={{ name: feature.icon }}
+                title={feature.title}
+                text={feature.description}
+              />
             </li>
           ))}
         </ul>
