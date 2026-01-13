@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-interface IconProps {
+export interface IconProps {
   name: string | null;
   position?: "left" | "right";
 }
