@@ -19,14 +19,18 @@
 
   &__primary {
     $bg-color: $clr-primary-gradient-mid;
-    $inner-shadow: inset 5px 5px 5px 0 clr(primary, 900, 0.05),
+    $inner-shadow:
+      inset 5px 5px 5px 0 clr(primary, 900, 0.05),
       inset -5px -5px 4px 0 clr(primary, 100, 0.05);
 
     font-weight: 700;
     color: $color;
     background: $bg-color;
     box-shadow: $inner-shadow, $shadow-md;
-    transition: opacity 100ms ease, box-shadow 100ms ease, transform 50ms ease;
+    transition:
+      opacity 100ms ease,
+      box-shadow 100ms ease,
+      transform 50ms ease;
 
     &:hover {
       opacity: 0.9;
@@ -47,8 +51,11 @@
     color: clr(primary, 500);
     border: 0.125rem solid clr(primary, 500);
     box-shadow: $shadow-sm;
-    transition: background-color 100ms ease, box-shadow 100ms ease,
-      transform 50ms ease, color 100ms ease;
+    transition:
+      background-color 100ms ease,
+      box-shadow 100ms ease,
+      transform 50ms ease,
+      color 100ms ease;
 
     &:hover {
       color: clr(primary, 100);
@@ -62,6 +69,16 @@
       background-color: clr(primary, 400);
       box-shadow: $shadow-sm;
     }
+
+    .btn__icon {
+      color: clr(primary, 100);
+      background-color: clr(primary, 500);
+    }
+
+    &:hover .btn__icon {
+      background-color: clr(primary, 100);
+      color: clr(primary, 500);
+    }
   }
 
   &__tertiary {
@@ -69,8 +86,11 @@
     color: clr(primary, 500);
     background-color: clr(primary, 100);
     box-shadow: $shadow-sm;
-    transition: background-color 100ms ease, box-shadow 100ms ease,
-      transform 50ms ease, color 100ms ease;
+    transition:
+      background-color 100ms ease,
+      box-shadow 100ms ease,
+      transform 50ms ease,
+      color 100ms ease;
 
     &:hover {
       background-color: clr(primary, 200);

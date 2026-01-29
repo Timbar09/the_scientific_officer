@@ -15,9 +15,9 @@ const HomePractice = () => {
         </p>
 
         <div className="flex jc-center jc-@md-start">
-          <Button>
+          <Button icon={{ name: "directions_run", position: "right" }}>
             <Link to="/practice" className="clr-inherit">
-              Get Started Now
+              Get Started Now!
             </Link>
           </Button>
         </div>
