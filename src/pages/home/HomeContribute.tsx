@@ -1,13 +1,36 @@
+import { motion, useScroll, useTransform } from "motion/react";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
+
 import Card from "../../components/Card";
 import Button from "../../components/Button";
 
 import communityImage from "../../assets/images/hero/community-contribute.jpg";
 
 const HomeContribute = () => {
+  const { scrollYProgress } = useScroll();
+  const isAboveSmallScreen: boolean = useMediaQuery({ breakpoint: "md" });
+  const isBelowLargeScreen: boolean = useMediaQuery({
+    breakpoint: "lg",
+    direction: "down",
+  });
+
+  const marginBlockStart = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["25%", "-50%"],
+  );
+  const opacity = useTransform(scrollYProgress, [0, 1], [0.75, 1]);
+
+  const shouldAnimate = isAboveSmallScreen && isBelowLargeScreen;
+
+  const motionStyles = shouldAnimate
+    ? { marginBlockStart, opacity }
+    : { marginBlockStart: "0%", opacity: 1 };
+
   return (
     <section className="home__contribute m-block-5">
-      <div className="container flex flex-col flex-@lg-row gap-5 p-block-4">
-        <div className="home__contribute--image">
+      <div className="container flex flex-col flex-@lg-row gap-5 gap-@md-0 p-block-4">
+        <div className="home__contribute--image grid">
           <img
             src={communityImage}
             alt="Community Contributing"
@@ -15,7 +38,7 @@ const HomeContribute = () => {
           />
         </div>
 
-        <div className="home__contribute--info">
+        <motion.div className="home__contribute--info" style={motionStyles}>
           <div className="home__contribute--info__text">
             <h2 className="home__section--title">
               Help Us Build a Better Platform
@@ -50,7 +73,7 @@ const HomeContribute = () => {
             </li>
           </ul>
 
-          <div className="home__contribute--info__cta m-block-start-4">
+          <div className="home__contribute--info__cta m-block-start-4 flex jc-center jc-@md-end">
             <Button icon={{ name: "heart_plus" }}>
               <a
                 href=""
@@ -62,7 +85,7 @@ const HomeContribute = () => {
               </a>
             </Button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
