@@ -26,7 +26,7 @@ const HomeHero = () => {
             <span>Through Practice</span>
           </h1>
 
-          <div className="flex jc-center jc-@md-start gap-3">
+          <div className="flex jc-center jc-@md-start gap-3 flex-wrap">
             <Button>
               <Link to="/articles" className="clr-inherit">
                 Start Practicing

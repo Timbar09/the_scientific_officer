@@ -24,24 +24,33 @@ const HomeMetrics = () => {
 
   return (
     <section className="home__metric">
-      <div className="container p-block-4">
-        <h2 className="sr-only">
-          So far, we have over 5,000 material resources to help scientific
-          officers enhance their skills!
-        </h2>
+      <div className="container">
+        <div className="home__metric__content p-4">
+          <h2 className="home__section--title home__metric--title">
+            Our Impact in Numbers
+          </h2>
 
-        <ul className="home__metric--list flex flex-@md-row flex-@sm-column jc-@md-between ai-center gap-5">
-          {metrics.map((metric) => (
-            <li className="home__metric--item text-center" key={metric.label}>
-              <h3 className="home__metric--item__value clr-primary-100 fw-bold">
-                {metric.value}
-              </h3>
-              <p className="home__metric--item__label clr-primary-300">
-                {metric.label}
-              </p>
-            </li>
-          ))}
-        </ul>
+          <p className="home__section--description m-block-end-4 clr-primary-200">
+            So far, we have over 5,000 material resources to help scientific
+            officers enhance their skills!
+          </p>
+
+          <ul className="home__metric--list gap-4">
+            {metrics.map((metric) => (
+              <li
+                className="home__metric--item text-center bg-primary-100 p-3"
+                key={metric.label}
+              >
+                <h3 className="home__metric--item__value clr-primary-100 fw-bold m-block-end-1">
+                  {metric.value}
+                </h3>
+                <p className="home__metric--item__label clr-primary-300">
+                  {metric.label}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

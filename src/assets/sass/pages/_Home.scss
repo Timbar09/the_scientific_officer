@@ -35,6 +35,11 @@
 
     &--description {
       max-width: max(40rem, 60%);
+      text-align: center;
+
+      @include mq(md) {
+        text-align: left;
+      }
     }
   }
 
@@ -97,7 +102,72 @@
   }
 
   &__metric {
-    background-color: clr(primary, 700);
+    @include mq(md) {
+      margin-block-end: 6rem;
+    }
+
+    .container {
+      border-radius: radius(lg);
+      background-image: radial-gradient(
+        circle at top left,
+        clr(primary, 500),
+        clr(primary, 800) 80%
+      );
+      box-shadow: $shadow-md;
+    }
+
+    &__content {
+      position: relative;
+      border-radius: inherit;
+      background-image: url(/src/assets/images/background-pattern.png);
+      background-size: 200px 200px;
+      background-position: 0 0;
+    }
+
+    &--title {
+      color: clr(primary, 100);
+      margin-bottom: spacing(2);
+    }
+
+    &--list {
+      display: grid;
+      margin-inline: auto;
+
+      @include mq(sm) {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      @include mq(md) {
+        grid-template-columns: repeat(4, 1fr);
+        min-width: 95%;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+      }
+
+      @include mq(lg) {
+        max-width: max(80%, 40rem);
+        min-width: 80%;
+      }
+    }
+
+    &--item {
+      border-radius: radius(md);
+      text-align: center;
+      flex: 1;
+
+      &__value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: clr(primary, 900);
+      }
+
+      &__label {
+        font-size: 0.825rem;
+        color: clr(primary, 400);
+      }
+    }
   }
 
   &__contribute {
