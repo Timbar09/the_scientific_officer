@@ -25,7 +25,7 @@ const HomeMetrics = () => {
   return (
     <section className="home__metric">
       <div className="container">
-        <div className="home__metric__content p-4">
+        <div className="home__metric__content p-4 bg-pattern">
           <h2 className="home__section--title home__metric--title">
             Our Impact in Numbers
           </h2>

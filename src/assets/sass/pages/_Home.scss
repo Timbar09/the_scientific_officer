@@ -119,9 +119,6 @@
     &__content {
       position: relative;
       border-radius: inherit;
-      background-image: url(/src/assets/images/background-pattern.png);
-      background-size: 200px 200px;
-      background-position: 0 0;
     }
 
     &--title {
@@ -188,7 +185,6 @@
     &--info {
       @include mq(md) {
         max-width: 80%;
-        // margin-block-start: -25%;
         margin-inline: auto;
         padding: spacing(4);
         background-color: clr(neutral, 100);

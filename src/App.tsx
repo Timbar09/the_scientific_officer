@@ -11,7 +11,7 @@ import About from "./pages/about";
 
 const App = () => {
   return (
-    <div className="App bg-neutral-200 clr-neutral-500">
+    <div className="App bg-neutral-200 clr-neutral-500 bg-pattern">
       <div id="overlay" className="overlay" />
 
       <Routes>
