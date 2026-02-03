@@ -7,10 +7,10 @@ const navLinks = [
   {
     name: "Practice",
     path: "/practice",
-    sub: [
-      { name: "Practice Questions", path: "/practice/questions" },
-      { name: "Mock Test", path: "/practice/mock-test" },
-    ],
+    // sub: [
+    //   { name: "Practice Questions", path: "/practice/questions" },
+    //   { name: "Mock Test", path: "/practice/mock-test" },
+    // ],
   },
   {
     name: "Resources",
