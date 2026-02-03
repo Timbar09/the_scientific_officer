@@ -1,4 +1,4 @@
-// import UnderConstruction from "../../components/UnderConstruction";
+import PracticeRadioButtons from "./PracticeRadioButtons";
 
 const Practice = () => {
   const topics = [
@@ -25,18 +25,18 @@ const Practice = () => {
             <legend className="practice__legend">
               Choose Topics You Want to cover:
             </legend>
-            <div className="practice__option--list flex flex-wrap gap-2">
+            <div className="practice__checkbox--list flex flex-wrap gap-2">
               {topics.map(({ id, name, icon }) => (
-                <label key={id} className="practice__option--item grid">
+                <label key={id} className="practice__checkbox--item grid">
                   <input
                     type="checkbox"
                     name="topic"
                     defaultChecked={id === 1}
                     value={name.toLowerCase()}
                   />{" "}
-                  <span className="practice__option--item__name p-block-2 p-inline-4">
+                  <span className="practice__checkbox--item__name p-block-2 p-inline-4">
                     {name}
-                    <span className="material-symbols-outlined practice__option--item__icon">
+                    <span className="material-symbols-outlined practice__checkbox--item__icon">
                       {icon}
                     </span>
                   </span>
@@ -44,6 +44,12 @@ const Practice = () => {
               ))}
             </div>
           </fieldset>
+
+          <PracticeRadioButtons />
+
+          <button type="submit" className="btn btn--primary m-block-start-4">
+            Start Practice
+          </button>
         </form>
       </div>
     </div>

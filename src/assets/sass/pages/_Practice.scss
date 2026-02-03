@@ -12,7 +12,7 @@
     color: clr(primary, 900);
   }
 
-  &__option {
+  &__checkbox {
     &--item {
       position: relative;
 
@@ -23,7 +23,7 @@
         margin: 0;
         position: absolute;
 
-        &:checked + .practice__option--item__name {
+        &:checked + .practice__checkbox--item__name {
           background-color: clr(primary, 500);
           color: clr(primary, 100);
           border-color: clr(primary, 500);
@@ -57,6 +57,60 @@
         font-size: 3.5rem;
         color: clr(neutral, 700, 0.1);
       }
+    }
+  }
+
+  &__radio {
+    &--list {
+      position: relative;
+      background-color: clr(primary, 500, 0.1);
+      max-width: max-content;
+      border-radius: radius(md);
+    }
+
+    &--item {
+      position: relative;
+
+      [type="radio"] {
+        appearance: none;
+        width: 0;
+        height: 0;
+        margin: 0;
+        position: absolute;
+
+        &:checked + .practice__radio--item__name {
+          color: clr(primary, 100);
+        }
+      }
+
+      &__name {
+        display: inline-block;
+        z-index: 1;
+        color: clr(primary, 500);
+        font-size: 0.875rem;
+        font-weight: 600;
+        position: relative;
+        min-width: max-content;
+        transition: color 250ms ease;
+
+        &:hover {
+          color: clr(primary, 600);
+        }
+      }
+    }
+
+    &--slider {
+      position: absolute;
+      top: spacing(1);
+      left: spacing(1);
+      bottom: spacing(1);
+      width: 6.5rem;
+      background-color: clr(primary, 500);
+      border-radius: radius(sm);
+      box-shadow: $shadow-md;
+      transition:
+        left 250ms ease,
+        width 250ms ease;
     }
   }
 }
