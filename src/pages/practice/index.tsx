@@ -1,4 +1,5 @@
 import PracticeRadioButtons from "./PracticeRadioButtons";
+import PracticeTiming from "./PracticeTiming";
 
 const Practice = () => {
   const topics = [
@@ -46,6 +47,8 @@ const Practice = () => {
           </fieldset>
 
           <PracticeRadioButtons />
+
+          <PracticeTiming />
 
           <button type="submit" className="btn btn--primary m-block-start-4">
             Start Practice

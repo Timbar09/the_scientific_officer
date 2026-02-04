@@ -3,6 +3,19 @@
 .practice {
   &__fieldset {
     border: 0;
+
+    label {
+      cursor: pointer;
+    }
+
+    [type="checkbox"],
+    [type="radio"] {
+      appearance: none;
+      width: 0;
+      height: 0;
+      margin: 0;
+      position: absolute;
+    }
   }
 
   &__legend {
@@ -17,12 +30,6 @@
       position: relative;
 
       [type="checkbox"] {
-        appearance: none;
-        width: 0;
-        height: 0;
-        margin: 0;
-        position: absolute;
-
         &:checked + .practice__checkbox--item__name {
           background-color: clr(primary, 500);
           color: clr(primary, 100);
@@ -65,19 +72,13 @@
       position: relative;
       background-color: clr(primary, 500, 0.1);
       max-width: max-content;
-      border-radius: radius(md);
+      border-radius: radius(lg);
     }
 
     &--item {
       position: relative;
 
       [type="radio"] {
-        appearance: none;
-        width: 0;
-        height: 0;
-        margin: 0;
-        position: absolute;
-
         &:checked + .practice__radio--item__name {
           color: clr(primary, 100);
         }
@@ -106,11 +107,46 @@
       bottom: spacing(1);
       width: 6.5rem;
       background-color: clr(primary, 500);
-      border-radius: radius(sm);
+      border-radius: radius(md);
       box-shadow: $shadow-md;
       transition:
         left 250ms ease,
-        width 250ms ease;
+        width 150ms ease;
+    }
+  }
+
+  &__timing {
+    &--checkbox {
+      &__label {
+        position: relative;
+        width: 4rem;
+        height: 2rem;
+        border-radius: radius(pill);
+        background-color: clr(primary, 500, 0.1);
+        transition: background-color 250ms ease;
+
+        [type="checkbox"] {
+          &:checked + .practice__timing--checkbox__slider {
+            left: calc(50% + 0.25rem);
+          }
+        }
+
+        &.checked {
+          background-color: clr(primary, 500);
+        }
+      }
+
+      &__slider {
+        position: absolute;
+        top: 0.25rem;
+        left: 0.25rem;
+        width: 1.5rem;
+        height: 1.5rem;
+        background-color: clr(primary, 100);
+        border-radius: radius(pill);
+        box-shadow: $shadow-md;
+        transition: left 250ms ease;
+      }
     }
   }
 }
