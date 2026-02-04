@@ -1,5 +1,5 @@
 import PracticeFieldset from "./PracticeFieldset";
-import PracticeRadioButtons from "./PracticeRadioButtons";
+import PracticeType from "./PracticeType";
 import PracticeTiming from "./PracticeTiming";
 
 const Practice = () => {
@@ -24,9 +24,9 @@ const Practice = () => {
 
         <form className="practice__form m-block-start-4 p-3">
           <PracticeFieldset legend="Choose Topics You Want to cover:">
-            <div className="practice__checkbox--list flex flex-wrap gap-2">
+            <div className="practice__topic--list flex flex-wrap gap-2">
               {topics.map(({ id, name, icon }) => (
-                <label key={id} className="practice__checkbox--item grid">
+                <label key={id} className="practice__topic--item grid">
                   <input
                     className="custom-input"
                     type="checkbox"
@@ -34,9 +34,9 @@ const Practice = () => {
                     defaultChecked={id === 1}
                     value={name.toLowerCase()}
                   />{" "}
-                  <span className="practice__checkbox--item__name custom-input__name p-block-2 p-inline-4">
+                  <span className="practice__topic--item__name custom-input__name p-block-2 p-inline-4">
                     {name}
-                    <span className="material-symbols-outlined practice__checkbox--item__icon">
+                    <span className="material-symbols-outlined practice__topic--item__icon">
                       {icon}
                     </span>
                   </span>
@@ -45,7 +45,7 @@ const Practice = () => {
             </div>
           </PracticeFieldset>
 
-          <PracticeRadioButtons />
+          <PracticeType />
 
           <PracticeTiming />
 
