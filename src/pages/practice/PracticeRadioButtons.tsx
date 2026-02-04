@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
+import PracticeFieldset from "./PracticeFieldset";
+
 const PracticeRadioButtons = () => {
   const radioRef = useRef<HTMLLabelElement>(null);
   const [activeRadio, setActiveRadio] = useState(1);
@@ -24,8 +26,7 @@ const PracticeRadioButtons = () => {
   }, [activeRadio]);
 
   return (
-    <fieldset className="practice__fieldset p-3 m-block-start-4">
-      <legend className="practice__legend">Select Type of Questions:</legend>
+    <PracticeFieldset legend="Select Type of Questions:">
       <div className="practice__radio--list flex flex-wrap p-1">
         {questionTypes.map(({ id, name }) => (
           <label
@@ -35,19 +36,20 @@ const PracticeRadioButtons = () => {
             onClick={() => setActiveRadio(id)}
           >
             <input
+              className="custom-input"
               type="radio"
               name="questionType"
               defaultChecked={id === 1}
               value={name.toLowerCase()}
             />{" "}
-            <span className="practice__radio--item__name p-block-1 p-inline-3">
+            <span className="practice__radio--item__name custom-input__name p-block-1 p-inline-3">
               {name}
             </span>
           </label>
         ))}
         <div className="practice__radio--slider" style={sliderStyle}></div>
       </div>
-    </fieldset>
+    </PracticeFieldset>
   );
 };
 
