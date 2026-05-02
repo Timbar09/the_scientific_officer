@@ -1,0 +1,147 @@
+[
+  {
+    "id": 1,
+    "topic": "animal health",
+    "variants": {
+      "multiple choice": {
+        "question": "Which sign is most consistent with dehydration in livestock?",
+        "options": [
+          "Glossy coat",
+          "Sunken eyes",
+          "Increased appetite",
+          "Faster growth"
+        ],
+        "answer": "Sunken eyes",
+        "explanation": "Sunken eyes are a common visible sign of dehydration and fluid loss.",
+        "hint": "Look for a visible sign around the eyes."
+      },
+      "true/false": {
+        "question": "Sunken eyes can indicate dehydration in livestock.",
+        "answer": "True",
+        "explanation": "Sunken eyes are a common visible sign of dehydration and fluid loss.",
+        "hint": "Think about what happens when the body loses too much water."
+      },
+      "detailed answer": {
+        "question": "Describe two signs that may suggest an animal is dehydrated.",
+        "answer": "Sunken eyes and dry mucous membranes",
+        "explanation": "Reduced body water can show up as sunken eyes, dry gums, and reduced skin elasticity.",
+        "hint": "Focus on obvious physical signs of fluid loss."
+      }
+    }
+  },
+  {
+    "id": 2,
+    "topic": "animal nutrition",
+    "variants": {
+      "multiple choice": {
+        "question": "Which nutrient is the main energy source in most livestock rations?",
+        "options": ["Minerals", "Carbohydrates", "Vitamins", "Water"],
+        "answer": "Carbohydrates",
+        "explanation": "Carbohydrates are the primary source of energy in most feed formulations.",
+        "hint": "Think of the nutrient group that animals use for fuel."
+      },
+      "true/false": {
+        "question": "Water is a nutrient and is essential for animal productivity.",
+        "answer": "True",
+        "explanation": "Water supports digestion, transport, temperature regulation, and many metabolic processes.",
+        "hint": "Even though it is not a vitamin or mineral, it is still essential."
+      },
+      "detailed answer": {
+        "question": "Explain why water is considered essential in animal nutrition.",
+        "answer": "Water supports digestion, transport, temperature regulation, and metabolism",
+        "explanation": "Animals need water for nearly every major body function, so shortages quickly reduce performance.",
+        "hint": "Think about digestion, temperature control, and body transport systems."
+      }
+    }
+  },
+  {
+    "id": 3,
+    "topic": "animal breeding",
+    "variants": {
+      "multiple choice": {
+        "question": "What is the main purpose of selective breeding?",
+        "options": [
+          "Increase disease spread",
+          "Improve desirable traits",
+          "Reduce feed intake",
+          "Shorten gestation"
+        ],
+        "answer": "Improve desirable traits",
+        "explanation": "Selective breeding is used to strengthen useful traits such as fertility, growth, and resistance.",
+        "hint": "The goal is to make future generations better for desired traits."
+      },
+      "true/false": {
+        "question": "Selective breeding is used to improve desirable traits in animals.",
+        "answer": "True",
+        "explanation": "Selective breeding allows farmers to choose parents with useful characteristics.",
+        "hint": "Ask whether breeding is being used to improve or worsen a trait."
+      },
+      "detailed answer": {
+        "question": "Explain one benefit of selective breeding in livestock production.",
+        "answer": "It improves useful traits like growth rate, fertility, or disease resistance",
+        "explanation": "Breeding from animals with desirable traits can improve the productivity of future generations.",
+        "hint": "Choose one trait that would help the farm perform better."
+      }
+    }
+  },
+  {
+    "id": 4,
+    "topic": "animal welfare",
+    "variants": {
+      "multiple choice": {
+        "question": "Which housing factor best supports animal welfare?",
+        "options": [
+          "Crowding",
+          "Adequate space",
+          "Limited airflow",
+          "Poor bedding"
+        ],
+        "answer": "Adequate space",
+        "explanation": "Adequate space reduces stress, injury, and competition among animals.",
+        "hint": "Think about what reduces stress and allows natural movement."
+      },
+      "true/false": {
+        "question": "Routine handling and comfortable housing can improve animal welfare.",
+        "answer": "True",
+        "explanation": "Comfortable housing and careful handling reduce stress and injury.",
+        "hint": "Welfare improves when stress is reduced."
+      },
+      "detailed answer": {
+        "question": "Name one factor that improves animal welfare and explain why.",
+        "answer": "Adequate space to move and rest",
+        "explanation": "Good space allowance reduces stress, injury, and competition among animals.",
+        "hint": "Think of housing conditions that reduce stress."
+      }
+    }
+  },
+  {
+    "id": 5,
+    "topic": "animal husbandry",
+    "variants": {
+      "multiple choice": {
+        "question": "Which practice best helps reduce disease pressure on a farm?",
+        "options": [
+          "Overcrowding",
+          "Routine hygiene",
+          "Skipping cleaning",
+          "Ignoring waste"
+        ],
+        "answer": "Routine hygiene",
+        "explanation": "Cleaning, sanitation, and proper waste handling help break disease cycles.",
+        "hint": "Focus on actions that keep the farm environment clean."
+      },
+      "true/false": {
+        "question": "Routine hygiene practices can help reduce disease pressure on a farm.",
+        "answer": "True",
+        "explanation": "Cleaning, sanitation, and proper waste handling all help break disease cycles.",
+        "hint": "Cleanliness usually lowers the chance of disease spreading."
+      },
+      "detailed answer": {
+        "question": "Explain one husbandry practice that helps prevent disease.",
+        "answer": "Routine cleaning and sanitation of pens and equipment",
+        "explanation": "Good hygiene lowers exposure to pathogens and helps keep animals healthy.",
+        "hint": "Think about cleaning, sanitation, and waste removal."
+      }
+    }
+  }
+]

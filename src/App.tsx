@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import Layout from "./layout";
 import Home from "./pages/home";
 import Practice from "./pages/practice";
+import PracticeSession from "./pages/practice/PracticeSession";
 // import MockTests from "./pages/mock";
 import Books from "./pages/books";
 import Articles from "./pages/articles";
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/practice" element={<Practice />} />
+          <Route path="/practice/session" element={<PracticeSession />} />
           {/* <Route path="/practice/mock-test" element={<MockTests />} /> */}
           <Route path="/resources/books" element={<Books />} />
           <Route path="/resources/articles" element={<Articles />} />
