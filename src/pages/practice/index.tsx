@@ -2,6 +2,7 @@ import type { FormEvent } from "react";
 import { useNavigate } from "react-router";
 
 import PracticeFieldset from "./PracticeFieldset";
+import PracticeHint from "./PracticeHint";
 import PracticeType from "./PracticeType";
 import PracticeTiming from "./PracticeTiming";
 import type { PracticeSettings, PracticeTopic, QuestionType } from "./types";
@@ -98,6 +99,8 @@ const Practice = () => {
           </PracticeFieldset>
 
           <PracticeType />
+
+          <PracticeHint />
 
           <PracticeTiming />
 
