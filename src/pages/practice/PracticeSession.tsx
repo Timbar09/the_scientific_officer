@@ -1,7 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
-import type { PracticeQuestion, PracticeSettings } from "./types";
+import type {
+  PracticeQuestion,
+  PracticeSettings,
+  SessionResults,
+  UserAnswer,
+} from "./types";
 
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60)
@@ -22,6 +27,14 @@ const PracticeSession = () => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [userAnswers, setUserAnswers] = useState<Map<number, UserAnswer>>(
+    new Map(),
+  );
+  const [selectedAnswer, setSelectedAnswer] = useState<string>("");
+  const [sessionComplete, setSessionComplete] = useState(false);
+  const [sessionResults, setSessionResults] = useState<SessionResults | null>(
+    null,
+  );
 
   useEffect(() => {
     if (!settings) {
@@ -90,8 +103,21 @@ const PracticeSession = () => {
         <div className="container">
           <h1 className="page__title">No Questions Found</h1>
           <p className="page__description">
-            There are no questions in the JSON bank for the selected topics and
-            question type yet.
+            There are no questions in the database(JSON bank) for the selected
+            topics and question type yet.
+          </p>
+
+          <p>
+            You can either go back and select different topics/question types,
+            or you can contribute to our question bank by submitting your own
+            questions{" "}
+            <a
+              href="https://example.com/contribute"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              here
+            </a>
           </p>
           <button
             type="button"
@@ -109,98 +135,259 @@ const PracticeSession = () => {
   const currentVariant = currentQuestion.variants[settings.questionType]!;
 
   const handleNextQuestion = () => {
+    if (selectedAnswer) {
+      const isCorrect = selectedAnswer === currentVariant.answer;
+      const newAnswer: UserAnswer = {
+        questionId: currentQuestion.id,
+        selectedAnswer,
+        isCorrect,
+        correctAnswer: currentVariant.answer,
+      };
+      const updatedAnswers = new Map(userAnswers);
+      updatedAnswers.set(currentQuestion.id, newAnswer);
+      setUserAnswers(updatedAnswers);
+    }
     setShowAnswer(false);
+    setSelectedAnswer("");
     setCurrentQuestionIndex(
       (currentIndex) => (currentIndex + 1) % filteredQuestions.length,
     );
   };
 
+  const handleSubmit = () => {
+    if (selectedAnswer && !userAnswers.has(currentQuestion.id)) {
+      const isCorrect = selectedAnswer === currentVariant.answer;
+      const newAnswer: UserAnswer = {
+        questionId: currentQuestion.id,
+        selectedAnswer,
+        isCorrect,
+        correctAnswer: currentVariant.answer,
+      };
+      const updatedAnswers = new Map(userAnswers);
+      updatedAnswers.set(currentQuestion.id, newAnswer);
+      setUserAnswers(updatedAnswers);
+    }
+
+    const correctCount = Array.from(userAnswers.values()).filter(
+      (answer) => answer.isCorrect,
+    ).length;
+    const wrongAnswers = Array.from(userAnswers.values()).filter(
+      (answer) => !answer.isCorrect,
+    );
+    const score = Math.round((correctCount / filteredQuestions.length) * 100);
+
+    const results: SessionResults = {
+      totalQuestions: filteredQuestions.length,
+      correctAnswers: correctCount,
+      wrongAnswers,
+      score,
+    };
+
+    setSessionResults(results);
+    setSessionComplete(true);
+  };
+
   return (
     <div className="practice page">
       <div className="container">
-        <h1 className="page__title">Practice Session</h1>
+        <h1 className="page__title">
+          {sessionComplete ? "Practice Results" : "Practice Session"}
+        </h1>
 
-        <div className="practice__session grid gap-4 m-block-start-4">
-          <section className="practice__session--summary p-3">
-            <p>
-              <strong>Topics:</strong> {settings.topics.join(", ")}
-            </p>
-            <p>
-              <strong>Question Type:</strong> {settings.questionType}
-            </p>
-            <p>
-              <strong>Hints:</strong> {settings.showHint ? "On" : "Off"}
-            </p>
-            <p>
-              <strong>Timing:</strong>{" "}
-              {settings.timePractice
-                ? `On (${formatTime(secondsRemaining)})`
-                : "Off"}
-            </p>
-            <p>
-              <strong>Question:</strong> {currentQuestionIndex + 1} of{" "}
-              {filteredQuestions.length}
-            </p>
-          </section>
-
-          <section className="practice__session--card p-3">
-            <p className="practice__session--topic text-uppercase">
-              {currentQuestion.topic}
-            </p>
-            <h2 className="practice__session--question m-block-2">
-              {currentVariant.question}
-            </h2>
-
-            {settings.showHint && currentVariant.hint ? (
-              <p className="practice__session--hint m-block-2">
-                <strong>Hint:</strong> {currentVariant.hint}
+        {!sessionComplete ? (
+          <div className="practice__session grid gap-4 m-block-start-4">
+            <section className="practice__session--summary p-3">
+              <p>
+                <strong>Topics:</strong> {settings.topics.join(", ")}
               </p>
-            ) : null}
+              <p>
+                <strong>Question Type:</strong> {settings.questionType}
+              </p>
+              <p>
+                <strong>Hints:</strong> {settings.showHint ? "On" : "Off"}
+              </p>
+              <p>
+                <strong>Timing:</strong>{" "}
+                {settings.timePractice
+                  ? `On (${formatTime(secondsRemaining)})`
+                  : "Off"}
+              </p>
+              <p>
+                <strong>Question:</strong> {currentQuestionIndex + 1} of{" "}
+                {filteredQuestions.length}
+              </p>
+            </section>
 
-            {currentVariant.options ? (
-              <ul className="practice__session--options grid gap-2 m-block-3">
-                {currentVariant.options.map((option) => (
-                  <li key={option} className="practice__session--option p-2">
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            ) : null}
+            <section className="practice__session--card p-3">
+              <p className="practice__session--topic text-uppercase">
+                {currentQuestion.topic}
+              </p>
+              <h2 className="practice__session--question m-block-2">
+                {currentVariant.question}
+              </h2>
 
-            {showAnswer ? (
-              <div className="practice__session--answer m-block-3 p-3">
-                <p>
-                  <strong>Answer:</strong> {currentVariant.answer}
+              {settings.showHint && currentVariant.hint ? (
+                <p className="practice__session--hint m-block-2">
+                  <strong>Hint:</strong> {currentVariant.hint}
                 </p>
-                <p>{currentVariant.explanation}</p>
+              ) : null}
+
+              {currentVariant.options ? (
+                <fieldset className="practice__session--answer-selection m-block-3">
+                  <legend className="sr-only">Select your answer</legend>
+                  <ul className="grid gap-2">
+                    {currentVariant.options.map((option) => (
+                      <li key={option}>
+                        <label className="flex gap-2 p-2">
+                          <input
+                            type="radio"
+                            name="answer"
+                            value={option}
+                            checked={selectedAnswer === option}
+                            onChange={(e) => setSelectedAnswer(e.target.value)}
+                          />
+                          <span>{option}</span>
+                        </label>
+                      </li>
+                    ))}
+                  </ul>
+                </fieldset>
+              ) : null}
+
+              {showAnswer && (
+                <div className="practice__session--answer m-block-3 p-3">
+                  <p>
+                    <strong>Correct Answer:</strong> {currentVariant.answer}
+                  </p>
+                  <p>{currentVariant.explanation}</p>
+                </div>
+              )}
+
+              <div className="flex flex-wrap gap-2">
+                {currentQuestionIndex < filteredQuestions.length - 1 ? (
+                  <>
+                    <button
+                      type="button"
+                      className="btn btn--secondary"
+                      onClick={() => setShowAnswer(!showAnswer)}
+                    >
+                      {showAnswer ? "Hide Answer" : "Show Answer"}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn--primary"
+                      onClick={handleNextQuestion}
+                      disabled={!selectedAnswer}
+                    >
+                      Next Question
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="btn btn--secondary"
+                      onClick={() => setShowAnswer(!showAnswer)}
+                    >
+                      {showAnswer ? "Hide Answer" : "Show Answer"}
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn--primary"
+                      onClick={handleSubmit}
+                      disabled={!selectedAnswer}
+                    >
+                      Submit Answers
+                    </button>
+                  </>
+                )}
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={() => navigate("/practice")}
+                >
+                  Change Settings
+                </button>
               </div>
-            ) : null}
+            </section>
+          </div>
+        ) : sessionResults ? (
+          // Results View
+          <div className="practice__results grid gap-4 m-block-start-4">
+            <section className="practice__results--summary p-3">
+              <h2 className="text-3xl m-block-end-2">
+                Final Score: {sessionResults.score}%
+              </h2>
+              <p className="text-lg">
+                <strong>Correct Answers:</strong>{" "}
+                {sessionResults.correctAnswers} of{" "}
+                {sessionResults.totalQuestions}
+              </p>
+              <p className="text-lg">
+                <strong>Wrong Answers:</strong>{" "}
+                {sessionResults.wrongAnswers.length}
+              </p>
+            </section>
+
+            {sessionResults.wrongAnswers.length > 0 ? (
+              <section className="practice__results--wrong-answers p-3">
+                <h3 className="text-xl m-block-end-2">Review Wrong Answers:</h3>
+                <ul className="grid gap-3">
+                  {sessionResults.wrongAnswers.map((wrongAnswer) => {
+                    const question = filteredQuestions.find(
+                      (q) => q.id === wrongAnswer.questionId,
+                    );
+                    const variant = question?.variants[settings.questionType];
+                    return (
+                      <li
+                        key={wrongAnswer.questionId}
+                        className="p-3"
+                        style={{ border: "1px solid #ddd" }}
+                      >
+                        <p>
+                          <strong>Question:</strong> {variant?.question}
+                        </p>
+                        <p>
+                          <strong>Your Answer:</strong>{" "}
+                          {wrongAnswer.selectedAnswer}
+                        </p>
+                        <p>
+                          <strong>Correct Answer:</strong>{" "}
+                          {wrongAnswer.correctAnswer}
+                        </p>
+                        <p>
+                          <strong>Explanation:</strong> {variant?.explanation}
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </section>
+            ) : (
+              <section className="practice__results--perfect p-3">
+                <h3 className="text-xl">Perfect Score! 🎉</h3>
+                <p>You got all questions correct!</p>
+              </section>
+            )}
 
             <div className="flex flex-wrap gap-2">
               <button
                 type="button"
-                className="btn btn--secondary"
-                onClick={() => setShowAnswer(true)}
-              >
-                Show Answer
-              </button>
-              <button
-                type="button"
                 className="btn btn--primary"
-                onClick={handleNextQuestion}
+                onClick={() => navigate("/practice")}
               >
-                Next Question
+                Try Another Session
               </button>
               <button
                 type="button"
                 className="btn"
-                onClick={() => navigate("/practice")}
+                onClick={() => navigate("/")}
               >
-                Change Settings
+                Back to Home
               </button>
             </div>
-          </section>
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );

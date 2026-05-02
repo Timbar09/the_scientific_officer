@@ -28,3 +28,19 @@ export interface PracticeQuestion {
   topic: PracticeTopic;
   variants: Partial<Record<QuestionType, PracticeQuestionVariant>>;
 }
+
+// Track user's answer for each question
+export interface UserAnswer {
+  questionId: number;
+  selectedAnswer: string;
+  isCorrect: boolean;
+  correctAnswer: string;
+}
+
+// Results summary after session completes
+export interface SessionResults {
+  totalQuestions: number;
+  correctAnswers: number;
+  wrongAnswers: UserAnswer[];
+  score: number;
+}
