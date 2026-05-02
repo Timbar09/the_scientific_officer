@@ -49,7 +49,9 @@ const Practice = () => {
     const practiceDuration = Number(formData.get("practiceDuration") ?? 5);
 
     const settings: PracticeSettings = {
+      // TODO: Handle case when no topic is selected. For now, default to the first topic. (Default to all topics in the future)
       topics: selectedTopics.length > 0 ? selectedTopics : [topics[0].value],
+      // TODO: Update the detailed answer question type to support different question types in the future. For now, default to multiple choice if no question type is selected.
       questionType: questionType ?? "multiple choice",
       timePractice,
       practiceDuration: Number.isFinite(practiceDuration)
@@ -78,6 +80,7 @@ const Practice = () => {
         >
           <PracticeFieldset legend="Choose Topics You Want to cover:">
             <div className="practice__topic--list flex flex-wrap gap-2">
+              {/* TODO: Display the number of questions available for all topics selected */}
               {topics.map(({ id, label, icon, value }) => (
                 <label key={id} className="practice__topic--item grid">
                   <input
@@ -97,6 +100,8 @@ const Practice = () => {
               ))}
             </div>
           </PracticeFieldset>
+
+          {/* TODO: Choose how many questions to include in the practice session. Limit range 1-25 */}
 
           <PracticeType />
 

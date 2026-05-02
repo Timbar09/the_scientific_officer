@@ -87,6 +87,38 @@ const PracticeSession = () => {
     setShowAnswer(false);
   }, [filteredQuestions.length]);
 
+  const currentQuestion = filteredQuestions[currentQuestionIndex];
+  const currentVariant =
+    currentQuestion?.variants[settings?.questionType ?? "multiple choice"];
+
+  const answersWithCurrentSelection = useMemo(() => {
+    const updatedAnswers = new Map(userAnswers);
+
+    if (currentQuestion && currentVariant && selectedAnswer) {
+      updatedAnswers.set(currentQuestion.id, {
+        questionId: currentQuestion.id,
+        selectedAnswer,
+        isCorrect: selectedAnswer === currentVariant.answer,
+        correctAnswer: currentVariant.answer,
+      });
+    }
+
+    return updatedAnswers;
+  }, [currentQuestion, currentVariant, selectedAnswer, userAnswers]);
+
+  const unansweredQuestionIndexes = useMemo(
+    () =>
+      filteredQuestions
+        .map((question, index) =>
+          answersWithCurrentSelection.has(question.id) ? -1 : index,
+        )
+        .filter((index) => index !== -1),
+    [answersWithCurrentSelection, filteredQuestions],
+  );
+
+  const unansweredCount = unansweredQuestionIndexes.length;
+  const allQuestionsAnswered = unansweredCount === 0;
+
   if (!settings || loading) {
     return (
       <div className="practice page">
@@ -131,49 +163,50 @@ const PracticeSession = () => {
     );
   }
 
-  const currentQuestion = filteredQuestions[currentQuestionIndex]!;
-  const currentVariant = currentQuestion.variants[settings.questionType]!;
+  if (!currentQuestion || !currentVariant) {
+    return null;
+  }
 
   const handleNextQuestion = () => {
-    if (selectedAnswer) {
-      const isCorrect = selectedAnswer === currentVariant.answer;
-      const newAnswer: UserAnswer = {
-        questionId: currentQuestion.id,
-        selectedAnswer,
-        isCorrect,
-        correctAnswer: currentVariant.answer,
-      };
-      const updatedAnswers = new Map(userAnswers);
-      updatedAnswers.set(currentQuestion.id, newAnswer);
-      setUserAnswers(updatedAnswers);
-    }
+    setUserAnswers(answersWithCurrentSelection);
+
     setShowAnswer(false);
     setSelectedAnswer("");
+
+    if (
+      currentQuestionIndex === filteredQuestions.length - 1 &&
+      unansweredQuestionIndexes.length > 0
+    ) {
+      setCurrentQuestionIndex(unansweredQuestionIndexes[0]);
+      return;
+    }
+
     setCurrentQuestionIndex(
       (currentIndex) => (currentIndex + 1) % filteredQuestions.length,
     );
   };
 
-  const handleSubmit = () => {
-    if (selectedAnswer && !userAnswers.has(currentQuestion.id)) {
-      const isCorrect = selectedAnswer === currentVariant.answer;
-      const newAnswer: UserAnswer = {
-        questionId: currentQuestion.id,
-        selectedAnswer,
-        isCorrect,
-        correctAnswer: currentVariant.answer,
-      };
-      const updatedAnswers = new Map(userAnswers);
-      updatedAnswers.set(currentQuestion.id, newAnswer);
-      setUserAnswers(updatedAnswers);
-    }
+  const handlePreviousQuestion = () => {
+    setUserAnswers(answersWithCurrentSelection);
 
-    const correctCount = Array.from(userAnswers.values()).filter(
-      (answer) => answer.isCorrect,
-    ).length;
-    const wrongAnswers = Array.from(userAnswers.values()).filter(
-      (answer) => !answer.isCorrect,
+    setShowAnswer(false);
+    setSelectedAnswer("");
+    setCurrentQuestionIndex(
+      (currentIndex) =>
+        (currentIndex - 1 + filteredQuestions.length) %
+        filteredQuestions.length,
     );
+  };
+
+  const handleSubmit = () => {
+    setUserAnswers(answersWithCurrentSelection);
+
+    const correctCount = Array.from(
+      answersWithCurrentSelection.values(),
+    ).filter((answer) => answer.isCorrect).length;
+    const wrongAnswers = Array.from(
+      answersWithCurrentSelection.values(),
+    ).filter((answer) => !answer.isCorrect);
     const score = Math.round((correctCount / filteredQuestions.length) * 100);
 
     const results: SessionResults = {
@@ -205,6 +238,9 @@ const PracticeSession = () => {
               </p>
               <p>
                 <strong>Hints:</strong> {settings.showHint ? "On" : "Off"}
+              </p>
+              <p>
+                <strong>Unanswered:</strong> {unansweredCount}
               </p>
               <p>
                 <strong>Timing:</strong>{" "}
@@ -264,43 +300,40 @@ const PracticeSession = () => {
               )}
 
               <div className="flex flex-wrap gap-2">
-                {currentQuestionIndex < filteredQuestions.length - 1 ? (
+                <button
+                  type="button"
+                  className="btn btn--secondary"
+                  onClick={() => setShowAnswer(!showAnswer)}
+                >
+                  {showAnswer ? "Hide Answer" : "Show Answer"}
+                </button>
+                {filteredQuestions.length > 1 ? (
                   <>
                     <button
                       type="button"
-                      className="btn btn--secondary"
-                      onClick={() => setShowAnswer(!showAnswer)}
+                      className="btn"
+                      onClick={handlePreviousQuestion}
                     >
-                      {showAnswer ? "Hide Answer" : "Show Answer"}
+                      Previous Question
                     </button>
                     <button
                       type="button"
                       className="btn btn--primary"
                       onClick={handleNextQuestion}
-                      disabled={!selectedAnswer}
                     >
                       Next Question
                     </button>
                   </>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className="btn btn--secondary"
-                      onClick={() => setShowAnswer(!showAnswer)}
-                    >
-                      {showAnswer ? "Hide Answer" : "Show Answer"}
-                    </button>
-                    <button
-                      type="button"
-                      className="btn btn--primary"
-                      onClick={handleSubmit}
-                      disabled={!selectedAnswer}
-                    >
-                      Submit Answers
-                    </button>
-                  </>
-                )}
+                ) : null}
+                {allQuestionsAnswered ? (
+                  <button
+                    type="button"
+                    className="btn btn--primary"
+                    onClick={handleSubmit}
+                  >
+                    Submit Answers
+                  </button>
+                ) : null}
                 <button
                   type="button"
                   className="btn"
@@ -312,7 +345,6 @@ const PracticeSession = () => {
             </section>
           </div>
         ) : sessionResults ? (
-          // Results View
           <div className="practice__results grid gap-4 m-block-start-4">
             <section className="practice__results--summary p-3">
               <h2 className="text-3xl m-block-end-2">
