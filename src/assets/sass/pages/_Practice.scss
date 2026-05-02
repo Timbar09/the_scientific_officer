@@ -15,10 +15,6 @@
 
     .custom-input {
       appearance: none;
-      width: 0;
-      height: 0;
-      margin: 0;
-      position: absolute;
 
       &__name {
         display: inline-block;
@@ -145,6 +141,52 @@
         border-radius: radius(pill);
         box-shadow: $shadow-md;
         transition: left 250ms ease;
+      }
+    }
+
+    &--value {
+      &.disabled {
+        opacity: 0.5;
+      }
+
+      &__controls {
+        max-width: max-content;
+      }
+
+      &__decrease,
+      &__increase {
+        width: 2.5rem;
+        height: 2rem;
+        background-color: clr(primary, 500, 0.1);
+        color: clr(primary, 500);
+        font-size: 1.25rem;
+        transition:
+          background-color 250ms ease,
+          color 250ms ease;
+
+        &:hover {
+          background-color: clr(primary, 500);
+          color: clr(primary, 100);
+          box-shadow: $shadow-sm;
+        }
+      }
+
+      &__decrease {
+        border-top-left-radius: radius(md);
+        border-bottom-left-radius: radius(md);
+      }
+
+      &__increase {
+        border-top-right-radius: radius(md);
+        border-bottom-right-radius: radius(md);
+      }
+
+      &__display {
+        padding-inline: 0.25rem;
+        background-color: clr(primary, 500, 0.1);
+        color: clr(primary, 600);
+        font-size: 1.25rem;
+        text-align: center;
       }
     }
   }
