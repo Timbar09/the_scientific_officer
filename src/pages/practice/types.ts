@@ -1,11 +1,28 @@
 export type PracticeTopic =
-  | "animal health"
-  | "animal nutrition"
-  | "animal breeding"
-  | "animal welfare"
-  | "animal husbandry";
+  | "baits"
+  | "diseases"
+  | "foot-and-mouth-disease"
+  | "pharmacology"
+  | "drug-administration"
+  | "biosecurity"
+  | "border-control"
+  | "ethics"
+  | "animal-health"
+  | "livestock-management"
+  | "regulations"
+  | "conduct"
+  | "organizations"
+  | "international-standards"
+  | "woah";
 
 export type QuestionType = "multiple choice" | "true/false" | "detailed answer";
+
+export interface PracticeData {
+  meta?: {
+    controlledTopics?: PracticeTopic[];
+  };
+  questions: PracticeQuestion[];
+}
 
 export interface PracticeSettings {
   topics: PracticeTopic[];
@@ -25,7 +42,7 @@ export interface PracticeQuestionVariant {
 
 export interface PracticeQuestion {
   id: number;
-  topic: PracticeTopic;
+  topics: PracticeTopic[];
   variants: Partial<Record<QuestionType, PracticeQuestionVariant>>;
 }
 

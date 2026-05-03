@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import type {
+  PracticeData,
   PracticeQuestion,
   PracticeSettings,
   SessionResults,
@@ -44,8 +45,9 @@ const PracticeSession = () => {
 
     const loadQuestions = async () => {
       const response = await fetch("/practice-questions.json");
-      const data = (await response.json()) as PracticeQuestion[];
-      setQuestions(data);
+      const data = (await response.json()) as PracticeData;
+      const { questions } = data;
+      setQuestions(questions);
       setLoading(false);
     };
 
@@ -77,7 +79,7 @@ const PracticeSession = () => {
 
     return questions.filter(
       (question) =>
-        settings.topics.includes(question.topic) &&
+        question.topics.some((topic) => settings.topics.includes(topic)) &&
         Boolean(question.variants[settings.questionType]),
     );
   }, [questions, settings]);
@@ -256,7 +258,7 @@ const PracticeSession = () => {
 
             <section className="practice__session--card p-3">
               <p className="practice__session--topic text-uppercase">
-                {currentQuestion.topic}
+                {currentQuestion.topics.join(", ")}
               </p>
               <h2 className="practice__session--question m-block-2">
                 {currentVariant.question}
