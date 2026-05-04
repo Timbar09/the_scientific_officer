@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router";
 import Layout from "./layout";
 import Home from "./pages/home";
 import Practice from "./pages/practice";
-import PracticeSession from "./pages/practice/PracticeSession";
+import PracticeSession from "./pages/practice/session";
 // import MockTests from "./pages/mock";
 import Books from "./pages/books";
 import Articles from "./pages/articles";
