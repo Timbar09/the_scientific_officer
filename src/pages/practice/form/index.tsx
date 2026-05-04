@@ -6,10 +6,7 @@ import PracticeHint from "./PracticeHint";
 import PracticeTiming from "./PracticeTiming";
 import PracticeType from "./PracticeType";
 
-import {
-  processControlledTopics,
-  type ProcessedTopic,
-} from "@utils/topicProcessor";
+import { processControlledTopics, type ProcessedTopic } from "@/utils";
 import type {
   PracticeSettings,
   PracticeTopic,
