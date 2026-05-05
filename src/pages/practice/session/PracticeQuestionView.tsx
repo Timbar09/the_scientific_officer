@@ -1,14 +1,5 @@
 import type { Session } from "../../../hooks/usePracticeSession";
 
-const formatTime = (seconds: number) => {
-  const minutes = Math.floor(seconds / 60)
-    .toString()
-    .padStart(2, "0");
-  const remainingSeconds = (seconds % 60).toString().padStart(2, "0");
-
-  return `${minutes}:${remainingSeconds}`;
-};
-
 const PracticeQuestionView = ({ session }: { session: Session }) => {
   const {
     settings,
@@ -16,7 +7,6 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     currentQuestionIndex,
     filteredQuestions,
     showAnswer,
-    secondsRemaining,
     selectedAnswer,
     unansweredCount,
     allQuestionsAnswered,
@@ -47,12 +37,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
         <p>
           <strong>Unanswered:</strong> {unansweredCount}
         </p>
-        <p>
-          <strong>Timing:</strong>{" "}
-          {settings.timePractice
-            ? `On (${formatTime(secondsRemaining)})`
-            : "Off"}
-        </p>
+
         <p>
           <strong>Question:</strong> {currentQuestionIndex + 1} of{" "}
           {filteredQuestions.length}
