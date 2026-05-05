@@ -7,6 +7,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     currentQuestionIndex,
     filteredQuestions,
     showAnswer,
+    isHintRevealed,
     selectedAnswer,
     unansweredCount,
     allQuestionsAnswered,
@@ -46,7 +47,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           {currentVariant.question}
         </h2>
 
-        {settings.showHint && currentVariant.hint ? (
+        {settings.showHint && isHintRevealed && currentVariant.hint ? (
           <p className="practice__session--hint m-block-2">
             <strong>Hint:</strong> {currentVariant.hint}
           </p>

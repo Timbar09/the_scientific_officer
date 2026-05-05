@@ -21,6 +21,7 @@ export interface Session {
   currentQuestion: PracticeQuestion | undefined;
   currentVariant: PracticeQuestionVariant | undefined;
   showAnswer: boolean;
+  isHintRevealed: boolean;
   secondsRemaining: number;
   selectedAnswer: string;
   unansweredCount: number;
@@ -30,6 +31,7 @@ export interface Session {
   submit: () => void;
   setSelectedAnswer: (value: string) => void;
   toggleAnswer: () => void;
+  revealHint: () => void;
   goToPractice: () => void;
 }
 
@@ -43,6 +45,9 @@ const usePracticeSession = (): Session => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
+    Set<number>
+  >(new Set());
   const [userAnswers, setUserAnswers] = useState<Map<number, UserAnswer>>(
     new Map(),
   );
@@ -105,6 +110,9 @@ const usePracticeSession = (): Session => {
   const currentQuestion = filteredQuestions[currentQuestionIndex];
   const currentVariant =
     currentQuestion?.variants[settings?.questionType ?? "multiple choice"];
+  const isHintRevealed = currentQuestion
+    ? revealedHintQuestionIds.has(currentQuestion.id)
+    : false;
 
   const answersWithCurrentSelection = useMemo(() => {
     const updatedAnswers = new Map(userAnswers);
@@ -187,6 +195,18 @@ const usePracticeSession = (): Session => {
     setIsComplete(true);
   };
 
+  const revealHint = () => {
+    if (!currentQuestion) {
+      return;
+    }
+
+    setRevealedHintQuestionIds((currentRevealedHints) => {
+      const nextRevealedHints = new Set(currentRevealedHints);
+      nextRevealedHints.add(currentQuestion.id);
+      return nextRevealedHints;
+    });
+  };
+
   return {
     settings,
     isLoading,
@@ -198,6 +218,7 @@ const usePracticeSession = (): Session => {
     currentQuestion,
     currentVariant,
     showAnswer,
+    isHintRevealed,
     secondsRemaining,
     selectedAnswer,
     unansweredCount,
@@ -208,6 +229,7 @@ const usePracticeSession = (): Session => {
     setSelectedAnswer,
     toggleAnswer: () =>
       setShowAnswer((currentShowAnswer) => !currentShowAnswer),
+    revealHint,
     goToPractice: () => navigate("/practice"),
   };
 };
