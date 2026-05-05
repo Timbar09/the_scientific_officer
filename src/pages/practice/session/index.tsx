@@ -4,9 +4,9 @@ import PracticeQuestionView from "./PracticeQuestionView";
 import PracticeResults from "./PracticeResults";
 import usePracticeSession from "../../../hooks/usePracticeSession";
 
-import { formatTime } from "@/utils";
+import { formatTime, titlize } from "@/utils";
 
-const Timer = ({ secondsRemaining }: { secondsRemaining: number }) => {
+const TimerBadge = ({ secondsRemaining }: { secondsRemaining: number }) => {
   const timerWarning =
     secondsRemaining <= 30
       ? "timer--warning-red"
@@ -29,10 +29,24 @@ const Timer = ({ secondsRemaining }: { secondsRemaining: number }) => {
   );
 };
 
+const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
+  return (
+    <div className="practice__header--badge flex ai-center gap-1 p-1">
+      <span className="material-symbols-outlined practice__header--icon">
+        quiz
+      </span>
+      <span className="practice__header--badge__value">
+        {titlize(questionType)}
+      </span>
+    </div>
+  );
+};
+
 const PracticeSession = () => {
   const session = usePracticeSession();
+  const { settings } = session;
 
-  if (!session.settings || session.isLoading) {
+  if (!settings || session.isLoading) {
     return <PracticeLoaderView />;
   }
 
@@ -62,8 +76,10 @@ const PracticeSession = () => {
             </div>
 
             <div className="practice__header--top__right flex ai-center gap-3">
-              {session.settings.timePractice && (
-                <Timer secondsRemaining={session.secondsRemaining} />
+              <QuestionsTypeBadge questionType={settings.questionType} />
+
+              {settings.timePractice && (
+                <TimerBadge secondsRemaining={session.secondsRemaining} />
               )}
             </div>
           </div>
@@ -77,7 +93,7 @@ const PracticeSession = () => {
           <PracticeResults
             sessionResults={session.results}
             filteredQuestions={session.filteredQuestions}
-            settings={session.settings}
+            settings={settings}
           />
         ) : null}
       </div>

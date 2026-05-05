@@ -29,12 +29,6 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           <strong>Topics:</strong> {settings.topics.join(", ")}
         </p>
         <p>
-          <strong>Question Type:</strong> {settings.questionType}
-        </p>
-        <p>
-          <strong>Hints:</strong> {settings.showHint ? "On" : "Off"}
-        </p>
-        <p>
           <strong>Unanswered:</strong> {unansweredCount}
         </p>
 

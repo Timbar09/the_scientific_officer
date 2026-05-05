@@ -1,6 +1,53 @@
 @use "../abstracts" as *;
 
 .practice {
+  &__header {
+    &--top {
+      background-color: clr(neutral, 100);
+      border-radius: radius(lg);
+    }
+
+    &--badge {
+      background-color: clr(neutral, 200);
+      border-radius: radius(md);
+      transition:
+        background-color 250ms ease,
+        color 250ms ease;
+
+      &__value {
+        font-size: fs(sm);
+        font-weight: 600;
+      }
+    }
+
+    &--hint__button {
+      &:hover {
+        background-color: clr(neutral, 300);
+        color: clr(neutral, 900);
+      }
+    }
+
+    &--timer {
+      &.timer--warning-yellow {
+        background-color: clr(alert, 400);
+        color: clr(alert, 600);
+
+        &__icon {
+          color: clr(alert, 600);
+        }
+      }
+
+      &.timer--warning-red {
+        background-color: clr(alert, 700);
+        color: clr(alert, 900);
+
+        &__icon {
+          color: clr(alert, 900);
+        }
+      }
+    }
+  }
+
   &__form {
     background-color: clr(neutral, 100);
     border-radius: radius(lg);
@@ -188,6 +235,13 @@
         font-size: 1.25rem;
         text-align: center;
       }
+    }
+  }
+
+  &__session {
+    &--card {
+      background-color: clr(neutral, 100);
+      border-radius: radius(md);
     }
   }
 }
