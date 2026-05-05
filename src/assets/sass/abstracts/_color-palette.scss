@@ -21,4 +21,24 @@ $colors: (
     800: hsl(28, 53%, 20%),
     900: hsl(29, 53%, 10%),
   ),
+  alert: (
+    100: hsl(120, 100%, 90%),
+    // success light green
+    200: hsl(120, 100%, 70%),
+    // success medium green
+    300: hsl(120, 100%, 50%),
+    // success dark green
+    400: hsl(60, 100%, 90%),
+    // warning light yellow
+    500: hsl(60, 100%, 70%),
+    // warning medium yellow
+    600: hsl(60, 100%, 43%),
+    // warning dark yellow
+    700: hsl(0, 100%, 90%),
+    // error light red
+    800: hsl(0, 100%, 70%),
+    // error medium red
+    900: hsl(0, 100%, 50%),
+    // error dark red
+  ),
 );
