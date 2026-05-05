@@ -42,9 +42,28 @@ const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
   );
 };
 
+const HintBadge = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <div className="practice__header--hint">
+      <button
+        type="button"
+        className="practice__header--hint__button practice__header--badge flex ai-center gap-1 p-1"
+        title="Get a Hint"
+        onClick={onClick}
+      >
+        <span className="material-symbols-outlined practice__header--icon">
+          lightbulb_2
+        </span>
+        <span className="practice__header--badge__value">Hint</span>
+        {/* {session.settings.showHint ? "On" : "Off"} */}
+      </button>
+    </div>
+  );
+};
+
 const PracticeSession = () => {
   const session = usePracticeSession();
-  const { settings } = session;
+  const { settings, isHintRevealed, revealHint } = session;
 
   if (!settings || session.isLoading) {
     return <PracticeLoaderView />;
@@ -76,6 +95,10 @@ const PracticeSession = () => {
             </div>
 
             <div className="practice__header--top__right flex ai-center gap-3">
+              {settings.showHint && !isHintRevealed && (
+                <HintBadge onClick={revealHint} />
+              )}
+
               <QuestionsTypeBadge questionType={settings.questionType} />
 
               {settings.timePractice && (
