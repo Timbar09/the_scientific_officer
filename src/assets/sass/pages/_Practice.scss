@@ -46,6 +46,43 @@
         }
       }
     }
+
+    &--progress {
+      &:hover .practice__header--progress__bar::before {
+        opacity: 1;
+      }
+
+      &__rail {
+        flex: 1;
+        background-color: clr(neutral, 200);
+        border-radius: radius(md);
+      }
+
+      &__bar {
+        position: relative;
+        height: 0.5rem;
+        background-color: clr(primary, 500);
+        border-radius: radius(sm);
+        transition: width 250ms ease;
+
+        &::before {
+          content: attr(data-progress);
+          position: absolute;
+          top: 350%;
+          left: 90%;
+          min-width: max-content;
+          transform: translateY(-50%);
+          color: clr(primary, 700);
+          background-color: clr(neutral, 200);
+          border-radius: radius(sm);
+          padding: 0 0.5rem;
+          font-size: 0.75rem;
+          font-weight: 500;
+          opacity: 0;
+          transition: opacity 250ms ease;
+        }
+      }
+    }
   }
 
   &__form {

@@ -61,6 +61,34 @@ const HintBadge = ({ onClick }: { onClick: () => void }) => {
   );
 };
 
+const ProgressBar = ({
+  unanswered,
+  total,
+}: {
+  unanswered: number;
+  total: number;
+}) => {
+  const progressPercentage = ((total - unanswered) / total) * 100;
+  const progressLabel = `${total - unanswered} out of ${total} answered`;
+
+  return (
+    <div className="practice__header--progress flex gap-1 ai-center p-block-1 p-inline-2">
+      <div className="practice__header--progress__rail">
+        <div
+          className="practice__header--progress__bar"
+          style={{ width: `${progressPercentage}%` }}
+          aria-label={progressLabel}
+          data-progress={progressLabel}
+        ></div>
+      </div>
+
+      <div className="practice__header--progress__value">
+        {`${Math.round(progressPercentage)}%`}
+      </div>
+    </div>
+  );
+};
+
 const PracticeSession = () => {
   const session = usePracticeSession();
   const { settings, isHintRevealed, revealHint } = session;
@@ -107,7 +135,12 @@ const PracticeSession = () => {
             </div>
           </div>
 
-          <div className="practice__header--bottom">Progress Bar</div>
+          <div className="practice__header--bottom">
+            <ProgressBar
+              unanswered={session.unansweredCount}
+              total={session.filteredQuestions.length}
+            />
+          </div>
         </header>
 
         {!session.isComplete ? (
