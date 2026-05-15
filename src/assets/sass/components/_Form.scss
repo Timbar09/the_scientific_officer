@@ -1,0 +1,42 @@
+@use "../abstracts" as *;
+
+.form {
+  &__fieldset {
+    border: 0;
+  }
+
+  &__radio {
+    width: 100%;
+
+    &--input {
+      appearance: none;
+      position: absolute;
+
+      &:checked + .form__radio--content {
+        background-color: clr(primary, 500);
+        color: clr(primary, 100);
+        border-color: clr(primary, 500);
+      }
+    }
+
+    &--content {
+      padding: 0.5rem 1rem;
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      color: clr(primary, 500);
+      font-size: 0.875rem;
+      font-weight: 600;
+      border: 2px solid clr(primary, 300);
+      border-radius: radius(md);
+      z-index: 1;
+      cursor: pointer;
+
+      &:hover {
+        border-color: clr(primary, 500);
+        background-color: clr(primary, 500, 0.1);
+        color: clr(primary, 600);
+      }
+    }
+  }
+}

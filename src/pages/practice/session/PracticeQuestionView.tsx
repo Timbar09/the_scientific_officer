@@ -1,6 +1,9 @@
+import FormRadioSet from "@/components/Form/FormRadioSet";
+
 import { titlize } from "@/utils";
 
-import type { Session } from "../../../hooks/usePracticeSession";
+import type { Session } from "@/hooks/usePracticeSession";
+import type { LegendData, FormFieldData } from "@/components/Form/types";
 
 type Topics = NonNullable<Session["settings"]>["topics"];
 
@@ -32,28 +35,22 @@ const AnswerOptions = ({
   selectedAnswer: string | null;
   onSelect: (option: string) => void;
 }) => {
+  const legend: LegendData = {
+    label: "Answer Options",
+    visible: false,
+  };
+
+  const data: FormFieldData[] = options.map((option) => ({
+    name: "answer",
+    value: option,
+    checked: selectedAnswer === option,
+    onChange: (event) => onSelect(event.target.value),
+  }));
+
   return (
-    <fieldset className="practice__session--answer-selection m-block-3">
-      <legend className="sr-only">Select your answer</legend>
-      <ul className="grid gap-2">
-        {options.map((option) => {
-          return (
-            <li key={option}>
-              <label className="flex gap-2 p-2">
-                <input
-                  type="radio"
-                  name="answer"
-                  value={option}
-                  checked={selectedAnswer === option}
-                  onChange={(event) => onSelect(event.target.value)}
-                />
-                <span>{option}</span>
-              </label>
-            </li>
-          );
-        })}
-      </ul>
-    </fieldset>
+    <div className="practice__session--options m-block-3">
+      <FormRadioSet legend={legend} data={data} />
+    </div>
   );
 };
 
