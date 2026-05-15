@@ -2,9 +2,16 @@
 
 .practice {
   &__header {
-    &--top {
-      background-color: clr(neutral, 100);
-      border-radius: radius(lg);
+    background-color: clr(neutral, 100);
+    border-radius: radius(lg);
+
+    &--left {
+      flex: 1;
+      width: 100%;
+
+      &__progressbar {
+        flex: 1;
+      }
     }
 
     &--badge {
@@ -54,7 +61,7 @@
 
       &__rail {
         flex: 1;
-        background-color: clr(neutral, 200);
+        background-color: clr(neutral, 300);
         border-radius: radius(md);
       }
 
@@ -83,6 +90,10 @@
         }
       }
     }
+  }
+
+  &__title {
+    font-size: fs("2xl");
   }
 
   &__form {
@@ -276,9 +287,25 @@
   }
 
   &__session {
+    &--summary {
+      &__badge {
+        background-color: clr(neutral, 200);
+        border-radius: radius(sm);
+        font-size: fs(xs);
+        font-weight: 600;
+        padding: 0.25rem 0.5rem;
+      }
+    }
+
     &--card {
       background-color: clr(neutral, 100);
       border-radius: radius(md);
+    }
+
+    &--question {
+      font-size: fs("2xl");
+      color: clr(primary, 900);
+      font-weight: 500;
     }
   }
 }

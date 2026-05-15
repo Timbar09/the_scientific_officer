@@ -72,7 +72,7 @@ const ProgressBar = ({
   const progressLabel = `${total - unanswered} out of ${total} answered`;
 
   return (
-    <div className="practice__header--progress flex gap-1 ai-center p-block-1 p-inline-2">
+    <div className="practice__header--progress flex gap-1 ai-center">
       <div className="practice__header--progress__rail">
         <div
           className="practice__header--progress__bar"
@@ -115,31 +115,33 @@ const PracticeSession = () => {
     <div className="practice page">
       <div className="container">
         <header className="practice__header">
-          <div className="practice__header--top flex ai-center jc-between p-3">
-            <div className="practice__header--top__left">
+          <div className="practice__header--container flex flex-col flex-@md-row gap-3 gap-@lg-5 ai-start ai-@md-center jc-between p-3">
+            <div className="practice__header--left flex ai-center gap-3 gap-@lg-5">
               <h1 className="practice__title">
                 {session.isComplete ? "Practice Results" : "Practice Session"}
               </h1>
+
+              <div className="practice__header--left__progressbar">
+                <ProgressBar
+                  unanswered={session.unansweredCount}
+                  total={session.filteredQuestions.length}
+                />
+              </div>
             </div>
 
-            <div className="practice__header--top__right flex ai-center gap-3">
-              {settings.showHint && !isHintRevealed && (
-                <HintBadge onClick={revealHint} />
-              )}
+            <div className="practice__header--right">
+              <div className="practice__header--badge__list flex ai-center gap-3">
+                {settings.showHint && !isHintRevealed && (
+                  <HintBadge onClick={revealHint} />
+                )}
 
-              <QuestionsTypeBadge questionType={settings.questionType} />
+                <QuestionsTypeBadge questionType={settings.questionType} />
 
-              {settings.timePractice && (
-                <TimerBadge secondsRemaining={session.secondsRemaining} />
-              )}
+                {settings.timePractice && (
+                  <TimerBadge secondsRemaining={session.secondsRemaining} />
+                )}
+              </div>
             </div>
-          </div>
-
-          <div className="practice__header--bottom">
-            <ProgressBar
-              unanswered={session.unansweredCount}
-              total={session.filteredQuestions.length}
-            />
           </div>
         </header>
 

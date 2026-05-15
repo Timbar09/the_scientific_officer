@@ -1,4 +1,61 @@
+import { titlize } from "@/utils";
+
 import type { Session } from "../../../hooks/usePracticeSession";
+
+type Topics = NonNullable<Session["settings"]>["topics"];
+
+const Summary = ({ topics }: { topics: Topics }) => {
+  return (
+    <section
+      className="practice__session--summary p-block-3 flex gap-2 ai-center"
+      aria-label="Topics Covered"
+      title="Topics Covered"
+    >
+      <h2 className="practice__session--summary__title sr-only">
+        Topics Covered:
+      </h2>
+      {topics.map((topic) => (
+        <span key={topic} className="practice__session--summary__badge">
+          {titlize(topic)}
+        </span>
+      ))}
+    </section>
+  );
+};
+
+const AnswerOptions = ({
+  options,
+  selectedAnswer,
+  onSelect,
+}: {
+  options: string[];
+  selectedAnswer: string | null;
+  onSelect: (option: string) => void;
+}) => {
+  return (
+    <fieldset className="practice__session--answer-selection m-block-3">
+      <legend className="sr-only">Select your answer</legend>
+      <ul className="grid gap-2">
+        {options.map((option) => {
+          return (
+            <li key={option}>
+              <label className="flex gap-2 p-2">
+                <input
+                  type="radio"
+                  name="answer"
+                  value={option}
+                  checked={selectedAnswer === option}
+                  onChange={(event) => onSelect(event.target.value)}
+                />
+                <span>{option}</span>
+              </label>
+            </li>
+          );
+        })}
+      </ul>
+    </fieldset>
+  );
+};
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
   const {
@@ -9,7 +66,6 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     showAnswer,
     isHintRevealed,
     selectedAnswer,
-    unansweredCount,
     allQuestionsAnswered,
     nextQuestion,
     previousQuestion,
@@ -24,24 +80,12 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
   }
 
   return (
-    <div className="practice__session grid gap-4 m-block-start-4">
-      <section className="practice__session--summary p-3">
-        <p>
-          <strong>Topics:</strong> {settings.topics.join(", ")}
-        </p>
-        <p>
-          <strong>Unanswered:</strong> {unansweredCount}
-        </p>
+    <div className="practice__session">
+      <Summary topics={settings.topics} />
 
-        <p>
-          <strong>Question:</strong> {currentQuestionIndex + 1} of{" "}
-          {filteredQuestions.length}
-        </p>
-      </section>
-
-      <section className="practice__session--card p-3">
+      <section className="practice__session--card p-5">
         <p className="practice__session--question__label">
-          Question {currentQuestionIndex + 1}
+          Question {currentQuestionIndex + 1}/{filteredQuestions.length}
         </p>
         <h2 className="practice__session--question m-block-2">
           {currentVariant.question}
@@ -54,29 +98,11 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
         ) : null}
 
         {currentVariant.options ? (
-          <fieldset className="practice__session--answer-selection m-block-3">
-            <legend className="sr-only">Select your answer</legend>
-            <ul className="grid gap-2">
-              {currentVariant.options.map((option) => {
-                return (
-                  <li key={option}>
-                    <label className="flex gap-2 p-2">
-                      <input
-                        type="radio"
-                        name="answer"
-                        value={option}
-                        checked={selectedAnswer === option}
-                        onChange={(event) =>
-                          setSelectedAnswer(event.target.value)
-                        }
-                      />
-                      <span>{option}</span>
-                    </label>
-                  </li>
-                );
-              })}
-            </ul>
-          </fieldset>
+          <AnswerOptions
+            options={currentVariant.options}
+            selectedAnswer={selectedAnswer}
+            onSelect={setSelectedAnswer}
+          />
         ) : null}
 
         {showAnswer && (
