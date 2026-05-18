@@ -13,12 +13,10 @@ import type {
   QuestionType,
 } from "@pages/practice/types";
 
-interface PracticeQuestionsMeta {
-  controlledTopics?: string[];
-}
-
 interface PracticeQuestionsPayload {
-  meta?: PracticeQuestionsMeta;
+  questions?: Array<{
+    topics?: string[];
+  }>;
 }
 
 const PracticeForm = () => {
@@ -29,9 +27,13 @@ const PracticeForm = () => {
     const loadTopics = async () => {
       const response = await fetch("/practice-questions.json");
       const data = (await response.json()) as PracticeQuestionsPayload;
-      const controlledTopics = data.meta?.controlledTopics ?? [];
+      const topics = Array.from(
+        new Set(
+          data.questions?.flatMap((question) => question.topics ?? []) ?? [],
+        ),
+      );
 
-      setPracticeTopics(processControlledTopics(controlledTopics));
+      setPracticeTopics(processControlledTopics(topics));
     };
 
     loadTopics().catch(() => setPracticeTopics([]));

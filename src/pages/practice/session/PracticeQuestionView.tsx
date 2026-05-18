@@ -17,6 +17,7 @@ const Summary = ({ topics }: { topics: Topics }) => {
       <h2 className="practice__session--summary__title sr-only">
         Topics Covered:
       </h2>
+
       {topics.map((topic) => (
         <span key={topic} className="practice__session--summary__badge">
           {titlize(topic)}
@@ -40,11 +41,13 @@ const AnswerOptions = ({
     visible: false,
   };
 
-  const data: FormFieldData[] = options.map((option) => ({
+  const data: FormFieldData[] = options.map((option, i) => ({
+    id: i,
     name: "answer",
     value: option,
     checked: selectedAnswer === option,
-    onChange: (event) => onSelect(event.target.value),
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
+      onSelect(event.target.value),
   }));
 
   return (

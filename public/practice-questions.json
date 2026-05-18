@@ -1,23 +1,6 @@
 {
   "meta": {
-    "version": "1.0",
-    "controlledTopics": [
-      "baits",
-      "diseases",
-      "foot-and-mouth-disease",
-      "pharmacology",
-      "drug-administration",
-      "biosecurity",
-      "border-control",
-      "ethics",
-      "animal-health",
-      "livestock-management",
-      "regulations",
-      "conduct",
-      "organizations",
-      "international-standards",
-      "woah"
-    ]
+    "version": "1.0"
   },
   "questions": [
     {

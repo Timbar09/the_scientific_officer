@@ -18,9 +18,6 @@ export type PracticeTopic =
 export type QuestionType = "multiple choice" | "true/false" | "detailed answer";
 
 export interface PracticeData {
-  meta?: {
-    controlledTopics?: PracticeTopic[];
-  };
   questions: PracticeQuestion[];
 }
 
