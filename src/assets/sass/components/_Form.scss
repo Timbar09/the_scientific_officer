@@ -6,36 +6,99 @@
   }
 
   &__radio {
-    width: 100%;
+    &--item {
+      display: inline-block;
+      width: 100%;
 
-    &--input {
-      appearance: none;
-      position: absolute;
+      &__input {
+        appearance: none;
+        position: absolute;
+      }
 
-      &:checked + .form__radio--content {
-        background-color: clr(primary, 500);
-        color: clr(primary, 100);
-        border-color: clr(primary, 500);
+      &__content {
+        display: inline-block;
+        width: 100%;
       }
     }
 
-    &--content {
-      padding: 0.5rem 1rem;
-      display: inline-block;
-      position: relative;
-      width: 100%;
-      color: clr(primary, 500);
-      font-size: 0.875rem;
-      font-weight: 600;
-      border: 2px solid clr(primary, 300);
-      border-radius: radius(md);
-      z-index: 1;
-      cursor: pointer;
+    &--slider {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      background-color: clr(primary, 500);
+      border-radius: calc(radius(md) * 0.75);
+      box-shadow: $shadow-md;
+      transition:
+        left 250ms ease,
+        width 150ms ease;
+    }
 
-      &:hover {
-        border-color: clr(primary, 500);
-        background-color: clr(primary, 500, 0.1);
-        color: clr(primary, 600);
+    // VARIANTS
+    &--default {
+      &__item {
+        &--input {
+          &:checked + .form__radio--default__item--content {
+            background-color: clr(primary, 500);
+            color: clr(primary, 100);
+            border-color: clr(primary, 500);
+          }
+        }
+
+        &--content {
+          padding: 0.5rem 1rem;
+          position: relative;
+          width: 100%;
+          color: clr(primary, 500);
+          font-size: 0.875rem;
+          font-weight: 600;
+          border: 2px solid clr(primary, 300);
+          border-radius: radius(md);
+          cursor: pointer;
+
+          &:hover {
+            border-color: clr(primary, 500);
+            background-color: clr(primary, 500, 0.1);
+            color: clr(primary, 600);
+          }
+        }
+      }
+    }
+
+    &--rail {
+      &__container {
+        color: clr(primary, 500);
+        background-color: clr(primary, 200);
+        padding: 0.25rem;
+        border-radius: radius(md);
+      }
+
+      &__list {
+        position: relative;
+        max-width: max-content;
+
+        .form__field {
+          z-index: 1;
+        }
+      }
+
+      &__item {
+        &--input {
+          &:checked + .form__radio--rail__item--content {
+            color: clr(primary, 100);
+          }
+        }
+
+        &--content {
+          display: inline-block;
+          padding: 0.25rem 0.75rem;
+          position: relative;
+          transition: color 250ms ease;
+        }
+
+        &:hover {
+          color: clr(primary, 600);
+        }
       }
     }
   }

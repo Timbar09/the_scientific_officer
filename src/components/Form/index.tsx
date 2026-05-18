@@ -1,27 +1,35 @@
 import type { ReactNode } from "react";
 
-import { RadioButton } from "./FormRadioSet";
+import FormRadioSet, { RadioButton } from "./FormRadioSet";
 
 import type { FormFieldData, FormFieldsetData } from "./types";
 
 export const FormField = ({
+  id,
   input = { type: "radio", variant: "default" },
   containerElement = "div",
   name,
   value,
   checked,
   onChange,
+  setRadioSliderStyle,
+  activeRadio,
+  setActiveRadio,
 }: FormFieldData) => {
   const Container = containerElement;
 
   return (
     <Container className="form__field">
       <RadioButton
+        id={id}
         input={input}
         name={name}
         value={value}
         checked={checked}
         onChange={onChange}
+        setRadioSliderStyle={setRadioSliderStyle}
+        activeRadio={activeRadio}
+        setActiveRadio={setActiveRadio}
       />
     </Container>
   );
@@ -40,10 +48,18 @@ export const FormFieldset = ({
   );
 };
 
-export const Form = ({ children }: { children?: ReactNode }) => {
+export const Form = ({
+  children,
+  onSubmit,
+}: {
+  children?: ReactNode;
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+}) => {
   return (
-    <div className="form__container">
-      <form action="">{children}</form>
-    </div>
+    <form className="form" onSubmit={onSubmit}>
+      <div className="form__container">{children}</div>
+    </form>
   );
 };
+
+export default { Form, FormFieldset, FormField, FormRadioSet };
