@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 
-import { FormFieldset, FormField } from ".";
+import FormField from "./FormField";
+import FormFieldset from "./FormFieldSet";
 
 import type { LegendData, FormFieldData } from "./types";
 

@@ -1,52 +1,8 @@
+import FormField from "./FormField";
+import FormFieldset from "./FormFieldSet";
+import FormRadioSet from "./FormRadioSet";
+
 import type { ReactNode } from "react";
-
-import FormRadioSet, { RadioButton } from "./FormRadioSet";
-
-import type { FormFieldData, FormFieldsetData } from "./types";
-
-export const FormField = ({
-  id,
-  input = { type: "radio", variant: "default" },
-  containerElement = "div",
-  name,
-  value,
-  checked,
-  onChange,
-  setRadioSliderStyle,
-  activeRadio,
-  setActiveRadio,
-}: FormFieldData) => {
-  const Container = containerElement;
-
-  return (
-    <Container className="form__field">
-      <RadioButton
-        id={id}
-        input={input}
-        name={name}
-        value={value}
-        checked={checked}
-        onChange={onChange}
-        setRadioSliderStyle={setRadioSliderStyle}
-        activeRadio={activeRadio}
-        setActiveRadio={setActiveRadio}
-      />
-    </Container>
-  );
-};
-
-export const FormFieldset = ({
-  children,
-  legend = { label: "", visible: true },
-}: FormFieldsetData) => {
-  const legendClass = legend.visible ? "form__fieldset--legend" : "sr-only";
-  return (
-    <fieldset className="form__fieldset">
-      <legend className={legendClass}>{legend.label}</legend>
-      {children}
-    </fieldset>
-  );
-};
 
 export const Form = ({
   children,
