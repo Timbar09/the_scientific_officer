@@ -1,3 +1,4 @@
+// TODO: Return more detailed time formats (e.g., hours, days) if the input seconds exceed certain thresholds.
 const formatTime = (seconds: number) => {
   const minutes = Math.floor(seconds / 60)
     .toString()

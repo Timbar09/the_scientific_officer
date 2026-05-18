@@ -5,25 +5,48 @@
  * @returns The converted string in Title Case format.
  */
 export function titlize(string: string): string {
+  let titlizedString = string;
+
   if (containsHyphen(string)) {
-    return titlizeHyphened(string);
+    titlizedString = titlizeHyphened(string);
   }
 
-  return string
-    .split(" ")
-    .map((word) => {
-      return word.charAt(0).toUpperCase() + word.slice(1);
-    })
-    .join(" ");
+  if (containsForwardSlash(string)) {
+    titlizedString = titlizeForwardSlashed(string);
+  }
+
+  return titlizeSpaced(titlizedString);
 }
 
 function containsHyphen(string: string): boolean {
   return string.includes("-");
 }
 
+function containsForwardSlash(string: string): boolean {
+  return string.includes("/");
+}
+
+function titlizeForwardSlashed(string: string): string {
+  return string
+    .split("/")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join("/");
+}
+
 function titlizeHyphened(string: string): string {
   return string
     .split("-")
+    .map((word) => {
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
+    .join(" ");
+}
+
+function titlizeSpaced(string: string): string {
+  return string
+    .split(" ")
     .map((word) => {
       return word.charAt(0).toUpperCase() + word.slice(1);
     })

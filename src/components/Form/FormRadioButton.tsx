@@ -1,5 +1,7 @@
 import { useRef, useEffect } from "react";
 
+import { titlize } from "@/utils";
+
 import type { FormFieldData } from "./types";
 
 const RadioButton = ({
@@ -56,7 +58,7 @@ const RadioButton = ({
       />
 
       <span className={`${contentVariantClass}`}>
-        <span className={contentLabelVariantClass}>{value}</span>
+        <span className={contentLabelVariantClass}>{titlize(value)}</span>
       </span>
     </label>
   );

@@ -4,7 +4,7 @@ import FormRadioSet from "./FormRadioSet";
 
 import type { ReactNode } from "react";
 
-export const Form = ({
+const Form = ({
   children,
   onSubmit,
 }: {
@@ -18,4 +18,4 @@ export const Form = ({
   );
 };
 
-export default { Form, FormFieldset, FormField, FormRadioSet };
+export { Form, FormFieldset, FormField, FormRadioSet };
