@@ -6,12 +6,9 @@ import PracticeHint from "./PracticeHint";
 import PracticeTiming from "./PracticeTiming";
 import PracticeType from "./PracticeType";
 
-import { processControlledTopics, type ProcessedTopic } from "@/utils";
-import type {
-  PracticeSettings,
-  PracticeTopic,
-  QuestionType,
-} from "@pages/practice/types";
+import type { PracticeSettings, QuestionType } from "@pages/practice/types";
+
+import { titlize } from "@/utils";
 
 interface PracticeQuestionsPayload {
   questions?: Array<{
@@ -21,7 +18,7 @@ interface PracticeQuestionsPayload {
 
 const PracticeForm = () => {
   const navigate = useNavigate();
-  const [practiceTopics, setPracticeTopics] = useState<ProcessedTopic[]>([]);
+  const [practiceTopics, setPracticeTopics] = useState<string[]>([]);
 
   useEffect(() => {
     const loadTopics = async () => {
@@ -33,7 +30,7 @@ const PracticeForm = () => {
         ),
       );
 
-      setPracticeTopics(processControlledTopics(topics));
+      setPracticeTopics(topics);
     };
 
     loadTopics().catch(() => setPracticeTopics([]));
@@ -43,9 +40,11 @@ const PracticeForm = () => {
     event.preventDefault();
 
     const formData = new FormData(event.currentTarget);
-    const selectedTopics = formData.getAll("topic") as PracticeTopic[];
-    const questionType = formData.get("questionType") as QuestionType | null;
-    const timePractice = formData.get("timePractice") === "time_practice";
+    const selectedTopics = formData.getAll("topic") as string[];
+    const selectedQuestionType = formData.get(
+      "questionType",
+    ) as QuestionType | null;
+    const includeTimer = formData.get("timePractice") === "time_practice";
     const showHint = formData.get("showHint") === "show_hints";
     const practiceDuration = Number(formData.get("practiceDuration") ?? 5);
 
@@ -54,10 +53,10 @@ const PracticeForm = () => {
         selectedTopics.length > 0
           ? selectedTopics
           : practiceTopics[0]
-            ? [practiceTopics[0].value as PracticeTopic]
+            ? [practiceTopics[0].toLowerCase() as string]
             : [],
-      questionType: questionType ?? "multiple choice",
-      timePractice,
+      questionType: selectedQuestionType ?? "multiple choice",
+      timePractice: includeTimer,
       practiceDuration: Number.isFinite(practiceDuration)
         ? practiceDuration
         : 5,
@@ -74,20 +73,20 @@ const PracticeForm = () => {
     >
       <PracticeFieldset legend="Choose Topics You Want to cover:">
         <div className="practice__topic--list flex flex-wrap gap-2">
-          {practiceTopics.map(({ id, label, icon, value }) => (
-            <label key={id} className="practice__topic--item grid">
+          {practiceTopics.map((topic, i) => (
+            <label key={topic} className="practice__topic--item grid">
               <input
                 className="custom-input"
                 type="checkbox"
                 name="topic"
-                defaultChecked={id === 1}
-                value={value}
+                defaultChecked={i === 0}
+                value={topic.toLowerCase()}
               />{" "}
-              <span className="practice__topic--item__name custom-input__name p-block-2 p-inline-4">
-                {label}
-                <span className="material-symbols-outlined practice__topic--item__icon">
+              <span className="practice__topic--item__name custom-input__name p-block-1 p-inline-2">
+                {titlize(topic)}
+                {/* <span className="material-symbols-outlined practice__topic--item__icon">
                   {icon}
-                </span>
+                </span> */}
               </span>
             </label>
           ))}

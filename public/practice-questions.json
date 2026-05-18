@@ -5,7 +5,7 @@
   "questions": [
     {
       "id": 1,
-      "topics": ["baits", "animal-health", "livestock-management"],
+      "topics": ["BAITS", "animal-health", "livestock-management"],
       "difficulty": "easy",
       "variants": {
         "multiple choice": {
@@ -42,7 +42,7 @@
     },
     {
       "id": 2,
-      "topics": ["diseases", "foot-and-mouth-disease"],
+      "topics": ["diseases", "FMD"],
       "difficulty": "easy",
       "variants": {
         "multiple choice": {
@@ -84,7 +84,7 @@
     },
     {
       "id": 3,
-      "topics": ["diseases", "foot-and-mouth-disease"],
+      "topics": ["diseases", "FMD", "response"],
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
@@ -161,7 +161,6 @@
         }
       }
     },
-
     {
       "id": 5,
       "topics": [
@@ -287,7 +286,7 @@
     },
     {
       "id": 8,
-      "topics": ["baits", "livestock-management", "regulations"],
+      "topics": ["BAITS", "livestock-management", "regulations"],
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
@@ -328,7 +327,7 @@
         "animal-health",
         "organizations",
         "international-standards",
-        "woah"
+        "WOAH"
       ],
       "difficulty": "easy",
       "variants": {

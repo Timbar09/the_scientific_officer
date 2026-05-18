@@ -1,20 +1,3 @@
-export type PracticeTopic =
-  | "baits"
-  | "diseases"
-  | "foot-and-mouth-disease"
-  | "pharmacology"
-  | "drug-administration"
-  | "biosecurity"
-  | "border-control"
-  | "ethics"
-  | "animal-health"
-  | "livestock-management"
-  | "regulations"
-  | "conduct"
-  | "organizations"
-  | "international-standards"
-  | "woah";
-
 export type QuestionType = "multiple choice" | "true/false" | "detailed answer";
 
 export interface PracticeData {
@@ -22,7 +5,7 @@ export interface PracticeData {
 }
 
 export interface PracticeSettings {
-  topics: PracticeTopic[];
+  topics: string[];
   questionType: QuestionType;
   timePractice: boolean;
   practiceDuration: number;
@@ -39,7 +22,7 @@ export interface PracticeQuestionVariant {
 
 export interface PracticeQuestion {
   id: number;
-  topics: PracticeTopic[];
+  topics: string[];
   variants: Partial<Record<QuestionType, PracticeQuestionVariant>>;
 }
 
