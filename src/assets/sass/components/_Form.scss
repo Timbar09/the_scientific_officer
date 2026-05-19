@@ -3,6 +3,12 @@
 .form {
   &__fieldset {
     border: 0;
+
+    &--legend {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: clr(primary, 900);
+    }
   }
 
   &__radio {
@@ -67,6 +73,7 @@
 
     &--rail {
       &__container {
+        max-width: max-content;
         color: clr(primary, 500);
         background-color: clr(primary, 200);
         padding: 0.25rem;
@@ -75,7 +82,6 @@
 
       &__list {
         position: relative;
-        max-width: max-content;
 
         .form__field {
           z-index: 1;
@@ -91,8 +97,11 @@
 
         &--content {
           display: inline-block;
-          padding: 0.25rem 0.75rem;
+          padding: 0.5rem 0.75rem;
           position: relative;
+          font-size: clamp(fs("xs"), 1.5vw, fs(sm));
+          font-weight: 500;
+          cursor: pointer;
           transition: color 250ms ease;
         }
 

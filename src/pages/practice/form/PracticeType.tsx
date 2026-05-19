@@ -1,56 +1,52 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
-import PracticeFieldset from "./PracticeFieldset";
+import { FormRadioSet } from "@/components/Form";
+
+import type { QuestionsPayload, QuestionType } from "../types";
 
 const PracticeType = () => {
-  const radioRef = useRef<HTMLLabelElement>(null);
-  const [activeRadio, setActiveRadio] = useState(1);
-  const [sliderStyle, setSliderStyle] = useState({
-    left: "0px",
-    width: "0px",
-  });
-
-  const questionTypes = [
-    { id: 1, name: "Multiple Choice" },
-    { id: 2, name: "True/False" },
-    { id: 3, name: "Detailed Answer" },
-  ];
+  const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
 
   useEffect(() => {
-    if (radioRef.current) {
-      setSliderStyle({
-        left: `${radioRef.current.offsetLeft}px`,
-        width: `${radioRef.current.clientWidth}px`,
-      });
-    }
-  }, [activeRadio]);
+    const loadQuestionTypes = async () => {
+      const response = await fetch("/practice-questions.json");
+      const data = (await response.json()) as QuestionsPayload;
+      const types = data.questionTypes ?? [];
 
-  return (
-    <PracticeFieldset legend="Select Type of Questions:">
-      <div className="practice__type--list flex flex-wrap p-1">
-        {questionTypes.map(({ id, name }) => (
-          <label
-            ref={id === activeRadio ? radioRef : null}
-            key={id}
-            className="practice__type--item grid"
-            onClick={() => setActiveRadio(id)}
-          >
-            <input
-              className="custom-input"
-              type="radio"
-              name="questionType"
-              defaultChecked={id === 1}
-              value={name.toLowerCase()}
-            />{" "}
-            <span className="practice__type--item__name custom-input__name p-block-1 p-inline-3">
-              {name}
-            </span>
-          </label>
-        ))}
-        <div className="practice__type--slider" style={sliderStyle}></div>
-      </div>
-    </PracticeFieldset>
-  );
+      setQuestionTypes(types);
+    };
+
+    loadQuestionTypes().catch(() => setQuestionTypes([]));
+  }, []);
+
+  const legend = {
+    label: "Select Type of Questions",
+    visible: true,
+  };
+
+  const mixedType = {
+    id: 99,
+    name: "questionType",
+    value: "mixed",
+    checked: false,
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
+      console.log("Selected Question Type:", event.target.value),
+  };
+
+  const data = questionTypes
+    .filter((type) => type.available)
+    .map(({ id, name }) => ({
+      id,
+      name: "questionType",
+      value: name.toLowerCase(),
+      checked: id === 1,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
+        console.log("Selected Question Type:", event.target.value),
+    }));
+
+  data.push(mixedType);
+
+  return <FormRadioSet legend={legend} variant="rail" data={data} />;
 };
 
 export default PracticeType;

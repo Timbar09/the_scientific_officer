@@ -2,6 +2,36 @@
   "meta": {
     "version": "1.0"
   },
+  "questionTypes": [
+    {
+      "id": 0,
+      "name": "Multiple Choice",
+      "icon": "check_box",
+      "available": true,
+      "description": "A question format where the respondent selects the correct answer from a list of options. This format tests recognition and recall of information."
+    },
+    {
+      "id": 1,
+      "name": "True/False",
+      "icon": "balance",
+      "available": true,
+      "description": "A question format where the respondent must determine if a statement is true or false."
+    },
+    {
+      "id": 2,
+      "name": "Short Answer",
+      "icon": "text_snippet",
+      "available": false,
+      "description": "A question format where the respondent provides a brief written answer. This format tests recall and understanding of key concepts."
+    },
+    {
+      "id": 3,
+      "name": "Detailed Answer",
+      "icon": "menu_book",
+      "available": false,
+      "description": "A question format where the respondent provides a detailed written answer. This format tests comprehensive understanding and the ability to articulate complex ideas."
+    }
+  ],
   "questions": [
     {
       "id": 1,
