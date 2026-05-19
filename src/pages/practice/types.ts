@@ -1,18 +1,21 @@
-export type QuestionType = "multiple choice" | "true/false" | "detailed answer";
+export const QUESTION_TYPE_NAMES = [
+  "Multiple Choice",
+  "True/False",
+  "Short Answer",
+  "Detailed Answer",
+] as const;
 
-export interface PracticeData {
-  questions: PracticeQuestion[];
-}
+export type QuestionTypeName = (typeof QUESTION_TYPE_NAMES)[number];
 
-export interface PracticeSettings {
-  topics: string[];
-  questionType: QuestionType;
-  timePractice: boolean;
-  practiceDuration: number;
-  showHint: boolean;
-}
+export type QuestionType = {
+  id: number;
+  name: QuestionTypeName;
+  icon: string;
+  available: boolean;
+  description: string;
+};
 
-export interface PracticeQuestionVariant {
+export interface QuestionVariant {
   question: string;
   answer: string;
   explanation: string;
@@ -20,10 +23,29 @@ export interface PracticeQuestionVariant {
   options?: string[];
 }
 
-export interface PracticeQuestion {
+export interface Question {
   id: number;
   topics: string[];
-  variants: Partial<Record<QuestionType, PracticeQuestionVariant>>;
+  difficulty: "Easy" | "Medium" | "Hard";
+  variants: Record<QuestionTypeName, QuestionVariant>;
+}
+
+export interface QuestionsPayload {
+  meta?: Record<string, string>;
+  questionTypes?: QuestionType[];
+  questions?: Question[];
+}
+
+export interface SessionData {
+  questions: Question[];
+}
+
+export interface SessionSettings {
+  topics: string[];
+  questionType: QuestionTypeName;
+  timePractice: boolean;
+  practiceDuration: number;
+  showHint: boolean;
 }
 
 // Track user's answer for each question

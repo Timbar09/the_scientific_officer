@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router";
-import type {
-  PracticeQuestion,
-  PracticeSettings,
-  SessionResults,
-} from "../types";
+import type { Question, SessionSettings, SessionResults } from "../types";
 
 interface Props {
   sessionResults: SessionResults;
-  filteredQuestions: PracticeQuestion[];
-  settings: PracticeSettings;
+  filteredQuestions: Question[];
+  settings: SessionSettings;
 }
 
 const PracticeResults = ({

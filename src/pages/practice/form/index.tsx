@@ -6,15 +6,13 @@ import PracticeHint from "./PracticeHint";
 import PracticeTiming from "./PracticeTiming";
 import PracticeType from "./PracticeType";
 
-import type { PracticeSettings, QuestionType } from "@pages/practice/types";
+import type {
+  SessionSettings,
+  QuestionTypeName,
+  QuestionsPayload,
+} from "@pages/practice/types";
 
 import { titlize } from "@/utils";
-
-interface PracticeQuestionsPayload {
-  questions?: Array<{
-    topics?: string[];
-  }>;
-}
 
 const PracticeForm = () => {
   const navigate = useNavigate();
@@ -23,7 +21,7 @@ const PracticeForm = () => {
   useEffect(() => {
     const loadTopics = async () => {
       const response = await fetch("/practice-questions.json");
-      const data = (await response.json()) as PracticeQuestionsPayload;
+      const data = (await response.json()) as QuestionsPayload;
       const topics = Array.from(
         new Set(
           data.questions?.flatMap((question) => question.topics ?? []) ?? [],
@@ -43,19 +41,19 @@ const PracticeForm = () => {
     const selectedTopics = formData.getAll("topic") as string[];
     const selectedQuestionType = formData.get(
       "questionType",
-    ) as QuestionType | null;
+    ) as QuestionTypeName | null;
     const includeTimer = formData.get("timePractice") === "time_practice";
     const showHint = formData.get("showHint") === "show_hints";
     const practiceDuration = Number(formData.get("practiceDuration") ?? 5);
 
-    const settings: PracticeSettings = {
+    const settings: SessionSettings = {
       topics:
         selectedTopics.length > 0
           ? selectedTopics
           : practiceTopics[0]
             ? [practiceTopics[0].toLowerCase() as string]
             : [],
-      questionType: selectedQuestionType ?? "multiple choice",
+      questionType: selectedQuestionType ?? "Multiple Choice",
       timePractice: includeTimer,
       practiceDuration: Number.isFinite(practiceDuration)
         ? practiceDuration
@@ -84,9 +82,6 @@ const PracticeForm = () => {
               />{" "}
               <span className="practice__topic--item__name custom-input__name p-block-1 p-inline-2">
                 {titlize(topic)}
-                {/* <span className="material-symbols-outlined practice__topic--item__icon">
-                  {icon}
-                </span> */}
               </span>
             </label>
           ))}

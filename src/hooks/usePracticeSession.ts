@@ -2,24 +2,24 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router";
 
 import type {
-  PracticeData,
-  PracticeQuestion,
-  PracticeSettings,
-  PracticeQuestionVariant,
+  SessionData,
+  Question,
+  SessionSettings,
+  QuestionVariant,
   SessionResults,
   UserAnswer,
 } from "../pages/practice/types";
 
 export interface Session {
-  settings: PracticeSettings | undefined;
+  settings: SessionSettings | undefined;
   isLoading: boolean;
   isComplete: boolean;
   results: SessionResults | null;
-  questions: PracticeQuestion[];
-  filteredQuestions: PracticeQuestion[];
+  questions: Question[];
+  filteredQuestions: Question[];
   currentQuestionIndex: number;
-  currentQuestion: PracticeQuestion | undefined;
-  currentVariant: PracticeQuestionVariant | undefined;
+  currentQuestion: Question | undefined;
+  currentVariant: QuestionVariant | undefined;
   showAnswer: boolean;
   isHintRevealed: boolean;
   secondsRemaining: number;
@@ -38,9 +38,9 @@ export interface Session {
 const usePracticeSession = (): Session => {
   const navigate = useNavigate();
   const location = useLocation();
-  const settings = location.state as PracticeSettings | undefined;
+  const settings = location.state as SessionSettings | undefined;
 
-  const [questions, setQuestions] = useState<PracticeQuestion[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [secondsRemaining, setSecondsRemaining] = useState(0);
@@ -63,7 +63,7 @@ const usePracticeSession = (): Session => {
 
     const loadQuestions = async () => {
       const response = await fetch("/practice-questions.json");
-      const data = (await response.json()) as PracticeData;
+      const data = (await response.json()) as SessionData;
       const { questions } = data;
       setQuestions(questions);
       setIsLoading(false);
@@ -109,7 +109,7 @@ const usePracticeSession = (): Session => {
 
   const currentQuestion = filteredQuestions[currentQuestionIndex];
   const currentVariant =
-    currentQuestion?.variants[settings?.questionType ?? "multiple choice"];
+    currentQuestion?.variants[settings?.questionType ?? "Multiple Choice"];
   const isHintRevealed = currentQuestion
     ? revealedHintQuestionIds.has(currentQuestion.id)
     : false;
