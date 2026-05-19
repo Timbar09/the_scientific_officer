@@ -279,7 +279,7 @@
     },
     {
       "id": 7,
-      "topics": ["regulations", "livestock-management", "baits"],
+      "topics": ["regulations", "livestock-management", "BAITS"],
       "difficulty": "medium",
       "variants": {
         "multiple choice": {

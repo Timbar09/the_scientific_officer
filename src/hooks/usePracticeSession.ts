@@ -55,6 +55,26 @@ const usePracticeSession = (): Session => {
   const [isComplete, setIsComplete] = useState(false);
   const [results, setResults] = useState<SessionResults | null>(null);
 
+  const processQuestions = (questions: Question[]): Question[] =>
+    questions.map((q) => {
+      const variantsEntries = Object.entries(q.variants).map(
+        ([key, variant]) => {
+          if (
+            key === "true/false" &&
+            (!variant.options || variant.options.length === 0)
+          ) {
+            return [key, { ...variant, options: ["True", "False"] }];
+          }
+          return [key, variant];
+        },
+      );
+
+      return {
+        ...q,
+        variants: Object.fromEntries(variantsEntries) as typeof q.variants,
+      };
+    });
+
   useEffect(() => {
     if (!settings) {
       navigate("/practice", { replace: true });
@@ -65,7 +85,8 @@ const usePracticeSession = (): Session => {
       const response = await fetch("/practice-questions.json");
       const data = (await response.json()) as SessionData;
       const { questions } = data;
-      setQuestions(questions);
+      const processed = processQuestions(questions ?? []);
+      setQuestions(processed);
       setIsLoading(false);
     };
 
