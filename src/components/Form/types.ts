@@ -5,6 +5,7 @@ export interface InputData {
 
 export interface FormFieldData {
   id?: number;
+  className?: string;
   input?: InputData;
   containerElement?: "div" | "li";
   name: string;
@@ -22,6 +23,14 @@ export interface LegendData {
 }
 
 export interface FormFieldsetData {
-  children: React.ReactNode;
   legend: LegendData;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export interface FormRadioSetData {
+  legend: LegendData;
+  className?: string;
+  variant?: "default" | "rail" | "ball";
+  data: FormFieldData[];
 }

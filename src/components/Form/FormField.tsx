@@ -4,6 +4,7 @@ import type { FormFieldData } from "./types";
 
 const FormField = ({
   id,
+  className = "",
   input = { type: "radio", variant: "default" },
   containerElement = "div",
   name,
@@ -17,7 +18,7 @@ const FormField = ({
   const Container = containerElement;
 
   return (
-    <Container className="form__field">
+    <Container className={`form__field ${className}`}>
       <RadioButton
         id={id}
         input={input}

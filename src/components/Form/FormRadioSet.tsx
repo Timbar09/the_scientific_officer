@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import FormField from "./FormField";
 import FormFieldset from "./FormFieldSet";
 
-import type { LegendData, FormFieldData } from "./types";
+import type { FormRadioSetData, FormFieldData } from "./types";
 
 export const RadioButton = ({
   id,
@@ -67,13 +67,10 @@ export const RadioButton = ({
 
 const FormRadioSet = ({
   legend,
+  className = "",
   variant = "default",
   data,
-}: {
-  legend: LegendData;
-  variant?: "default" | "rail" | "ball";
-  data: FormFieldData[];
-}) => {
+}: FormRadioSetData) => {
   const [sliderStyle, setSliderStyle] = useState({
     left: "0px",
     width: "0px",
@@ -88,7 +85,7 @@ const FormRadioSet = ({
   const variantClass = variantClasses[variant];
 
   return (
-    <FormFieldset legend={legend}>
+    <FormFieldset legend={legend} className={className}>
       <div
         className={`form__radio--container form__radio--${variant}__container`}
       >

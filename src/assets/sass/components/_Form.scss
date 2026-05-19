@@ -52,20 +52,24 @@
         }
 
         &--content {
-          padding: 0.5rem 1rem;
+          padding: 0.75rem 1rem;
           position: relative;
           width: 100%;
           color: clr(primary, 500);
           font-size: 0.875rem;
           font-weight: 600;
-          border: 2px solid clr(primary, 300);
+          background-color: clr(primary, 500, 0.1);
           border-radius: radius(md);
           cursor: pointer;
+          transition:
+            background-color 250ms ease,
+            color 250ms ease,
+            border-color 250ms ease;
 
           &:hover {
             border-color: clr(primary, 500);
-            background-color: clr(primary, 500, 0.1);
-            color: clr(primary, 600);
+            background-color: clr(primary, 500, 0.2);
+            color: clr(primary, 700);
           }
         }
       }

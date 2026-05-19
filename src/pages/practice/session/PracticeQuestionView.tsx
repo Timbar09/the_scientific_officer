@@ -40,23 +40,44 @@ const AnswerOptions = ({
   selectedAnswer: string | null;
   onSelect: (option: string) => void;
 }) => {
+  let isTrueFalseVariant = false;
+
   const legend: LegendData = {
     label: "Answer Options",
     visible: false,
   };
 
-  const data: FormFieldData[] = options.map((option, i) => ({
-    id: i,
-    name: "answer",
-    value: option,
-    checked: selectedAnswer === option,
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-      onSelect(event.target.value),
-  }));
+  const data: FormFieldData[] = options.map((option, i) => {
+    if (
+      !isTrueFalseVariant &&
+      options.length === 2 &&
+      option.toLowerCase() === "true" &&
+      options[1 - i].toLowerCase() === "false"
+    ) {
+      isTrueFalseVariant = true;
+    }
+
+    return {
+      id: i,
+      name: "answer",
+      value: option,
+      checked: selectedAnswer === option,
+      onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
+        onSelect(event.target.value),
+    };
+  });
+
+  const trueOrFalseVariantClass = isTrueFalseVariant
+    ? "practice__session--answer__options--truefalse"
+    : "";
 
   return (
-    <div className="practice__session--options m-block-3">
-      <FormRadioSet legend={legend} data={data} />
+    <div className="practice__session--answer m-block-3">
+      <FormRadioSet
+        className={trueOrFalseVariantClass}
+        legend={legend}
+        data={data}
+      />
     </div>
   );
 };
