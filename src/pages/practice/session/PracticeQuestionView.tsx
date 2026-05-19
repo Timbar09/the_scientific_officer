@@ -10,19 +10,23 @@ type Topics = NonNullable<Session["settings"]>["topics"];
 const Summary = ({ topics }: { topics: Topics }) => {
   return (
     <section
-      className="practice__session--summary p-block-3 flex gap-2 ai-center"
+      className="practice__session--summary"
       aria-label="Topics Covered"
       title="Topics Covered"
     >
-      <h2 className="practice__session--summary__title sr-only">
-        Topics Covered:
-      </h2>
+      <div className="practice__session--summary__topic">
+        <h2 className="practice__session--summary__topic--title sr-only">
+          Topics Covered:
+        </h2>
 
-      {topics.map((topic) => (
-        <span key={topic} className="practice__session--summary__badge">
-          {titlize(topic)}
-        </span>
-      ))}
+        <div className="practice__session--summary__topic--list p-block-3 flex flex-wrap gap-2 ai-center">
+          {topics.map((topic) => (
+            <span key={topic} className="practice__session--summary__badge">
+              {titlize(topic)}
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
