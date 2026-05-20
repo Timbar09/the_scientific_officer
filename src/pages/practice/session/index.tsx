@@ -2,7 +2,7 @@ import PracticeLoaderView from "./PracticeLoaderView";
 import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
 import PracticeQuestionView from "./PracticeQuestionView";
 import PracticeResults from "./PracticeResults";
-import usePracticeSession from "../../../hooks/usePracticeSession";
+import useSession from "@/hooks/useSession";
 
 import { formatTime, titlize } from "@/utils";
 
@@ -90,7 +90,7 @@ const ProgressBar = ({
 };
 
 const PracticeSession = () => {
-  const session = usePracticeSession();
+  const session = useSession();
   const { settings, isHintRevealed, revealHint } = session;
 
   if (!settings || session.isLoading) {
