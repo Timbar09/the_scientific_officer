@@ -66,7 +66,7 @@ export const RadioButton = ({
 };
 
 const FormRadioSet = ({
-  legend,
+  label,
   className = "",
   variant = "default",
   data,
@@ -85,7 +85,7 @@ const FormRadioSet = ({
   const variantClass = variantClasses[variant];
 
   return (
-    <FormFieldset legend={legend} className={className}>
+    <FormFieldset label={label} className={className}>
       <div
         className={`form__radio--container form__radio--${variant}__container`}
       >

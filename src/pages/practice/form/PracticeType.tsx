@@ -19,8 +19,8 @@ const PracticeType = () => {
     loadQuestionTypes().catch(() => setQuestionTypes([]));
   }, []);
 
-  const legend = {
-    label: "Select Type of Questions",
+  const label = {
+    text: "Select Type of Questions",
     visible: true,
   };
 
@@ -46,7 +46,7 @@ const PracticeType = () => {
 
   data.push(mixedType);
 
-  return <FormRadioSet legend={legend} variant="rail" data={data} />;
+  return <FormRadioSet label={label} variant="rail" data={data} />;
 };
 
 export default PracticeType;

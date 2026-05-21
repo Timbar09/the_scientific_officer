@@ -3,13 +3,14 @@ import type { FormFieldsetData } from "./types";
 const FormFieldset = ({
   children,
   className = "",
-  legend = { label: "", visible: true },
+  label = { text: "", visible: true },
 }: FormFieldsetData) => {
-  const legendClass = legend.visible ? "form__fieldset--legend" : "sr-only";
+  const legendClass = label.visible ? "form__field--label" : "sr-only";
   const fieldsetClass = `form__fieldset ${className == "" ? "p-block-2 p-inline-3 m-block-start-2" : className}`;
+
   return (
     <fieldset className={fieldsetClass}>
-      <legend className={legendClass}>{legend.label}</legend>
+      <legend className={legendClass}>{label.text}</legend>
       {children}
     </fieldset>
   );

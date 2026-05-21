@@ -8,7 +8,7 @@ const RadioButton = ({
   id,
   input = { type: "radio", variant: "default" },
   name,
-  value,
+  value = "",
   checked,
   onChange,
   setRadioSliderStyle,
