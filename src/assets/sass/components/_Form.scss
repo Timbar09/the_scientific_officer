@@ -1,13 +1,44 @@
 @use "../abstracts" as *;
 
 .form {
-  &__fieldset {
-    border: 0;
+  &__field {
+    &set {
+      border: 0;
+    }
 
-    &--legend {
+    &--label {
+      display: block;
       font-size: 0.875rem;
       font-weight: 600;
       color: clr(primary, 900);
+    }
+  }
+
+  &__input {
+    &--item__input {
+      padding: 0.75rem 1rem;
+      width: 100%;
+      color: clr(primary, 700);
+      background-color: clr(primary, 500, 0.1);
+      border-radius: radius(md);
+      box-shadow:
+        inset 0 4px 6px clr(primary, 500, 0.1),
+        inset 0 -4px 6px clr(primary, 500, 0.05);
+      border: 0;
+
+      &:focus {
+        outline: 2px solid clr(primary, 500);
+        outline-offset: 2px;
+      }
+
+      &::placeholder {
+        font-style: italic;
+      }
+
+      &.textarea {
+        min-height: 7rem;
+        resize: none;
+      }
     }
   }
 

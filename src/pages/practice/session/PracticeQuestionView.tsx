@@ -1,9 +1,14 @@
 import FormRadioSet from "@/components/Form/FormRadioSet";
+import { FormField } from "@/components/Form";
 
 import { titlize } from "@/utils";
 
-import type { Session } from "@/hooks/usePracticeSession";
-import type { LegendData, FormFieldData } from "@/components/Form/types";
+import type { Session } from "@/hooks/useSession/types";
+import type {
+  LabelData,
+  FormFieldData,
+  InputData,
+} from "@/components/Form/types";
 
 type Topics = NonNullable<Session["settings"]>["topics"];
 
@@ -31,8 +36,8 @@ const Summary = ({ topics }: { topics: Topics }) => {
   );
 };
 
-const AnswerOptions = ({
-  options,
+const AnswerBox = ({
+  options = [],
   selectedAnswer,
   onSelect,
 }: {
@@ -42,8 +47,8 @@ const AnswerOptions = ({
 }) => {
   let isTrueFalseVariant = false;
 
-  const legend: LegendData = {
-    label: "Answer Options",
+  const label: LabelData = {
+    text: "Answer Options",
     visible: false,
   };
 
@@ -71,13 +76,26 @@ const AnswerOptions = ({
     ? "practice__session--answer__options--truefalse"
     : "";
 
+  const input: InputData = {
+    type: "textarea",
+    variant: "default",
+  };
+
   return (
-    <div className="practice__session--answer m-block-3">
-      <FormRadioSet
-        className={trueOrFalseVariantClass}
-        legend={legend}
-        data={data}
-      />
+    <div className="practice__session--answer m-block-4">
+      {options.length > 0 ? (
+        <FormRadioSet
+          className={trueOrFalseVariantClass}
+          label={label}
+          data={data}
+        />
+      ) : (
+        <FormField
+          name="answer"
+          input={input}
+          placeholder="Enter your answer..."
+        />
+      )}
     </div>
   );
 };
@@ -122,13 +140,11 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           </p>
         ) : null}
 
-        {currentVariant.options ? (
-          <AnswerOptions
-            options={currentVariant.options}
-            selectedAnswer={selectedAnswer}
-            onSelect={setSelectedAnswer}
-          />
-        ) : null}
+        <AnswerBox
+          options={currentVariant.options || []}
+          selectedAnswer={selectedAnswer}
+          onSelect={setSelectedAnswer}
+        />
 
         {showAnswer && (
           <div className="practice__session--answer m-block-3 p-3">
