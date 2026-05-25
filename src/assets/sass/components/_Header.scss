@@ -8,10 +8,9 @@
   z-index: 1000;
 
   .container {
-    border-radius: radius(pill);
+    border-radius: radius(lg);
 
     @include mq("md") {
-      padding: spacing(1);
       background-color: clr(neutral, 100);
       box-shadow: $shadow-lg;
       border: $border;
@@ -50,6 +49,10 @@
         @include mq("md") {
           display: none;
         }
+
+        .material-symbols-outlined {
+          font-size: 1.25rem;
+        }
       }
     }
 
@@ -61,7 +64,7 @@
       background-color: clr(neutral, 100);
       width: 100%;
       flex-direction: column;
-      gap: 0.125em;
+      gap: 0.125rem;
 
       button {
         background-color: clr(neutral, 100);
@@ -72,7 +75,6 @@
         width: 100%;
         text-align: center;
         font-size: inherit;
-        // border-radius: radius(lg);
         cursor: pointer;
         z-index: 1;
         transition: background-color 100ms ease;
@@ -121,6 +123,7 @@
 
     &--list {
       padding-inline-end: spacing(4);
+
       &__item {
         position: relative;
 
@@ -136,27 +139,21 @@
       }
 
       &__link {
-        --underline-height: 7%;
+        --underline-height: 3%;
 
-        position: relative;
         font-size: inherit;
         font-weight: 600;
-        // padding: spacing(3) 0;
         border-radius: radius(lg);
         transition: color 100ms ease;
 
         @include before() {
           left: 0;
-          bottom: -1.025rem;
+          bottom: -1%;
           width: 100%;
           height: 0;
           background: $clr-primary-gradient-mid;
           border-radius: radius(lg) radius(lg) 0 0;
           transition: height 0ms ease;
-
-          @include mq("lg") {
-            bottom: -1.15rem;
-          }
         }
 
         &:hover {

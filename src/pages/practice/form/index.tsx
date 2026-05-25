@@ -78,7 +78,7 @@ const PracticeForm = () => {
                 type="checkbox"
                 name="topic"
                 defaultChecked={i === 0}
-                value={topic.toLowerCase()}
+                value={topic}
               />{" "}
               <span className="practice__topic--item__name custom-input__name p-block-1 p-inline-2">
                 {titlize(topic)}

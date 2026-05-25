@@ -60,6 +60,7 @@ export const getFilteredQuestions = (
     q.topics.some((t) => settings.topics.includes(t)),
   );
 
+  // TODO: It should be "All" not "Mixed". Update the questionTypeName type and everywhere else accordingly
   if (qType === "mixed") {
     const expanded: QuestionWithVariantKey[] = [];
     matches.forEach((q) =>

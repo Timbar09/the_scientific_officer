@@ -1,19 +1,21 @@
 @use "../abstracts" as *;
 
 .btn {
-  $color: clr(primary, 100);
-
-  border-radius: radius(pill);
-  font-size: 1.0125rem;
+  border-radius: radius(md);
+  font-size: 1.0125em;
 
   &__icon {
-    padding: 0.25rem;
-    color: clr(primary, 500);
-    background-color: $color;
-    border-radius: radius(circle);
+    padding: 0.5875rem;
+    // font-size: 1em;
+    color: clr(primary, 100);
+    background-color: clr(primary, 200, 0.125);
+    border-radius: radius(md);
+    transition:
+      background-color 100ms ease,
+      color 100ms ease;
 
     .material-symbols-outlined {
-      font-size: 1.25rem;
+      font-size: 1.25em;
     }
   }
 
@@ -24,7 +26,7 @@
       inset -5px -5px 4px 0 clr(primary, 100, 0.05);
 
     font-weight: 700;
-    color: $color;
+    color: clr(primary, 100);
     background: $bg-color;
     box-shadow: $inner-shadow, $shadow-md;
     transition:
@@ -46,10 +48,9 @@
   &__secondary {
     --border-width: 0.125rem;
 
-    padding-block: calc(spacing(1) - var(--border-width));
     font-weight: 700;
     color: clr(primary, 500);
-    border: 0.125rem solid clr(primary, 500);
+    outline: 0.125rem solid clr(primary, 300);
     box-shadow: $shadow-sm;
     transition:
       background-color 100ms ease,
@@ -71,13 +72,14 @@
     }
 
     .btn__icon {
-      color: clr(primary, 100);
-      background-color: clr(primary, 500);
+      padding: 0.525rem;
+      color: clr(primary, 500);
+      outline: 0.125rem solid clr(primary, 300);
     }
 
     &:hover .btn__icon {
-      background-color: clr(primary, 100);
-      color: clr(primary, 500);
+      background-color: clr(primary, 400);
+      color: clr(primary, 100);
     }
   }
 
@@ -93,6 +95,7 @@
       color 100ms ease;
 
     &:hover {
+      color: clr(primary, 600);
       background-color: clr(primary, 200);
       box-shadow: $shadow-md;
     }
@@ -101,6 +104,16 @@
       transform: scale(0.98);
       background-color: clr(neutral, 800);
       box-shadow: $shadow-sm;
+    }
+
+    .btn__icon {
+      color: clr(primary, 500);
+      background-color: clr(primary, 200, 0.25);
+    }
+
+    &:hover .btn__icon {
+      color: clr(primary, 600);
+      background-color: clr(primary, 300);
     }
   }
 }

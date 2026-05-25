@@ -48,8 +48,8 @@ const Button = ({
   const iconClasses = `${
     icon
       ? icon.position?.toLocaleLowerCase() === "left"
-        ? "p-block-1 p-inline-start-1 p-inline-end-4"
-        : "p-block-1 p-inline-start-4 p-inline-end-1 flex-row-reverse"
+        ? "p-inline-end-4"
+        : "p-inline-start-4 flex-row-reverse"
       : "p-block-1 p-inline-3"
   }`;
   className =
