@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router";
+import { NavLink, useLocation } from "react-router";
 import { motion, AnimatePresence } from "motion/react";
 import type { Variants } from "motion/react";
 
@@ -64,13 +64,22 @@ const NavItem = ({
   handleMenuItemClick = () => {},
 }: NavItemProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { pathname } = useLocation();
 
   const itemClassName = `header__nav--${isMobileMenu ? "menu" : "list"}`;
+  const isItemActive =
+    pathname === item.path || pathname.startsWith(`${item.path}/`);
+  const isSubItemActive =
+    item.sub?.some(
+      (subItem) =>
+        pathname === subItem.path || pathname.startsWith(`${subItem.path}/`),
+    ) ?? false;
+  const isDropdownActive = isItemActive || isSubItemActive;
 
   return (
     <li
       key={item.path}
-      className={`${itemClassName}__item`}
+      className={`${itemClassName}__item p-block-@md-4`}
       role="listitem"
       onMouseEnter={!isMobileMenu ? () => setIsOpen(true) : undefined}
       onMouseLeave={!isMobileMenu ? () => setIsOpen(false) : undefined}
@@ -80,8 +89,8 @@ const NavItem = ({
           <button
             type="button"
             className={`${itemClassName}__link flex ai-center jc-center ${
-              isMobileMenu ? "fw-bold p-1" : ""
-            }`}
+              isMobileMenu ? "p-2" : ""
+            } ${isDropdownActive ? "active" : ""}`}
             aria-haspopup="true"
             aria-expanded={isOpen}
             onClick={isMobileMenu ? () => setIsOpen(!isOpen) : undefined}
@@ -115,7 +124,7 @@ const NavItem = ({
           to={item.path}
           className={({ isActive }) =>
             `${itemClassName}__link flex jc-center ai-center ${
-              isMobileMenu ? "fw-bold p-1" : ""
+              isMobileMenu ? "p-2" : ""
             } ${isActive ? "active" : ""}`
           }
           {...(isMobileMenu ? { onClick: handleMenuItemClick } : {})}

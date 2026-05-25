@@ -18,7 +18,7 @@
   }
 
   &__logo {
-    border-radius: radius(pill);
+    border-radius: radius(md);
     background-color: clr(neutral, 100);
     box-shadow: $shadow-md;
 
@@ -58,13 +58,26 @@
 
     &--menu {
       position: absolute;
-      padding: 4.5rem spacing(3) spacing(5);
-      border-radius: 0 0 radius(lg) radius(lg);
+      padding: 4.5rem spacing(4) spacing(4);
+      border-radius: 0 0 radius(xl) radius(xl);
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       background-color: clr(neutral, 100);
       width: 100%;
       flex-direction: column;
-      gap: 0.125rem;
+
+      li {
+        &:first-child {
+          a {
+            border-radius: radius(md) radius(md) 0 0;
+          }
+        }
+
+        &:last-child {
+          a {
+            border-radius: 0 0 radius(md) radius(md);
+          }
+        }
+      }
 
       button {
         background-color: clr(neutral, 100);
@@ -74,7 +87,9 @@
         position: relative;
         width: 100%;
         text-align: center;
-        font-size: inherit;
+        font-size: 1.5em;
+        font-weight: 500;
+        letter-spacing: 0.07125em;
         cursor: pointer;
         z-index: 1;
         transition: background-color 100ms ease;
@@ -139,7 +154,7 @@
       }
 
       &__link {
-        --underline-height: 3%;
+        --underline-height: 0.125em;
 
         font-size: inherit;
         font-weight: 600;
@@ -148,7 +163,7 @@
 
         @include before() {
           left: 0;
-          bottom: -1%;
+          bottom: -2%;
           width: 100%;
           height: 0;
           background: $clr-primary-gradient-mid;

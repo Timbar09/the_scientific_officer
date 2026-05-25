@@ -63,10 +63,7 @@ const HomeFeatures = () => {
 
         <ul className="home__feature--list grid gap-4">
           {features.map((feature) => (
-            <li
-              className="home__feature--item flex flex-col gap-1"
-              key={feature.title}
-            >
+            <li className="home__feature--item" key={feature.title}>
               <Card
                 icon={{ name: feature.icon }}
                 title={feature.title}

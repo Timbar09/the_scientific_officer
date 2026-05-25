@@ -30,7 +30,7 @@ const HomeMetrics = () => {
             Our Impact in Numbers
           </h2>
 
-          <p className="home__section--description m-block-end-4 clr-primary-200">
+          <p className="home__section--description m-block-end-5 clr-primary-200">
             So far, we have over 5,000 material resources to help scientific
             officers enhance their skills!
           </p>
@@ -41,7 +41,7 @@ const HomeMetrics = () => {
                 className="home__metric--item text-center bg-primary-100 p-3"
                 key={metric.label}
               >
-                <h3 className="home__metric--item__value clr-primary-100 fw-bold m-block-end-1">
+                <h3 className="home__metric--item__value clr-primary-100 fw-bold">
                   {metric.value}
                 </h3>
                 <p className="home__metric--item__label clr-primary-300">
