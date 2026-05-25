@@ -48,3 +48,53 @@
     }
   }
 }
+
+// Responsive spacing utility classes with .{class}-@{breakpoint}-{size} naming
+@each $break-name, $break-value in $breakpoints {
+  @include mq($break-name) {
+    @each $key, $value in $sizes {
+      .m-\@#{$break-name}-#{$key} {
+        margin: $value;
+      }
+      .m-block-start-\@#{$break-name}-#{$key} {
+        margin-block-start: $value;
+      }
+      .m-block-end-\@#{$break-name}-#{$key} {
+        margin-block-end: $value;
+      }
+      .m-block-\@#{$break-name}-#{$key} {
+        margin-block: $value;
+      }
+      .m-inline-start-\@#{$break-name}-#{$key} {
+        margin-inline-start: $value;
+      }
+      .m-inline-end-\@#{$break-name}-#{$key} {
+        margin-inline-end: $value;
+      }
+      .m-inline-\@#{$break-name}-#{$key} {
+        margin-inline: $value;
+      }
+      .p-\@#{$break-name}-#{$key} {
+        padding: $value;
+      }
+      .p-block-start-\@#{$break-name}-#{$key} {
+        padding-block-start: $value;
+      }
+      .p-block-end-\@#{$break-name}-#{$key} {
+        padding-block-end: $value;
+      }
+      .p-block-\@#{$break-name}-#{$key} {
+        padding-block: $value;
+      }
+      .p-inline-start-\@#{$break-name}-#{$key} {
+        padding-inline-start: $value;
+      }
+      .p-inline-end-\@#{$break-name}-#{$key} {
+        padding-inline-end: $value;
+      }
+      .p-inline-\@#{$break-name}-#{$key} {
+        padding-inline: $value;
+      }
+    }
+  }
+}
