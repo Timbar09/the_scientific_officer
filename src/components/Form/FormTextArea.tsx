@@ -20,7 +20,7 @@ const FormTextArea = ({
       <span className={labelVariantTextClass}>{label?.text}</span>
 
       <textarea
-        className={`form__input--item__input textarea ${inputVariantClass}`}
+        className={`form__input--item__input textarea ${inputVariantClass} p-block-2 p-inline-4`}
         name={name}
         placeholder={placeholder}
       />

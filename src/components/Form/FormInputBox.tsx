@@ -20,7 +20,7 @@ const FormInputBox = ({
       <span className={labelVariantTextClass}>{label?.text}</span>
 
       <input
-        className={`form__input--item__input ${inputVariantClass}`}
+        className={`form__input--item__input ${inputVariantClass} p-block-2 p-inline-4`}
         type={type}
         name={name}
         placeholder={placeholder}
