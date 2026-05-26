@@ -1,6 +1,5 @@
 import FormField from "./FormField";
 import FormFieldset from "./FormFieldSet";
-import FormRadioSet from "./FormRadioSet";
 
 import type { ReactNode } from "react";
 
@@ -18,4 +17,4 @@ const Form = ({
   );
 };
 
-export { Form, FormFieldset, FormField, FormRadioSet };
+export { Form, FormFieldset, FormField };

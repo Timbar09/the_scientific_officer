@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 
-import { FormRadioSet } from "@/components/Form";
+import { FormField } from "@/components/Form";
 
 import type { QuestionsPayload, QuestionType } from "../types";
+import type { FormFieldData, InputData } from "@/components/Form/types";
 
 const PracticeType = () => {
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
@@ -19,6 +20,8 @@ const PracticeType = () => {
     loadQuestionTypes().catch(() => setQuestionTypes([]));
   }, []);
 
+  const input: InputData = { type: "radio", variant: "rail" };
+
   const label = {
     text: "Select Type of Questions",
     visible: true,
@@ -33,8 +36,8 @@ const PracticeType = () => {
       console.log("Selected Question Type:", event.target.value),
   };
 
-  const data = questionTypes
-    .filter((type) => type.available)
+  const options = questionTypes
+    .filter((qt) => qt.available)
     .map(({ id, name }) => ({
       id,
       name: "questionType",
@@ -44,9 +47,15 @@ const PracticeType = () => {
         console.log("Selected Question Type:", event.target.value),
     }));
 
-  data.push(mixedType);
+  options.push(mixedType);
 
-  return <FormRadioSet label={label} variant="rail" data={data} />;
+  const fieldData: FormFieldData = {
+    input,
+    label,
+    options,
+  };
+
+  return <FormField {...fieldData} />;
 };
 
 export default PracticeType;

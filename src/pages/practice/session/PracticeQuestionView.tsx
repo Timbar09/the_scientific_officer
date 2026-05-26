@@ -1,4 +1,3 @@
-import FormRadioSet from "@/components/Form/FormRadioSet";
 import { FormField } from "@/components/Form";
 
 import { titlize } from "@/utils";
@@ -76,23 +75,30 @@ const AnswerBox = ({
     ? "practice__session--answer__options--truefalse"
     : "";
 
-  const input: InputData = {
+  const typedInInput: InputData = {
     type: "textarea",
+    variant: "default",
+  };
+
+  const selectedOptionInput: InputData = {
+    type: "radio",
     variant: "default",
   };
 
   return (
     <div className="practice__session--answer m-block-4">
       {options.length > 0 ? (
-        <FormRadioSet
+        <FormField
+          name="answer"
+          input={selectedOptionInput}
           className={trueOrFalseVariantClass}
           label={label}
-          data={data}
+          options={data}
         />
       ) : (
         <FormField
           name="answer"
-          input={input}
+          input={typedInInput}
           placeholder="Enter your answer..."
         />
       )}

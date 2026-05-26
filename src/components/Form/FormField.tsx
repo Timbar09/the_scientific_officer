@@ -9,7 +9,7 @@ const FormField = ({
   className = "",
   input = { type: "text", variant: "default" },
   containerElement = "div",
-  label,
+  label = { text: "", visible: true },
   name = "",
   value = "",
   checked = false,
@@ -18,6 +18,7 @@ const FormField = ({
   setRadioSliderStyle,
   activeRadio,
   setActiveRadio,
+  options = [],
 }: FormFieldData) => {
   const { type } = input;
   const Container = containerElement;
@@ -44,6 +45,7 @@ const FormField = ({
         setRadioSliderStyle={setRadioSliderStyle}
         activeRadio={activeRadio}
         setActiveRadio={setActiveRadio}
+        options={options}
       />
     </Container>
   );

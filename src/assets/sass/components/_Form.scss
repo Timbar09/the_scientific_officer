@@ -8,7 +8,7 @@
 
     &--label {
       display: block;
-      font-size: 0.875rem;
+      font-size: 0.95em;
       font-weight: 600;
       color: clr(primary, 900);
     }
@@ -16,7 +16,6 @@
 
   &__input {
     &--item__input {
-      padding: 0.75rem 1rem;
       width: 100%;
       color: clr(primary, 700);
       background-color: clr(primary, 500, 0.1);
@@ -36,7 +35,7 @@
       }
 
       &.textarea {
-        min-height: 7rem;
+        min-height: 7em;
         resize: none;
       }
     }
@@ -83,11 +82,10 @@
         }
 
         &--content {
-          padding: 0.75rem 1rem;
           position: relative;
           width: 100%;
           color: clr(primary, 500);
-          font-size: 0.875rem;
+          font-size: 0.95em;
           font-weight: 600;
           background-color: clr(primary, 500, 0.1);
           border-radius: radius(md);
@@ -111,19 +109,19 @@
         max-width: max-content;
         color: clr(primary, 500);
         background-color: clr(primary, 200);
-        padding: 0.25rem;
+        padding: 0.25em;
         border-radius: radius(md);
       }
 
       &__list {
         position: relative;
-
-        .form__field {
-          z-index: 1;
-        }
       }
 
       &__item {
+        &--container {
+          z-index: 1;
+        }
+
         &--input {
           &:checked + .form__radio--rail__item--content {
             color: clr(primary, 100);
@@ -132,10 +130,10 @@
 
         &--content {
           display: inline-block;
-          padding: 0.5rem 0.75rem;
+          padding: 0.75em 1em;
           position: relative;
-          font-size: clamp(fs("xs"), 1.5vw, fs(sm));
-          font-weight: 500;
+          // font-size: clamp(fs("xs"), 1.5vw, fs(sm));
+          font-weight: 600;
           cursor: pointer;
           transition: color 250ms ease;
         }

@@ -1,13 +1,17 @@
 import FormInputBox from "./FormInputBox";
 import FormRadioButton from "./FormRadioButton";
-import type FormTextArea from "./FormTextArea";
+import FormTextArea from "./FormTextArea";
+
+export type INPUT_TYPE = "text" | "radio" | "checkbox" | "textarea";
+export type RADIO_VARIANT = "default" | "rail" | "ball";
 
 export type InputComponent =
   | typeof FormInputBox
   | typeof FormRadioButton
   | typeof FormTextArea;
+
 export interface InputData {
-  type: "text" | "radio" | "checkbox" | "textarea";
+  type: INPUT_TYPE;
   variant: string;
 }
 
@@ -17,7 +21,7 @@ export interface FormFieldData {
   input?: InputData;
   containerElement?: "div" | "li";
   label?: { text: string; visible: boolean };
-  name: string;
+  name?: string;
   value?: string;
   checked?: boolean;
   placeholder?: string;
@@ -25,6 +29,7 @@ export interface FormFieldData {
   setRadioSliderStyle?: (style: { left: string; width: string }) => void;
   activeRadio?: number;
   setActiveRadio?: (id: number) => void;
+  options?: FormFieldData[];
 }
 
 export interface LabelData {
@@ -36,11 +41,4 @@ export interface FormFieldsetData {
   label: LabelData;
   children: React.ReactNode;
   className?: string;
-}
-
-export interface FormRadioSetData {
-  label: LabelData;
-  className?: string;
-  variant?: "default" | "rail" | "ball";
-  data: FormFieldData[];
 }
