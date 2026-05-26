@@ -5,6 +5,8 @@ import { FormField } from "@/components/Form";
 import type { QuestionsPayload, QuestionType } from "../types";
 import type { FormFieldData, InputData } from "@/components/Form/types";
 
+import { DEFAULT_ACTIVE_RADIO } from "@/components/Form/FormRadioButton";
+
 const PracticeType = () => {
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
 
@@ -27,11 +29,11 @@ const PracticeType = () => {
     visible: true,
   };
 
-  const mixedType = {
-    id: 99,
+  const allType = {
+    id: DEFAULT_ACTIVE_RADIO,
     name: "questionType",
-    value: "mixed",
-    checked: false,
+    value: "all",
+    checked: true,
     onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
       console.log("Selected Question Type:", event.target.value),
   };
@@ -42,12 +44,12 @@ const PracticeType = () => {
       id,
       name: "questionType",
       value: name.toLowerCase(),
-      checked: id === 1,
+      checked: false,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
         console.log("Selected Question Type:", event.target.value),
     }));
 
-  options.push(mixedType);
+  options.unshift(allType);
 
   const fieldData: FormFieldData = {
     input,

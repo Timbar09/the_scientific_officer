@@ -60,8 +60,7 @@ export const getFilteredQuestions = (
     q.topics.some((t) => settings.topics.includes(t)),
   );
 
-  // TODO: It should be "All" not "Mixed". Update the questionTypeName type and everywhere else accordingly
-  if (qType === "mixed") {
+  if (qType === "all") {
     const expanded: QuestionWithVariantKey[] = [];
     matches.forEach((q) =>
       getAvailableVariantKeys(q, availableTypes).forEach((key) =>
@@ -85,12 +84,12 @@ export const getCurrentVariant = (
 ): QuestionVariant | undefined => {
   if (!currentQuestion || !settings) return undefined;
   const qType = settings.questionType.toLowerCase();
-  if (qType === "mixed" && currentQuestion.variantKey) {
+  if (qType === "all" && currentQuestion.variantKey) {
     return currentQuestion.variants[
       currentQuestion.variantKey as keyof typeof currentQuestion.variants
     ];
   }
-  if (qType === "mixed")
+  if (qType === "all")
     return pickRandomVariant(currentQuestion, availableTypes);
   return currentQuestion.variants[
     qType as keyof typeof currentQuestion.variants

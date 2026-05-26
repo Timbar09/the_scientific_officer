@@ -6,6 +6,8 @@ import type { RADIO_VARIANT, FormFieldData } from "./types";
 
 import { titlize } from "@/utils";
 
+export const DEFAULT_ACTIVE_RADIO = 999;
+
 const RadioButtonOption = ({
   id,
   input = { type: "radio", variant: "default" },
@@ -14,7 +16,7 @@ const RadioButtonOption = ({
   checked,
   onChange,
   setRadioSliderStyle,
-  activeRadio = 0,
+  activeRadio = DEFAULT_ACTIVE_RADIO,
   setActiveRadio,
 }: FormFieldData) => {
   const radioRef = useRef<HTMLLabelElement>(null);
@@ -76,7 +78,7 @@ const FormRadioButton = ({
     left: "0px",
     width: "0px",
   });
-  const [activeRadio, setActiveRadio] = useState(0);
+  const [activeRadio, setActiveRadio] = useState(999);
   const { variant } = input;
 
   const variantClasses = {
