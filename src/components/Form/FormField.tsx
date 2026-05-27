@@ -1,6 +1,7 @@
-import RadioButton from "./FormRadioButton";
-import InputBox from "./FormInputBox";
 import TextArea from "./FormTextArea";
+import InputBox from "./FormInputBox";
+import FormCheckBox from "./FormCheckBox";
+import RadioButton from "./FormRadioButton";
 
 import type { InputComponent, FormFieldData } from "./types";
 
@@ -27,6 +28,7 @@ const FormField = ({
     text: InputBox,
     radio: RadioButton,
     textarea: TextArea,
+    checkbox: FormCheckBox,
   };
 
   const Input = inputs[type] || InputBox;

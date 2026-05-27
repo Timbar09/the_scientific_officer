@@ -1,33 +1,27 @@
 import { useState } from "react";
 
-import PracticeFieldset from "./PracticeFieldset";
+// import PracticeFieldset from "./PracticeFieldset";
 import PracticeTimingInput from "./PracticeTimingInput";
+import { FormField, FormFieldset } from "@/components/Form";
 
 const PracticeTiming = () => {
   const [isChecked, setIsChecked] = useState(false);
+  const label = {
+    text: "Enable Timer",
+    visible: true,
+  };
 
   return (
-    <PracticeFieldset legend="Set Practice Timing:">
-      <div className="flex gap-5">
-        <div className="practice__timing--checkbox flex flex-wrap gap-2">
-          <label
-            className={`practice__timing--checkbox__label grid ${isChecked ? "checked" : ""}`}
-          >
-            <input
-              className="custom-input"
-              type="checkbox"
-              name="timePractice"
-              value="time_practice"
-              checked={isChecked}
-              onChange={(e) => setIsChecked(e.target.checked)}
-            />{" "}
-            <div className="practice__timing--checkbox__slider"></div>
-          </label>
-        </div>
+    <FormFieldset label={label} className="flex gap-5 p-block-2">
+      <FormField
+        label={{ text: "Switch Timer On or Off", visible: false }}
+        input={{ type: "checkbox", variant: "switch" }}
+        name="practiceTiming"
+        onChange={(e) => setIsChecked(e.target.checked)}
+      />
 
-        <PracticeTimingInput enabled={isChecked} />
-      </div>
-    </PracticeFieldset>
+      <PracticeTimingInput enabled={isChecked} />
+    </FormFieldset>
   );
 };
 

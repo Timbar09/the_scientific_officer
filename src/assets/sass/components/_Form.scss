@@ -130,9 +130,8 @@
 
         &--content {
           display: inline-block;
-          padding: 0.75em 1em;
+          padding: 0.5em 1em;
           position: relative;
-          // font-size: clamp(fs("xs"), 1.5vw, fs(sm));
           font-weight: 600;
           cursor: pointer;
           transition: color 250ms ease;
@@ -140,6 +139,55 @@
 
         &:hover {
           color: clr(primary, 600);
+        }
+      }
+    }
+  }
+
+  &__checkbox {
+    &--checked {
+      .form__checkbox--switch__box {
+        background-color: clr(primary, 500);
+      }
+    }
+
+    &--input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    // VARIANTS
+    &--switch {
+      &__input {
+        &:checked
+          + .form__checkbox--switch__box
+          .form__checkbox--switch__box--indicator {
+          left: calc(50% + 0.25em);
+        }
+      }
+
+      &__box {
+        position: relative;
+        display: inline-block;
+        width: 4em;
+        height: 2em;
+        border-radius: radius(pill);
+        background-color: clr(primary, 500, 0.1);
+        transition: background-color 250ms ease;
+
+        &--indicator {
+          position: absolute;
+          display: inline-block;
+          top: 0.25em;
+          left: 0.25em;
+          width: 1.5em;
+          height: 1.5em;
+          background-color: clr(primary, 100);
+          border-radius: radius(pill);
+          box-shadow: $shadow-md;
+          transition: left 250ms ease;
         }
       }
     }
