@@ -145,8 +145,23 @@
   }
 
   &__checkbox {
+    cursor: pointer;
+
     &--checked {
+      .form__checkbox--default__box {
+        background-color: clr(primary, 500);
+
+        &--indicator {
+          transform: rotate(-45deg) scale(1);
+        }
+      }
+
       .form__checkbox--switch__box {
+        background-color: clr(primary, 500);
+      }
+
+      .form__checkbox--tab__box {
+        color: clr(primary, 100);
         background-color: clr(primary, 500);
       }
     }
@@ -159,6 +174,51 @@
     }
 
     // VARIANTS
+    &--default {
+      &__box {
+        --dimension: 2em;
+        --thickness: 0.159em;
+
+        position: relative;
+        display: inline-block;
+        width: var(--dimension);
+        height: var(--dimension);
+        border-radius: calc(radius(sm) * 1.5);
+        border: var(--thickness) solid clr(primary, 500, 0.5);
+        transition: background-color 100ms ease;
+
+        &:hover {
+          border-color: clr(primary, 500);
+        }
+
+        &--indicator {
+          position: absolute;
+          display: inline-block;
+          top: 45%;
+          left: 30%;
+          transform: rotate(-45deg) scale(0);
+          height: var(--thickness);
+          width: calc(var(--dimension) * 0.55);
+          background-color: clr(primary, 100);
+          border-radius: radius(pill);
+          box-shadow: $shadow-md;
+          transition: transform 150ms ease;
+
+          &::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: var(--thickness);
+            height: calc(var(--dimension) * 0.35);
+            background-color: inherit;
+            border-radius: radius(pill);
+            box-shadow: $shadow-md;
+          }
+        }
+      }
+    }
+
     &--switch {
       &__input {
         &:checked
@@ -189,6 +249,19 @@
           box-shadow: $shadow-md;
           transition: left 250ms ease;
         }
+      }
+    }
+
+    &--tab {
+      &__box {
+        margin-block-start: 0;
+        position: relative;
+        display: inline-block;
+        padding: 0.5em 0.75em;
+        font-weight: 600;
+        border-radius: calc(radius(sm) * 1.75);
+        background-color: clr(primary, 500, 0.1);
+        transition: background-color 250ms ease;
       }
     }
   }

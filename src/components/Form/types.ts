@@ -5,7 +5,7 @@ import FormRadioButton from "./FormRadioButton";
 
 export type INPUT_TYPE = "text" | "radio" | "checkbox" | "textarea";
 export type RADIO_VARIANT = "default" | "rail";
-export type CHECKBOX_VARIANT = "default" | "switch";
+export type CHECKBOX_VARIANT = "default" | "switch" | "tab";
 
 export type InputComponent =
   | typeof FormInputBox

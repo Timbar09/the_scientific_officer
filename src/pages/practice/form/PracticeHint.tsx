@@ -1,28 +1,18 @@
-import { useState } from "react";
-
-import PracticeFieldset from "./PracticeFieldset";
+import { FormField } from "@/components/Form";
 
 const PracticeHint = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  const label = {
+    text: "Show Hints",
+    visible: true,
+  };
 
   return (
-    <PracticeFieldset legend="Hints:">
-      <label
-        className={`practice__hint--label grid ${isChecked ? "checked" : ""}`}
-      >
-        <input
-          className="custom-input"
-          type="checkbox"
-          name="showHint"
-          value="show_hints"
-          checked={isChecked}
-          onChange={(event) => setIsChecked(event.target.checked)}
-        />{" "}
-        <span className="custom-input__name p-block-1 p-inline-3">
-          Show hints during practice
-        </span>
-      </label>
-    </PracticeFieldset>
+    <FormField
+      label={label}
+      name="showHints"
+      value="show_hints"
+      input={{ type: "checkbox", variant: "default" }}
+    />
   );
 };
 

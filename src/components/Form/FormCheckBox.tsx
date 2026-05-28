@@ -7,9 +7,10 @@ const FormCheckBox = ({
   label = { text: "", visible: false },
   name,
   value,
+  checked,
   onChange,
 }: FormFieldData) => {
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(checked || false);
   const { variant } = input;
   const { text, visible } = label;
 
@@ -26,9 +27,11 @@ const FormCheckBox = ({
     <label
       className={`form__checkbox ${isChecked ? "form__checkbox--checked" : ""}`}
     >
-      <span className={`form__field--label ${visible ? "" : "sr-only"}`}>
-        {text}
-      </span>
+      {variant !== "tab" && (
+        <span className={`form__field--label ${visible ? "" : "sr-only"}`}>
+          {text}
+        </span>
+      )}
 
       <input
         className={`form__checkbox--input ${inputVariantClass}`}
@@ -42,7 +45,11 @@ const FormCheckBox = ({
       <span
         className={`${boxVariantClass} ${visible ? "m-block-start-1" : ""}`}
       >
-        <span className={indicatorVariantClass}></span>
+        {variant === "tab" ? (
+          text
+        ) : (
+          <span className={indicatorVariantClass}></span>
+        )}
       </span>
     </label>
   );

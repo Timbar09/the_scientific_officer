@@ -16,7 +16,8 @@ const PracticeTiming = () => {
       <FormField
         label={{ text: "Switch Timer On or Off", visible: false }}
         input={{ type: "checkbox", variant: "switch" }}
-        name="practiceTiming"
+        name="sessionTimer"
+        value="set_timer"
         onChange={(e) => setIsChecked(e.target.checked)}
       />
 
