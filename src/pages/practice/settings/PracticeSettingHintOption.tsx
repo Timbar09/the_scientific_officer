@@ -1,6 +1,6 @@
 import { FormField } from "@/components/Form";
 
-const PracticeHint = () => {
+const PracticeSettingHintOption = () => {
   const label = {
     text: "Show Hints",
     visible: true,
@@ -16,4 +16,4 @@ const PracticeHint = () => {
   );
 };
 
-export default PracticeHint;
+export default PracticeSettingHintOption;

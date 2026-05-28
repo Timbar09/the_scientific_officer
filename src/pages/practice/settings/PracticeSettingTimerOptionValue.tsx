@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PracticeTimingInput = ({ enabled }: { enabled: boolean }) => {
+const PracticeSettingTimerOptionValue = ({ enabled }: { enabled: boolean }) => {
   const [timeDisplay, setTimeDisplay] = useState("005");
 
   const increaseTime = () => {
@@ -62,4 +62,4 @@ const PracticeTimingInput = ({ enabled }: { enabled: boolean }) => {
   );
 };
 
-export default PracticeTimingInput;
+export default PracticeSettingTimerOptionValue;

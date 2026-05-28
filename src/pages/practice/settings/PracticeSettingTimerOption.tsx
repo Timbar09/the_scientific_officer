@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // import PracticeFieldset from "./PracticeFieldset";
-import PracticeTimingInput from "./PracticeTimingInput";
+import PracticeTimingInput from "./PracticeSettingTimerOptionValue";
 import { FormField, FormFieldset } from "@/components/Form";
 
 const PracticeTiming = () => {
