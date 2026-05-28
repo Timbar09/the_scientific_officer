@@ -1,10 +1,11 @@
-import PracticeForm from "./form";
+import PracticeEntryForm from "./settings";
 
 const Practice = () => {
   return (
     <div className="practice page">
       <div className="container">
         <h1 className="page__title">Let's Put Your Knowledge to the Test!</h1>
+
         <p className="page__description">
           Select from a variety of topics, difficulty levels, and question types
           to customize your practice sessions. Whether you're a beginner or an
@@ -12,7 +13,7 @@ const Practice = () => {
           your understanding of scientific concepts.
         </p>
 
-        <PracticeForm />
+        <PracticeEntryForm />
       </div>
     </div>
   );
