@@ -12,7 +12,7 @@ const FormTextArea = ({
   const labelVariantClass = `form__input--item form__input--${variant}__item`;
   const inputVariantClass = `form__input--${variant}__item--input`;
   const labelVariantTextClass = label?.visible
-    ? "form__field--label p-block-2"
+    ? "form__field--label m-block-end-2"
     : "sr-only";
 
   return (

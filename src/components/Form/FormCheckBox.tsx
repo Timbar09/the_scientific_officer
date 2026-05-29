@@ -28,7 +28,9 @@ const FormCheckBox = ({
       className={`form__checkbox ${isChecked ? "form__checkbox--checked" : ""}`}
     >
       {variant !== "tab" && (
-        <span className={`form__field--label ${visible ? "" : "sr-only"}`}>
+        <span
+          className={visible ? "form__field--label m-block-end-2" : "sr-only"}
+        >
           {text}
         </span>
       )}
@@ -42,9 +44,7 @@ const FormCheckBox = ({
         onChange={handleOnChange}
       />
 
-      <span
-        className={`${boxVariantClass} ${visible ? "m-block-start-1" : ""}`}
-      >
+      <span className={boxVariantClass}>
         {variant === "tab" ? (
           text
         ) : (

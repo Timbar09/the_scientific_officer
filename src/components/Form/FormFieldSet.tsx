@@ -5,8 +5,10 @@ const FormFieldset = ({
   className = "",
   label = { text: "", visible: true },
 }: FormFieldsetData) => {
-  const legendClass = label.visible ? "form__field--label" : "sr-only";
-  const fieldsetClass = `form__fieldset ${className == "" ? "p-block-2 p-inline-3 m-block-start-2" : className}`;
+  const legendClass = label.visible
+    ? "form__field--label m-block-end-2"
+    : "sr-only";
+  const fieldsetClass = `form__fieldset ${className}`;
 
   return (
     <fieldset className={fieldsetClass}>
