@@ -7,7 +7,7 @@ import type { FormFieldData, InputData } from "@/components/Form/types";
 
 import { DEFAULT_ACTIVE_RADIO } from "@/components/Form/FormRadioButton";
 
-const PracticeType = () => {
+const PracticeSettingQuestionTypeSelection = () => {
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
 
   useEffect(() => {
@@ -60,4 +60,4 @@ const PracticeType = () => {
   return <FormField {...fieldData} />;
 };
 
-export default PracticeType;
+export default PracticeSettingQuestionTypeSelection;

@@ -12,7 +12,7 @@ const PracticeTiming = () => {
   };
 
   return (
-    <FormFieldset label={label} className="flex gap-5 p-block-2">
+    <FormFieldset label={label} className="flex gap-5">
       <FormField
         label={{ text: "Switch Timer On or Off", visible: false }}
         input={{ type: "checkbox", variant: "switch" }}

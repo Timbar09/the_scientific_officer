@@ -97,191 +97,41 @@
   }
 
   &__form {
-    background-color: clr(neutral, 100);
-    border-radius: radius(lg);
-  }
-
-  &__fieldset {
-    border: 0;
-
-    label {
-      cursor: pointer;
-    }
-
-    .custom-input {
-      appearance: none;
-
-      &__name {
-        display: inline-block;
-        z-index: 1;
-        color: clr(primary, 500);
-        font-size: 0.875rem;
-        font-weight: 600;
-        position: relative;
+    .form {
+      &__container {
+        display: flex;
+        flex-direction: column;
+        gap: spacing(3);
       }
     }
 
-    &--legend {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: clr(primary, 900);
+    &--section {
+      background-color: clr(neutral, 100);
+      border-radius: radius(xl);
     }
-  }
 
-  &__topic {
-    &--item {
-      position: relative;
-
-      [type="checkbox"] {
-        &:checked + .practice__topic--item__name {
-          background-color: clr(primary, 500);
-          color: clr(primary, 100);
-          border-color: clr(primary, 500);
-        }
-      }
-
-      &__name {
-        border: 2px solid clr(primary, 300);
-        border-radius: radius(md);
+    &--group {
+      > section {
+        flex: 1;
         min-width: max-content;
-        overflow: hidden;
-
-        &:hover {
-          border-color: clr(primary, 500);
-          background-color: clr(primary, 500, 0.1);
-          color: clr(primary, 600);
-        }
       }
 
-      &__icon {
-        position: absolute;
-        bottom: -25%;
-        right: -10%;
-        font-size: 3.5rem;
-        color: clr(neutral, 700, 0.1);
-      }
-    }
-  }
-
-  &__type {
-    &--list {
-      position: relative;
-      background-color: clr(primary, 500, 0.1);
-      max-width: max-content;
-      border-radius: radius(md);
-    }
-
-    &--item {
-      position: relative;
-
-      [type="radio"] {
-        &:checked + .practice__type--item__name {
-          color: clr(primary, 100);
-        }
-      }
-
-      &__name {
-        min-width: max-content;
-        transition: color 250ms ease;
-
-        &:hover {
-          color: clr(primary, 600);
+      .practice__form--submit {
+        button {
+          width: 100%;
+          height: 100%;
+          justify-content: center;
+          font-size: fs(xl);
+          padding: 1em;
         }
       }
     }
 
-    &--slider {
-      position: absolute;
-      top: spacing(1);
-      left: spacing(1);
-      bottom: spacing(1);
-      width: 6.5rem;
-      background-color: clr(primary, 500);
-      border-radius: radius(sm);
-      box-shadow: $shadow-md;
-      transition:
-        left 250ms ease,
-        width 150ms ease;
-    }
-  }
-
-  &__timing {
-    &--checkbox {
-      &__label {
-        position: relative;
-        width: 4rem;
-        height: 2rem;
-        border-radius: radius(pill);
-        background-color: clr(primary, 500, 0.1);
-        transition: background-color 250ms ease;
-
-        [type="checkbox"] {
-          &:checked + .practice__timing--checkbox__slider {
-            left: calc(50% + 0.25rem);
-          }
+    &--topic {
+      &__item {
+        .form__checkbox--box {
+          font-size: 0.75em;
         }
-
-        &.checked {
-          background-color: clr(primary, 500);
-        }
-      }
-
-      &__slider {
-        position: absolute;
-        top: 0.25rem;
-        left: 0.25rem;
-        width: 1.5rem;
-        height: 1.5rem;
-        background-color: clr(primary, 100);
-        border-radius: radius(pill);
-        box-shadow: $shadow-md;
-        transition: left 250ms ease;
-      }
-    }
-
-    &--value {
-      &.disabled {
-        opacity: 0.5;
-      }
-
-      &__controls {
-        max-width: max-content;
-      }
-
-      &__decrease,
-      &__increase {
-        width: 2.5rem;
-        height: 2rem;
-        background-color: clr(primary, 500, 0.1);
-        color: clr(primary, 500);
-        font-size: 1.25rem;
-        transition:
-          background-color 250ms ease,
-          color 250ms ease;
-
-        &:hover {
-          background-color: clr(primary, 500);
-          color: clr(primary, 100);
-          box-shadow: $shadow-sm;
-        }
-      }
-
-      &__decrease {
-        border-top-left-radius: radius(md);
-        border-bottom-left-radius: radius(md);
-      }
-
-      &__increase {
-        border-top-right-radius: radius(md);
-        border-bottom-right-radius: radius(md);
-      }
-
-      &__display {
-        padding-inline: 0.25rem;
-        background-color: clr(primary, 500, 0.1);
-        color: clr(primary, 600);
-        font-size: 1.25rem;
-        text-align: center;
       }
     }
   }
@@ -311,10 +161,12 @@
     &--answer {
       &__options {
         &--truefalse {
-          .form__radio--default__list {
-            flex-direction: row;
+          .form__radio--default {
+            &__list {
+              flex-direction: row;
+            }
 
-            .form__field {
+            &__item--container {
               flex: 1;
             }
           }
