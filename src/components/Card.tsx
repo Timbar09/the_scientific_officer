@@ -1,3 +1,5 @@
+import Icon from "@components/Icon";
+
 import type { IconProps } from "./Button";
 
 interface CardProps {
@@ -16,7 +18,7 @@ const Card = ({ icon, title, text, size = "medium" }: CardProps) => {
     >
       {icon && (
         <span className={`card__icon card__${size}--icon grid`}>
-          <span className="material-symbols-outlined">{icon.name}</span>
+          <Icon name={icon.name || ""} />
         </span>
       )}
 

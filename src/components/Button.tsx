@@ -1,5 +1,7 @@
 import { NavLink } from "react-router";
 
+import Icon from "@components/Icon";
+
 export interface IconProps {
   name: string | null;
   position?: "left" | "right";
@@ -60,7 +62,7 @@ const Button = ({
       <NavLink to={to} className={className} onClick={onClick}>
         {icon && (
           <span className="btn__icon grid">
-            <span className="material-symbols-outlined">{icon.name}</span>
+            <Icon name={icon.name || ""} />
           </span>
         )}
         {children}
@@ -72,7 +74,7 @@ const Button = ({
     <button type={type} className={className} onClick={onClick}>
       {icon && (
         <span className="btn__icon grid">
-          <span className="material-symbols-outlined">{icon.name}</span>
+          <Icon name={icon.name || ""} />
         </span>
       )}
       {children}

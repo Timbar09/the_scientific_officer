@@ -164,6 +164,11 @@
       .form__checkbox--tab__box {
         color: clr(primary, 100);
         background-color: clr(primary, 500);
+
+        &:hover {
+          color: clr(primary, 100);
+          background-color: clr(primary, 500);
+        }
       }
     }
 
@@ -178,7 +183,7 @@
     &--default {
       &__box {
         --dimension: 2em;
-        --thickness: 0.159em;
+        --thickness: 0.185em;
 
         position: relative;
         display: inline-block;
@@ -262,7 +267,14 @@
         font-weight: 600;
         border-radius: calc(radius(sm) * 1.75);
         background-color: clr(primary, 500, 0.1);
-        transition: background-color 250ms ease;
+        transition:
+          background-color 250ms ease,
+          color 250ms ease;
+
+        &:hover {
+          background-color: clr(primary, 500, 0.2);
+          color: clr(primary, 500);
+        }
       }
     }
   }

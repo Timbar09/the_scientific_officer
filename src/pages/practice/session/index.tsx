@@ -1,7 +1,10 @@
-import PracticeLoaderView from "./PracticeLoaderView";
-import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
-import PracticeQuestionView from "./PracticeQuestionView";
+import Icon from "@components/Icon";
+
 import PracticeResults from "./PracticeResults";
+import PracticeLoaderView from "./PracticeLoaderView";
+import PracticeQuestionView from "./PracticeQuestionView";
+import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
+
 import useSession from "@/hooks/useSession";
 
 import { formatTime, titlize } from "@/utils";
@@ -19,9 +22,8 @@ const TimerBadge = ({ secondsRemaining }: { secondsRemaining: number }) => {
       className={`practice__header--timer practice__header--badge flex ai-center gap-1 p-1 ${timerWarning}`}
       title="Time Remaining"
     >
-      <span className="material-symbols-outlined practice__header--timer__icon">
-        schedule
-      </span>
+      <Icon name="schedule" className="practice__header--timer__icon" />
+
       <span className="practice__header--timer__value fw-bold">
         {` ${formatTime(secondsRemaining)} Mins`}
       </span>
@@ -32,9 +34,8 @@ const TimerBadge = ({ secondsRemaining }: { secondsRemaining: number }) => {
 const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
   return (
     <div className="practice__header--badge flex ai-center gap-1 p-1">
-      <span className="material-symbols-outlined practice__header--icon">
-        quiz
-      </span>
+      <Icon name="quiz" className="practice__header--icon" />
+
       <span className="practice__header--badge__value">
         {titlize(questionType)}
       </span>
@@ -51,9 +52,8 @@ const HintBadge = ({ onClick }: { onClick: () => void }) => {
         title="Get a Hint"
         onClick={onClick}
       >
-        <span className="material-symbols-outlined practice__header--icon">
-          lightbulb_2
-        </span>
+        <Icon name="lightbulb" className="practice__header--icon" />
+
         <span className="practice__header--badge__value">Hint</span>
         {/* {session.settings.showHint ? "On" : "Off"} */}
       </button>
