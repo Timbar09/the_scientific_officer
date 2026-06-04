@@ -119,10 +119,9 @@
       .practice__form--submit {
         button {
           width: 100%;
-          height: 100%;
           justify-content: center;
-          font-size: fs(xl);
-          padding: 1em;
+          font-size: fs(lg);
+          padding: 0.75em 1.5em;
         }
       }
     }
@@ -131,6 +130,113 @@
       &__item {
         .form__checkbox--box {
           font-size: 0.75em;
+        }
+      }
+    }
+
+    &--timer {
+      &__value {
+        position: relative;
+        padding: 0.25em;
+        color: clr(primary, 100);
+        background-color: clr(primary, 200);
+        border-radius: radius(md);
+        border: 0;
+        transition:
+          opacity 250ms ease-in-out,
+          background-color 250ms ease,
+          color 250ms ease;
+
+        &:hover {
+          &::before,
+          &::after {
+            opacity: 1;
+          }
+        }
+
+        &.disabled {
+          pointer-events: none;
+          opacity: 0.35;
+          color: clr(neutral, 400);
+          background-color: clr(neutral, 300);
+
+          .practice__form--timer {
+            &__value {
+              &--indicator {
+                background-color: clr(neutral, 400);
+              }
+
+              &--button {
+                color: clr(neutral, 400);
+              }
+            }
+          }
+        }
+
+        &::before,
+        &::after {
+          position: absolute;
+          bottom: -1.5em;
+          color: clr(neutral, 500);
+          font-size: 0.75em;
+          font-weight: 700;
+          opacity: 0;
+          transition: opacity 500ms 150ms ease;
+        }
+
+        &::before {
+          content: attr(data-min) " mins";
+          left: -7%;
+        }
+
+        &::after {
+          content: attr(data-max) " mins";
+          right: -7%;
+        }
+
+        &--controls {
+          --indicator-width: 0;
+
+          position: relative;
+          min-height: 100%;
+          border-radius: calc(radius(md) * 0.75);
+          overflow: hidden;
+        }
+
+        &--display,
+        &--button {
+          z-index: 1;
+        }
+
+        &--button {
+          color: clr(primary, 300);
+
+          &:hover {
+            color: clr(primary, 100);
+          }
+        }
+
+        &--display {
+          min-width: 4em;
+          font-size: fs(lg);
+          font-weight: 600;
+        }
+
+        &--indicator {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: var(--indicator-width);
+          height: 100%;
+          background-color: clr(primary, 500);
+          border-radius: inherit;
+          transition: width 250ms ease;
+        }
+
+        &--input {
+          width: 0;
+          height: 0;
+          opacity: 0;
         }
       }
     }
