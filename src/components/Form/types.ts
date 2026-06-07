@@ -23,7 +23,7 @@ export interface FormFieldData {
   className?: string;
   input?: InputData;
   containerElement?: "div" | "li";
-  label?: { text: string; visible: boolean };
+  label?: LabelData;
   name?: string;
   value?: string;
   checked?: boolean;
@@ -38,6 +38,7 @@ export interface FormFieldData {
 export interface LabelData {
   text: string;
   visible: boolean;
+  alignment?: "row" | "column";
 }
 
 export interface FormFieldsetData {

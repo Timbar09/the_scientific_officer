@@ -46,7 +46,7 @@ const PracticeSettingsForm = () => {
           <PracticeSettingHintOption />
         </FormSection>
 
-        <FormSection className="practice__form--submit">
+        <FormSection className="practice__form--submit flex ai-center">
           <Button type="submit">Start Practice Session</Button>
         </FormSection>
       </div>

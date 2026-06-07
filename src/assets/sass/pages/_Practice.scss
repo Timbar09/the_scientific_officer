@@ -127,6 +127,14 @@
     }
 
     &--topic {
+      &__selectAll {
+        .form__checkbox--box {
+          --dimension: 1.5em;
+
+          border-radius: radius(sm);
+        }
+      }
+
       &__item {
         .form__checkbox--box {
           font-size: 0.75em;

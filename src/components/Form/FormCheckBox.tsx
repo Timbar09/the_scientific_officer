@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { FormFieldData } from "@/components/Form/types";
 
 const FormCheckBox = ({
   input = { type: "checkbox", variant: "switch" },
-  label = { text: "", visible: false },
+  label = { text: "", visible: false, alignment: "column" },
   name,
   value,
   checked,
@@ -14,26 +14,30 @@ const FormCheckBox = ({
   const { variant } = input;
   const { text, visible } = label;
 
+  label.alignment = label.alignment || "column";
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsChecked(e.target.checked);
     onChange?.(e);
   };
+
+  useEffect(() => {
+    setIsChecked(checked || false);
+  }, [checked]);
+
+  const checkboxFlexClass =
+    label.alignment === "column" ? "flex-col" : "flex-row ai-center";
+  const checkboxClass = `form__checkbox flex gap-2 ${checkboxFlexClass} ${isChecked ? "form__checkbox--checked" : ""}`;
+
+  const labelClass = visible ? "form__field--label" : "sr-only";
 
   const inputVariantClass = `form__checkbox--${variant}__input`;
   const boxVariantClass = `form__checkbox--box form__checkbox--${variant}__box`;
   const indicatorVariantClass = `form__checkbox--${variant}__box--indicator`;
 
   return (
-    <label
-      className={`form__checkbox ${isChecked ? "form__checkbox--checked" : ""}`}
-    >
-      {variant !== "tab" && (
-        <span
-          className={visible ? "form__field--label m-block-end-2" : "sr-only"}
-        >
-          {text}
-        </span>
-      )}
+    <label className={checkboxClass} aria-checked={isChecked}>
+      {variant !== "tab" && <span className={labelClass}>{text}</span>}
 
       <input
         className={`form__checkbox--input ${inputVariantClass}`}
