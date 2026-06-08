@@ -6,6 +6,9 @@ const FormTextArea = ({
   name,
   label,
   placeholder = "",
+  disabled = false,
+  required = false,
+  rows,
 }: FormFieldData) => {
   const { variant } = input;
 
@@ -23,6 +26,9 @@ const FormTextArea = ({
         className={`form__input--item__input textarea ${inputVariantClass} p-block-2 p-inline-4`}
         name={name}
         placeholder={placeholder}
+        disabled={disabled}
+        required={required}
+        rows={rows}
       />
     </label>
   );

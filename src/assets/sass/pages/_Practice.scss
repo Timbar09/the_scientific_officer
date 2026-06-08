@@ -127,11 +127,26 @@
     }
 
     &--topic {
-      &__selectAll {
-        .form__checkbox--box {
-          --dimension: 1.5em;
+      position: relative;
 
-          border-radius: radius(sm);
+      &__selectAll {
+        position: absolute;
+        top: 0;
+        right: spacing(5);
+        padding: spacing(5) 0 0 spacing(1);
+        background-color: clr(neutral, 100);
+
+        .form {
+          &__field {
+            display: inline-block;
+            margin-inline-start: auto;
+          }
+
+          &__checkbox--box {
+            --dimension: 1.5em;
+
+            border-radius: radius(sm);
+          }
         }
       }
 

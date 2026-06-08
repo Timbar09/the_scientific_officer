@@ -6,6 +6,12 @@ const FormInputBox = ({
   name,
   label,
   placeholder = "",
+  disabled = false,
+  required = false,
+  autoComplete,
+  maxLength,
+  min,
+  max,
 }: FormFieldData) => {
   const { type, variant } = input;
 
@@ -24,6 +30,12 @@ const FormInputBox = ({
         type={type}
         name={name}
         placeholder={placeholder}
+        disabled={disabled}
+        required={required}
+        autoComplete={autoComplete}
+        maxLength={maxLength}
+        min={min}
+        max={max}
       />
     </label>
   );

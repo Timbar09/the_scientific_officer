@@ -14,6 +14,10 @@ const RadioButtonOption = ({
   name,
   value,
   checked,
+  disabled = false,
+  required = false,
+  error = "",
+  describedBy = "",
   onChange,
   setRadioSliderStyle,
   activeRadio = DEFAULT_ACTIVE_RADIO,
@@ -41,6 +45,10 @@ const RadioButtonOption = ({
     variant == "default"
       ? {
           checked: checked,
+          disabled,
+          required,
+          "aria-invalid": Boolean(error),
+          "aria-describedby": describedBy || undefined,
           onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
             onChange?.(event),
         }
@@ -107,6 +115,10 @@ const FormRadioButton = ({
                 name={option.name}
                 value={option.value}
                 checked={option.checked}
+                disabled={option.disabled}
+                required={option.required}
+                error={option.error}
+                describedBy={option.describedBy}
                 onChange={option.onChange}
                 setRadioSliderStyle={setSliderStyle}
                 activeRadio={activeRadio}

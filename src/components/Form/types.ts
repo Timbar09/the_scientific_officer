@@ -27,6 +27,13 @@ export interface FormFieldData {
   name?: string;
   value?: string;
   checked?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  autoComplete?: string;
+  maxLength?: number;
+  min?: number;
+  max?: number;
+  rows?: number;
   placeholder?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setRadioSliderStyle?: (style: { left: string; width: string }) => void;

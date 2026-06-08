@@ -41,7 +41,7 @@ const PracticeSettingTopicSection = () => {
 
   return (
     <FormFieldset label={label}>
-      <div className="practice__form--topic__selectAll p-block-end-2">
+      <div className="practice__form--topic__selectAll">
         <FormField
           name="selectAllTopics"
           label={{ text: "Select All", visible: true, alignment: "row" }}

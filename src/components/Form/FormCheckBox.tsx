@@ -8,6 +8,8 @@ const FormCheckBox = ({
   name,
   value,
   checked,
+  disabled = false,
+  required = false,
   onChange,
 }: FormFieldData) => {
   const [isChecked, setIsChecked] = useState(checked || false);
@@ -45,6 +47,8 @@ const FormCheckBox = ({
         name={name}
         value={value}
         checked={isChecked}
+        disabled={disabled}
+        required={required}
         onChange={handleOnChange}
       />
 

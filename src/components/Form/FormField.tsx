@@ -14,6 +14,13 @@ const FormField = ({
   name = "",
   value = "",
   checked = false,
+  disabled = false,
+  required = false,
+  autoComplete,
+  maxLength,
+  min,
+  max,
+  rows,
   placeholder = "",
   onChange = () => {},
   setRadioSliderStyle,
@@ -42,6 +49,13 @@ const FormField = ({
         value={value}
         label={label}
         checked={checked}
+        disabled={disabled}
+        required={required}
+        autoComplete={autoComplete}
+        maxLength={maxLength}
+        min={min}
+        max={max}
+        rows={rows}
         placeholder={placeholder}
         onChange={onChange}
         setRadioSliderStyle={setRadioSliderStyle}
