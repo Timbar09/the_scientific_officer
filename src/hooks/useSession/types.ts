@@ -5,7 +5,7 @@ import type {
   QuestionVariant,
   SessionResults,
   // UserAnswer,
-} from "@/pages/practice/types";
+} from "../../pages/practice/types";
 
 export interface Session {
   settings: SessionSettings | undefined;

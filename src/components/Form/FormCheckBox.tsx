@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import type { FormFieldData } from "@/components/Form/types";
+import type { FormFieldData } from "./types";
 
 const FormCheckBox = ({
   input = { type: "checkbox", variant: "switch" },

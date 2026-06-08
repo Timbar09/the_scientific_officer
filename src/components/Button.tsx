@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 
-import Icon from "@components/Icon";
+import Icon from "./Icon";
 
 export interface IconProps {
   name: string | null;

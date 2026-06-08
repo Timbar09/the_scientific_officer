@@ -3,7 +3,7 @@ import type {
   QuestionVariant,
   SessionSettings,
   UserAnswer,
-} from "@/pages/practice/types";
+} from "../../pages/practice/types";
 
 type QuestionWithVariantKey = Question & { variantKey?: string };
 

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 
-import { FormField } from "@/components/Form";
+import { FormField } from "../../../components/Form";
 
 import type { QuestionsPayload, QuestionType } from "../types";
-import type { FormFieldData, InputData } from "@/components/Form/types";
+import type { FormFieldData, InputData } from "../../../components/Form/types";
 
-import { DEFAULT_ACTIVE_RADIO } from "@/components/Form/FormRadioButton";
+import { DEFAULT_ACTIVE_RADIO } from "../../../components/Form/FormRadioButton";
 
 const PracticeSettingQuestionTypeSelection = () => {
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);

@@ -1,4 +1,4 @@
-import type { Question } from "@/pages/practice/types";
+import type { Question } from "../../pages/practice/types";
 import { ensureTrueFalseOptions } from "./utils";
 
 export async function fetchSessionData(): Promise<{

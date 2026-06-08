@@ -1,13 +1,13 @@
-import Icon from "@components/Icon";
+import Icon from "../../../components/Icon";
 
 import PracticeResults from "./PracticeResults";
 import PracticeLoaderView from "./PracticeLoaderView";
 import PracticeQuestionView from "./PracticeQuestionView";
 import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
 
-import useSession from "@/hooks/useSession";
+import useSession from "../../../hooks/useSession";
 
-import { formatTime, titlize } from "@/utils";
+import { formatTime, titlize } from "../../../utils";
 
 const TimerBadge = ({ secondsRemaining }: { secondsRemaining: number }) => {
   const timerWarning =

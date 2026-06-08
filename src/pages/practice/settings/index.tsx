@@ -1,12 +1,12 @@
-import Button from "@/components/Button";
-import { Form } from "@/components/Form";
+import Button from "../../../components/Button";
+import { Form } from "../../../components/Form";
 
 import PracticeSettingTimerOption from "./PracticeSettingTimerOption";
 import PracticeSettingHintOption from "./PracticeSettingHintOption";
 import PracticeSettingTopicSection from "./PracticeSettingTopicSection";
 import PracticeSettingQuestionTypeSelection from "./PracticeSettingQuestionTypeSelection";
 
-import { usePracticeSettings } from "@hooks/usePracticeSettings";
+import { usePracticeSettings } from "../../../hooks/usePracticeSettings";
 
 interface FormSectionProps {
   className: string;

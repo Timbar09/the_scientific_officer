@@ -2,7 +2,7 @@ import { useState } from "react";
 
 // import PracticeFieldset from "./PracticeFieldset";
 import PracticeTimingInput from "./PracticeSettingTimerOptionValue";
-import { FormField, FormFieldset } from "@/components/Form";
+import { FormField, FormFieldset } from "../../../components/Form";
 
 const PracticeTiming = () => {
   const [isChecked, setIsChecked] = useState(false);

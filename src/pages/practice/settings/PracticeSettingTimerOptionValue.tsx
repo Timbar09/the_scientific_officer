@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Icon from "@components/Icon";
+import Icon from "../../../components/Icon";
 
 const MIN_TIME = 5;
 const TIME_STEP = 5;

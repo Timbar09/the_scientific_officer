@@ -4,7 +4,7 @@ import FormFieldset from "./FormFieldSet";
 
 import type { RADIO_VARIANT, FormFieldData } from "./types";
 
-import { titlize } from "@/utils";
+import { titlize } from "../../utils";
 
 export const DEFAULT_ACTIVE_RADIO = 999;
 
@@ -16,8 +16,6 @@ const RadioButtonOption = ({
   checked,
   disabled = false,
   required = false,
-  error = "",
-  describedBy = "",
   onChange,
   setRadioSliderStyle,
   activeRadio = DEFAULT_ACTIVE_RADIO,
@@ -47,8 +45,6 @@ const RadioButtonOption = ({
           checked: checked,
           disabled,
           required,
-          "aria-invalid": Boolean(error),
-          "aria-describedby": describedBy || undefined,
           onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
             onChange?.(event),
         }
@@ -117,8 +113,6 @@ const FormRadioButton = ({
                 checked={option.checked}
                 disabled={option.disabled}
                 required={option.required}
-                error={option.error}
-                describedBy={option.describedBy}
                 onChange={option.onChange}
                 setRadioSliderStyle={setSliderStyle}
                 activeRadio={activeRadio}

@@ -1,4 +1,4 @@
-import { FormField } from "@/components/Form";
+import { FormField } from "../../../components/Form";
 
 const PracticeSettingHintOption = () => {
   const label = {

@@ -1,13 +1,13 @@
-import { FormField } from "@/components/Form";
+import { FormField } from "../../../components/Form";
 
-import { titlize } from "@/utils";
+import { titlize } from "../../../utils";
 
-import type { Session } from "@/hooks/useSession/types";
+import type { Session } from "../../../hooks/useSession/types";
 import type {
   LabelData,
   FormFieldData,
   InputData,
-} from "@/components/Form/types";
+} from "../../../components/Form/types";
 
 type Topics = NonNullable<Session["settings"]>["topics"];
 

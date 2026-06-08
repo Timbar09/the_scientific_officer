@@ -5,7 +5,7 @@ import type {
   SessionSettings,
   QuestionTypeName,
   QuestionsPayload,
-} from "@pages/practice/types";
+} from "../pages/practice/types";
 
 export const usePracticeSettings = () => {
   const navigate = useNavigate();

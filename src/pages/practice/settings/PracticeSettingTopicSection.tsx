@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 
-import { FormField, FormFieldset } from "@/components/Form";
+import { FormField, FormFieldset } from "../../../components/Form";
 
-import { usePracticeSettings } from "@/hooks/usePracticeSettings";
+import { usePracticeSettings } from "../../../hooks/usePracticeSettings";
 
-import { titlize } from "@/utils";
+import { titlize } from "../../../utils";
 
 const PracticeSettingTopicSection = () => {
   const { practiceTopics } = usePracticeSettings();

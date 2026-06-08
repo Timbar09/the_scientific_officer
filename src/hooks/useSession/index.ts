@@ -6,7 +6,7 @@ import type {
   SessionSettings,
   SessionResults,
   UserAnswer,
-} from "@/pages/practice/types";
+} from "../../pages/practice/types";
 
 import {
   getFilteredQuestions,
