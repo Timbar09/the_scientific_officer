@@ -1,11 +1,20 @@
-import { useState } from "react";
-
 // import PracticeFieldset from "./PracticeFieldset";
 import PracticeTimingInput from "./PracticeSettingTimerOptionValue";
 import { FormField, FormFieldset } from "../../../components/Form";
 
-const PracticeTiming = () => {
-  const [isChecked, setIsChecked] = useState(false);
+interface PracticeTimingProps {
+  enabled: boolean;
+  onEnabledChange: (value: boolean) => void;
+  value: number;
+  onValueChange: (value: number) => void;
+}
+
+const PracticeTiming = ({
+  enabled,
+  onEnabledChange,
+  value,
+  onValueChange,
+}: PracticeTimingProps) => {
   const label = {
     text: "Enable Timer",
     visible: true,
@@ -18,10 +27,15 @@ const PracticeTiming = () => {
         input={{ type: "checkbox", variant: "switch" }}
         name="sessionTimer"
         value="set_timer"
-        onChange={(e) => setIsChecked(e.target.checked)}
+        checked={enabled}
+        onChange={(e) => onEnabledChange(e.target.checked)}
       />
 
-      <PracticeTimingInput enabled={isChecked} />
+      <PracticeTimingInput
+        enabled={enabled}
+        value={value}
+        onValueChange={onValueChange}
+      />
     </FormFieldset>
   );
 };

@@ -7,7 +7,15 @@ import type { FormFieldData, InputData } from "../../../components/Form/types";
 
 import { DEFAULT_ACTIVE_RADIO } from "../../../components/Form/FormRadioButton";
 
-const PracticeSettingQuestionTypeSelection = () => {
+interface PracticeSettingQuestionTypeSelectionProps {
+  selectedQuestionType: string;
+  onQuestionTypeChange: (value: string) => void;
+}
+
+const PracticeSettingQuestionTypeSelection = ({
+  selectedQuestionType,
+  onQuestionTypeChange,
+}: PracticeSettingQuestionTypeSelectionProps) => {
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
 
   useEffect(() => {
@@ -33,9 +41,9 @@ const PracticeSettingQuestionTypeSelection = () => {
     id: DEFAULT_ACTIVE_RADIO,
     name: "questionType",
     value: "all",
-    checked: true,
+    checked: selectedQuestionType === "all",
     onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-      console.log("Selected Question Type:", event.target.value),
+      onQuestionTypeChange(event.target.value),
   };
 
   const options = questionTypes
@@ -44,9 +52,9 @@ const PracticeSettingQuestionTypeSelection = () => {
       id,
       name: "questionType",
       value: name.toLowerCase(),
-      checked: false,
+      checked: selectedQuestionType === name.toLowerCase(),
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-        console.log("Selected Question Type:", event.target.value),
+        onQuestionTypeChange(event.target.value),
     }));
 
   options.unshift(allType);

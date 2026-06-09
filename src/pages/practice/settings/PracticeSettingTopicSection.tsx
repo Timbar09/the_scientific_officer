@@ -1,37 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import { FormField, FormFieldset } from "../../../components/Form";
 
-import { usePracticeSettings } from "../../../hooks/usePracticeSettings";
-
 import { titlize } from "../../../utils";
 
-const PracticeSettingTopicSection = () => {
-  const { practiceTopics } = usePracticeSettings();
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+interface PracticeSettingTopicSectionProps {
+  selectedTopics: string[];
+  onTopicsChange: (topics: string[]) => void;
+  error?: string;
+  practiceTopics: string[];
+}
+
+const PracticeSettingTopicSection = ({
+  selectedTopics,
+  onTopicsChange,
+  error,
+  practiceTopics,
+}: PracticeSettingTopicSectionProps) => {
   const initializedDefaultTopic = useRef(false);
 
   useEffect(() => {
     if (!initializedDefaultTopic.current && practiceTopics.length > 0) {
       initializedDefaultTopic.current = true;
-      setSelectedTopics([practiceTopics[0]]);
+      onTopicsChange([practiceTopics[0]]);
     }
-  }, [practiceTopics]);
+  }, [practiceTopics, onTopicsChange]);
 
   const isSelectAllChecked =
     practiceTopics.length > 0 &&
     selectedTopics.length === practiceTopics.length;
 
   const handleSelectAllChange = (checked: boolean) => {
-    setSelectedTopics(checked ? [...practiceTopics] : []);
+    onTopicsChange(checked ? [...practiceTopics] : []);
   };
 
   const handleTopicChange = (topic: string, checked: boolean) => {
-    setSelectedTopics((currentTopics) =>
-      checked
-        ? Array.from(new Set([...currentTopics, topic]))
-        : currentTopics.filter((currentTopic) => currentTopic !== topic),
-    );
+    const nextTopics = checked
+      ? Array.from(new Set([...selectedTopics, topic]))
+      : selectedTopics.filter((currentTopic) => currentTopic !== topic);
+
+    onTopicsChange(nextTopics);
   };
 
   const label = {
@@ -60,13 +68,15 @@ const PracticeSettingTopicSection = () => {
             className="practice__form--topic__item"
             label={{ text: titlize(topic), visible: true }}
             input={{ type: "checkbox", variant: "tab" }}
-            name="topic"
+            name="topics"
             value={topic}
             checked={selectedTopics.includes(topic)}
             onChange={(event) => handleTopicChange(topic, event.target.checked)}
           />
         ))}
       </ul>
+
+      {error ? <p className="form__field--error">{error}</p> : null}
     </FormFieldset>
   );
 };

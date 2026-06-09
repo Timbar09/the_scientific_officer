@@ -1,6 +1,14 @@
 import { FormField } from "../../../components/Form";
 
-const PracticeSettingHintOption = () => {
+interface PracticeSettingHintOptionProps {
+  enabled: boolean;
+  onEnabledChange: (value: boolean) => void;
+}
+
+const PracticeSettingHintOption = ({
+  enabled,
+  onEnabledChange,
+}: PracticeSettingHintOptionProps) => {
   const label = {
     text: "Show Hints",
     visible: true,
@@ -11,7 +19,9 @@ const PracticeSettingHintOption = () => {
       label={label}
       name="showHints"
       value="show_hints"
+      checked={enabled}
       input={{ type: "checkbox", variant: "default" }}
+      onChange={(event) => onEnabledChange(event.target.checked)}
     />
   );
 };

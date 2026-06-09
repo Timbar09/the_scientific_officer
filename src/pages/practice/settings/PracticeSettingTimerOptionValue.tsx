@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import Icon from "../../../components/Icon";
 
 const MIN_TIME = 5;
@@ -27,15 +25,25 @@ const TimeControlButton = ({ onClick, controlType }: ButtonProps) => {
   );
 };
 
-const PracticeSettingTimerOptionValue = ({ enabled }: { enabled: boolean }) => {
-  const [timeDisplay, setTimeDisplay] = useState(MIN_TIME);
+interface PracticeSettingTimerOptionValueProps {
+  enabled: boolean;
+  value: number;
+  onValueChange: (value: number) => void;
+}
+
+const PracticeSettingTimerOptionValue = ({
+  enabled,
+  value,
+  onValueChange,
+}: PracticeSettingTimerOptionValueProps) => {
+  const timeDisplay = value;
 
   const increaseTime = () => {
-    setTimeDisplay((prev) => Math.min(prev + TIME_STEP, MAX_TIME));
+    onValueChange(Math.min(timeDisplay + TIME_STEP, MAX_TIME));
   };
 
   const decreaseTime = () => {
-    setTimeDisplay((prev) => Math.max(prev - TIME_STEP, MIN_TIME));
+    onValueChange(Math.max(timeDisplay - TIME_STEP, MIN_TIME));
   };
 
   const style = {
