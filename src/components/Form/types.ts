@@ -35,6 +35,7 @@ export interface FormFieldData {
   max?: number;
   rows?: number;
   placeholder?: string;
+  config?: Record<string, unknown>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setRadioSliderStyle?: (style: { left: string; width: string }) => void;
   activeRadio?: number;

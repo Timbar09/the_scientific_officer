@@ -48,7 +48,13 @@ const RadioButtonOption = ({
           onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
             onChange?.(event),
         }
-      : { defaultChecked: id == activeRadio };
+      : {
+          checked: checked,
+          disabled,
+          required,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
+            onChange?.(event),
+        };
 
   return (
     <label

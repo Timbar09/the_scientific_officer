@@ -1,9 +1,10 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+
+import type { PracticeFormFields } from "../pages/practice/settings";
 
 import type {
   SessionSettings,
-  QuestionTypeName,
   QuestionsPayload,
 } from "../pages/practice/types";
 
@@ -15,10 +16,8 @@ export const usePracticeSettings = () => {
     loadTopics();
   }, []);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    const settings = getSessionSettings(event);
+  const handleSubmit = (formValues: PracticeFormFields) => {
+    const settings = getSessionSettings(formValues);
 
     navigate("/practice/session", { state: settings });
   };
@@ -40,38 +39,22 @@ export const usePracticeSettings = () => {
     }
   };
 
-  const getFormData = (event: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(event.currentTarget);
-
-    return {
-      selectedTopics: formData.getAll("topic") as string[],
-      selectedQuestionType: formData.get(
-        "questionType",
-      ) as QuestionTypeName | null,
-      includeTimer: formData.get("sessionTimer") === "set_timer",
-      showHint: formData.get("showHints") === "show_hints",
-      practiceDuration: Number(formData.get("practiceDuration") ?? 5),
-    };
-  };
-
   const getSessionSettings = (
-    event: FormEvent<HTMLFormElement>,
+    formValues: PracticeFormFields,
   ): SessionSettings => {
-    const data = getFormData(event);
-
     return {
       topics:
-        data.selectedTopics.length > 0
-          ? data.selectedTopics
+        formValues.topics.length > 0
+          ? formValues.topics
           : practiceTopics[0]
-            ? [practiceTopics[0].toLowerCase() as string]
+            ? [practiceTopics[0].toLowerCase()]
             : [],
-      questionType: data.selectedQuestionType ?? "Multiple Choice",
-      timePractice: data.includeTimer,
-      practiceDuration: Number.isFinite(data.practiceDuration)
-        ? data.practiceDuration
+      questionType: formValues.questionType,
+      timePractice: formValues.timerEnabled,
+      practiceDuration: Number.isFinite(formValues.timerValue)
+        ? formValues.timerValue
         : 5,
-      showHint: data.showHint,
+      showHint: formValues.hintsEnabled,
     };
   };
 

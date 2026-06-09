@@ -42,7 +42,7 @@ export interface SessionData {
 
 export interface SessionSettings {
   topics: string[];
-  questionType: QuestionTypeName;
+  questionType: string;
   timePractice: boolean;
   practiceDuration: number;
   showHint: boolean;
