@@ -38,6 +38,7 @@ const fd = {
 interface FormSectionProps {
   className: string;
   children?: React.ReactNode;
+  hasError?: boolean;
 }
 
 const PracticeSettingsForm = () => {
@@ -84,10 +85,13 @@ const PracticeSettingsForm = () => {
       className="practice__form flex flex-col m-block-start-5"
       onSubmit={onSubmit}
     >
-      <FormSection className="practice__form--topic">
+      <FormSection
+        className="practice__form--topic"
+        hasError={!!errors.topics?.message}
+      >
         <PracticeSettingTopicSection
           register={register}
-          error={errors.topics?.message as string}
+          errorMessage={errors.topics?.message as string}
           formSectionData={fd.topics}
         />
       </FormSection>
@@ -123,9 +127,13 @@ const PracticeSettingsForm = () => {
   );
 };
 
-const FormSection = ({ className, children }: FormSectionProps) => {
+const FormSection = ({ className, children, hasError }: FormSectionProps) => {
+  const errorClass = hasError ? "form__field--error" : "";
+
   return (
-    <section className={`practice__form--section ${className} p-5`}>
+    <section
+      className={`practice__form--section ${className} ${errorClass} p-5`}
+    >
       {children}
     </section>
   );

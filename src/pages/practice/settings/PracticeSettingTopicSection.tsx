@@ -6,7 +6,7 @@ import { titlize } from "../../../utils";
 
 interface TopicProps {
   register: UseFormRegister<FieldValues>;
-  error?: string;
+  errorMessage?: string;
   formSectionData: {
     name: string;
     practiceTopics: string[];
@@ -17,7 +17,7 @@ interface TopicProps {
 
 const PracticeSettingTopicSection = ({
   register,
-  error,
+  errorMessage,
   formSectionData,
 }: TopicProps) => {
   const { name, practiceTopics, selected, isAllSelected } = formSectionData;
@@ -59,7 +59,11 @@ const PracticeSettingTopicSection = ({
         ))}
       </ul>
 
-      {error ? <p className="form__field--error">{error}</p> : null}
+      {errorMessage ? (
+        <p className="form__field--error__message m-block-start-1 clr-alert-800 fw-bold">
+          {errorMessage}
+        </p>
+      ) : null}
     </FormFieldset>
   );
 };

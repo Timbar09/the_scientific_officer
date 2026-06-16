@@ -12,6 +12,10 @@
       font-weight: 600;
       color: clr(primary, 900);
     }
+
+    &--error {
+      outline: 2px solid clr(alert, 800);
+    }
   }
 
   &__input {

@@ -63,7 +63,7 @@ const FormField = ({
       />
 
       {errors && errors[name] && (
-        <p className="form__field--error p-block-1 p-inline-4 clr-alert-800">
+        <p className="form__field--error__message m-block-start-1 clr-alert-800 fw-bold">
           {errors[name]?.message?.toString() || "This field is required."}
         </p>
       )}
