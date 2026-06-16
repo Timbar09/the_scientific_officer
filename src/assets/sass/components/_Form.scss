@@ -71,15 +71,19 @@
 
     // VARIANTS
     &--default {
-      &__item {
-        &--input {
-          &:checked + .form__radio--default__item--content {
-            background-color: clr(primary, 500);
+      &__active {
+        .form__radio--default__item--content {
+          background-color: clr(primary, 500);
+          color: clr(primary, 100);
+
+          &:hover {
+            background-color: clr(primary, 500, 0.9);
             color: clr(primary, 100);
-            border-color: clr(primary, 500);
           }
         }
+      }
 
+      &__item {
         &--content {
           position: relative;
           width: 100%;
@@ -91,11 +95,9 @@
           cursor: pointer;
           transition:
             background-color 250ms ease,
-            color 250ms ease,
-            border-color 250ms ease;
+            color 250ms ease;
 
           &:hover {
-            border-color: clr(primary, 500);
             background-color: clr(primary, 500, 0.2);
             color: clr(primary, 700);
           }
@@ -104,6 +106,12 @@
     }
 
     &--rail {
+      &__active {
+        .form__radio--rail__item--content {
+          color: clr(primary, 100);
+        }
+      }
+
       &__container {
         max-width: max-content;
         color: clr(primary, 500);
@@ -119,12 +127,6 @@
       &__item {
         &--container {
           z-index: 1;
-        }
-
-        &--input {
-          &:checked + .form__radio--rail__item--content {
-            color: clr(primary, 100);
-          }
         }
 
         &--content {

@@ -12,11 +12,21 @@ const FormInputBox = ({
   maxLength,
   min,
   max,
+  register,
+  rules,
 }: FormFieldData) => {
   const { type, variant } = input;
 
-  const labelVariantClass = `form__input--item form__input--${variant}__item`;
+  const isRHF = register && name;
+
+  const rhfProps = isRHF
+    ? register(name, {
+        ...rules,
+      })
+    : {};
+
   const inputVariantClass = `form__input--${variant}__item--input`;
+  const labelVariantClass = `form__input--item form__input--${variant}__item`;
   const labelVariantTextClass = label?.visible
     ? "form__field--label m-block-end-2"
     : "sr-only";
@@ -36,6 +46,7 @@ const FormInputBox = ({
         maxLength={maxLength}
         min={min}
         max={max}
+        {...rhfProps}
       />
     </label>
   );

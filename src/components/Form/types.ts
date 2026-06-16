@@ -3,6 +3,13 @@ import FormCheckBox from "./FormCheckBox";
 import FormInputBox from "./FormInputBox";
 import FormRadioButton from "./FormRadioButton";
 
+import type {
+  FieldValues,
+  RegisterOptions,
+  UseFormRegister,
+  FieldErrors,
+} from "react-hook-form";
+
 export type INPUT_TYPE = "text" | "radio" | "checkbox" | "textarea";
 export type RADIO_VARIANT = "default" | "rail";
 export type CHECKBOX_VARIANT = "default" | "switch" | "tab";
@@ -19,7 +26,7 @@ export interface InputData {
 }
 
 export interface FormFieldData {
-  id?: number;
+  id: number;
   className?: string;
   input?: InputData;
   containerElement?: "div" | "li";
@@ -35,7 +42,9 @@ export interface FormFieldData {
   max?: number;
   rows?: number;
   placeholder?: string;
-  config?: Record<string, unknown>;
+  register?: UseFormRegister<FieldValues>;
+  rules?: RegisterOptions<FieldValues>;
+  errors?: FieldErrors<FieldValues>;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setRadioSliderStyle?: (style: { left: string; width: string }) => void;
   activeRadio?: number;

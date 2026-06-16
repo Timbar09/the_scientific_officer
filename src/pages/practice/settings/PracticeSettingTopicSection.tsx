@@ -1,46 +1,26 @@
-import { useEffect, useRef } from "react";
-
 import { FormField, FormFieldset } from "../../../components/Form";
+
+import type { FieldValues, UseFormRegister } from "react-hook-form";
 
 import { titlize } from "../../../utils";
 
-interface PracticeSettingTopicSectionProps {
-  selectedTopics: string[];
-  onTopicsChange: (topics: string[]) => void;
+interface TopicProps {
+  register: UseFormRegister<FieldValues>;
   error?: string;
-  practiceTopics: string[];
+  formSectionData: {
+    name: string;
+    practiceTopics: string[];
+    selected: string[];
+    isAllSelected: boolean;
+  };
 }
 
 const PracticeSettingTopicSection = ({
-  selectedTopics,
-  onTopicsChange,
+  register,
   error,
-  practiceTopics,
-}: PracticeSettingTopicSectionProps) => {
-  const initializedDefaultTopic = useRef(false);
-
-  useEffect(() => {
-    if (!initializedDefaultTopic.current && practiceTopics.length > 0) {
-      initializedDefaultTopic.current = true;
-      onTopicsChange([practiceTopics[0]]);
-    }
-  }, [practiceTopics, onTopicsChange]);
-
-  const isSelectAllChecked =
-    practiceTopics.length > 0 &&
-    selectedTopics.length === practiceTopics.length;
-
-  const handleSelectAllChange = (checked: boolean) => {
-    onTopicsChange(checked ? [...practiceTopics] : []);
-  };
-
-  const handleTopicChange = (topic: string, checked: boolean) => {
-    const nextTopics = checked
-      ? Array.from(new Set([...selectedTopics, topic]))
-      : selectedTopics.filter((currentTopic) => currentTopic !== topic);
-
-    onTopicsChange(nextTopics);
-  };
+  formSectionData,
+}: TopicProps) => {
+  const { name, practiceTopics, selected, isAllSelected } = formSectionData;
 
   const label = {
     text: "Choose Topics You Want to cover",
@@ -51,27 +31,30 @@ const PracticeSettingTopicSection = ({
     <FormFieldset label={label}>
       <div className="practice__form--topic__selectAll">
         <FormField
-          name="selectAllTopics"
+          id={0}
+          name={name}
           label={{ text: "Select All", visible: true, alignment: "row" }}
           input={{ type: "checkbox", variant: "default" }}
           value="all"
-          checked={isSelectAllChecked}
-          onChange={(event) => handleSelectAllChange(event.target.checked)}
+          register={register}
+          checked={isAllSelected}
         />
       </div>
 
       <ul className="practice__form--topic__list flex flex-wrap gap-1">
-        {practiceTopics.map((topic) => (
+        {practiceTopics?.map((topic, i) => (
           <FormField
             key={topic}
+            id={i + 1}
             containerElement="li"
             className="practice__form--topic__item"
             label={{ text: titlize(topic), visible: true }}
             input={{ type: "checkbox", variant: "tab" }}
-            name="topics"
+            name={name}
             value={topic}
-            checked={selectedTopics.includes(topic)}
-            onChange={(event) => handleTopicChange(topic, event.target.checked)}
+            register={register}
+            rules={{ required: "Please select at least one topic." }}
+            checked={selected.includes(topic)}
           />
         ))}
       </ul>

@@ -9,18 +9,28 @@ const FormTextArea = ({
   disabled = false,
   required = false,
   rows,
+  register,
+  rules,
 }: FormFieldData) => {
   const { variant } = input;
 
-  const labelVariantClass = `form__input--item form__input--${variant}__item`;
+  const isRHF = register && name;
+
+  const rhfProps = isRHF
+    ? register(name, {
+        ...rules,
+      })
+    : {};
+
+  const labelVariantClass = `form__input--${variant}__item`;
   const inputVariantClass = `form__input--${variant}__item--input`;
-  const labelVariantTextClass = label?.visible
+  const labelTextClass = label?.visible
     ? "form__field--label m-block-end-2"
     : "sr-only";
 
   return (
-    <label key={id} className={labelVariantClass}>
-      <span className={labelVariantTextClass}>{label?.text}</span>
+    <label key={id} className={`form__input--item ${labelVariantClass}`}>
+      <span className={labelTextClass}>{label?.text}</span>
 
       <textarea
         className={`form__input--item__input textarea ${inputVariantClass} p-block-2 p-inline-4`}
@@ -29,6 +39,7 @@ const FormTextArea = ({
         disabled={disabled}
         required={required}
         rows={rows}
+        {...rhfProps}
       />
     </label>
   );

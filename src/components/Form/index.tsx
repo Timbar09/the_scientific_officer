@@ -3,15 +3,13 @@ import FormFieldset from "./FormFieldSet";
 
 import type { ReactNode } from "react";
 
-const Form = ({
-  children,
-  onSubmit,
-  className,
-}: {
+interface FormProps {
   children?: ReactNode;
   className?: string;
-  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
-}) => {
+  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+const Form = ({ children, onSubmit, className }: FormProps) => {
   return (
     <form className={`form ${className || ""}`} onSubmit={onSubmit}>
       <div className="form__container">{children}</div>

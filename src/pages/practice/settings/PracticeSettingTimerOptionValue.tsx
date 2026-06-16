@@ -1,3 +1,11 @@
+import { useEffect, useState } from "react";
+
+import type {
+  FieldValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
+
 import Icon from "../../../components/Icon";
 
 const MIN_TIME = 5;
@@ -9,42 +17,34 @@ interface ButtonProps {
   controlType: "increase" | "decrease";
 }
 
-const TimeControlButton = ({ onClick, controlType }: ButtonProps) => {
-  const icon = controlType === "increase" ? "add" : "remove";
-  const buttonClass = `practice__form--timer__value--button practice__form--timer__value--${controlType} flex jc-center ai-center p-1`;
-
-  return (
-    <button
-      type="button"
-      aria-label={`${controlType} practice duration`}
-      className={buttonClass}
-      onClick={onClick}
-    >
-      <Icon name={icon} />
-    </button>
-  );
-};
-
 interface PracticeSettingTimerOptionValueProps {
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   enabled: boolean;
-  value: number;
-  onValueChange: (value: number) => void;
 }
 
 const PracticeSettingTimerOptionValue = ({
   enabled,
-  value,
-  onValueChange,
+  register,
+  setValue,
 }: PracticeSettingTimerOptionValueProps) => {
-  const timeDisplay = value;
+  const [timeDisplay, setTimeDisplay] = useState(MIN_TIME);
 
   const increaseTime = () => {
-    onValueChange(Math.min(timeDisplay + TIME_STEP, MAX_TIME));
+    setTimeDisplay(Math.min(timeDisplay + TIME_STEP, MAX_TIME));
   };
 
   const decreaseTime = () => {
-    onValueChange(Math.max(timeDisplay - TIME_STEP, MIN_TIME));
+    setTimeDisplay(Math.max(timeDisplay - TIME_STEP, MIN_TIME));
   };
+
+  useEffect(() => {
+    setValue("timerValue", timeDisplay, {
+      shouldDirty: true,
+      shouldTouch: true,
+      shouldValidate: true,
+    });
+  }, [setValue, timeDisplay]);
 
   const style = {
     "--indicator-width": `${(timeDisplay / (MAX_TIME - MIN_TIME)) * 100}%`,
@@ -70,7 +70,7 @@ const PracticeSettingTimerOptionValue = ({
         className="practice__form--timer__value--controls flex-inline"
         style={style}
       >
-        <TimeControlButton onClick={decreaseTime} controlType="decrease" />
+        <TimerControlButton onClick={decreaseTime} controlType="decrease" />
 
         <output
           id="practiceDurationOutput"
@@ -80,7 +80,7 @@ const PracticeSettingTimerOptionValue = ({
           {timeDisplay}
         </output>
 
-        <TimeControlButton onClick={increaseTime} controlType="increase" />
+        <TimerControlButton onClick={increaseTime} controlType="increase" />
 
         <div className="practice__form--timer__value--indicator" />
       </div>
@@ -89,13 +89,29 @@ const PracticeSettingTimerOptionValue = ({
         className="practice__form--timer__value--input custom-input"
         type="hidden"
         id="practiceDuration"
-        name="practiceDuration"
-        value={timeDisplay}
-        min="5"
-        max="120"
         readOnly
+        {...register("timerValue", {
+          min: MIN_TIME,
+          max: MAX_TIME,
+        })}
       />
     </fieldset>
+  );
+};
+
+const TimerControlButton = ({ onClick, controlType }: ButtonProps) => {
+  const icon = controlType === "increase" ? "add" : "remove";
+  const buttonClass = `practice__form--timer__value--${controlType} flex jc-center ai-center p-1`;
+
+  return (
+    <button
+      type="button"
+      aria-label={`${controlType} practice duration`}
+      className={`practice__form--timer__value--button ${buttonClass}`}
+      onClick={onClick}
+    >
+      <Icon name={icon} />
+    </button>
   );
 };
 

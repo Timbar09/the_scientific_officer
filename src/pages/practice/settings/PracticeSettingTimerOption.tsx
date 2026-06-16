@@ -1,20 +1,30 @@
-// import PracticeFieldset from "./PracticeFieldset";
-import PracticeTimingInput from "./PracticeSettingTimerOptionValue";
-import { FormField, FormFieldset } from "../../../components/Form";
+import type {
+  FieldValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 
-interface PracticeTimingProps {
-  enabled: boolean;
-  onEnabledChange: (value: boolean) => void;
-  value: number;
-  onValueChange: (value: number) => void;
+import { FormField, FormFieldset } from "../../../components/Form";
+import PracticeTimingInput from "./PracticeSettingTimerOptionValue";
+
+interface TimerOptionProps {
+  register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
+  formSectionData: {
+    name: string;
+    defaultValue: boolean;
+    isTimed: boolean;
+    value: string | number | boolean;
+  };
 }
 
-const PracticeTiming = ({
-  enabled,
-  onEnabledChange,
-  value,
-  onValueChange,
-}: PracticeTimingProps) => {
+const PracticeSettingTimerOption = ({
+  register,
+  setValue,
+  formSectionData,
+}: TimerOptionProps) => {
+  const { name, value, isTimed } = formSectionData;
+
   const label = {
     text: "Enable Timer",
     visible: true,
@@ -23,21 +33,22 @@ const PracticeTiming = ({
   return (
     <FormFieldset label={label} className="flex gap-5">
       <FormField
+        id={0}
         label={{ text: "Switch Timer On or Off", visible: false }}
         input={{ type: "checkbox", variant: "switch" }}
-        name="sessionTimer"
-        value="set_timer"
-        checked={enabled}
-        onChange={(e) => onEnabledChange(e.target.checked)}
+        name={name}
+        value={value.toString()}
+        checked={isTimed}
+        register={register}
       />
 
       <PracticeTimingInput
-        enabled={enabled}
-        value={value}
-        onValueChange={onValueChange}
+        register={register}
+        setValue={setValue}
+        enabled={isTimed}
       />
     </FormFieldset>
   );
 };
 
-export default PracticeTiming;
+export default PracticeSettingTimerOption;

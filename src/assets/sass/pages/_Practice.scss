@@ -137,9 +137,16 @@
         background-color: clr(neutral, 100);
 
         .form {
+          // TODO: Add hover effects
           &__field {
+            font-size: 0.75rem;
             display: inline-block;
             margin-inline-start: auto;
+
+            &--label {
+              line-height: 1;
+              color: clr(neutral, 500);
+            }
           }
 
           &__checkbox--box {

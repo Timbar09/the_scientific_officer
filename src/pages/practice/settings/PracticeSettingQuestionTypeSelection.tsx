@@ -1,36 +1,22 @@
-import { useEffect, useState } from "react";
+import type { UseFormRegister, FieldValues } from "react-hook-form";
+import type { FormFieldData } from "../../../components/Form/types";
 
 import { FormField } from "../../../components/Form";
 
-import type { QuestionsPayload, QuestionType } from "../types";
-import type { FormFieldData, InputData } from "../../../components/Form/types";
-
-import { DEFAULT_ACTIVE_RADIO } from "../../../components/Form/FormRadioButton";
-
-interface PracticeSettingQuestionTypeSelectionProps {
-  selectedQuestionType: string;
-  onQuestionTypeChange: (value: string) => void;
+interface QuestionTypeSelectionProps {
+  register: UseFormRegister<FieldValues>;
+  formSectionData: {
+    name: string;
+    defaultValue: string;
+    questionTypes: { id: number; name: string; available: boolean }[];
+  };
 }
 
 const PracticeSettingQuestionTypeSelection = ({
-  selectedQuestionType,
-  onQuestionTypeChange,
-}: PracticeSettingQuestionTypeSelectionProps) => {
-  const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
-
-  useEffect(() => {
-    const loadQuestionTypes = async () => {
-      const response = await fetch("/practice-questions.json");
-      const data = (await response.json()) as QuestionsPayload;
-      const types = data.questionTypes ?? [];
-
-      setQuestionTypes(types);
-    };
-
-    loadQuestionTypes().catch(() => setQuestionTypes([]));
-  }, []);
-
-  const input: InputData = { type: "radio", variant: "rail" };
+  register,
+  formSectionData,
+}: QuestionTypeSelectionProps) => {
+  const { name, defaultValue, questionTypes } = formSectionData;
 
   const label = {
     text: "Select Type of Questions",
@@ -38,30 +24,31 @@ const PracticeSettingQuestionTypeSelection = ({
   };
 
   const allType = {
-    id: DEFAULT_ACTIVE_RADIO,
-    name: "questionType",
+    id: 0,
     value: "all",
-    checked: selectedQuestionType === "all",
+    checked: defaultValue === "all",
     onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-      onQuestionTypeChange(event.target.value),
+      console.log(event.target.value),
   };
 
   const options = questionTypes
     .filter((qt) => qt.available)
     .map(({ id, name }) => ({
       id,
-      name: "questionType",
       value: name.toLowerCase(),
-      checked: selectedQuestionType === name.toLowerCase(),
+      checked: false,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-        onQuestionTypeChange(event.target.value),
+        console.log(event.target.value),
     }));
 
   options.unshift(allType);
 
   const fieldData: FormFieldData = {
-    input,
+    id: 1,
+    name: name,
+    input: { type: "radio", variant: "rail" },
     label,
+    register,
     options,
   };
 
