@@ -1,7 +1,9 @@
+import Container from "./Container";
+
 const Footer = () => {
   return (
     <footer className="footer bg-primary-900 p-block-start-5">
-      <div className="container">
+      <Container>
         <div className="footer__top p-block-3">
           <ul className="footer__top--group__list flex flex-col flex-@md-row jc-between gap-4">
             <li className="footer__top--group__item">
@@ -117,7 +119,7 @@ const Footer = () => {
             </a>
           </p>
         </div>
-      </div>
+      </Container>
     </footer>
   );
 };

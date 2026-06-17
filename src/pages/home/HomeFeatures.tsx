@@ -1,4 +1,5 @@
 import Card from "../../components/Card";
+import Container from "../../components/Container";
 
 const HomeFeatures = () => {
   const features = [
@@ -53,7 +54,7 @@ const HomeFeatures = () => {
 
   return (
     <section className="home__feature main__section">
-      <div className="container">
+      <Container>
         <h2 className="home__section--title">Everything You Need to Excel</h2>
 
         <p className="home__section--description">
@@ -72,7 +73,7 @@ const HomeFeatures = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </Container>
     </section>
   );
 };

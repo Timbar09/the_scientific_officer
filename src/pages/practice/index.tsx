@@ -1,9 +1,10 @@
-import PracticeEntryForm from "./settings";
+import SessionSettingsForm from "./settings";
+import Container from "../../components/Container";
 
 const Practice = () => {
   return (
     <div className="practice page">
-      <div className="container">
+      <Container>
         <h1 className="page__title">Let's Put Your Knowledge to the Test!</h1>
 
         <p className="page__description">
@@ -13,8 +14,8 @@ const Practice = () => {
           your understanding of scientific concepts.
         </p>
 
-        <PracticeEntryForm />
-      </div>
+        <SessionSettingsForm />
+      </Container>
     </div>
   );
 };

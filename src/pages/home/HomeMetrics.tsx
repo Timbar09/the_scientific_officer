@@ -1,3 +1,5 @@
+import Container from "../../components/Container";
+
 const HomeMetrics = () => {
   const metrics = [
     {
@@ -24,7 +26,7 @@ const HomeMetrics = () => {
 
   return (
     <section className="home__metric">
-      <div className="container">
+      <Container>
         <div className="home__metric__content p-4 bg-pattern">
           <h2 className="home__section--title home__metric--title">
             Our Impact in Numbers
@@ -51,7 +53,7 @@ const HomeMetrics = () => {
             ))}
           </ul>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

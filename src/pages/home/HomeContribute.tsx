@@ -5,6 +5,7 @@ import Card from "../../components/Card";
 import Button from "../../components/Button";
 
 import communityImage from "../../assets/images/hero/community-contribute.jpg";
+import Container from "../../components/Container";
 
 const HomeContribute = () => {
   const { scrollYProgress } = useScroll();
@@ -29,7 +30,7 @@ const HomeContribute = () => {
 
   return (
     <section className="home__contribute m-block-5">
-      <div className="container flex flex-col flex-@lg-row gap-5 gap-@md-0 p-block-4">
+      <Container className="flex flex-col flex-@lg-row gap-5 gap-@md-0 p-block-4">
         <div className="home__contribute--image grid">
           <img
             src={communityImage}
@@ -86,7 +87,7 @@ const HomeContribute = () => {
             </Button>
           </div>
         </motion.div>
-      </div>
+      </Container>
     </section>
   );
 };

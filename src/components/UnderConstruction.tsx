@@ -1,6 +1,7 @@
 import { useMediaQuery } from "../hooks/useMediaQuery";
 
 import Button from "./Button";
+import Container from "./Container";
 
 interface UnderConstructionProps {
   page: string;
@@ -11,7 +12,7 @@ const UnderConstruction = ({ page }: UnderConstructionProps) => {
 
   return (
     <div className="under-construction">
-      <div className="container flex jc-center ai-center flex-col">
+      <Container className="flex jc-center ai-center flex-col">
         <h1 className="under-construction__title m-block-end-4">{page} Page</h1>
 
         <header className="under-construction__header flex flex-col flex-@md-row ai-center jc-center">
@@ -36,7 +37,7 @@ const UnderConstruction = ({ page }: UnderConstructionProps) => {
         <Button to="/" icon={{ name: "Arrow_back" }}>
           Go Back Home
         </Button>
-      </div>
+      </Container>
     </div>
   );
 };

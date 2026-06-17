@@ -1,4 +1,5 @@
 import Icon from "../../../components/Icon";
+import Container from "../../../components/Container";
 
 import PracticeResults from "./PracticeResults";
 import PracticeLoaderView from "./PracticeLoaderView";
@@ -8,6 +9,76 @@ import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
 import useSession from "../../../hooks/useSession";
 
 import { formatTime, titlize } from "../../../utils";
+
+const PracticeSession = () => {
+  const session = useSession();
+  const { settings, isHintRevealed, revealHint } = session;
+
+  if (!settings || session.isLoading) {
+    return <PracticeLoaderView />;
+  }
+
+  if (session.filteredQuestions.length === 0) {
+    return (
+      <div className="practice page">
+        <Container>
+          <PracticeNoQuestionsView />
+        </Container>
+      </div>
+    );
+  }
+
+  if (!session.currentQuestion || !session.currentVariant) {
+    return null;
+  }
+
+  return (
+    <div className="practice page">
+      <Container>
+        <header className="practice__header">
+          <div className="practice__header--container flex flex-col flex-@md-row gap-3 gap-@lg-5 ai-start ai-@md-center jc-between p-3">
+            <div className="practice__header--left flex ai-center gap-3 gap-@lg-5">
+              <h1 className="practice__title">
+                {session.isComplete ? "Practice Results" : "Practice Session"}
+              </h1>
+
+              <div className="practice__header--left__progressbar">
+                <ProgressBar
+                  unanswered={session.unansweredCount}
+                  total={session.filteredQuestions.length}
+                />
+              </div>
+            </div>
+
+            <div className="practice__header--right">
+              <div className="practice__header--badge__list flex ai-center gap-3">
+                {settings.showHint && !isHintRevealed && (
+                  <HintBadge onClick={revealHint} />
+                )}
+
+                <QuestionsTypeBadge questionType={settings.questionType} />
+
+                {settings.timePractice && (
+                  <TimerBadge secondsRemaining={session.secondsRemaining} />
+                )}
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {!session.isComplete ? (
+          <PracticeQuestionView session={session} />
+        ) : session.results ? (
+          <PracticeResults
+            sessionResults={session.results}
+            filteredQuestions={session.filteredQuestions}
+            settings={settings}
+          />
+        ) : null}
+      </Container>
+    </div>
+  );
+};
 
 const TimerBadge = ({ secondsRemaining }: { secondsRemaining: number }) => {
   const timerWarning =
@@ -84,76 +155,6 @@ const ProgressBar = ({
 
       <div className="practice__header--progress__value">
         {`${Math.round(progressPercentage)}%`}
-      </div>
-    </div>
-  );
-};
-
-const PracticeSession = () => {
-  const session = useSession();
-  const { settings, isHintRevealed, revealHint } = session;
-
-  if (!settings || session.isLoading) {
-    return <PracticeLoaderView />;
-  }
-
-  if (session.filteredQuestions.length === 0) {
-    return (
-      <div className="practice page">
-        <div className="container">
-          <PracticeNoQuestionsView />
-        </div>
-      </div>
-    );
-  }
-
-  if (!session.currentQuestion || !session.currentVariant) {
-    return null;
-  }
-
-  return (
-    <div className="practice page">
-      <div className="container">
-        <header className="practice__header">
-          <div className="practice__header--container flex flex-col flex-@md-row gap-3 gap-@lg-5 ai-start ai-@md-center jc-between p-3">
-            <div className="practice__header--left flex ai-center gap-3 gap-@lg-5">
-              <h1 className="practice__title">
-                {session.isComplete ? "Practice Results" : "Practice Session"}
-              </h1>
-
-              <div className="practice__header--left__progressbar">
-                <ProgressBar
-                  unanswered={session.unansweredCount}
-                  total={session.filteredQuestions.length}
-                />
-              </div>
-            </div>
-
-            <div className="practice__header--right">
-              <div className="practice__header--badge__list flex ai-center gap-3">
-                {settings.showHint && !isHintRevealed && (
-                  <HintBadge onClick={revealHint} />
-                )}
-
-                <QuestionsTypeBadge questionType={settings.questionType} />
-
-                {settings.timePractice && (
-                  <TimerBadge secondsRemaining={session.secondsRemaining} />
-                )}
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {!session.isComplete ? (
-          <PracticeQuestionView session={session} />
-        ) : session.results ? (
-          <PracticeResults
-            sessionResults={session.results}
-            filteredQuestions={session.filteredQuestions}
-            settings={settings}
-          />
-        ) : null}
       </div>
     </div>
   );

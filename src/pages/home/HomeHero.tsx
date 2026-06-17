@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 
 import Button from "../../components/Button";
+import Container from "../../components/Container";
 
 import chicksImage from "../../assets/images/hero/chicks.jpg";
 import kidsImage from "../../assets/images/hero/man-feeding-kids.jpg";
@@ -17,7 +18,7 @@ const HomeHero = () => {
 
   return (
     <section className="home__hero main__section">
-      <div className="container flex flex-col flex-@md-row jc-@md-between ai-center gap-5">
+      <Container className="flex flex-col flex-@md-row jc-@md-between ai-center gap-5">
         <div className="home__hero--text p-block-5">
           <p className="clr-primary-500">For Animal Science Professionals</p>
 
@@ -57,7 +58,7 @@ const HomeHero = () => {
             ))}
           </ul>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };

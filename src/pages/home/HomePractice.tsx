@@ -1,10 +1,12 @@
-import Button from "../../components/Button";
 import { Link } from "react-router";
+
+import Button from "../../components/Button";
+import Container from "../../components/Container";
 
 const HomePractice = () => {
   return (
     <section className="home__practice m-block-5">
-      <div className="container p-block-4 text-center">
+      <Container className="p-block-4 text-center">
         <h2 className="home__section--title">
           Ready to Enhance Your Animal Science Skills?
         </h2>
@@ -21,7 +23,7 @@ const HomePractice = () => {
             </Link>
           </Button>
         </div>
-      </div>
+      </Container>
     </section>
   );
 };
