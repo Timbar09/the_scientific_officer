@@ -5,7 +5,7 @@ const FormCheckBox = ({
   label = { text: "", visible: false, alignment: "column" },
   name,
   value,
-  checked,
+  isChecked,
   disabled = false,
   register,
   rules,
@@ -17,7 +17,7 @@ const FormCheckBox = ({
 
   const isAlignRow = label.alignment === "row";
 
-  const isCheckedClass = checked ? "form__checkbox--checked" : "";
+  const isCheckedClass = isChecked ? "form__checkbox--checked" : "";
   const checkboxFlexClass = isAlignRow ? "flex-row ai-center" : "flex-col";
   const checkboxClass = `form__checkbox flex gap-2 ${checkboxFlexClass} ${isCheckedClass}`;
 
@@ -36,7 +36,7 @@ const FormCheckBox = ({
     : {};
 
   return (
-    <label className={checkboxClass} aria-checked={checked}>
+    <label className={checkboxClass} aria-checked={isChecked}>
       {variant !== "tab" && <span className={labelClass}>{text}</span>}
 
       <input
@@ -44,7 +44,6 @@ const FormCheckBox = ({
         type="checkbox"
         name={name}
         value={value ? value.toString() : "on"}
-        checked={checked}
         disabled={disabled}
         {...rhfProps}
       />

@@ -32,12 +32,12 @@ const PracticeSettingTopicSection = ({
       <div className="practice__form--topic__selectAll">
         <FormField
           id={0}
-          name={name}
+          name="selectAllTopics"
           label={{ text: "Select All", visible: true, alignment: "row" }}
           input={{ type: "checkbox", variant: "default" }}
           value="all"
           register={register}
-          checked={isAllSelected}
+          isChecked={isAllSelected}
         />
       </div>
 
@@ -54,7 +54,7 @@ const PracticeSettingTopicSection = ({
             value={topic}
             register={register}
             rules={{ required: "Please select at least one topic." }}
-            checked={selected.includes(topic)}
+            isChecked={selected.includes(topic) || isAllSelected}
           />
         ))}
       </ul>

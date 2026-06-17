@@ -14,7 +14,7 @@ const FormField = ({
   label = { text: "", visible: true, alignment: "column" },
   name = "",
   value = "",
-  checked,
+  isChecked,
   disabled = false,
   autoComplete,
   rows,
@@ -48,7 +48,7 @@ const FormField = ({
         name={name}
         value={value}
         label={label}
-        checked={checked}
+        isChecked={isChecked}
         disabled={disabled}
         autoComplete={autoComplete}
         rows={rows}

@@ -34,6 +34,7 @@ export interface FormFieldData {
   name?: string;
   value?: string;
   checked?: boolean;
+  isChecked?: boolean;
   disabled?: boolean;
   required?: boolean;
   autoComplete?: string;

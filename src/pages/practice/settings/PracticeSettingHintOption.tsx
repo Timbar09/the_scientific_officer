@@ -29,7 +29,7 @@ const PracticeSettingHintOption = ({
       input={{ type: "checkbox", variant: "default" }}
       name={name}
       value="show_hints"
-      checked={hasHints}
+      isChecked={hasHints}
       register={register}
     />
   );

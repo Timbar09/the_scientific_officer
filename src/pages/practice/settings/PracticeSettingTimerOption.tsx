@@ -38,7 +38,7 @@ const PracticeSettingTimerOption = ({
         input={{ type: "checkbox", variant: "switch" }}
         name={name}
         value={value.toString()}
-        checked={isTimed}
+        isChecked={isTimed}
         register={register}
       />
 
