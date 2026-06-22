@@ -1,28 +1,15 @@
+import { usePracticeSettings } from "../../hooks/usePracticeSettings";
+
 import Container from "../../components/Container";
 
 const HomeMetrics = () => {
-  const metrics = [
-    {
-      value: "5,000+",
-      label: "Practice Questions",
-    },
-    {
-      value: "17+",
-      label: "Topics Covered",
-    },
-    {
-      value: "1,200+",
-      label: "Resources",
-    },
-    {
-      value: "500+",
-      label: "Articles",
-    },
-    // {
-    //   value: "10,000+",
-    //   label: "Active Users",
-    // },
-  ];
+  const { metrics } = usePracticeSettings();
+
+  const formatValue = (value: number) => {
+    const roundedValue = Math.round(value / 10) * 10;
+
+    return `${roundedValue.toLocaleString()}+`;
+  };
 
   return (
     <section className="home__metric">
@@ -41,13 +28,13 @@ const HomeMetrics = () => {
             {metrics.map((metric) => (
               <li
                 className="home__metric--item text-center bg-primary-100 p-3"
-                key={metric.label}
+                key={metric.title}
               >
                 <h3 className="home__metric--item__value clr-primary-100 fw-bold">
-                  {metric.value}
+                  {formatValue(metric.value)}
                 </h3>
                 <p className="home__metric--item__label clr-primary-300">
-                  {metric.label}
+                  {metric.title}
                 </p>
               </li>
             ))}

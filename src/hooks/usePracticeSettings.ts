@@ -7,16 +7,35 @@ import type {
   SessionSettings,
   QuestionsPayload,
   QuestionType,
+  Question,
 } from "../pages/practice/types";
 
 export const usePracticeSettings = () => {
   const navigate = useNavigate();
   const [practiceTopics, setPracticeTopics] = useState<string[]>([]);
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
+  const [questions, setQuestions] = useState<Question[]>([]);
+  const [metrics, setMetrics] = useState([
+    {
+      title: "Total Questions",
+      value: 0,
+    },
+    {
+      title: "Total Topics",
+      value: 0,
+    },
+    {
+      title: "Total Resources",
+      value: 0,
+    },
+    {
+      title: "Total Articles",
+      value: 0,
+    },
+  ]);
 
   useEffect(() => {
-    loadTopics();
-    loadQuestionTypes();
+    loadData();
   }, []);
 
   const handleSubmit = (formValues: FieldValues) => {
@@ -25,7 +44,7 @@ export const usePracticeSettings = () => {
     navigate("/practice/session", { state: settings });
   };
 
-  const loadTopics = async () => {
+  const loadData = async () => {
     try {
       const response = await fetch("/practice-questions.json");
       const data = (await response.json()) as QuestionsPayload;
@@ -34,23 +53,34 @@ export const usePracticeSettings = () => {
           data.questions?.flatMap((question) => question.topics ?? []) ?? [],
         ),
       );
+      const questionTypes = data.questionTypes ?? [];
+      const questions = data.questions ?? [];
 
+      setQuestions(questions);
       setPracticeTopics(topics);
+      setQuestionTypes(questionTypes);
+      setMetrics([
+        {
+          title: "Total Questions",
+          value: questions.reduce((total, question) => {
+            return total + Object.keys(question.variants).length;
+          }, 0),
+        },
+        {
+          title: "Total Topics",
+          value: topics.length,
+        },
+        {
+          title: "Total Resources",
+          value: 1_200, // Placeholder value
+        },
+        {
+          title: "Total Articles",
+          value: 500, // Placeholder value
+        },
+      ]);
     } catch (error) {
-      setPracticeTopics([]);
-      console.error("Failed to load practice topics:", error);
-    }
-  };
-
-  const loadQuestionTypes = async () => {
-    try {
-      const response = await fetch("/practice-questions.json");
-      const data = (await response.json()) as QuestionsPayload;
-      const types = data.questionTypes ?? [];
-
-      setQuestionTypes(types);
-    } catch (error) {
-      console.error("Failed to load question types:", error);
+      console.error("Failed to load practice data:", error);
     }
   };
 
@@ -71,5 +101,5 @@ export const usePracticeSettings = () => {
     };
   };
 
-  return { practiceTopics, questionTypes, handleSubmit };
+  return { practiceTopics, questionTypes, questions, metrics, handleSubmit };
 };
