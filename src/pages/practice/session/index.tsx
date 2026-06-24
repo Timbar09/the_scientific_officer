@@ -1,4 +1,8 @@
+import { useEffect, useState } from "react";
+import useSession from "../../../hooks/useSession";
+
 import Icon from "../../../components/Icon";
+import Tooltip from "../../../components/Tooltip";
 import Container from "../../../components/Container";
 
 import PracticeResults from "./PracticeResults";
@@ -6,10 +10,7 @@ import PracticeLoaderView from "./PracticeLoaderView";
 import PracticeQuestionView from "./PracticeQuestionView";
 import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
 
-import useSession from "../../../hooks/useSession";
-
 import { formatTime, titlize } from "../../../utils";
-import Tooltip from "../../../components/Tooltip";
 
 const PracticeSession = () => {
   const session = useSession();
@@ -53,14 +54,14 @@ const PracticeSession = () => {
 
             <div className="practice__header--right">
               <div className="practice__header--badge__list flex ai-center gap-3">
-                {settings.showHint && !isHintRevealed && (
+                {settings.hintsEnabled && !isHintRevealed && (
                   <HintBadge onClick={revealHint} />
                 )}
 
                 <QuestionsTypeBadge questionType={settings.questionType} />
 
-                {settings.timePractice && (
-                  <TimerBadge secondsRemaining={session.secondsRemaining} />
+                {settings.timerEnabled && (
+                  <TimerBadge duration={settings.sessionDuration} />
                 )}
               </div>
             </div>
@@ -81,7 +82,18 @@ const PracticeSession = () => {
   );
 };
 
-const TimerBadge = ({ secondsRemaining }: { secondsRemaining: number }) => {
+const TimerBadge = ({ duration }: { duration: number }) => {
+  const [secondsRemaining, setSecondsRemaining] = useState(duration * 60);
+
+  useEffect(() => {
+    setSecondsRemaining(duration * 60);
+    const id = window.setInterval(
+      () => setSecondsRemaining((s) => Math.max(s - 1, 0)),
+      1000,
+    );
+    return () => window.clearInterval(id);
+  }, [duration]);
+
   const timerWarning =
     secondsRemaining <= 30
       ? "timer--warning-red"

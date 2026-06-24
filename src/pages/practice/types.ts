@@ -43,9 +43,9 @@ export interface SessionData {
 export interface SessionSettings {
   topics: string[];
   questionType: string;
-  timePractice: boolean;
-  practiceDuration: number;
-  showHint: boolean;
+  timerEnabled: boolean;
+  sessionDuration: number;
+  hintsEnabled: boolean;
 }
 
 // Track user's answer for each question

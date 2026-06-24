@@ -93,11 +93,11 @@ export const usePracticeSettings = () => {
             ? [practiceTopics[0].toLowerCase()]
             : [],
       questionType: formValues.questionType,
-      timePractice: formValues.timerEnabled,
-      practiceDuration: Number.isFinite(formValues.timerValue)
+      timerEnabled: formValues.timerEnabled,
+      sessionDuration: Number.isFinite(formValues.timerValue)
         ? formValues.timerValue
         : 5,
-      showHint: formValues.hintsEnabled,
+      hintsEnabled: formValues.hintsEnabled,
     };
   };
 

@@ -28,17 +28,17 @@
   &::before {
     content: "";
     position: absolute;
-    top: -0.2875em;
+    top: -0.125em;
     left: var(--left, 50%);
     right: var(--right, auto);
     translate: var(--translate, -50% 0);
     rotate: 45deg;
-    width: 0.5em;
-    height: 0.5em;
+    width: 0.75em;
+    height: 0.75em;
     border-top: solid 0.105em var(--opaque-100);
     border-left: solid 0.105em var(--opaque-100);
-    background-color: var(--bg-300);
-    border-radius: var(--radius-100);
+    background-color: clr(primary, 800);
+    border-radius: calc(radius(sm) / 5);
   }
 
   &__text {

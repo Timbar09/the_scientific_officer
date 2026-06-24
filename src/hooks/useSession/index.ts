@@ -26,7 +26,6 @@ const useSession = () => {
   const [availableTypes, setAvailableTypes] = useState<Set<string>>(new Set());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
-  const [secondsRemaining, setSecondsRemaining] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
     Set<number>
@@ -58,16 +57,6 @@ const useSession = () => {
     }
     void load();
   }, [navigate, settings, load]);
-
-  useEffect(() => {
-    if (!settings?.timePractice) return undefined;
-    setSecondsRemaining(settings.practiceDuration * 60);
-    const id = window.setInterval(
-      () => setSecondsRemaining((s) => Math.max(s - 1, 0)),
-      1000,
-    );
-    return () => window.clearInterval(id);
-  }, [settings]);
 
   const filteredQuestions = useMemo<
     (Question & { variantKey?: string })[]
@@ -175,7 +164,6 @@ const useSession = () => {
     isHintRevealed: Boolean(
       currentQuestion && revealedHintQuestionIds.has(currentQuestion.id),
     ),
-    secondsRemaining,
     selectedAnswer,
     unansweredCount,
     allQuestionsAnswered,

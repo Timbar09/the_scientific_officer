@@ -19,7 +19,6 @@ export interface Session {
   currentVariant: QuestionVariant | undefined;
   showAnswer: boolean;
   isHintRevealed: boolean;
-  secondsRemaining: number;
   selectedAnswer: string;
   unansweredCount: number;
   allQuestionsAnswered: boolean;
