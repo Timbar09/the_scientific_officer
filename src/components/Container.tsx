@@ -5,6 +5,7 @@ interface ContainerProps {
 }
 
 const Container = ({ children, className, size = "md" }: ContainerProps) => {
+  const classNames = className ? ` ${className}` : "";
   const sizeClasses = {
     sm: "container__small",
     md: "container__medium",
@@ -13,7 +14,7 @@ const Container = ({ children, className, size = "md" }: ContainerProps) => {
   };
 
   return (
-    <div className={`container ${className} ${sizeClasses[size]}`}>
+    <div className={`container${classNames} ${sizeClasses[size]}`}>
       {children}
     </div>
   );

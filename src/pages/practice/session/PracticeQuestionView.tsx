@@ -1,7 +1,3 @@
-import { FormField } from "../../../components/Form";
-
-import { titlize } from "../../../utils";
-
 import type { Session } from "../../../hooks/useSession/types";
 import type {
   LabelData,
@@ -9,7 +5,111 @@ import type {
   InputData,
 } from "../../../components/Form/types";
 
+import Icon from "../../../components/Icon";
+import { FormField } from "../../../components/Form";
+
+import { titlize } from "../../../utils";
+
 type Topics = NonNullable<Session["settings"]>["topics"];
+
+const PracticeQuestionView = ({ session }: { session: Session }) => {
+  const {
+    settings,
+    currentVariant,
+    currentQuestionIndex,
+    filteredQuestions,
+    showAnswer,
+    isHintRevealed,
+    selectedAnswer,
+    allQuestionsAnswered,
+    nextQuestion,
+    previousQuestion,
+    submit,
+    setSelectedAnswer,
+    toggleAnswer: onToggleAnswer,
+    goToPractice: onChangeSettings,
+  } = session;
+
+  if (!settings || !currentVariant) {
+    return null;
+  }
+
+  return (
+    <div className="practice__session">
+      <Summary topics={settings.topics} />
+
+      <section className="practice__session--card p-5">
+        <p className="practice__session--question__label">
+          Question {currentQuestionIndex + 1}/{filteredQuestions.length}
+        </p>
+        <h2 className="practice__session--question m-block-2">
+          {currentVariant.question}
+        </h2>
+
+        {settings.showHint && isHintRevealed && currentVariant.hint ? (
+          <div className="practice__session--hint m-block-2 flex ai-center">
+            <p className="sr-only">Hint</p>
+
+            <div className="practice__session--hint__icon flex ai-center jc-center p-1">
+              <Icon name="lightbulb_2" className="practice__session--icon" />
+            </div>
+
+            <p className="practice__session--hint__message p-1">
+              {currentVariant.hint}
+            </p>
+          </div>
+        ) : null}
+
+        <AnswerBox
+          options={currentVariant.options || []}
+          selectedAnswer={selectedAnswer}
+          onSelect={setSelectedAnswer}
+        />
+
+        {showAnswer && (
+          <div className="practice__session--answer m-block-3 p-3">
+            <p>
+              <strong>Correct Answer:</strong> {currentVariant.answer}
+            </p>
+            <p>{currentVariant.explanation}</p>
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-2">
+          <button
+            type="button"
+            className="btn btn--secondary"
+            onClick={onToggleAnswer}
+          >
+            {showAnswer ? "Hide Answer" : "Show Answer"}
+          </button>
+          {filteredQuestions.length > 1 ? (
+            <>
+              <button type="button" className="btn" onClick={previousQuestion}>
+                Previous Question
+              </button>
+              <button
+                type="button"
+                className="btn btn--primary"
+                onClick={nextQuestion}
+              >
+                Next Question
+              </button>
+            </>
+          ) : null}
+          {allQuestionsAnswered ? (
+            <button type="button" className="btn btn--primary" onClick={submit}>
+              Submit Answers
+            </button>
+          ) : null}
+          <button type="button" className="btn" onClick={onChangeSettings}>
+            Change Settings
+          </button>
+        </div>
+      </section>
+    </div>
+  );
+};
 
 const Summary = ({ topics }: { topics: Topics }) => {
   return (
@@ -89,6 +189,7 @@ const AnswerBox = ({
     <div className="practice__session--answer m-block-4">
       {options.length > 0 ? (
         <FormField
+          id={0}
           name="answer"
           input={selectedOptionInput}
           className={trueOrFalseVariantClass}
@@ -97,102 +198,12 @@ const AnswerBox = ({
         />
       ) : (
         <FormField
+          id={0}
           name="answer"
           input={typedInInput}
           placeholder="Enter your answer..."
         />
       )}
-    </div>
-  );
-};
-
-const PracticeQuestionView = ({ session }: { session: Session }) => {
-  const {
-    settings,
-    currentVariant,
-    currentQuestionIndex,
-    filteredQuestions,
-    showAnswer,
-    isHintRevealed,
-    selectedAnswer,
-    allQuestionsAnswered,
-    nextQuestion,
-    previousQuestion,
-    submit,
-    setSelectedAnswer,
-    toggleAnswer: onToggleAnswer,
-    goToPractice: onChangeSettings,
-  } = session;
-
-  if (!settings || !currentVariant) {
-    return null;
-  }
-
-  return (
-    <div className="practice__session">
-      <Summary topics={settings.topics} />
-
-      <section className="practice__session--card p-5">
-        <p className="practice__session--question__label">
-          Question {currentQuestionIndex + 1}/{filteredQuestions.length}
-        </p>
-        <h2 className="practice__session--question m-block-2">
-          {currentVariant.question}
-        </h2>
-
-        {settings.showHint && isHintRevealed && currentVariant.hint ? (
-          <p className="practice__session--hint m-block-2">
-            <strong>Hint:</strong> {currentVariant.hint}
-          </p>
-        ) : null}
-
-        <AnswerBox
-          options={currentVariant.options || []}
-          selectedAnswer={selectedAnswer}
-          onSelect={setSelectedAnswer}
-        />
-
-        {showAnswer && (
-          <div className="practice__session--answer m-block-3 p-3">
-            <p>
-              <strong>Correct Answer:</strong> {currentVariant.answer}
-            </p>
-            <p>{currentVariant.explanation}</p>
-          </div>
-        )}
-
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            className="btn btn--secondary"
-            onClick={onToggleAnswer}
-          >
-            {showAnswer ? "Hide Answer" : "Show Answer"}
-          </button>
-          {filteredQuestions.length > 1 ? (
-            <>
-              <button type="button" className="btn" onClick={previousQuestion}>
-                Previous Question
-              </button>
-              <button
-                type="button"
-                className="btn btn--primary"
-                onClick={nextQuestion}
-              >
-                Next Question
-              </button>
-            </>
-          ) : null}
-          {allQuestionsAnswered ? (
-            <button type="button" className="btn btn--primary" onClick={submit}>
-              Submit Answers
-            </button>
-          ) : null}
-          <button type="button" className="btn" onClick={onChangeSettings}>
-            Change Settings
-          </button>
-        </div>
-      </section>
     </div>
   );
 };

@@ -27,10 +27,14 @@
       }
     }
 
-    &--hint__button {
-      &:hover {
-        background-color: clr(neutral, 300);
-        color: clr(neutral, 900);
+    &--hint {
+      position: relative;
+
+      &__button {
+        &:hover {
+          background-color: clr(neutral, 300);
+          color: clr(neutral, 900);
+        }
       }
     }
 
@@ -286,6 +290,24 @@
     &--card {
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
+    }
+
+    &--hint {
+      border: 1px solid clr(alert, 500);
+      border-radius: radius(md);
+      overflow: hidden;
+
+      &__icon {
+        color: clr(alert, 600);
+        background-color: clr(alert, 400);
+        border-right: 1px solid clr(alert, 500);
+      }
+
+      &__message {
+        // padding: 0.5rem;
+        font-size: fs(sm);
+        // color: clr(alert, 700);
+      }
     }
 
     &--question {

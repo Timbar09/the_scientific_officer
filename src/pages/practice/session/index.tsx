@@ -9,6 +9,7 @@ import PracticeNoQuestionsView from "./PracticeNoQuestionsView";
 import useSession from "../../../hooks/useSession";
 
 import { formatTime, titlize } from "../../../utils";
+import Tooltip from "../../../components/Tooltip";
 
 const PracticeSession = () => {
   const session = useSession();
@@ -120,14 +121,15 @@ const HintBadge = ({ onClick }: { onClick: () => void }) => {
       <button
         type="button"
         className="practice__header--hint__button practice__header--badge flex ai-center gap-1 p-1"
-        title="Get a Hint"
         onClick={onClick}
       >
-        <Icon name="lightbulb" className="practice__header--icon" />
+        <Icon name="lightbulb_2" className="practice__header--icon" />
 
         <span className="practice__header--badge__value">Hint</span>
         {/* {session.settings.showHint ? "On" : "Off"} */}
       </button>
+
+      <Tooltip>Get a hint!</Tooltip>
     </div>
   );
 };
