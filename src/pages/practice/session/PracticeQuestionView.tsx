@@ -1,3 +1,4 @@
+import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
 import type {
   LabelData,
@@ -7,10 +8,22 @@ import type {
 
 import Icon from "../../../components/Icon";
 import { FormField } from "../../../components/Form";
+import Button from "../../../components/Button";
 
 import { titlize } from "../../../utils";
 
 type Topics = NonNullable<Session["settings"]>["topics"];
+
+interface NavButtonsProps {
+  onToggleAnswer: () => void;
+  previousQuestion: () => void;
+  nextQuestion: () => void;
+  submit: () => void;
+  // onChangeSettings: () => void;
+  showAnswer: boolean;
+  filteredQuestions: Session["filteredQuestions"];
+  allQuestionsAnswered: boolean;
+}
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
   const {
@@ -27,7 +40,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     submit,
     setSelectedAnswer,
     toggleAnswer: onToggleAnswer,
-    goToPractice: onChangeSettings,
+    // goToPractice: onChangeSettings,
   } = session;
 
   if (!settings || !currentVariant) {
@@ -75,37 +88,16 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           </div>
         )}
 
-        <div className="flex flex-wrap gap-2">
-          <button
-            type="button"
-            className="btn btn--secondary"
-            onClick={onToggleAnswer}
-          >
-            {showAnswer ? "Hide Answer" : "Show Answer"}
-          </button>
-          {filteredQuestions.length > 1 ? (
-            <>
-              <button type="button" className="btn" onClick={previousQuestion}>
-                Previous Question
-              </button>
-              <button
-                type="button"
-                className="btn btn--primary"
-                onClick={nextQuestion}
-              >
-                Next Question
-              </button>
-            </>
-          ) : null}
-          {allQuestionsAnswered ? (
-            <button type="button" className="btn btn--primary" onClick={submit}>
-              Submit Answers
-            </button>
-          ) : null}
-          <button type="button" className="btn" onClick={onChangeSettings}>
-            Change Settings
-          </button>
-        </div>
+        <NavButtons
+          onToggleAnswer={onToggleAnswer}
+          previousQuestion={previousQuestion}
+          nextQuestion={nextQuestion}
+          submit={submit}
+          // onChangeSettings={onChangeSettings}
+          showAnswer={showAnswer}
+          filteredQuestions={filteredQuestions}
+          allQuestionsAnswered={allQuestionsAnswered}
+        />
       </section>
     </div>
   );
@@ -204,6 +196,48 @@ const AnswerBox = ({
           placeholder="Enter your answer..."
         />
       )}
+    </div>
+  );
+};
+
+const NavButtons = ({
+  onToggleAnswer,
+  previousQuestion,
+  nextQuestion,
+  submit,
+  // onChangeSettings,
+  showAnswer,
+  filteredQuestions,
+  allQuestionsAnswered,
+}: NavButtonsProps) => {
+  const nextBtnIcon: IconProps = { name: "arrow_forward", position: "right" };
+  const prevBtnIcon: IconProps = { name: "arrow_back" };
+
+  return (
+    <div className="flex flex-wrap gap-2">
+      <button
+        type="button"
+        className="btn btn--secondary"
+        onClick={onToggleAnswer}
+      >
+        {showAnswer ? "Hide Answer" : "Show Answer"}
+      </button>
+      {filteredQuestions.length > 1 ? (
+        <>
+          <Button onClick={previousQuestion} icon={prevBtnIcon}>
+            Prev
+          </Button>
+
+          <Button onClick={nextQuestion} icon={nextBtnIcon}>
+            Next
+          </Button>
+        </>
+      ) : null}
+      {allQuestionsAnswered ? (
+        <button type="button" className="btn btn--primary" onClick={submit}>
+          Submit Answers
+        </button>
+      ) : null}
     </div>
   );
 };
