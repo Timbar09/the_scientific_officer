@@ -7,14 +7,14 @@ import type {
   SessionSettings,
   QuestionsPayload,
   QuestionType,
-  Question,
+  QuestionData,
 } from "../pages/practice/types";
 
 export const usePracticeSettings = () => {
   const navigate = useNavigate();
   const [practiceTopics, setPracticeTopics] = useState<string[]>([]);
   const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionData[]>([]);
   const [metrics, setMetrics] = useState([
     {
       title: "Total Questions",

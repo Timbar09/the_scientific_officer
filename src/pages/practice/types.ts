@@ -1,11 +1,11 @@
-export const QUESTION_TYPE_NAMES = [
-  "Multiple Choice",
-  "True/False",
-  "Short Answer",
-  "Detailed Answer",
+export const VARIANT_NAMES = [
+  "multiple choice",
+  "true/false",
+  "short answer",
+  "detailed answer",
 ] as const;
 
-export type QuestionTypeName = (typeof QUESTION_TYPE_NAMES)[number];
+export type QuestionTypeName = (typeof VARIANT_NAMES)[number];
 
 export type QuestionType = {
   id: number;
@@ -23,21 +23,21 @@ export interface QuestionVariant {
   options?: string[];
 }
 
-export interface Question {
+export interface QuestionData {
   id: number;
   topics: string[];
-  difficulty: "Easy" | "Medium" | "Hard";
+  difficulty: "easy" | "medium" | "hard";
   variants: Record<QuestionTypeName, QuestionVariant>;
 }
 
 export interface QuestionsPayload {
   meta?: Record<string, string>;
   questionTypes?: QuestionType[];
-  questions?: Question[];
+  questions?: QuestionData[];
 }
 
 export interface SessionData {
-  questions: Question[];
+  questions: QuestionData[];
 }
 
 export interface SessionSettings {

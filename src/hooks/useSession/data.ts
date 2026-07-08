@@ -1,13 +1,13 @@
-import type { Question } from "../../pages/practice/types";
+import type { QuestionData } from "../../pages/practice/types";
 import { ensureTrueFalseOptions } from "./utils";
 
 export async function fetchSessionData(): Promise<{
-  questions: Question[];
+  questions: QuestionData[];
   availableTypes: Set<string>;
 }> {
   const resp = await fetch("/practice-questions.json");
   const data = (await resp.json()) as unknown as {
-    questions?: Question[];
+    questions?: QuestionData[];
     questionTypes?: Array<{ name: string; available: boolean }>;
   };
 

@@ -30,7 +30,7 @@ export interface FormFieldData {
   className?: string;
   input?: InputData;
   containerElement?: "div" | "li";
-  label?: LabelData;
+  label?: FormLabelData;
   name?: string;
   value?: string;
   checked?: boolean;
@@ -53,14 +53,14 @@ export interface FormFieldData {
   options?: FormFieldData[];
 }
 
-export interface LabelData {
+export interface FormLabelData {
   text: string;
   visible: boolean;
   alignment?: "row" | "column";
 }
 
 export interface FormFieldsetData {
-  label: LabelData;
+  label: FormLabelData;
   children: React.ReactNode;
   className?: string;
 }

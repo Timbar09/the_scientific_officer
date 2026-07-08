@@ -1,13 +1,13 @@
 import type {
-  Question,
+  QuestionData,
   QuestionVariant,
   SessionSettings,
   UserAnswer,
 } from "../../pages/practice/types";
 
-type QuestionWithVariantKey = Question & { variantKey?: string };
+type QuestionWithVariantKey = QuestionData & { variantKey?: string };
 
-export const shuffle = (qs: Question[]): Question[] => {
+export const shuffle = (qs: QuestionData[]): QuestionData[] => {
   const shuffled = [...qs];
 
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -31,7 +31,7 @@ export const ensureTrueFalseOptions = (
     : variant;
 
 export const getAvailableVariantKeys = (
-  q: Question,
+  q: QuestionData,
   availableTypes: Set<string>,
 ): string[] =>
   Object.keys(q.variants).filter(
@@ -39,7 +39,7 @@ export const getAvailableVariantKeys = (
   );
 
 export const pickRandomVariant = (
-  q: Question,
+  q: QuestionData,
   availableTypes: Set<string>,
 ): QuestionVariant | undefined => {
   const keys = getAvailableVariantKeys(q, availableTypes);
@@ -49,7 +49,7 @@ export const pickRandomVariant = (
 };
 
 export const getFilteredQuestions = (
-  questions: Question[],
+  questions: QuestionData[],
   settings: SessionSettings | undefined,
   availableTypes: Set<string>,
 ): QuestionWithVariantKey[] => {
@@ -76,6 +76,39 @@ export const getFilteredQuestions = (
       .map((q) => ({ ...q })),
   );
 };
+
+// export const destructureQuestions = (
+//   questionData: QuestionData[],
+//   availableTypes: Set<string>,
+// ): SessionQuestion[] => {
+//   let uniqueIdCounter = 0;
+
+//   const destructuredQuestions = questionData.map((q) => {
+//     const { variants, ...rest } = q;
+
+//     const variantKeys = [...availableTypes];
+
+//     const qList = variantKeys.map((key) => {
+//       const questionVariant =
+//         variants[key as keyof typeof variants] ||
+//         variants[Object.keys(variants)[0] as keyof typeof variants];
+
+//       const result = {
+//         variant: key as keyof typeof variants,
+//         ...{ ...rest, id: uniqueIdCounter },
+//         ...questionVariant,
+//       };
+
+//       uniqueIdCounter += 1;
+
+//       return result;
+//     });
+
+//     return qList;
+//   });
+
+//   return shuffle(destructuredQuestions.flat());
+// };
 
 export const getCurrentVariant = (
   currentQuestion: QuestionWithVariantKey | undefined,
@@ -122,13 +155,13 @@ export const getUnansweredQuestionIndexes = (
     .map((q, i) => (answersWithCurrentSelection.has(q.id) ? -1 : i))
     .filter((i) => i !== -1);
 
-export default {
-  shuffle,
-  ensureTrueFalseOptions,
-  getAvailableVariantKeys,
-  pickRandomVariant,
-  getFilteredQuestions,
-  getCurrentVariant,
-  getAnswersWithCurrentSelection,
-  getUnansweredQuestionIndexes,
-};
+// export default {
+//   shuffle,
+//   ensureTrueFalseOptions,
+//   getAvailableVariantKeys,
+//   pickRandomVariant,
+//   getFilteredQuestions,
+//   getCurrentVariant,
+//   getAnswersWithCurrentSelection,
+//   getUnansweredQuestionIndexes,
+// };
