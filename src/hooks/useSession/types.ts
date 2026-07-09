@@ -9,23 +9,30 @@ import type {
 
 export interface Session {
   settings: SessionSettings | undefined;
-  isLoading: boolean;
   isComplete: boolean;
   results: SessionResults | null;
-  questions: QuestionData[];
-  currentQuestionIndex: number;
-  currentQuestion: QuestionData | undefined;
-  currentVariant: QuestionVariant | undefined;
-  showAnswer: boolean;
-  isHintRevealed: boolean;
-  selectedAnswer: string;
-  unansweredCount: number;
-  allQuestionsAnswered: boolean;
-  nextQuestion: () => void;
-  previousQuestion: () => void;
-  submit: () => void;
-  setSelectedAnswer: (value: string) => void;
-  toggleAnswer: () => void;
-  revealHint: () => void;
-  goToPractice: () => void;
+  questions: {
+    list: QuestionData[];
+    engaged: Map<number, object>;
+    unansweredCount: number;
+    loading: boolean;
+    areAllAnswered: boolean;
+    current: {
+      index: number;
+      question: QuestionData | undefined;
+      variant: QuestionVariant | undefined;
+      selectedAnswer: string;
+      showAnswer: boolean;
+      hintRevealed: boolean;
+    };
+  };
+  func: {
+    nextQuestion: () => void;
+    previousQuestion: () => void;
+    submit: () => void;
+    setSelectedAnswer: (value: string) => void;
+    toggleAnswer: () => void;
+    revealHint: () => void;
+    goToPractice: () => void;
+  };
 }

@@ -30,6 +30,9 @@ const useSession = () => {
   const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
     Set<number>
   >(new Set());
+  const [questionsEngaged, setQuestionsEngaged] = useState<Map<number, object>>(
+    new Map(),
+  );
   const [userAnswers, setUserAnswers] = useState<Map<number, UserAnswer>>(
     new Map(),
   );
@@ -40,9 +43,9 @@ const useSession = () => {
   const load = useCallback(async () => {
     if (!settings) return;
     try {
-      const { questions: qs, availableTypes } = await fetchSessionData();
+      const { questions: list, availableTypes } = await fetchSessionData();
       setAvailableTypes(availableTypes);
-      setQuestionData(qs);
+      setQuestionData(list);
     } catch {
       setQuestionData([]);
     } finally {
@@ -58,16 +61,16 @@ const useSession = () => {
     void load();
   }, [navigate, settings, load]);
 
-  const questions = useMemo<(QuestionData & { variantKey?: string })[]>(() => {
+  const list = useMemo<(QuestionData & { variantKey?: string })[]>(() => {
     return getFilteredQuestions(questionData, settings, availableTypes);
   }, [questionData, settings, availableTypes]);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
     setShowAnswer(false);
-  }, [questions.length]);
+  }, [list.length]);
 
-  const currentQuestion = questions[currentQuestionIndex];
+  const currentQuestion = list[currentQuestionIndex];
 
   const currentVariant = useMemo(() => {
     return getCurrentVariant(currentQuestion, settings, availableTypes);
@@ -83,8 +86,8 @@ const useSession = () => {
   }, [currentQuestion, currentVariant, selectedAnswer, userAnswers]);
 
   const unansweredQuestionIndexes = useMemo(
-    () => getUnansweredQuestionIndexes(questions, answersWithCurrentSelection),
-    [questions, answersWithCurrentSelection],
+    () => getUnansweredQuestionIndexes(list, answersWithCurrentSelection),
+    [list, answersWithCurrentSelection],
   );
 
   const unansweredCount = unansweredQuestionIndexes.length;
@@ -96,14 +99,14 @@ const useSession = () => {
     setSelectedAnswer("");
 
     if (
-      currentQuestionIndex === questions.length - 1 &&
+      currentQuestionIndex === list.length - 1 &&
       unansweredQuestionIndexes.length > 0
     ) {
       setCurrentQuestionIndex(unansweredQuestionIndexes[0]);
       return;
     }
 
-    setCurrentQuestionIndex((i) => (i + 1) % Math.max(questions.length, 1));
+    setCurrentQuestionIndex((i) => (i + 1) % Math.max(list.length, 1));
   };
 
   const previousQuestion = () => {
@@ -111,7 +114,7 @@ const useSession = () => {
     setShowAnswer(false);
     setSelectedAnswer("");
     setCurrentQuestionIndex(
-      (i) => (i - 1 + questions.length) % Math.max(questions.length, 1),
+      (i) => (i - 1 + list.length) % Math.max(list.length, 1),
     );
   };
 
@@ -120,10 +123,10 @@ const useSession = () => {
     const all = Array.from(answersWithCurrentSelection.values());
     const correct = all.filter((a) => a.isCorrect).length;
     const wrong = all.filter((a) => !a.isCorrect);
-    const score = Math.round((correct / Math.max(questions.length, 1)) * 100);
+    const score = Math.round((correct / Math.max(list.length, 1)) * 100);
 
     const r: SessionResults = {
-      totalQuestions: questions.length,
+      totalQuestions: list.length,
       correctAnswers: correct,
       wrongAnswers: wrong,
       score,
@@ -136,32 +139,48 @@ const useSession = () => {
   const revealHint = () => {
     if (!currentQuestion) return;
     setRevealedHintQuestionIds((s) => new Set(s).add(currentQuestion.id));
+    setQuestionsEngaged((s) =>
+      new Map(s).set(currentQuestion.id, {
+        hintRevealed: true,
+      }),
+    );
+  };
+
+  const current = {
+    index: currentQuestionIndex,
+    question: currentQuestion,
+    variant: currentVariant,
+    selectedAnswer: selectedAnswer,
+    showAnswer,
+    hintRevealed: currentQuestion
+      ? revealedHintQuestionIds.has(currentQuestion.id)
+      : false,
+  };
+
+  const questions = {
+    list,
+    engaged: questionsEngaged,
+    unansweredCount,
+    loading: isLoading,
+    areAllAnswered: allQuestionsAnswered,
+    current,
   };
 
   return {
     settings,
-    isLoading,
     isComplete,
     results,
     questionData,
     questions,
-    currentQuestionIndex,
-    currentQuestion,
-    currentVariant,
-    showAnswer,
-    isHintRevealed: Boolean(
-      currentQuestion && revealedHintQuestionIds.has(currentQuestion.id),
-    ),
-    selectedAnswer,
-    unansweredCount,
-    allQuestionsAnswered,
-    nextQuestion,
-    previousQuestion,
-    submit,
-    setSelectedAnswer,
-    toggleAnswer: () => setShowAnswer((s) => !s),
-    revealHint,
-    goToPractice: () => navigate("/practice"),
+    func: {
+      nextQuestion,
+      previousQuestion,
+      submit,
+      setSelectedAnswer,
+      toggleAnswer: () => setShowAnswer((s) => !s),
+      revealHint,
+      goToPractice: () => navigate("/practice"),
+    },
   };
 };
 

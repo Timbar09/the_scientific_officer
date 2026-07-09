@@ -14,13 +14,16 @@ import { formatTime, titlize } from "../../../utils";
 
 const PracticeSession = () => {
   const session = useSession();
-  const { settings, isHintRevealed, revealHint } = session;
+  const { settings, func, questions } = session;
+  const { list, loading, current, unansweredCount } = questions;
 
-  if (!settings || session.isLoading) {
+  console.log("Interacted Questions:", questions.engaged);
+
+  if (!settings || loading) {
     return <PracticeLoaderView />;
   }
 
-  if (session.questions.length === 0) {
+  if (list.length === 0) {
     return (
       <div className="practice page">
         <Container>
@@ -30,7 +33,7 @@ const PracticeSession = () => {
     );
   }
 
-  if (!session.currentQuestion || !session.currentVariant) {
+  if (!current.question || !current.variant) {
     return null;
   }
 
@@ -45,17 +48,14 @@ const PracticeSession = () => {
               </h1>
 
               <div className="practice__header--left__progressbar">
-                <ProgressBar
-                  unanswered={session.unansweredCount}
-                  total={session.questions.length}
-                />
+                <ProgressBar unanswered={unansweredCount} total={list.length} />
               </div>
             </div>
 
             <div className="practice__header--right">
               <div className="practice__header--badge__list flex ai-center gap-3">
-                {settings.hintsEnabled && !isHintRevealed && (
-                  <HintBadge onClick={revealHint} />
+                {settings.hintsEnabled && !current.hintRevealed && (
+                  <HintBadge onClick={func.revealHint} />
                 )}
 
                 <QuestionsTypeBadge questionType={settings.questionType} />
@@ -73,7 +73,7 @@ const PracticeSession = () => {
         ) : session.results ? (
           <PracticeResults
             sessionResults={session.results}
-            questions={session.questions}
+            questions={list}
             settings={settings}
           />
         ) : null}

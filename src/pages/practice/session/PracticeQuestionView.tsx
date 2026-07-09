@@ -1,5 +1,6 @@
 import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
+import type { QuestionData } from "../../../pages/practice/types";
 import type {
   FormLabelData,
   FormFieldData,
@@ -19,29 +20,23 @@ interface NavButtonsProps {
   submit: () => void;
   // onChangeSettings: () => void;
   showAnswer: boolean;
-  questions: Session["questions"];
+  questions: QuestionData[];
   allQuestionsAnswered: boolean;
 }
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
+  const { settings, questions, func } = session;
+
+  const { list, current, areAllAnswered } = questions;
   const {
-    settings,
-    currentVariant,
-    currentQuestionIndex,
-    questions,
-    showAnswer,
-    isHintRevealed,
-    selectedAnswer,
-    allQuestionsAnswered,
     nextQuestion,
     previousQuestion,
     submit,
     setSelectedAnswer,
     toggleAnswer: onToggleAnswer,
-    // goToPractice: onChangeSettings,
-  } = session;
+  } = func;
 
-  if (!settings || !currentVariant || !questions) {
+  if (!settings || !current.variant || !list) {
     return null;
   }
 
@@ -51,13 +46,15 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
 
       <section className="practice__session--card p-5">
         <p className="practice__session--question__label">
-          Question {currentQuestionIndex + 1}/{questions.length}
+          Question {current.index + 1}/{list.length}
         </p>
         <h2 className="practice__session--question m-block-2">
-          {currentVariant.question}
+          {current.variant.question}
         </h2>
 
-        {settings.hintsEnabled && isHintRevealed && currentVariant.hint ? (
+        {settings.hintsEnabled &&
+        current.hintRevealed &&
+        current.variant.hint ? (
           <div className="practice__session--hint m-block-2 flex ai-center">
             <p className="sr-only">Hint</p>
 
@@ -66,23 +63,23 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
             </div>
 
             <p className="practice__session--hint__message p-1">
-              {currentVariant.hint}
+              {current.variant.hint}
             </p>
           </div>
         ) : null}
 
         <AnswerBox
-          options={currentVariant.options || []}
-          selectedAnswer={selectedAnswer}
+          options={current.variant.options || []}
+          selectedAnswer={current.selectedAnswer}
           onSelect={setSelectedAnswer}
         />
 
-        {showAnswer && (
+        {current.showAnswer && (
           <div className="practice__session--answer m-block-3 p-3">
             <p>
-              <strong>Correct Answer:</strong> {currentVariant.answer}
+              <strong>Correct Answer:</strong> {current.variant.answer}
             </p>
-            <p>{currentVariant.explanation}</p>
+            <p>{current.variant.explanation}</p>
           </div>
         )}
 
@@ -92,9 +89,9 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           nextQuestion={nextQuestion}
           submit={submit}
           // onChangeSettings={onChangeSettings}
-          showAnswer={showAnswer}
-          questions={questions}
-          allQuestionsAnswered={allQuestionsAnswered}
+          showAnswer={current.showAnswer}
+          questions={list}
+          allQuestionsAnswered={areAllAnswered}
         />
       </section>
     </div>
