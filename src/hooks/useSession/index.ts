@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 
 import type {
-  Question,
+  QuestionData,
   SessionSettings,
   SessionResults,
   UserAnswer,
@@ -22,7 +22,7 @@ const useSession = () => {
   const location = useLocation();
   const settings = location.state as SessionSettings | undefined;
 
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questionData, setQuestionData] = useState<QuestionData[]>([]);
   const [availableTypes, setAvailableTypes] = useState<Set<string>>(new Set());
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -42,9 +42,9 @@ const useSession = () => {
     try {
       const { questions: qs, availableTypes } = await fetchSessionData();
       setAvailableTypes(availableTypes);
-      setQuestions(qs);
+      setQuestionData(qs);
     } catch {
-      setQuestions([]);
+      setQuestionData([]);
     } finally {
       setIsLoading(false);
     }
@@ -58,18 +58,16 @@ const useSession = () => {
     void load();
   }, [navigate, settings, load]);
 
-  const filteredQuestions = useMemo<
-    (Question & { variantKey?: string })[]
-  >(() => {
-    return getFilteredQuestions(questions, settings, availableTypes);
-  }, [questions, settings, availableTypes]);
+  const questions = useMemo<(QuestionData & { variantKey?: string })[]>(() => {
+    return getFilteredQuestions(questionData, settings, availableTypes);
+  }, [questionData, settings, availableTypes]);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
     setShowAnswer(false);
-  }, [filteredQuestions.length]);
+  }, [questions.length]);
 
-  const currentQuestion = filteredQuestions[currentQuestionIndex];
+  const currentQuestion = questions[currentQuestionIndex];
 
   const currentVariant = useMemo(() => {
     return getCurrentVariant(currentQuestion, settings, availableTypes);
@@ -85,12 +83,8 @@ const useSession = () => {
   }, [currentQuestion, currentVariant, selectedAnswer, userAnswers]);
 
   const unansweredQuestionIndexes = useMemo(
-    () =>
-      getUnansweredQuestionIndexes(
-        filteredQuestions,
-        answersWithCurrentSelection,
-      ),
-    [filteredQuestions, answersWithCurrentSelection],
+    () => getUnansweredQuestionIndexes(questions, answersWithCurrentSelection),
+    [questions, answersWithCurrentSelection],
   );
 
   const unansweredCount = unansweredQuestionIndexes.length;
@@ -102,16 +96,14 @@ const useSession = () => {
     setSelectedAnswer("");
 
     if (
-      currentQuestionIndex === filteredQuestions.length - 1 &&
+      currentQuestionIndex === questions.length - 1 &&
       unansweredQuestionIndexes.length > 0
     ) {
       setCurrentQuestionIndex(unansweredQuestionIndexes[0]);
       return;
     }
 
-    setCurrentQuestionIndex(
-      (i) => (i + 1) % Math.max(filteredQuestions.length, 1),
-    );
+    setCurrentQuestionIndex((i) => (i + 1) % Math.max(questions.length, 1));
   };
 
   const previousQuestion = () => {
@@ -119,9 +111,7 @@ const useSession = () => {
     setShowAnswer(false);
     setSelectedAnswer("");
     setCurrentQuestionIndex(
-      (i) =>
-        (i - 1 + filteredQuestions.length) %
-        Math.max(filteredQuestions.length, 1),
+      (i) => (i - 1 + questions.length) % Math.max(questions.length, 1),
     );
   };
 
@@ -130,12 +120,10 @@ const useSession = () => {
     const all = Array.from(answersWithCurrentSelection.values());
     const correct = all.filter((a) => a.isCorrect).length;
     const wrong = all.filter((a) => !a.isCorrect);
-    const score = Math.round(
-      (correct / Math.max(filteredQuestions.length, 1)) * 100,
-    );
+    const score = Math.round((correct / Math.max(questions.length, 1)) * 100);
 
     const r: SessionResults = {
-      totalQuestions: filteredQuestions.length,
+      totalQuestions: questions.length,
       correctAnswers: correct,
       wrongAnswers: wrong,
       score,
@@ -155,8 +143,8 @@ const useSession = () => {
     isLoading,
     isComplete,
     results,
+    questionData,
     questions,
-    filteredQuestions,
     currentQuestionIndex,
     currentQuestion,
     currentVariant,

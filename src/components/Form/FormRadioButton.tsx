@@ -12,6 +12,7 @@ const FormRadioButton = ({
   className = "",
   input = { type: "radio", variant: "default" },
   options = [],
+  isChecked = false,
   register,
   rules,
 }: FormFieldData) => {
@@ -20,7 +21,7 @@ const FormRadioButton = ({
     width: "0px",
   });
   const [activeRadio, setActiveRadio] = useState(
-    options.find((option) => option.checked)?.id || options[0]?.id || 0,
+    options.find((option) => option.isChecked)?.id,
   );
   const { variant } = input;
 
@@ -54,6 +55,7 @@ const FormRadioButton = ({
                 setRadioSliderStyle={setSliderStyle}
                 activeRadio={activeRadio}
                 setActiveRadio={setActiveRadio}
+                isChecked={isChecked}
                 register={register}
                 rules={rules}
               />
@@ -81,6 +83,7 @@ const RadioButtonOption = ({
   setActiveRadio,
   register,
   rules,
+  // isChecked,
 }: FormFieldData) => {
   const radioRef = useRef<HTMLLabelElement>(null);
 
@@ -115,12 +118,22 @@ const RadioButtonOption = ({
       })
     : {};
 
+  // console.log(
+  //   "FormRadioButton: ",
+  //   value,
+  //   "is",
+  //   isChecked ? "CHECKED" : "NOT CHECKED",
+  // );
+
   return (
     <label
       ref={variant !== "default" ? radioRef : null}
       key={id}
       className={`form__radio--item ${labelVariantClass}`}
-      onClick={() => setActiveRadio?.(id || 0)}
+      onClick={() => {
+        setActiveRadio?.(id);
+        // console.log("Active Radio Changed", { id, value, activeRadio });
+      }}
     >
       <input
         className={`form__radio--item__input ${inputVariantClass}`}

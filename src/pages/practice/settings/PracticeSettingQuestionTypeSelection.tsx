@@ -26,9 +26,7 @@ const PracticeSettingQuestionTypeSelection = ({
   const allType = {
     id: 0,
     value: "all",
-    checked: defaultValue === "all",
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-      console.log(event.target.value),
+    isChecked: defaultValue === "all",
   };
 
   const options = questionTypes
@@ -36,9 +34,7 @@ const PracticeSettingQuestionTypeSelection = ({
     .map(({ id, name }) => ({
       id,
       value: name.toLowerCase(),
-      checked: false,
-      onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
-        console.log(event.target.value),
+      isChecked: false,
     }));
 
   options.unshift(allType);

@@ -1,7 +1,7 @@
 import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
 import type {
-  LabelData,
+  FormLabelData,
   FormFieldData,
   InputData,
 } from "../../../components/Form/types";
@@ -12,8 +12,6 @@ import Button from "../../../components/Button";
 
 import { titlize } from "../../../utils";
 
-type Topics = NonNullable<Session["settings"]>["topics"];
-
 interface NavButtonsProps {
   onToggleAnswer: () => void;
   previousQuestion: () => void;
@@ -21,7 +19,7 @@ interface NavButtonsProps {
   submit: () => void;
   // onChangeSettings: () => void;
   showAnswer: boolean;
-  filteredQuestions: Session["filteredQuestions"];
+  questions: Session["questions"];
   allQuestionsAnswered: boolean;
 }
 
@@ -30,7 +28,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     settings,
     currentVariant,
     currentQuestionIndex,
-    filteredQuestions,
+    questions,
     showAnswer,
     isHintRevealed,
     selectedAnswer,
@@ -43,7 +41,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     // goToPractice: onChangeSettings,
   } = session;
 
-  if (!settings || !currentVariant) {
+  if (!settings || !currentVariant || !questions) {
     return null;
   }
 
@@ -53,7 +51,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
 
       <section className="practice__session--card p-5">
         <p className="practice__session--question__label">
-          Question {currentQuestionIndex + 1}/{filteredQuestions.length}
+          Question {currentQuestionIndex + 1}/{questions.length}
         </p>
         <h2 className="practice__session--question m-block-2">
           {currentVariant.question}
@@ -95,7 +93,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           submit={submit}
           // onChangeSettings={onChangeSettings}
           showAnswer={showAnswer}
-          filteredQuestions={filteredQuestions}
+          questions={questions}
           allQuestionsAnswered={allQuestionsAnswered}
         />
       </section>
@@ -103,7 +101,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
   );
 };
 
-const Summary = ({ topics }: { topics: Topics }) => {
+const Summary = ({ topics }: { topics: string[] }) => {
   return (
     <section
       className="practice__session--summary"
@@ -138,7 +136,7 @@ const AnswerBox = ({
 }) => {
   let isTrueFalseVariant = false;
 
-  const label: LabelData = {
+  const label: FormLabelData = {
     text: "Answer Options",
     visible: false,
   };
@@ -207,7 +205,7 @@ const NavButtons = ({
   submit,
   // onChangeSettings,
   showAnswer,
-  filteredQuestions,
+  questions,
   allQuestionsAnswered,
 }: NavButtonsProps) => {
   const nextBtnIcon: IconProps = { name: "arrow_forward", position: "right" };
@@ -222,7 +220,7 @@ const NavButtons = ({
       >
         {showAnswer ? "Hide Answer" : "Show Answer"}
       </button>
-      {filteredQuestions.length > 1 ? (
+      {questions.length > 1 ? (
         <>
           <Button onClick={previousQuestion} icon={prevBtnIcon}>
             Prev

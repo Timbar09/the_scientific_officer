@@ -20,7 +20,7 @@ const PracticeSession = () => {
     return <PracticeLoaderView />;
   }
 
-  if (session.filteredQuestions.length === 0) {
+  if (session.questions.length === 0) {
     return (
       <div className="practice page">
         <Container>
@@ -47,7 +47,7 @@ const PracticeSession = () => {
               <div className="practice__header--left__progressbar">
                 <ProgressBar
                   unanswered={session.unansweredCount}
-                  total={session.filteredQuestions.length}
+                  total={session.questions.length}
                 />
               </div>
             </div>
@@ -73,7 +73,7 @@ const PracticeSession = () => {
         ) : session.results ? (
           <PracticeResults
             sessionResults={session.results}
-            filteredQuestions={session.filteredQuestions}
+            questions={session.questions}
             settings={settings}
           />
         ) : null}
@@ -138,7 +138,6 @@ const HintBadge = ({ onClick }: { onClick: () => void }) => {
         <Icon name="lightbulb_2" className="practice__header--icon" />
 
         <span className="practice__header--badge__value">Hint</span>
-        {/* {session.settings.showHint ? "On" : "Off"} */}
       </button>
 
       <Tooltip>Get a hint!</Tooltip>

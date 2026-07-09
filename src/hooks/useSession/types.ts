@@ -1,6 +1,6 @@
 import type {
   // SessionData,
-  Question,
+  QuestionData,
   SessionSettings,
   QuestionVariant,
   SessionResults,
@@ -12,10 +12,9 @@ export interface Session {
   isLoading: boolean;
   isComplete: boolean;
   results: SessionResults | null;
-  questions: Question[];
-  filteredQuestions: Question[];
+  questions: QuestionData[];
   currentQuestionIndex: number;
-  currentQuestion: Question | undefined;
+  currentQuestion: QuestionData | undefined;
   currentVariant: QuestionVariant | undefined;
   showAnswer: boolean;
   isHintRevealed: boolean;

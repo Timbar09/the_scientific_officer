@@ -9,6 +9,7 @@ const FormCheckBox = ({
   disabled = false,
   register,
   rules,
+  onChange = () => {},
 }: FormFieldData) => {
   const { variant } = input;
   const { text, visible } = label;
@@ -46,6 +47,7 @@ const FormCheckBox = ({
         value={value ? value.toString() : "on"}
         disabled={disabled}
         {...rhfProps}
+        onChange={onChange}
       />
 
       <span className={boxVariantClass}>

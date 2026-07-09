@@ -1,17 +1,13 @@
 import { useNavigate } from "react-router";
-import type { Question, SessionSettings, SessionResults } from "../types";
+import type { QuestionData, SessionSettings, SessionResults } from "../types";
 
 interface Props {
   sessionResults: SessionResults;
-  filteredQuestions: Question[];
+  questions: QuestionData[];
   settings: SessionSettings;
 }
 
-const PracticeResults = ({
-  sessionResults,
-  filteredQuestions,
-  settings,
-}: Props) => {
+const PracticeResults = ({ sessionResults, questions, settings }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -34,10 +30,13 @@ const PracticeResults = ({
           <h3 className="text-xl m-block-end-2">Review Wrong Answers:</h3>
           <ul className="grid gap-3">
             {sessionResults.wrongAnswers.map((wrongAnswer) => {
-              const question = filteredQuestions.find(
+              const question = questions.find(
                 (q) => q.id === wrongAnswer.questionId,
               );
-              const variant = question?.variants[settings.questionType];
+              const variant =
+                question?.variants[
+                  settings.questionType as keyof typeof question.variants
+                ];
               return (
                 <li
                   key={wrongAnswer.questionId}
@@ -45,7 +44,7 @@ const PracticeResults = ({
                   style={{ border: "1px solid #ddd" }}
                 >
                   <p>
-                    <strong>Question:</strong> {variant?.question}
+                    <strong>QuestionData:</strong> {variant?.question}
                   </p>
                   <p>
                     <strong>Your Answer:</strong> {wrongAnswer.selectedAnswer}

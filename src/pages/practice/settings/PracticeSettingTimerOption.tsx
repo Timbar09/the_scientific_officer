@@ -30,6 +30,11 @@ const PracticeSettingTimerOption = ({
     visible: true,
   };
 
+  const handleTimerChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = event.target.checked;
+    setValue(name, isChecked);
+  };
+
   return (
     <FormFieldset label={label} className="flex gap-5">
       <FormField
@@ -40,6 +45,7 @@ const PracticeSettingTimerOption = ({
         value={value.toString()}
         isChecked={isTimed}
         register={register}
+        onChange={handleTimerChange}
       />
 
       <PracticeTimingInput

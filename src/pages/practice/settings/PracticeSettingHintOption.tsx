@@ -1,9 +1,14 @@
-import type { FieldValues, UseFormRegister } from "react-hook-form";
+import type {
+  FieldValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 
 import { FormField } from "../../../components/Form";
 
 interface HintOptionProps {
   register: UseFormRegister<FieldValues>;
+  setValue: UseFormSetValue<FieldValues>;
   formSectionData: {
     name: string;
     defaultValue: boolean;
@@ -13,6 +18,7 @@ interface HintOptionProps {
 
 const PracticeSettingHintOption = ({
   register,
+  setValue,
   formSectionData,
 }: HintOptionProps) => {
   const { name, hasHints } = formSectionData;
@@ -20,6 +26,11 @@ const PracticeSettingHintOption = ({
   const label = {
     text: "Show Hints",
     visible: true,
+  };
+
+  const handleHintChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const isChecked = event.target.checked;
+    setValue(name, isChecked);
   };
 
   return (
@@ -31,6 +42,7 @@ const PracticeSettingHintOption = ({
       value="show_hints"
       isChecked={hasHints}
       register={register}
+      onChange={handleHintChange}
     />
   );
 };

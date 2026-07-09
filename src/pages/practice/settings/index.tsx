@@ -1,3 +1,4 @@
+import React from "react";
 import { useForm, useWatch } from "react-hook-form";
 import { usePracticeSettings } from "../../../hooks/usePracticeSettings";
 import type { FieldValues } from "react-hook-form";
@@ -17,7 +18,7 @@ const fd = {
     practiceTopics: [] as string[],
     defaultValue: [],
     selected: [] as string[],
-    isAllSelected: false,
+    // isAllSelected: false,
   },
   qType: {
     name: "questionType",
@@ -63,8 +64,8 @@ const PracticeSettingsForm = () => {
   const selectedTopics = useWatch({ control, name: fd.topics.name }) ?? [];
   const isHintEnabled = useWatch({ control, name: fd.hints.name }) ?? false;
   const isTimerEnabled = useWatch({ control, name: fd.timer.name }) ?? false;
-  const isSelectAllChecked =
-    useWatch({ control, name: fd.allTopics.name }) ?? false;
+  // const isSelectAllChecked =
+  //   useWatch({ control, name: fd.allTopics.name }) ?? false;
 
   const onSubmit = handleFormSubmit((formValues) => {
     handleSubmit(formValues);
@@ -72,9 +73,11 @@ const PracticeSettingsForm = () => {
 
   fd.topics.practiceTopics = practiceTopics;
   fd.topics.selected = selectedTopics;
-  fd.topics.isAllSelected = isSelectAllChecked;
+  // fd.topics.isAllSelected = isSelectAllChecked;
 
   fd.qType.questionTypes = questionTypes;
+
+  console.log("PracticeSettingsForm - isTimerEnabled:", isTimerEnabled);
 
   fd.timer.isTimed = isTimerEnabled;
 
@@ -87,10 +90,11 @@ const PracticeSettingsForm = () => {
     >
       <FormSection
         className="practice__form--topic"
-        hasError={!!errors.topics?.message}
+        hasError={!!errors.topics?.message && selectedTopics.length === 0}
       >
         <PracticeSettingTopicSection
           register={register}
+          setValue={setValue}
           errorMessage={errors.topics?.message as string}
           formSectionData={fd.topics}
         />
@@ -115,6 +119,7 @@ const PracticeSettingsForm = () => {
         <FormSection className="practice__form--hints">
           <PracticeSettingHintOption
             register={register}
+            setValue={setValue}
             formSectionData={fd.hints}
           />
         </FormSection>
