@@ -4,16 +4,16 @@ import type {
   SessionSettings,
   QuestionVariant,
   SessionResults,
-  // UserAnswer,
+  UserAnswer,
 } from "../../pages/practice/types";
 
 export interface Session {
   settings: SessionSettings | undefined;
   isComplete: boolean;
   results: SessionResults | null;
+  revealedHintQuestionIds: Set<number>;
   questions: {
     list: QuestionData[];
-    engaged: Map<number, object>;
     unansweredCount: number;
     loading: boolean;
     areAllAnswered: boolean;
@@ -23,7 +23,6 @@ export interface Session {
       variant: QuestionVariant | undefined;
       selectedAnswer: string;
       showAnswer: boolean;
-      hintRevealed: boolean;
     };
   };
   func: {
@@ -35,4 +34,5 @@ export interface Session {
     revealHint: () => void;
     goToPractice: () => void;
   };
+  userAnswers: Map<number, UserAnswer>;
 }

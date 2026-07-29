@@ -30,9 +30,6 @@ const useSession = () => {
   const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
     Set<number>
   >(new Set());
-  const [questionsEngaged, setQuestionsEngaged] = useState<Map<number, object>>(
-    new Map(),
-  );
   const [userAnswers, setUserAnswers] = useState<Map<number, UserAnswer>>(
     new Map(),
   );
@@ -139,27 +136,20 @@ const useSession = () => {
   const revealHint = () => {
     if (!currentQuestion) return;
     setRevealedHintQuestionIds((s) => new Set(s).add(currentQuestion.id));
-    setQuestionsEngaged((s) =>
-      new Map(s).set(currentQuestion.id, {
-        hintRevealed: true,
-      }),
-    );
   };
 
   const current = {
     index: currentQuestionIndex,
     question: currentQuestion,
     variant: currentVariant,
-    selectedAnswer: selectedAnswer,
+    selectedAnswer:
+      userAnswers.get(currentQuestion?.id ?? -1)?.selectedAnswer ||
+      selectedAnswer,
     showAnswer,
-    hintRevealed: currentQuestion
-      ? revealedHintQuestionIds.has(currentQuestion.id)
-      : false,
   };
 
   const questions = {
     list,
-    engaged: questionsEngaged,
     unansweredCount,
     loading: isLoading,
     areAllAnswered: allQuestionsAnswered,
@@ -172,6 +162,8 @@ const useSession = () => {
     results,
     questionData,
     questions,
+    revealedHintQuestionIds,
+    userAnswers: answersWithCurrentSelection,
     func: {
       nextQuestion,
       previousQuestion,

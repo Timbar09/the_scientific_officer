@@ -14,10 +14,12 @@ import { formatTime, titlize } from "../../../utils";
 
 const PracticeSession = () => {
   const session = useSession();
-  const { settings, func, questions } = session;
+  const { settings, func, questions, revealedHintQuestionIds } = session;
   const { list, loading, current, unansweredCount } = questions;
 
-  console.log("Interacted Questions:", questions.engaged);
+  const isHintRevealed = current.question
+    ? revealedHintQuestionIds.has(current.question.id)
+    : false;
 
   if (!settings || loading) {
     return <PracticeLoaderView />;
@@ -54,7 +56,7 @@ const PracticeSession = () => {
 
             <div className="practice__header--right">
               <div className="practice__header--badge__list flex ai-center gap-3">
-                {settings.hintsEnabled && !current.hintRevealed && (
+                {settings.hintsEnabled && !isHintRevealed && (
                   <HintBadge onClick={func.revealHint} />
                 )}
 
@@ -127,13 +129,13 @@ const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
   );
 };
 
-const HintBadge = ({ onClick }: { onClick: () => void }) => {
+const HintBadge = ({ onClick }: { onClick: (value: boolean) => void }) => {
   return (
     <div className="practice__header--hint">
       <button
         type="button"
         className="practice__header--hint__button practice__header--badge flex ai-center gap-1 p-1"
-        onClick={onClick}
+        onClick={() => onClick(true)}
       >
         <Icon name="lightbulb_2" className="practice__header--icon" />
 

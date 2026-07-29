@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
 import type { QuestionData } from "../../../pages/practice/types";
@@ -18,14 +20,18 @@ interface NavButtonsProps {
   previousQuestion: () => void;
   nextQuestion: () => void;
   submit: () => void;
-  // onChangeSettings: () => void;
+  setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
   showAnswer: boolean;
   questions: QuestionData[];
   allQuestionsAnswered: boolean;
 }
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
-  const { settings, questions, func } = session;
+  const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
+    undefined,
+  );
+  const { settings, questions, func, userAnswers, revealedHintQuestionIds } =
+    session;
 
   const { list, current, areAllAnswered } = questions;
   const {
@@ -36,8 +42,24 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     toggleAnswer: onToggleAnswer,
   } = func;
 
+  const isHintRevealed = current.question
+    ? revealedHintQuestionIds.has(current.question.id)
+    : false;
+
   if (!settings || !current.variant || !list) {
     return null;
+  }
+
+  if (current.question) {
+    const currentAnswer = userAnswers.get(current.question.id);
+
+    if (currentAnswer) {
+      console.log("Current Question State: ", currentAnswer);
+    } else {
+      console.log("Current question is Not Answered.");
+    }
+  } else {
+    console.log("Current question is Not Registered.");
   }
 
   return (
@@ -52,9 +74,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           {current.variant.question}
         </h2>
 
-        {settings.hintsEnabled &&
-        current.hintRevealed &&
-        current.variant.hint ? (
+        {settings.hintsEnabled && isHintRevealed && current.variant.hint ? (
           <div className="practice__session--hint m-block-2 flex ai-center">
             <p className="sr-only">Hint</p>
 
@@ -72,6 +92,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           options={current.variant.options || []}
           selectedAnswer={current.selectedAnswer}
           onSelect={setSelectedAnswer}
+          selectedOptionId={selectedOptionId}
+          setSelectedOptionId={setSelectedOptionId}
         />
 
         {current.showAnswer && (
@@ -88,7 +110,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           previousQuestion={previousQuestion}
           nextQuestion={nextQuestion}
           submit={submit}
-          // onChangeSettings={onChangeSettings}
+          setSelectedOptionId={setSelectedOptionId}
           showAnswer={current.showAnswer}
           questions={list}
           allQuestionsAnswered={areAllAnswered}
@@ -126,10 +148,14 @@ const AnswerBox = ({
   options = [],
   selectedAnswer,
   onSelect,
+  selectedOptionId,
+  setSelectedOptionId,
 }: {
   options: string[];
   selectedAnswer: string | null;
   onSelect: (option: string) => void;
+  selectedOptionId: number | undefined;
+  setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
 }) => {
   let isTrueFalseVariant = false;
 
@@ -152,7 +178,8 @@ const AnswerBox = ({
       id: i,
       name: "answer",
       value: option,
-      checked: selectedAnswer === option,
+      isChecked: selectedAnswer === option,
+      activeRadio: selectedAnswer === option ? i : undefined,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
         onSelect(event.target.value),
     };
@@ -182,6 +209,8 @@ const AnswerBox = ({
           className={trueOrFalseVariantClass}
           label={label}
           options={data}
+          activeRadio={selectedOptionId}
+          setActiveRadio={setSelectedOptionId}
         />
       ) : (
         <FormField
@@ -200,13 +229,23 @@ const NavButtons = ({
   previousQuestion,
   nextQuestion,
   submit,
-  // onChangeSettings,
+  setSelectedOptionId,
   showAnswer,
   questions,
   allQuestionsAnswered,
 }: NavButtonsProps) => {
   const nextBtnIcon: IconProps = { name: "arrow_forward", position: "right" };
   const prevBtnIcon: IconProps = { name: "arrow_back" };
+
+  const handleNextQuestionClick = () => {
+    setSelectedOptionId(undefined);
+    nextQuestion();
+  };
+
+  const handlePrevQuestionClick = () => {
+    setSelectedOptionId(undefined);
+    previousQuestion();
+  };
 
   return (
     <div className="flex flex-wrap gap-2">
@@ -219,11 +258,11 @@ const NavButtons = ({
       </button>
       {questions.length > 1 ? (
         <>
-          <Button onClick={previousQuestion} icon={prevBtnIcon}>
+          <Button onClick={handlePrevQuestionClick} icon={prevBtnIcon}>
             Prev
           </Button>
 
-          <Button onClick={nextQuestion} icon={nextBtnIcon}>
+          <Button onClick={handleNextQuestionClick} icon={nextBtnIcon}>
             Next
           </Button>
         </>

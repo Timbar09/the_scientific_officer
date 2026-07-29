@@ -154,14 +154,3 @@ export const getUnansweredQuestionIndexes = (
   filteredQuestions
     .map((q, i) => (answersWithCurrentSelection.has(q.id) ? -1 : i))
     .filter((i) => i !== -1);
-
-// export default {
-//   shuffle,
-//   ensureTrueFalseOptions,
-//   getAvailableVariantKeys,
-//   pickRandomVariant,
-//   getFilteredQuestions,
-//   getCurrentVariant,
-//   getAnswersWithCurrentSelection,
-//   getUnansweredQuestionIndexes,
-// };
