@@ -7,6 +7,18 @@ export const VARIANT_NAMES = [
 
 export type QuestionTypeName = (typeof VARIANT_NAMES)[number];
 
+export type Question = {
+  text: string;
+  answer: string;
+  explanation: string;
+  hint?: string | undefined;
+  options?: string[] | undefined;
+  id: number;
+  topics: string[];
+  difficulty: "easy" | "medium" | "hard";
+  variant: QuestionTypeName;
+};
+
 export type QuestionType = {
   id: number;
   name: QuestionTypeName;
@@ -16,7 +28,7 @@ export type QuestionType = {
 };
 
 export interface QuestionVariant {
-  question: string;
+  text: string;
   answer: string;
   explanation: string;
   hint?: string;

@@ -1,8 +1,6 @@
 import type {
-  // SessionData,
-  QuestionData,
+  Question,
   SessionSettings,
-  QuestionVariant,
   SessionResults,
   UserAnswer,
 } from "../../pages/practice/types";
@@ -13,14 +11,13 @@ export interface Session {
   results: SessionResults | null;
   revealedHintQuestionIds: Set<number>;
   questions: {
-    list: QuestionData[];
+    list: Question[];
     unansweredCount: number;
     loading: boolean;
     areAllAnswered: boolean;
     current: {
       index: number;
-      question: QuestionData | undefined;
-      variant: QuestionVariant | undefined;
+      question: Question | undefined;
       selectedAnswer: string;
       showAnswer: boolean;
     };
