@@ -39,7 +39,7 @@
       "difficulty": "easy",
       "variants": {
         "multiple choice": {
-          "question": "What does BAITS stand for?",
+          "text": "What does BAITS stand for?",
           "options": [
             "Botswana Animal Identification and Traceability System",
             "Botswana Agricultural Information and Tracking System",
@@ -51,19 +51,19 @@
           "hint": "Think about the national system used in Botswana for identifying and tracing livestock."
         },
         "true/false": {
-          "question": "BAITS stands for Botswana Agricultural Information and Tracking System.",
+          "text": "BAITS stands for Botswana Agricultural Information and Tracking System.",
           "answer": "False",
           "explanation": "BAITS stands for Botswana Animal Identification and Traceability System, which is the national system used in Botswana for identifying and tracing livestock. It is essential for disease control, traceability, and livestock management.",
           "hint": "Think about the national system used in Botswana for identifying and tracing livestock."
         },
         "short answer": {
-          "question": "What does BAITS stand for?",
+          "text": "What does BAITS stand for?",
           "answer": "Botswana Animal Identification and Traceability System",
           "explanation": "BAITS is the national system used in Botswana for identifying and tracing livestock. It is essential for disease control, traceability, and livestock management.",
           "hint": "Think about the national system used in Botswana for identifying and tracing livestock."
         },
         "detailed answer": {
-          "question": "What is BAITS and why is it important?",
+          "text": "What is BAITS and why is it important?",
           "answer": "BAITS, or the Botswana Animal Identification and Traceability System, is a comprehensive system used to identify and trace livestock in Botswana. It is crucial for disease control, traceability, and livestock management. BAITS allows for the tracking of animal movements, helps in the early detection of disease outbreaks, and ensures that animals can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
           "explanation": "BAITS plays a critical role in maintaining animal health and ensuring effective livestock management in Botswana. It provides a framework for identifying and tracing animals, which is essential for controlling diseases and ensuring the safety of the food supply.",
           "hint": "Think about the national system used in Botswana for identifying and tracing livestock, and its importance for disease control and livestock management."
@@ -76,7 +76,7 @@
       "difficulty": "easy",
       "variants": {
         "multiple choice": {
-          "question": "Which of the following diseases is NOT a differential diagnosis for foot-and-mouth disease (FMD)?",
+          "text": "Which of the following diseases is NOT a differential diagnosis for foot-and-mouth disease (FMD)?",
           "options": [
             "Vesicular Stomatitis (VS)",
             "Swine Vesicular Disease (SVD)",
@@ -93,19 +93,19 @@
           "hint": "Focus on diseases that cause vesicular lesions in livestock."
         },
         "true/false": {
-          "question": "Foot-and-mouth disease (FMD) can be easily differentiated from other diseases based on clinical signs alone.",
+          "text": "Foot-and-mouth disease (FMD) can be easily differentiated from other diseases based on clinical signs alone.",
           "answer": "False",
           "explanation": "FMD can present with clinical signs that are similar to other diseases, making laboratory diagnosis essential for accurate identification.",
           "hint": "Think about the importance of laboratory testing in diagnosing diseases with similar clinical presentations."
         },
         "short answer": {
-          "question": "Name one disease that can be confused with foot-and-mouth disease (FMD).",
+          "text": "Name one disease that can be confused with foot-and-mouth disease (FMD).",
           "answer": "Vesicular Stomatitis (VS)",
           "explanation": "Vesicular Stomatitis (VS) can cause clinical signs that are indistinguishable from FMD in cattle and pigs, making it a common differential diagnosis.",
           "hint": "Think about diseases that cause vesicular lesions in livestock."
         },
         "detailed answer": {
-          "question": "List 5 differential diagnoses of FMD.",
+          "text": "List 5 differential diagnoses of FMD.",
           "answer": "Vesicular Stomatitis (VS): Affects horses, cattle, and pigs. Clinically indistinguishable from FMD in cattle and pigs, requiring laboratory diagnosis, Swine Vesicular Disease (SVD): Exclusively affects pigs. Causes vesicular lesions similar to FMD, Bovine Viral Diarrhea (BVD) / Mucosal Disease: Can cause oral erosions, but typically not true vesicles, and often accompanied by diarrhea and immunosuppression, Rinderpest (eradicated): Historically a differential, but now eradicated globally, Peste des Petits Ruminants (PPR): Affects small ruminants, causing oral lesions, diarrhea, and pneumonia. Not vesicular, Blue Tongue: Primarily sheep, but can affect cattle. Causes oral erosions, lameness, and cyanosis of the tongue, but not vesicles, Contagious Ecthyma (Orf): Affects small ruminants, causing proliferative lesions around the mouth, but not true vesicles, Chemical/Thermal Burns: Can cause oral lesions that might be mistaken for FMD.",
           "explanation": "FMD can be confused with several other diseases that cause similar clinical signs, particularly vesicular lesions. Accurate diagnosis often requires laboratory testing to differentiate FMD from these other conditions.",
           "hint": "Think about diseases that cause vesicular lesions in livestock, as well as other conditions that can cause oral lesions or lameness."
@@ -118,7 +118,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "In an extension area, some animals display drooling and lameness. This is likely to be foot-and-mouth disease (FMD). What should you do next?",
+          "text": "In an extension area, some animals display drooling and lameness. This is likely to be foot-and-mouth disease (FMD). What should you do next?",
           "options": [
             "Immediately report to your supervisor and the District Veterinary Officer",
             "Collect samples for laboratory confirmation",
@@ -133,19 +133,19 @@
           "hint": "Think about the comprehensive approach needed to manage a suspected FMD outbreak, including diagnosis, containment, and communication."
         },
         "true/false": {
-          "question": "In an extension area, some animals display drooling and lameness. This is likely to be foot-and-mouth disease (FMD).",
+          "text": "In an extension area, some animals display drooling and lameness. This is likely to be foot-and-mouth disease (FMD).",
           "answer": "True",
           "explanation": "Drooling and lameness are classic clinical signs of FMD, especially in an endemic area like Botswana. However, a definitive diagnosis requires laboratory confirmation.",
           "hint": "Consider the clinical signs and the endemic status of FMD in Botswana."
         },
         "short answer": {
-          "question": "In one extension area, some animals display drooling and lameness. What is the most likely diagnosis?",
+          "text": "In one extension area, some animals display drooling and lameness. What is the most likely diagnosis?",
           "answer": "Foot-and-mouth disease (FMD)",
           "explanation": "Drooling and lameness are classic clinical signs of FMD, especially in an endemic area like Botswana. However, a definitive diagnosis requires laboratory confirmation.",
           "hint": "Consider the clinical signs and the endemic status of FMD in Botswana."
         },
         "detailed answer": {
-          "question": "In one extension area, some animals display drooling and lameness. How will you handle that?",
+          "text": "In one extension area, some animals display drooling and lameness. How will you handle that?",
           "answer": "Initial Information Gathering: Obtain precise location, number of affected animals, species, age, onset of signs, and any recent animal movements or introductions, Farmer Instructions: Advise the farmer to immediately isolate affected animals, stop all animal movements on and off the farm, and restrict access to the kraal/pasture, Field Visit Preparation: Gather necessary equipment: PPE (disposable overalls, boots, gloves, masks), sampling kit (sterile containers, viral transport media, scalpels, syringes), disinfectant, and camera, On-site Investigation: (*Biosecurity - Implement strict biosecurity upon arrival and departure from the farm. *Clinical Examination - Examine affected animals for characteristic FMD lesions (vesicles on tongue, dental pad, gums, interdigital spaces, coronary band, teats). Note the stage of lesions (intact vesicles, ruptured vesicles, erosions).*Epidemiological Assessment - Interview the farmer about animal history, movement, contact with other herds/wildlife, and vaccination status. Look for a pattern of spread.), Sample Collection: Collect appropriate samples (vesicular fluid, epithelial tissue from fresh lesions, probang samples if chronic) and ensure proper labeling, storage (cold chain), and transport to the laboratory (e.g., Botswana National Veterinary Laboratory), Provisional Diagnosis & Reporting: Based on clinical signs and epidemiological findings, make a provisional diagnosis. Immediately notify my supervisor and the District Veterinary Officer, providing a detailed report of the findings, Containment Measures: Initiate immediate local movement restrictions (standstill) in the affected area and surrounding farms. Begin preliminary trace-back and trace-forward investigations, Public Awareness: If confirmed, prepare for community engagement (Kgotla meetings) to inform farmers and enforce control measures.",
           "explanation": "This scenario immediately raises suspicion of FMD, especially given Botswana's endemic status. Your response should be systematic and rapid",
           "hint": "Think about the steps needed to confirm the diagnosis, contain the outbreak, and prevent further spread of the disease."
@@ -158,7 +158,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "What should you NOT do if your supervisor tells you to ignore procedure?",
+          "text": "What should you NOT do if your supervisor tells you to ignore procedure?",
           "options": [
             "Seek clarification on the instructions",
             "Refer to official veterinary regulations and protocols",
@@ -172,19 +172,19 @@
           "hint": "Think about the consequences of following unlawful instructions."
         },
         "true/false": {
-          "question": "If your supervisor tells you to ignore procedure, you should follow their instructions without question.",
+          "text": "If your supervisor tells you to ignore procedure, you should follow their instructions without question.",
           "answer": "False",
           "explanation": "Following official veterinary regulations and protocols is essential, even if it means challenging a supervisor's instruction.",
           "hint": "Think about the importance of following regulations and protecting animal health, even if it means challenging a supervisor's instruction."
         },
         "short answer": {
-          "question": "If your supervisor tells you to ignore procedure, what should you do?",
+          "text": "If your supervisor tells you to ignore procedure, what should you do?",
           "answer": "Seek clarification, refer to official regulations, express concerns, document the directive, and escalate if necessary.",
           "explanation": "Following official veterinary regulations and protocols is essential, even if it means challenging a supervisor's instruction.",
           "hint": "Think about the importance of following regulations and protecting animal health, even if it means challenging a supervisor's instruction."
         },
         "detailed answer": {
-          "question": "What do you do when your supervisor tells you not to follow the procedure when handling a consignment at the border?",
+          "text": "What do you do when your supervisor tells you not to follow the procedure when handling a consignment at the border?",
           "answer": "Seek Clarification: I would politely and respectfully seek clarification from my supervisor, asking for the rationale behind deviating from the standard operating procedures (SOPs). There might be an exceptional circumstance or a new directive I am unaware of, Refer to SOPs/Legislation: I would refer to the official procedures, national legislation (e.g., Animal Diseases Act), and international standards (WOAH guidelines) that govern border control and disease prevention. These are in place to protect the country's animal health status, Express Concerns: I would express my professional concerns regarding the potential risks of not following procedure, especially concerning disease introduction, trade implications, and my professional responsibility as a veterinary officer, Document the Directive: If the supervisor insists on the deviation, I would respectfully request the directive in writing, or at least document the conversation, including the date, time, and specific instructions given. This is for my protection and to ensure accountability, Escalate (if necessary): If the directive clearly compromises animal health, public health, or violates established laws and I cannot resolve it with my immediate supervisor, I would escalate the matter through the appropriate chain of command within the Department of Veterinary Services, or to an ethics committee if one exists. My duty is to the health and safety of the nation's livestock and citizens.",
           "explanation": "This is a critical ethical and professional dilemma. Your response should prioritize adherence to established procedures and professional integrity",
           "hint": "Think about the importance of following regulations and protecting animal health, even if it means challenging a supervisor's instruction."
@@ -203,7 +203,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "What NOT to do when a consignment is non-compliant?",
+          "text": "What NOT to do when a consignment is non-compliant?",
           "options": [
             "Immediate Isolation",
             "Detailed Assessment",
@@ -218,19 +218,19 @@
           "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
         },
         "true/false": {
-          "question": "A non-compliant consignment should be allowed entry and left to police officials.",
+          "text": "A non-compliant consignment should be allowed entry and left to police officials.",
           "answer": "False",
           "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
           "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
         },
         "short answer": {
-          "question": "What do you do when a consignment is non-compliant?",
+          "text": "What do you do when a consignment is non-compliant?",
           "answer": "Immediate isolation, detailed assessment, consultation with authorities, options for resolution (rectification, refusal of entry/re-export, destruction), documentation, and biosecurity measures.",
           "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
           "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
         },
         "detailed answer": {
-          "question": "What do you do when a consignment is non-compliant?",
+          "text": "What do you do when a consignment is non-compliant?",
           "answer": "Immediate Isolation: The consignment would be immediately isolated from other animals and potential contamination sources, Detailed Assessment: Identify the specific nature of the non-compliance (e.g., missing documents, signs of disease, incorrect identification, unauthorized species), Consultation: Immediately inform my supervisor and relevant authorities (e.g., Customs, Department of Veterinary Services headquarters) for guidance, Options for Resolution: Depending on the non-compliance, options include; ( *Rectification - If minor (e.g., missing minor document that can be immediately provided), allow for rectification under strict supervision, *Refusal of Entry/Re-export - For significant non-compliance (e.g., disease suspicion, major document fraud), the consignment would be refused entry and, if feasible, ordered for re-export to the country of origin, *Destruction - In cases of high disease risk or inability to re-export, humane destruction of the animals or products may be necessary, following legal procedures), Documentation: Meticulously document all findings, actions taken, and communications with the importer and authorities, Biosecurity: Ensure thorough cleaning and disinfection of the area and equipment after handling the non-compliant consignment.",
           "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
           "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
@@ -243,7 +243,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "Which one of the following is NOT a practice you should follow when handling imported cattle at the border?",
+          "text": "Which one of the following is NOT a practice you should follow when handling imported cattle at the border?",
           "options": [
             "Verify documentation (import permits, health certificates, origin/destination)",
             "Inspection for clinical signs of disease",
@@ -258,19 +258,19 @@
           "hint": "Effective communication with owners and handlers is crucial for successful border control and biosecurity."
         },
         "true/false": {
-          "question": "When handling imported cattle at the border, you should not engage with owners or handlers.",
+          "text": "When handling imported cattle at the border, you should not engage with owners or handlers.",
           "answer": "False",
           "explanation": "Engaging with owners and handlers is important to gather information and ensure compliance with regulations.",
           "hint": "Effective communication with owners and handlers is crucial for successful border control and biosecurity."
         },
         "short answer": {
-          "question": "What do you do when handling imported cattle at the border?",
+          "text": "What do you do when handling imported cattle at the border?",
           "answer": "Verify documentation, inspect for clinical signs of disease, verify identification, ensure quarantine requirements are met, implement biosecurity measures, and maintain record keeping.",
           "explanation": "Effective handling of imported cattle at the border involves a comprehensive approach to ensure compliance with regulations and prevent disease introduction.",
           "hint": "Think about the steps involved in ensuring that imported cattle do not pose a risk to local livestock and comply with regulations."
         },
         "detailed answer": {
-          "question": "How do you handle imported cattle at the border?",
+          "text": "How do you handle imported cattle at the border?",
           "answer": "Verify Documentation: Check all import permits, health certificates, and animal identification (e.g., ear tags) to ensure they are valid and match the consignment. This includes verifying the origin, destination, and purpose of import, Physical Inspection: Conduct a thorough clinical examination of all animals for any signs of disease, injuries, or stress. I would pay close attention to any lesions, lameness, or abnormal behavior, Quarantine Requirements: Ensure that the animals meet the specified quarantine requirements, either at the border post or at an approved post-import quarantine facility. This includes verifying the duration and conditions of quarantine, Identification: Confirm that all animals are correctly identified according to national regulations (e.g., BAITS tags), Biosecurity Measures: Oversee the disinfection of vehicles and equipment used for transport. Ensure personnel adhere to strict biosecurity protocols, Record Keeping: Accurately record all details of the import, including inspection findings, any discrepancies, and the release or refusal of the consignment.",
           "explanation": "Handling imported cattle at the border involves a strict protocol to prevent disease introduction and ensure compliance with regulations.",
           "hint": "Think about the steps involved in ensuring that imported cattle do not pose a risk to local livestock and comply with regulations."
@@ -283,7 +283,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "Which of the following statements about tag replacement procedures in BAITS is FALSE?",
+          "text": "Which of the following statements about tag replacement procedures in BAITS is FALSE?",
           "options": [
             "Tag replacement is a common procedure in livestock management.",
             "Proper documentation and system updates are crucial to maintain accurate traceability.",
@@ -295,19 +295,19 @@
           "hint": "Think about the importance of maintaining accurate records and traceability in livestock management, and the steps needed to ensure that a lost or damaged tag does not compromise the animal's identification history."
         },
         "true/false": {
-          "question": "Tag replacement procedures in BAITS are not important for maintaining accurate traceability.",
+          "text": "Tag replacement procedures in BAITS are not important for maintaining accurate traceability.",
           "answer": "False",
           "explanation": "Tag replacement is a common procedure in livestock management, essential for maintaining accurate traceability within the Botswana Animal Identification and Traceability System (BAITS). Proper documentation and system updates are crucial to ensure that the animal's identification history remains intact, even after a tag replacement.",
           "hint": "Think about the importance of maintaining accurate records and traceability in livestock management, and the steps needed to ensure that a lost or damaged tag does not compromise the animal's identification history."
         },
         "short answer": {
-          "question": "When do livestock owners need to update their BAITS records?",
+          "text": "When do livestock owners need to update their BAITS records?",
           "answer": "Livestock owners need to update their BAITS records whenever an animal's ear tag is lost or damaged and requires replacement, when there are changes in ownership, and also when there are changes in the animal's status (e.g., death, sale, movement).",
           "explanation": "Updating BAITS records is essential for maintaining accurate traceability and ensuring that the animal's identification history is complete and up-to-date. This is particularly important when an ear tag is lost or damaged, as it can affect the ability to trace the animal's history and movements.",
           "hint": "Think about the situations that would require changes to an animal's identification records, such as lost or damaged tags, changes in ownership, or changes in the animal's status."
         },
         "detailed answer": {
-          "question": "Describe the tag replacement procedure in BAITS.",
+          "text": "Describe the tag replacement procedure in BAITS.",
           "answer": "Farmer Notification: The farmer reports a lost or damaged ear tag to the nearest Veterinary Office, Verification: A Veterinary Officer or Animal Health Coordinator would verify the animal's identity (e.g., through brand marks, physical description, existing secondary tags) and the reason for replacement, BAITS System Update: The officer would access the BAITS system (either BAITS 2 or BAITS 3, depending on the current system in use) and initiate a tag replacement request. This involves deactivating the old tag number (if partially readable) and assigning a new, unique tag number to the animal, New Tag Application: A new, officially approved BAITS ear tag would be applied to the animal, Record Keeping: All details of the replacement, including the old tag number (if known), new tag number, date, and reason for replacement, are updated in the BAITS database. This ensures the animal's full traceability history is maintained.",
           "explanation": "Tag replacement is a common procedure in livestock management, essential for maintaining accurate traceability within the Botswana Animal Identification and Traceability System (BAITS). Proper documentation and system updates are crucial to ensure that the animal's identification history remains intact, even after a tag replacement.",
           "hint": "Think about the importance of maintaining accurate records and traceability in livestock management, and the steps needed to ensure that a lost or damaged tag does not compromise the animal's identification history."
@@ -320,7 +320,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "Which of the following statements about holding registration for livestock owners in Botswana is FALSE?",
+          "text": "Which of the following statements about holding registration for livestock owners in Botswana is FALSE?",
           "options": [
             "Registering a holding is a legal requirement for livestock owners in Botswana.",
             "Holding registration is crucial for disease control and traceability.",
@@ -332,19 +332,19 @@
           "hint": "Think about the legal and regulatory requirements for livestock management in Botswana, and the importance of traceability and record-keeping in ensuring animal health and disease control."
         },
         "true/false": {
-          "question": "Registering a holding is not necessary for livestock owners in Botswana.",
+          "text": "Registering a holding is not necessary for livestock owners in Botswana.",
           "answer": "False",
           "explanation": "Registering a holding is a fundamental requirement for livestock owners in Botswana, crucial for disease control, traceability, and eligibility for government programs. It ensures that all livestock are accounted for and can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
           "hint": "Think about the legal and regulatory requirements for livestock management in Botswana, and the importance of traceability and record-keeping in ensuring animal health and disease control."
         },
         "short answer": {
-          "question": "Where can livestock owners in Botswana register their holdings?",
+          "text": "Where can livestock owners in Botswana register their holdings?",
           "answer": "Livestock owners in Botswana can register their holdings with the Department of Veterinary Services (DVS) through the Botswana Animal Identification and Traceability System (BAITS).",
           "explanation": "The Department of Veterinary Services (DVS) is responsible for the registration of livestock holdings in Botswana. This process is facilitated through the Botswana Animal Identification and Traceability System (BAITS), which ensures that all livestock are properly identified and traceable for disease control and regulatory compliance.",
           "hint": "Think about the government department responsible for veterinary services and livestock management in Botswana."
         },
         "detailed answer": {
-          "question": "What are the requirements to register a holding?",
+          "text": "What are the requirements to register a holding?",
           "answer": "Application: Submission of an application form to the Department of Veterinary Services, Proof of Ownership/Occupancy: Documentation proving legal ownership or occupancy of the land where the livestock are kept (e.g., land title, lease agreement, customary land rights certificate), Brand Certificate: A valid brand certificate for the livestock owner, as branding is a legal requirement for cattle in Botswana, Keeper ID: The individual responsible for the animals must have a valid Keeper ID within the BAITS system, Premises Inspection: The holding may undergo an inspection by a Veterinary Officer to ensure it meets basic biosecurity standards and is suitable for livestock, BAITS Registration: Once approved, the holding is registered in the BAITS system, receiving a unique holding identification number. This links the holding to the owner and the animals kept there.",
           "explanation": "Registering a holding is a fundamental requirement for livestock owners in Botswana, crucial for disease control, traceability, and eligibility for government programs. It ensures that all livestock are accounted for and can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
           "hint": "Think about the legal and regulatory requirements for livestock management in Botswana, and the importance of traceability and record-keeping in ensuring animal health and disease control."
@@ -362,7 +362,7 @@
       "difficulty": "easy",
       "variants": {
         "multiple choice": {
-          "question": "What does WOAH stand for?",
+          "text": "What does WOAH stand for?",
           "options": [
             "World Organisation for Animal Health",
             "World Organisation for Agricultural Health",
@@ -374,20 +374,20 @@
           "hint": "Think about the global organization that sets standards for animal health and disease control."
         },
         "true/false": {
-          "question": "WOAH stands for World Organisation for Animal Health.",
+          "text": "WOAH stands for World Organisation for Animal Health.",
           "answer": "True",
           "explanation": "WOAH, formerly known as OIE (Office International des Epizooties), is the intergovernmental organization responsible for improving animal health worldwide. It sets international standards for animal health and welfare, and provides guidance on disease control and prevention.",
           "hint": "Think about the global organization that sets standards for animal health and disease control."
         },
 
         "short answer": {
-          "question": "What does WOAH stand for?",
+          "text": "What does WOAH stand for?",
           "answer": "World Organisation for Animal Health",
           "explanation": "WOAH, formerly known as OIE (Office International des Epizooties), is the intergovernmental organization responsible for improving animal health worldwide. It sets international standards for animal health and welfare, and provides guidance on disease control and prevention.",
           "hint": "Think about the global organization that sets standards for animal health and disease control."
         },
         "detailed answer": {
-          "question": "What is WOAH and what is its role in animal health?",
+          "text": "What is WOAH and what is its role in animal health?",
           "answer": "WOAH, formerly known as OIE (Office International des Epizooties), is the intergovernmental organization responsible for improving animal health worldwide. It sets international standards for animal health and welfare, provides guidance on disease control and prevention, and facilitates cooperation among member countries to enhance global animal health security. WOAH also maintains a list of notifiable diseases and provides a platform for reporting outbreaks and sharing information.",
           "explanation": "WOAH plays a critical role in global animal health by setting standards, providing guidance, and facilitating cooperation among countries to prevent and control animal diseases.",
           "hint": "Think about the global organization that sets standards for animal health and disease control."
@@ -400,7 +400,7 @@
       "difficulty": "medium",
       "variants": {
         "multiple choice": {
-          "question": "Which of the following is NOT a method of drug administration in animals?",
+          "text": "Which of the following is NOT a method of drug administration in animals?",
           "options": [
             "Oral Administration",
             "Subcutaneous Injection",
@@ -412,19 +412,19 @@
           "hint": "Consider the common routes of drug administration and their applications."
         },
         "true/false": {
-          "question": "Intrauterine infusion is a standard method of drug administration in animals.",
+          "text": "Intrauterine infusion is a standard method of drug administration in animals.",
           "answer": "False",
           "explanation": "Intrauterine infusion is not a standard method of drug administration in animals.",
           "hint": "Consider the common routes of drug administration and their applications."
         },
         "short answer": {
-          "question": "Name a method of drug administration in animals.",
+          "text": "Name a method of drug administration in animals.",
           "answer": "Oral Administration, Subcutaneous Injection, Intramuscular Injection",
           "explanation": "There are various methods to administer drugs to animals, each with its own advantages and considerations based on the type of drug, the condition being treated, and the species of animal. Proper administration is crucial for ensuring the efficacy of the treatment and minimizing stress or harm to the animal.",
           "hint": "Think about the different methods of drug administration based on the route of entry into the animal's body and the type of treatment needed."
         },
         "detailed answer": {
-          "question": "State 5 ways to administer drugs to animals.",
+          "text": "State 5 ways to administer drugs to animals.",
           "answer": "Oral Administration (PO): Administering drugs by mouth (e.g., drenching, feed additives, tablets). This is generally easy for farmers but absorption can be variable, Subcutaneous Injection (SC): Injecting drugs under the skin. This is a common route for vaccines and some antibiotics, offering slower absorption than intramuscular but generally less painful, Intramuscular Injection (IM): Injecting drugs directly into the muscle. This route provides faster absorption than SC and is used for many antibiotics and anti-inflammatories. Proper site selection is crucial to avoid nerve damage or carcass damage, Intravenous Injection (IV): Administering drugs directly into the bloodstream for immediate effect. This requires skill to avoid complications, Topical Application: Applying drugs directly to the skin or mucous membranes (e.g., pour-on for parasites, ointments for skin conditions). This is non-invasive but may have variable absorption depending on the formulation and site of application, Intra-mammary Infusion: Administering drugs directly into the mammary gland, commonly used for treating mastitis in dairy cattle. This allows for high local concentrations of the drug while minimizing systemic exposure.",
           "explanation": "There are various methods to administer drugs to animals, each with its own advantages and considerations based on the type of drug, the condition being treated, and the species of animal. Proper administration is crucial for ensuring the efficacy of the treatment and minimizing stress or harm to the animal.",
           "hint": "Think about the different methods of drug administration based on the route of entry into the animal's body and the type of treatment needed."

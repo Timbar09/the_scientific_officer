@@ -1,13 +1,12 @@
 import { useNavigate } from "react-router";
-import type { QuestionData, SessionSettings, SessionResults } from "../types";
+import type { SessionResults, Question } from "../types";
 
 interface Props {
   sessionResults: SessionResults;
-  questions: QuestionData[];
-  settings: SessionSettings;
+  questions: Question[];
 }
 
-const PracticeResults = ({ sessionResults, questions, settings }: Props) => {
+const PracticeResults = ({ sessionResults, questions }: Props) => {
   const navigate = useNavigate();
 
   return (
@@ -33,10 +32,10 @@ const PracticeResults = ({ sessionResults, questions, settings }: Props) => {
               const question = questions.find(
                 (q) => q.id === wrongAnswer.questionId,
               );
-              const variant =
-                question?.variants[
-                  settings.questionType as keyof typeof question.variants
-                ];
+              // const variant =
+              //   question?.variants[
+              //     settings.questionType as keyof typeof question.variants
+              //   ];
               return (
                 <li
                   key={wrongAnswer.questionId}
@@ -44,7 +43,7 @@ const PracticeResults = ({ sessionResults, questions, settings }: Props) => {
                   style={{ border: "1px solid #ddd" }}
                 >
                   <p>
-                    <strong>QuestionData:</strong> {variant?.question}
+                    <strong>Question:</strong> {question?.text}
                   </p>
                   <p>
                     <strong>Your Answer:</strong> {wrongAnswer.selectedAnswer}
@@ -53,7 +52,7 @@ const PracticeResults = ({ sessionResults, questions, settings }: Props) => {
                     <strong>Correct Answer:</strong> {wrongAnswer.correctAnswer}
                   </p>
                   <p>
-                    <strong>Explanation:</strong> {variant?.explanation}
+                    <strong>Explanation:</strong> {question?.explanation}
                   </p>
                 </li>
               );

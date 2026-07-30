@@ -35,7 +35,7 @@ const PracticeSession = () => {
     );
   }
 
-  if (!current.question || !current.variant) {
+  if (!current.question) {
     return null;
   }
 
@@ -73,11 +73,7 @@ const PracticeSession = () => {
         {!session.isComplete ? (
           <PracticeQuestionView session={session} />
         ) : session.results ? (
-          <PracticeResults
-            sessionResults={session.results}
-            questions={list}
-            settings={settings}
-          />
+          <PracticeResults sessionResults={session.results} questions={list} />
         ) : null}
       </Container>
     </div>

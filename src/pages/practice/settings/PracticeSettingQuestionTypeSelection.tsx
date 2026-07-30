@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import type { UseFormRegister, FieldValues } from "react-hook-form";
 import type { FormFieldData } from "../../../components/Form/types";
 
@@ -16,6 +18,7 @@ const PracticeSettingQuestionTypeSelection = ({
   register,
   formSectionData,
 }: QuestionTypeSelectionProps) => {
+  const [selectedTypeId, setSelectedTypeId] = useState<number>(0);
   const { name, defaultValue, questionTypes } = formSectionData;
 
   const label = {
@@ -45,6 +48,8 @@ const PracticeSettingQuestionTypeSelection = ({
     input: { type: "radio", variant: "rail" },
     label,
     register,
+    activeRadio: selectedTypeId,
+    setActiveRadio: setSelectedTypeId,
     options,
   };
 
