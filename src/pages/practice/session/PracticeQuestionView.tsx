@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
-import type { QuestionData } from "../../../pages/practice/types";
+import type { Question } from "../../../pages/practice/types";
 import type {
   FormLabelData,
   FormFieldData,
@@ -22,7 +22,7 @@ interface NavButtonsProps {
   submit: () => void;
   setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
   showAnswer: boolean;
-  questions: QuestionData[];
+  questions: Question[];
   allQuestionsAnswered: boolean;
 }
 
@@ -30,10 +30,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
   const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
     undefined,
   );
-  const { settings, questions, func, userAnswers, revealedHintQuestionIds } =
-    session;
-
-  const { list, current, areAllAnswered } = questions;
+  const { settings, questions, func, revealedHintQuestionIds } = session;
   const {
     nextQuestion,
     previousQuestion,
@@ -41,25 +38,15 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     setSelectedAnswer,
     toggleAnswer: onToggleAnswer,
   } = func;
+  const { list, current, areAllAnswered } = questions;
+  const { index, question, selectedAnswer, showAnswer } = current;
 
-  const isHintRevealed = current.question
-    ? revealedHintQuestionIds.has(current.question.id)
+  const isHintRevealed = question
+    ? revealedHintQuestionIds.has(question.id)
     : false;
 
-  if (!settings || !current.variant || !list) {
+  if (!settings || !current || !list) {
     return null;
-  }
-
-  if (current.question) {
-    const currentAnswer = userAnswers.get(current.question.id);
-
-    if (currentAnswer) {
-      console.log("Current Question State: ", currentAnswer);
-    } else {
-      console.log("Current question is Not Answered.");
-    }
-  } else {
-    console.log("Current question is Not Registered.");
   }
 
   return (
@@ -68,13 +55,13 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
 
       <section className="practice__session--card p-5">
         <p className="practice__session--question__label">
-          Question {current.index + 1}/{list.length}
+          Question {index + 1}/{list.length}
         </p>
         <h2 className="practice__session--question m-block-2">
-          {current.variant.question}
+          {question?.text}
         </h2>
 
-        {settings.hintsEnabled && isHintRevealed && current.variant.hint ? (
+        {settings.hintsEnabled && isHintRevealed ? (
           <div className="practice__session--hint m-block-2 flex ai-center">
             <p className="sr-only">Hint</p>
 
@@ -83,14 +70,14 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
             </div>
 
             <p className="practice__session--hint__message p-1">
-              {current.variant.hint}
+              {question?.hint}
             </p>
           </div>
         ) : null}
 
         <AnswerBox
-          options={current.variant.options || []}
-          selectedAnswer={current.selectedAnswer}
+          options={question?.options || []}
+          selectedAnswer={selectedAnswer}
           onSelect={setSelectedAnswer}
           selectedOptionId={selectedOptionId}
           setSelectedOptionId={setSelectedOptionId}
@@ -99,9 +86,9 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
         {current.showAnswer && (
           <div className="practice__session--answer m-block-3 p-3">
             <p>
-              <strong>Correct Answer:</strong> {current.variant.answer}
+              <strong>Correct Answer:</strong> {question?.answer}
             </p>
-            <p>{current.variant.explanation}</p>
+            <p>{question?.explanation}</p>
           </div>
         )}
 
@@ -111,7 +98,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           nextQuestion={nextQuestion}
           submit={submit}
           setSelectedOptionId={setSelectedOptionId}
-          showAnswer={current.showAnswer}
+          showAnswer={showAnswer}
           questions={list}
           allQuestionsAnswered={areAllAnswered}
         />

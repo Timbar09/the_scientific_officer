@@ -1,13 +1,11 @@
 import type {
+  Question,
   QuestionData,
   QuestionVariant,
-  SessionSettings,
   UserAnswer,
 } from "../../pages/practice/types";
 
-type QuestionWithVariantKey = QuestionData & { variantKey?: string };
-
-export const shuffle = (qs: QuestionData[]): QuestionData[] => {
+export const shuffle = (qs: Question[]): Question[] => {
   const shuffled = [...qs];
 
   for (let index = shuffled.length - 1; index > 0; index -= 1) {
@@ -38,119 +36,93 @@ export const getAvailableVariantKeys = (
     (k) => availableTypes.size === 0 || availableTypes.has(k.toLowerCase()),
   );
 
-export const pickRandomVariant = (
-  q: QuestionData,
-  availableTypes: Set<string>,
-): QuestionVariant | undefined => {
-  const keys = getAvailableVariantKeys(q, availableTypes);
-  if (!keys.length) return undefined;
-  const key = keys[Math.floor(Math.random() * keys.length)];
-  return q.variants[key as keyof typeof q.variants];
+export const pickRandomQuestion = (
+  questions: Question[],
+): Question | undefined => {
+  if (!questions.length) return undefined;
+  return questions[Math.floor(Math.random() * questions.length)];
 };
 
-export const getFilteredQuestions = (
-  questions: QuestionData[],
-  settings: SessionSettings | undefined,
-  availableTypes: Set<string>,
-): QuestionWithVariantKey[] => {
-  if (!settings) return [];
-  const qType = settings.questionType.toLowerCase();
+export const getSessionQuestions = (
+  questionList: Question[],
+  selectedType: string | undefined,
+): Question[] => {
+  if (!questionList.length) return [];
 
-  const matches = questions.filter((q) =>
-    q.topics.some((t) => settings.topics.includes(t)),
-  );
-
-  if (qType === "all") {
-    const expanded: QuestionWithVariantKey[] = [];
-    matches.forEach((q) =>
-      getAvailableVariantKeys(q, availableTypes).forEach((key) =>
-        expanded.push({ ...q, variantKey: key }),
-      ),
+  if (selectedType && selectedType.toLowerCase() !== "all") {
+    return questionList.filter(
+      (q) => q.variant.toLowerCase() === selectedType.toLowerCase(),
     );
-    return shuffle(expanded);
   }
 
-  return shuffle(
-    matches
-      .filter((q) => Boolean(q.variants[qType as keyof typeof q.variants]))
-      .map((q) => ({ ...q })),
-  );
+  return questionList;
 };
 
-// export const destructureQuestions = (
-//   questionData: QuestionData[],
-//   availableTypes: Set<string>,
-// ): SessionQuestion[] => {
-//   let uniqueIdCounter = 0;
-
-//   const destructuredQuestions = questionData.map((q) => {
-//     const { variants, ...rest } = q;
-
-//     const variantKeys = [...availableTypes];
-
-//     const qList = variantKeys.map((key) => {
-//       const questionVariant =
-//         variants[key as keyof typeof variants] ||
-//         variants[Object.keys(variants)[0] as keyof typeof variants];
-
-//       const result = {
-//         variant: key as keyof typeof variants,
-//         ...{ ...rest, id: uniqueIdCounter },
-//         ...questionVariant,
-//       };
-
-//       uniqueIdCounter += 1;
-
-//       return result;
-//     });
-
-//     return qList;
-//   });
-
-//   return shuffle(destructuredQuestions.flat());
-// };
-
-export const getCurrentVariant = (
-  currentQuestion: QuestionWithVariantKey | undefined,
-  settings: SessionSettings | undefined,
+export const destructureQuestionData = (
+  questionData: QuestionData[],
   availableTypes: Set<string>,
-): QuestionVariant | undefined => {
-  if (!currentQuestion || !settings) return undefined;
-  const qType = settings.questionType.toLowerCase();
-  if (qType === "all" && currentQuestion.variantKey) {
-    return currentQuestion.variants[
-      currentQuestion.variantKey as keyof typeof currentQuestion.variants
-    ];
-  }
-  if (qType === "all")
-    return pickRandomVariant(currentQuestion, availableTypes);
-  return currentQuestion.variants[
-    qType as keyof typeof currentQuestion.variants
-  ];
+): Question[] => {
+  let uniqueIdCounter = 0;
+
+  const destructuredQuestions = questionData.map((q) => {
+    const { variants, ...rest } = q;
+
+    const variantKeys = [...availableTypes];
+
+    const qList = variantKeys.map((key) => {
+      const questionVariant =
+        variants[key as keyof typeof variants] ||
+        variants[Object.keys(variants)[0] as keyof typeof variants];
+
+      const result = {
+        variant: key as keyof typeof variants,
+        ...{ ...rest, id: uniqueIdCounter },
+        ...questionVariant,
+      };
+
+      uniqueIdCounter += 1;
+
+      return result;
+    });
+
+    return qList;
+  });
+
+  return shuffle(destructuredQuestions.flat());
+};
+
+export const getCurrentQuestion = (
+  questions: Question[],
+  currentIndex: number,
+): Question | undefined => {
+  if (!questions.length) return undefined;
+  if (currentIndex < 0 || currentIndex >= questions.length) return undefined;
+  return questions[currentIndex];
 };
 
 export const getAnswersWithCurrentSelection = (
-  currentQuestion: QuestionWithVariantKey | undefined,
-  currentVariant: QuestionVariant | undefined,
+  currentQuestion: Question | undefined,
   selectedAnswer: string,
   userAnswers: Map<number, UserAnswer>,
 ): Map<number, UserAnswer> => {
   const map = new Map(userAnswers);
-  if (currentQuestion && currentVariant && selectedAnswer) {
+  const { answer } = currentQuestion || {};
+
+  if (currentQuestion && selectedAnswer && selectedAnswer !== "") {
     map.set(currentQuestion.id, {
       questionId: currentQuestion.id,
       selectedAnswer,
-      isCorrect: selectedAnswer === currentVariant.answer,
-      correctAnswer: currentVariant.answer,
+      isCorrect: selectedAnswer === answer,
+      correctAnswer: answer || "",
     });
   }
   return map;
 };
 
 export const getUnansweredQuestionIndexes = (
-  filteredQuestions: QuestionWithVariantKey[],
-  answersWithCurrentSelection: Map<number, UserAnswer>,
+  questions: Question[],
+  userAnswers: Map<number, UserAnswer>,
 ): number[] =>
-  filteredQuestions
-    .map((q, i) => (answersWithCurrentSelection.has(q.id) ? -1 : i))
+  questions
+    .map((q, i) => (userAnswers.has(q.id) ? -1 : i))
     .filter((i) => i !== -1);

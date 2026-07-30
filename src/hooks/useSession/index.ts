@@ -6,12 +6,13 @@ import type {
   SessionSettings,
   SessionResults,
   UserAnswer,
+  Question,
 } from "../../pages/practice/types";
 
 import {
-  getFilteredQuestions,
-  getCurrentVariant,
   getAnswersWithCurrentSelection,
+  destructureQuestionData,
+  getSessionQuestions,
   getUnansweredQuestionIndexes,
 } from "./utils";
 
@@ -23,7 +24,7 @@ const useSession = () => {
   const settings = location.state as SessionSettings | undefined;
 
   const [questionData, setQuestionData] = useState<QuestionData[]>([]);
-  const [availableTypes, setAvailableTypes] = useState<Set<string>>(new Set());
+  const [questionList, setQuestionList] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -40,9 +41,11 @@ const useSession = () => {
   const load = useCallback(async () => {
     if (!settings) return;
     try {
-      const { questions: list, availableTypes } = await fetchSessionData();
-      setAvailableTypes(availableTypes);
-      setQuestionData(list);
+      const { questions: qData, availableTypes } = await fetchSessionData();
+      const questions = destructureQuestionData(qData, availableTypes);
+
+      setQuestionData(qData);
+      setQuestionList(questions);
     } catch {
       setQuestionData([]);
     } finally {
@@ -58,9 +61,9 @@ const useSession = () => {
     void load();
   }, [navigate, settings, load]);
 
-  const list = useMemo<(QuestionData & { variantKey?: string })[]>(() => {
-    return getFilteredQuestions(questionData, settings, availableTypes);
-  }, [questionData, settings, availableTypes]);
+  const list = useMemo<Question[]>(() => {
+    return getSessionQuestions(questionList, settings?.questionType);
+  }, [questionList, settings?.questionType]);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
@@ -69,18 +72,13 @@ const useSession = () => {
 
   const currentQuestion = list[currentQuestionIndex];
 
-  const currentVariant = useMemo(() => {
-    return getCurrentVariant(currentQuestion, settings, availableTypes);
-  }, [currentQuestion, settings, availableTypes]);
-
   const answersWithCurrentSelection = useMemo(() => {
     return getAnswersWithCurrentSelection(
       currentQuestion,
-      currentVariant,
       selectedAnswer,
       userAnswers,
     );
-  }, [currentQuestion, currentVariant, selectedAnswer, userAnswers]);
+  }, [currentQuestion, selectedAnswer, userAnswers]);
 
   const unansweredQuestionIndexes = useMemo(
     () => getUnansweredQuestionIndexes(list, answersWithCurrentSelection),
@@ -141,7 +139,6 @@ const useSession = () => {
   const current = {
     index: currentQuestionIndex,
     question: currentQuestion,
-    variant: currentVariant,
     selectedAnswer:
       userAnswers.get(currentQuestion?.id ?? -1)?.selectedAnswer ||
       selectedAnswer,
