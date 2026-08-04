@@ -15,7 +15,7 @@ export const BREAKPOINTS: { [key: string]: string } = {
   lg: "65em",
 };
 
-interface props {
+interface Props {
   breakpoint: string;
   direction?: "up" | "down";
 }
@@ -23,13 +23,13 @@ interface props {
 export const useMediaQuery = ({
   breakpoint,
   direction = "up",
-}: props): boolean => {
+}: Props): boolean => {
   const query = `(${direction === "up" ? "min" : "max"}-width: ${
     BREAKPOINTS[breakpoint]
   })`;
   const isClient = typeof window !== "undefined";
   const [matches, setMatches] = useState<boolean>(() =>
-    isClient ? window.matchMedia(query).matches : false
+    isClient ? window.matchMedia(query).matches : false,
   );
 
   useEffect(() => {

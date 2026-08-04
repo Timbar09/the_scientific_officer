@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
-import type { Question } from "../../../pages/practice/types";
+import type { Question, UserAnswer } from "../../../pages/practice/types";
 import type {
   FormLabelData,
   FormFieldData,
@@ -10,10 +12,12 @@ import type {
 } from "../../../components/Form/types";
 
 import Icon from "../../../components/Icon";
-import { FormField } from "../../../components/Form";
 import Button from "../../../components/Button";
+import { FormField } from "../../../components/Form";
 
 import { titlize } from "../../../utils";
+
+import "swiper/css";
 
 interface NavButtonsProps {
   onToggleAnswer: () => void;
@@ -30,7 +34,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
   const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
     undefined,
   );
-  const { settings, questions, func, revealedHintQuestionIds } = session;
+  const { settings, questions, func, revealedHintQuestionIds, userAnswers } =
+    session;
   const {
     nextQuestion,
     previousQuestion,
@@ -52,6 +57,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
   return (
     <div className="practice__session">
       <Summary topics={settings.topics} />
+
+      <Overview questions={list} userAnswers={userAnswers} />
 
       <section className="practice__session--card p-5">
         <p className="practice__session--question__label">
@@ -128,6 +135,81 @@ const Summary = ({ topics }: { topics: string[] }) => {
         </div>
       </div>
     </section>
+  );
+};
+
+const Overview = ({
+  questions,
+  userAnswers,
+}: {
+  questions: Question[];
+  userAnswers: Map<number, UserAnswer>;
+}) => {
+  const [slidesPerView, setSlidesPerView] = useState(1);
+  const isMobile = useMediaQuery({ breakpoint: "sm" });
+  const isTablet = useMediaQuery({ breakpoint: "md" });
+
+  useEffect(() => {
+    if (isMobile) {
+      setSlidesPerView(3);
+    } else if (isTablet) {
+      setSlidesPerView(6);
+    } else {
+      setSlidesPerView(1);
+    }
+  }, [isMobile, isTablet]);
+
+  return (
+    <section className="practice__session--overview p-3 m-block-end-3">
+      <Swiper
+        className="practice__session--overview__container"
+        wrapperTag="ul"
+        wrapperClass="practice__session--overview__list p-inline-2"
+        spaceBetween={10}
+        slidesPerView={slidesPerView}
+        onSlideChange={() => console.log("slide change")}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {questions.map((q, i) => {
+          let iconName = "radio_button_unchecked";
+          const userAnswer = userAnswers.get(q.id);
+
+          if (userAnswer) {
+            if (userAnswer.isCorrect === true) {
+              iconName = "check_small";
+            } else if (userAnswer.isCorrect === false) {
+              iconName = "close_small";
+            }
+          }
+
+          return (
+            <SwiperSlide
+              key={q.id}
+              tag="li"
+              className="practice__session--overview__question p-block-1 flex gap-1 jc-center ai-center"
+            >
+              <Icon name={iconName} /> <span>Question {i + 1}</span>
+            </SwiperSlide>
+          );
+        })}
+
+        <SlideButton direction="prev" />
+        <SlideButton direction="next" />
+      </Swiper>
+    </section>
+  );
+};
+
+const SlideButton = ({ direction }: { direction: "next" | "prev" }) => {
+  const swiper = useSwiper();
+  const isNext = direction === "next";
+  return (
+    <button
+      className="practice__session--overview__slideButton"
+      onClick={() => (isNext ? swiper.slideNext() : swiper.slidePrev())}
+    >
+      <Icon name={direction === "next" ? "chevron_right" : "chevron_left"} />
+    </button>
   );
 };
 

@@ -1,6 +1,8 @@
 @use "../abstracts" as *;
 
 .practice {
+  height: min(100vh, 100dvh);
+
   &__header {
     background-color: clr(neutral, 100);
     border-radius: radius(lg);
@@ -295,6 +297,58 @@
         font-size: fs(xs);
         font-weight: 600;
         padding: 0.25rem 0.5rem;
+      }
+    }
+
+    &--overview {
+      background-color: clr(neutral, 100);
+      border-radius: radius(lg);
+
+      &__container {
+        // border-radius: radius(sm);
+        // cursor: grab;
+      }
+
+      &__list {
+        border-radius: radius(sm);
+        cursor: grab;
+      }
+
+      &__question {
+        text-align: center;
+        font-size: fs(sm);
+        font-weight: 600;
+        background-color: clr(primary, 200, 0.2);
+        border-radius: radius(sm);
+
+        p {
+          min-width: max-content;
+        }
+      }
+
+      &__slideButton {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding-block: 0.5em;
+        background-color: clr(neutral, 100);
+        color: clr(primary, 300);
+        z-index: 1;
+        transition: color 250ms ease;
+
+        &:hover {
+          color: clr(primary, 600);
+        }
+
+        &:first-of-type {
+          left: 0;
+          padding-inline-end: 0.25em;
+        }
+
+        &:last-of-type {
+          right: 0;
+          padding-inline-start: 0.25em;
+        }
       }
     }
 
