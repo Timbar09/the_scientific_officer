@@ -1,8 +1,6 @@
 @use "../abstracts" as *;
 
 .practice {
-  height: min(100vh, 100dvh);
-
   &__header {
     background-color: clr(neutral, 100);
     border-radius: radius(lg);
@@ -304,11 +302,6 @@
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
 
-      &__container {
-        // border-radius: radius(sm);
-        // cursor: grab;
-      }
-
       &__list {
         border-radius: radius(sm);
         cursor: grab;
@@ -320,10 +313,6 @@
         font-weight: 600;
         background-color: clr(primary, 200, 0.2);
         border-radius: radius(sm);
-
-        p {
-          min-width: max-content;
-        }
       }
 
       &__slideButton {
@@ -352,33 +341,31 @@
       }
     }
 
-    &--card {
+    &--question {
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
-    }
 
-    &--hint {
-      border: 1px solid clr(alert, 500);
-      border-radius: radius(md);
-      overflow: hidden;
+      &__hint {
+        border: 1px solid clr(alert, 500);
+        border-radius: radius(md);
+        overflow: hidden;
 
-      &__icon {
-        color: clr(alert, 600);
-        background-color: clr(alert, 400);
-        border-right: 1px solid clr(alert, 500);
+        &--icon {
+          color: clr(alert, 600);
+          background-color: clr(alert, 400);
+          border-right: 1px solid clr(alert, 500);
+        }
+
+        &--message {
+          font-size: fs(sm);
+        }
       }
 
-      &__message {
-        // padding: 0.5rem;
-        font-size: fs(sm);
-        // color: clr(alert, 700);
+      &__text {
+        font-size: fs("2xl");
+        color: clr(primary, 900);
+        font-weight: 500;
       }
-    }
-
-    &--question {
-      font-size: fs("2xl");
-      color: clr(primary, 900);
-      font-weight: 500;
     }
 
     &--answer {

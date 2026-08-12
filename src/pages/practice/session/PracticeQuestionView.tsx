@@ -5,6 +5,7 @@ import { useMediaQuery } from "../../../hooks/useMediaQuery";
 import type { IconProps } from "../../../components/Button";
 import type { Session } from "../../../hooks/useSession/types";
 import type { Question, UserAnswer } from "../../../pages/practice/types";
+import type { AnswerBoxProps } from "./types";
 import type {
   FormLabelData,
   FormFieldData,
@@ -37,10 +38,10 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
   const { settings, questions, func, revealedHintQuestionIds, userAnswers } =
     session;
   const {
+    onSelectAnswer,
     nextQuestion,
     previousQuestion,
     submit,
-    setSelectedAnswer,
     toggleAnswer: onToggleAnswer,
   } = func;
   const { list, current, areAllAnswered } = questions;
@@ -60,32 +61,25 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
 
       <Overview questions={list} userAnswers={userAnswers} />
 
-      <section className="practice__session--card p-5">
+      <section className="practice__session--question p-5">
         <p className="practice__session--question__label">
           Question {index + 1}/{list.length}
         </p>
-        <h2 className="practice__session--question m-block-2">
+
+        <h2 className="practice__session--question__text m-block-2">
           {question?.text}
         </h2>
 
-        {settings.hintsEnabled && isHintRevealed ? (
-          <div className="practice__session--hint m-block-2 flex ai-center">
-            <p className="sr-only">Hint</p>
-
-            <div className="practice__session--hint__icon flex ai-center jc-center p-1">
-              <Icon name="lightbulb_2" className="practice__session--icon" />
-            </div>
-
-            <p className="practice__session--hint__message p-1">
-              {question?.hint}
-            </p>
-          </div>
-        ) : null}
+        <HintText
+          enabled={settings.hintsEnabled}
+          isRevealed={isHintRevealed}
+          text={question?.hint || ""}
+        />
 
         <AnswerBox
           options={question?.options || []}
           selectedAnswer={selectedAnswer}
-          onSelect={setSelectedAnswer}
+          onSelect={onSelectAnswer}
           selectedOptionId={selectedOptionId}
           setSelectedOptionId={setSelectedOptionId}
         />
@@ -145,19 +139,21 @@ const Overview = ({
   questions: Question[];
   userAnswers: Map<number, UserAnswer>;
 }) => {
-  const [slidesPerView, setSlidesPerView] = useState(1);
+  const [slidesPerView, setSlidesPerView] = useState(3);
   const isMobile = useMediaQuery({ breakpoint: "sm" });
   const isTablet = useMediaQuery({ breakpoint: "md" });
 
   useEffect(() => {
     if (isMobile) {
-      setSlidesPerView(3);
-    } else if (isTablet) {
       setSlidesPerView(6);
+    } else if (isTablet) {
+      setSlidesPerView(8);
     } else {
-      setSlidesPerView(1);
+      setSlidesPerView(3);
     }
   }, [isMobile, isTablet]);
+
+  // TODO: Add functionality for the current question  to be in view when the user navigates to it, and also for the user to be able to click on a question in the overview to navigate to that question.
 
   return (
     <section className="practice__session--overview p-3 m-block-end-3">
@@ -188,7 +184,8 @@ const Overview = ({
               tag="li"
               className="practice__session--overview__question p-block-1 flex gap-1 jc-center ai-center"
             >
-              <Icon name={iconName} /> <span>Question {i + 1}</span>
+              <Icon name={iconName} />
+              <span>{isTablet ? `Question ${i + 1}` : `Q ${i + 1}`}</span>
             </SwiperSlide>
           );
         })}
@@ -213,19 +210,41 @@ const SlideButton = ({ direction }: { direction: "next" | "prev" }) => {
   );
 };
 
+const HintText = ({
+  enabled,
+  isRevealed,
+  text,
+}: {
+  enabled: boolean;
+  isRevealed: boolean;
+  text: string;
+}) => {
+  return (
+    <>
+      {enabled && isRevealed ? (
+        <div className="practice__session--question__hint m-block-2 flex ai-center">
+          <p className="sr-only">Hint</p>
+
+          <div className="practice__session--question__hint--icon flex ai-center jc-center p-1">
+            <Icon name="lightbulb_2" className="practice__session--icon" />
+          </div>
+
+          <p className="practice__session--question__hint--message p-1">
+            {text}
+          </p>
+        </div>
+      ) : null}
+    </>
+  );
+};
+
 const AnswerBox = ({
   options = [],
   selectedAnswer,
   onSelect,
   selectedOptionId,
   setSelectedOptionId,
-}: {
-  options: string[];
-  selectedAnswer: string | null;
-  onSelect: (option: string) => void;
-  selectedOptionId: number | undefined;
-  setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
-}) => {
+}: AnswerBoxProps) => {
   let isTrueFalseVariant = false;
 
   const label: FormLabelData = {

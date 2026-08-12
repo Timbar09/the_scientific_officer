@@ -46,6 +46,7 @@ export interface FormFieldData {
   register?: UseFormRegister<FieldValues>;
   rules?: RegisterOptions<FieldValues>;
   errors?: FieldErrors<FieldValues>;
+  isPositive?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setRadioSliderStyle?: (style: { left: string; width: string }) => void;
   activeRadio?: number;

@@ -23,10 +23,10 @@ export interface Session {
     };
   };
   func: {
+    onSelectAnswer: (answer: string) => void;
     nextQuestion: () => void;
     previousQuestion: () => void;
     submit: () => void;
-    setSelectedAnswer: (value: string) => void;
     toggleAnswer: () => void;
     revealHint: () => void;
     goToPractice: () => void;

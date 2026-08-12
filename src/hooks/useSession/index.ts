@@ -10,7 +10,6 @@ import type {
 } from "../../pages/practice/types";
 
 import {
-  getAnswersWithCurrentSelection,
   destructureQuestionData,
   getSessionQuestions,
   getUnansweredQuestionIndexes,
@@ -72,24 +71,16 @@ const useSession = () => {
 
   const currentQuestion = list[currentQuestionIndex];
 
-  const answersWithCurrentSelection = useMemo(() => {
-    return getAnswersWithCurrentSelection(
-      currentQuestion,
-      selectedAnswer,
-      userAnswers,
-    );
-  }, [currentQuestion, selectedAnswer, userAnswers]);
-
   const unansweredQuestionIndexes = useMemo(
-    () => getUnansweredQuestionIndexes(list, answersWithCurrentSelection),
-    [list, answersWithCurrentSelection],
+    () => getUnansweredQuestionIndexes(list, userAnswers),
+    [list, userAnswers],
   );
 
   const unansweredCount = unansweredQuestionIndexes.length;
   const allQuestionsAnswered = unansweredCount === 0;
 
   const nextQuestion = () => {
-    setUserAnswers(answersWithCurrentSelection);
+    setCurrentQuestionIndex((i) => (i + 1) % Math.max(list.length, 1));
     setShowAnswer(false);
     setSelectedAnswer("");
 
@@ -100,12 +91,29 @@ const useSession = () => {
       setCurrentQuestionIndex(unansweredQuestionIndexes[0]);
       return;
     }
+  };
 
-    setCurrentQuestionIndex((i) => (i + 1) % Math.max(list.length, 1));
+  const onSelectAnswer = (answer: string) => {
+    if (!currentQuestion) return;
+
+    setUserAnswers((prev) => {
+      const updated = new Map(prev);
+
+      updated.set(currentQuestion.id, {
+        questionId: currentQuestion.id,
+        selectedAnswer: answer,
+        isCorrect: answer === currentQuestion.answer,
+        correctAnswer: currentQuestion.answer,
+      });
+
+      return updated;
+    });
+
+    setSelectedAnswer(answer);
+    // setShowAnswer(true);
   };
 
   const previousQuestion = () => {
-    setUserAnswers(answersWithCurrentSelection);
     setShowAnswer(false);
     setSelectedAnswer("");
     setCurrentQuestionIndex(
@@ -114,8 +122,7 @@ const useSession = () => {
   };
 
   const submit = () => {
-    setUserAnswers(answersWithCurrentSelection);
-    const all = Array.from(answersWithCurrentSelection.values());
+    const all = Array.from(userAnswers.values());
     const correct = all.filter((a) => a.isCorrect).length;
     const wrong = all.filter((a) => !a.isCorrect);
     const score = Math.round((correct / Math.max(list.length, 1)) * 100);
@@ -160,12 +167,12 @@ const useSession = () => {
     questionData,
     questions,
     revealedHintQuestionIds,
-    userAnswers: answersWithCurrentSelection,
+    userAnswers,
     func: {
+      onSelectAnswer,
       nextQuestion,
       previousQuestion,
       submit,
-      setSelectedAnswer,
       toggleAnswer: () => setShowAnswer((s) => !s),
       revealHint,
       goToPractice: () => navigate("/practice"),

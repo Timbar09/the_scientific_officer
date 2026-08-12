@@ -117,21 +117,29 @@ const RadioButtonOption = ({
       })
     : {};
 
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (onChange) {
+      onChange(event);
+    }
+
+    if (setActiveRadio) {
+      setActiveRadio(id);
+    }
+  };
+
   return (
     <label
       ref={variant !== "default" ? radioRef : null}
       key={id}
       className={`form__radio--item ${labelVariantClass}`}
-      onClick={() => {
-        setActiveRadio?.(id);
-      }}
     >
       <input
         className={`form__radio--item__input ${inputVariantClass}`}
         type="radio"
         value={value}
         disabled={disabled}
-        onChange={onChange}
+        onChange={handleChange}
+        checked={isActive}
         {...rhfProps}
       />
 
