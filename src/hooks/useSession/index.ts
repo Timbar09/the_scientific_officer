@@ -154,6 +154,7 @@ const useSession = () => {
 
   const questions = {
     list,
+    count: list.length,
     unansweredCount,
     loading: isLoading,
     areAllAnswered: allQuestionsAnswered,

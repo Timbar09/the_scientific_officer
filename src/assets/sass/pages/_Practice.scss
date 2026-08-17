@@ -313,6 +313,31 @@
         font-weight: 600;
         background-color: clr(primary, 200, 0.2);
         border-radius: radius(sm);
+
+        &--correct {
+          color: clr(primary, 900);
+          background-color: clr(alert, 100);
+
+          .practice__session--overview__question--icon {
+            color: clr(primary, 100);
+            background-color: clr(alert, 300);
+          }
+        }
+
+        &--incorrect {
+          color: clr(primary, 900);
+          background-color: clr(alert, 700);
+
+          .practice__session--overview__question--icon {
+            color: clr(primary, 100);
+            background-color: clr(alert, 900);
+          }
+        }
+
+        &--icon {
+          font-size: 1.75em;
+          border-radius: radius(circle);
+        }
       }
 
       &__slideButton {

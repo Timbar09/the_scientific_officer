@@ -12,6 +12,7 @@ export interface Session {
   revealedHintQuestionIds: Set<number>;
   questions: {
     list: Question[];
+    count: number;
     unansweredCount: number;
     loading: boolean;
     areAllAnswered: boolean;

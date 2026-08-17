@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import type { SessionResults, Question } from "../types";
+import type { SessionResults, Question } from "../../types";
 
 interface Props {
   sessionResults: SessionResults;
