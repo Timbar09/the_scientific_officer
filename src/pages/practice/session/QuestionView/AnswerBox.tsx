@@ -13,7 +13,9 @@ const AnswerBox = ({
   onSelect,
   selectedOptionId,
   setSelectedOptionId,
+  correctAnswer,
 }: AnswerBoxProps) => {
+  const isAnswered = selectedAnswer?.length === 0 ? false : true;
   let isTrueFalseVariant = false;
 
   const label: FormLabelData = {
@@ -31,9 +33,21 @@ const AnswerBox = ({
       isTrueFalseVariant = true;
     }
 
+    const isCorrect =
+      isAnswered && selectedAnswer === option && option === correctAnswer;
+    const isIncorrect =
+      isAnswered && selectedAnswer === option && option !== correctAnswer;
+
+    const optionClass = isCorrect
+      ? "answered__correct"
+      : isIncorrect
+        ? "answered__incorrect"
+        : "";
+
     return {
       id: i,
       name: "answer",
+      className: optionClass,
       value: option,
       isChecked: selectedAnswer === option,
       activeRadio: selectedAnswer === option ? i : undefined,
@@ -56,8 +70,14 @@ const AnswerBox = ({
     variant: "default",
   };
 
+  const disableAnswerBoxClass = isAnswered
+    ? "practice__session--answer__disabled"
+    : "";
+
   return (
-    <div className="practice__session--answer m-block-4">
+    <div
+      className={`practice__session--answer m-block-4 ${disableAnswerBoxClass}`}
+    >
       {options.length > 0 ? (
         <FormField
           id={0}

@@ -370,6 +370,26 @@
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
 
+      &.answered {
+        .answered {
+          &__correct {
+            .form__radio--item__content {
+              font-weight: 900;
+              color: clr(primary, 100);
+              background-color: clr(alert, 300);
+            }
+          }
+
+          &__incorrect {
+            .form__radio--item__content {
+              font-weight: 900;
+              color: clr(primary, 100);
+              background-color: clr(alert, 900);
+            }
+          }
+        }
+      }
+
       &__hint {
         border: 1px solid clr(alert, 500);
         border-radius: radius(md);
@@ -394,6 +414,13 @@
     }
 
     &--answer {
+      &__disabled {
+        pointer-events: none;
+        user-select: none;
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
       &__options {
         &--truefalse {
           .form__radio--default {

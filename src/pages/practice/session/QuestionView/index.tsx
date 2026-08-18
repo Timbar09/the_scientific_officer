@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import type { Session } from "../../../../hooks/useSession/types";
 
@@ -11,6 +11,7 @@ import NavButtons from "./NavButtons";
 import "swiper/css";
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
+  const questionRef = useRef<HTMLElement>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
     undefined,
   );
@@ -34,13 +35,21 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     return null;
   }
 
+  const handleAnswerSelect = (answer: string) => {
+    onSelectAnswer(answer);
+
+    if (questionRef.current) {
+      questionRef.current.classList.add("answered");
+    }
+  };
+
   return (
     <div className="practice__session">
       <Summary topics={settings.topics} />
 
       <Overview questions={list} userAnswers={userAnswers} />
 
-      <section className="practice__session--question p-5">
+      <section className="practice__session--question p-5" ref={questionRef}>
         <p className="practice__session--question__label">
           Question {index + 1}/{list.length}
         </p>
@@ -58,7 +67,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
         <AnswerBox
           options={question?.options || []}
           selectedAnswer={selectedAnswer}
-          onSelect={onSelectAnswer}
+          correctAnswer={question?.answer || ""}
+          onSelect={handleAnswerSelect}
           selectedOptionId={selectedOptionId}
           setSelectedOptionId={setSelectedOptionId}
         />

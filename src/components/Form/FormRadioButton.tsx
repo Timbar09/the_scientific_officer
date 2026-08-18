@@ -45,6 +45,7 @@ const FormRadioButton = ({
             >
               <RadioButtonOption
                 id={option.id}
+                className={option.className}
                 input={input}
                 containerElement="li"
                 name={name}
@@ -73,6 +74,7 @@ const FormRadioButton = ({
 
 const RadioButtonOption = ({
   id,
+  className = "",
   input = { type: "radio", variant: "default" },
   name,
   value,
@@ -131,7 +133,7 @@ const RadioButtonOption = ({
     <label
       ref={variant !== "default" ? radioRef : null}
       key={id}
-      className={`form__radio--item ${labelVariantClass}`}
+      className={`form__radio--item ${labelVariantClass} ${className}`}
     >
       <input
         className={`form__radio--item__input ${inputVariantClass}`}

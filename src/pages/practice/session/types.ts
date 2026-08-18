@@ -23,6 +23,7 @@ export interface HintTextProps {
 export interface AnswerBoxProps {
   options: string[];
   selectedAnswer: string | null;
+  correctAnswer: string;
   onSelect: (option: string) => void;
   selectedOptionId: number | undefined;
   setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
