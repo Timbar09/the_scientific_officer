@@ -12,6 +12,7 @@ import "swiper/css";
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
   const questionRef = useRef<HTMLElement>(null);
+  const [hideShowAnswerButton, setHideShowAnswerButton] = useState(false);
   const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
     undefined,
   );
@@ -71,6 +72,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           onSelect={handleAnswerSelect}
           selectedOptionId={selectedOptionId}
           setSelectedOptionId={setSelectedOptionId}
+          setShowAnswerButton={setHideShowAnswerButton}
+          showAnswer={showAnswer}
         />
 
         {current.showAnswer && (
@@ -89,8 +92,10 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           submit={submit}
           setSelectedOptionId={setSelectedOptionId}
           showAnswer={showAnswer}
-          questions={list}
+          displayNav={list.length > 1}
           allQuestionsAnswered={areAllAnswered}
+          hideShowAnswerButton={hideShowAnswerButton}
+          setShowAnswerButton={setHideShowAnswerButton}
         />
       </section>
     </div>

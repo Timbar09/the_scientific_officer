@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 import type { AnswerBoxProps } from "../types";
 import type {
   FormLabelData,
@@ -14,9 +16,15 @@ const AnswerBox = ({
   selectedOptionId,
   setSelectedOptionId,
   correctAnswer,
+  setShowAnswerButton,
+  showAnswer,
 }: AnswerBoxProps) => {
   const isAnswered = selectedAnswer?.length === 0 ? false : true;
   let isTrueFalseVariant = false;
+
+  useEffect(() => {
+    setShowAnswerButton(isAnswered && selectedAnswer !== correctAnswer);
+  }, [isAnswered, selectedAnswer, correctAnswer, setShowAnswerButton]);
 
   const label: FormLabelData = {
     text: "Answer Options",
@@ -34,7 +42,9 @@ const AnswerBox = ({
     }
 
     const isCorrect =
-      isAnswered && selectedAnswer === option && option === correctAnswer;
+      isAnswered &&
+      option === correctAnswer &&
+      (selectedAnswer === option || showAnswer);
     const isIncorrect =
       isAnswered && selectedAnswer === option && option !== correctAnswer;
 

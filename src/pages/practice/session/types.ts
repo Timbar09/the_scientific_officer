@@ -27,6 +27,8 @@ export interface AnswerBoxProps {
   onSelect: (option: string) => void;
   selectedOptionId: number | undefined;
   setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setShowAnswerButton: React.Dispatch<React.SetStateAction<boolean>>;
+  showAnswer: boolean;
 }
 
 export interface NavButtonsProps {
@@ -36,6 +38,8 @@ export interface NavButtonsProps {
   submit: () => void;
   setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
   showAnswer: boolean;
-  questions: Question[];
+  displayNav: boolean;
   allQuestionsAnswered: boolean;
+  hideShowAnswerButton: boolean;
+  setShowAnswerButton: React.Dispatch<React.SetStateAction<boolean>>;
 }
