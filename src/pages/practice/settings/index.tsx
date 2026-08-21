@@ -18,7 +18,6 @@ const fd = {
     practiceTopics: [] as string[],
     defaultValue: [],
     selected: [] as string[],
-    // isAllSelected: false,
   },
   qType: {
     name: "questionType",
@@ -64,8 +63,6 @@ const PracticeSettingsForm = () => {
   const selectedTopics = useWatch({ control, name: fd.topics.name }) ?? [];
   const isHintEnabled = useWatch({ control, name: fd.hints.name }) ?? false;
   const isTimerEnabled = useWatch({ control, name: fd.timer.name }) ?? false;
-  // const isSelectAllChecked =
-  //   useWatch({ control, name: fd.allTopics.name }) ?? false;
 
   const onSubmit = handleFormSubmit((formValues) => {
     handleSubmit(formValues);
@@ -73,11 +70,8 @@ const PracticeSettingsForm = () => {
 
   fd.topics.practiceTopics = practiceTopics;
   fd.topics.selected = selectedTopics;
-  // fd.topics.isAllSelected = isSelectAllChecked;
 
   fd.qType.questionTypes = questionTypes;
-
-  console.log("PracticeSettingsForm - isTimerEnabled:", isTimerEnabled);
 
   fd.timer.isTimed = isTimerEnabled;
 

@@ -1,8 +1,9 @@
 import type {
   Question,
+  UserAnswer,
   QuestionData,
   QuestionVariant,
-  UserAnswer,
+  SessionSettings,
 } from "../../pages/practice/types";
 
 export const shuffle = (qs: Question[]): Question[] => {
@@ -45,17 +46,26 @@ export const pickRandomQuestion = (
 
 export const getSessionQuestions = (
   questionList: Question[],
-  selectedType: string | undefined,
+  settings: SessionSettings,
 ): Question[] => {
   if (!questionList.length) return [];
 
-  if (selectedType && selectedType.toLowerCase() !== "all") {
-    return questionList.filter(
-      (q) => q.variant.toLowerCase() === selectedType.toLowerCase(),
+  const { questionType, topics } = settings;
+  let filteredQuestions = questionList;
+
+  if (topics && topics.length > 0) {
+    filteredQuestions = questionList.filter((q) =>
+      q.topics.some((topic) => topics.includes(topic)),
     );
   }
 
-  return questionList;
+  if (questionType && questionType.toLowerCase() !== "all") {
+    filteredQuestions = questionList.filter(
+      (q) => q.variant.toLowerCase() === questionType.toLowerCase(),
+    );
+  }
+
+  return filteredQuestions.length > 0 ? filteredQuestions : [];
 };
 
 export const destructureQuestionData = (

@@ -61,8 +61,8 @@ const useSession = () => {
   }, [navigate, settings, load]);
 
   const list = useMemo<Question[]>(() => {
-    return getSessionQuestions(questionList, settings?.questionType);
-  }, [questionList, settings?.questionType]);
+    return getSessionQuestions(questionList, settings as SessionSettings);
+  }, [questionList, settings]);
 
   useEffect(() => {
     setCurrentQuestionIndex(0);
