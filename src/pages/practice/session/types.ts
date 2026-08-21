@@ -14,9 +14,10 @@ export interface OverviewProps {
   userAnswers: Map<number, UserAnswer>;
 }
 
-export interface HintTextProps {
-  enabled: boolean;
-  isRevealed: boolean;
+export interface InfoCardProps {
+  display: boolean;
+  classPrefix?: string;
+  icon?: string;
   text: string;
 }
 

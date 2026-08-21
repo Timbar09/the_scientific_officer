@@ -315,22 +315,22 @@
         border-radius: radius(sm);
 
         &--correct {
-          color: clr(primary, 900);
+          color: clr(alert, 300);
           background-color: clr(alert, 100);
 
           .practice__session--overview__question--icon {
             color: clr(primary, 100);
-            background-color: clr(alert, 300);
+            background-color: clr(alert, 200);
           }
         }
 
         &--incorrect {
-          color: clr(primary, 900);
+          color: clr(alert, 900);
           background-color: clr(alert, 700);
 
           .practice__session--overview__question--icon {
             color: clr(primary, 100);
-            background-color: clr(alert, 900);
+            background-color: clr(alert, 800);
           }
         }
 
@@ -375,34 +375,68 @@
           &__correct {
             .form__radio--item__content {
               font-weight: 900;
-              color: clr(primary, 100);
-              background-color: clr(alert, 300);
+              color: clr(alert, 300);
+              background-color: clr(alert, 200);
             }
           }
 
           &__incorrect {
             .form__radio--item__content {
               font-weight: 900;
-              color: clr(primary, 100);
-              background-color: clr(alert, 900);
+              color: clr(alert, 900);
+              background-color: clr(alert, 800);
             }
           }
         }
       }
 
-      &__hint {
-        border: 1px solid clr(alert, 500);
-        border-radius: radius(md);
-        overflow: hidden;
+      &__infoCard {
+        --border-clr: #{clr(primary, 200)};
+        --bg-clr: #{clr(primary, 200, 0.5)};
+        --icon-clr: #{clr(primary, 600)};
+        --icon-bg-clr: #{clr(primary, 400)};
+        --text-clr: #{clr(primary, 600)};
 
-        &--icon {
-          color: clr(alert, 600);
-          background-color: clr(alert, 400);
-          border-right: 1px solid clr(alert, 500);
+        &--container {
+          border: 1px solid var(--border-clr);
+          border-radius: radius(md);
+          background-color: var(--bg-clr);
+          overflow: hidden;
         }
 
-        &--message {
+        &--icon {
+          color: var(--icon-clr);
+          background-color: var(--icon-bg-clr);
+          border-right: 1px solid var(--border-clr);
+        }
+
+        &--text {
           font-size: fs(sm);
+          color: var(--text-clr);
+        }
+      }
+
+      &__hint {
+        --border-clr: #{clr(alert, 500)};
+        --bg-clr: #{clr(alert, 500, 0.125)};
+        --icon-clr: #{clr(alert, 600)};
+        --icon-bg-clr: #{clr(alert, 400)};
+        --text-clr: #{clr(alert, 600)};
+
+        border-bottom: 1px solid clr(primary, 200);
+      }
+
+      &__explanation {
+        --border-clr: #{clr(alert, 100)};
+        --bg-clr: #{clr(alert, 100, 0.05)};
+        --icon-clr: #{clr(alert, 300)};
+        --icon-bg-clr: #{clr(alert, 100)};
+        --text-clr: #{clr(alert, 300)};
+
+        border-top: 1px solid clr(primary, 200);
+
+        &--text {
+          font-style: italic;
         }
       }
 
@@ -417,7 +451,6 @@
       &__disabled {
         pointer-events: none;
         user-select: none;
-        opacity: 0.6;
         cursor: not-allowed;
       }
 

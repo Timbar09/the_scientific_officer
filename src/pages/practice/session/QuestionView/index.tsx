@@ -4,7 +4,7 @@ import type { Session } from "../../../../hooks/useSession/types";
 
 import Summary from "./Summary";
 import Overview from "./Overview";
-import HintText from "./HintText";
+import InfoCard from "./InfoCard";
 import AnswerBox from "./AnswerBox";
 import NavButtons from "./NavButtons";
 
@@ -59,9 +59,10 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           {question?.text}
         </h2>
 
-        <HintText
-          enabled={settings.hintsEnabled}
-          isRevealed={isHintRevealed}
+        <InfoCard
+          display={isHintRevealed && settings.hintsEnabled}
+          classPrefix="hint"
+          icon="lightbulb_2"
           text={question?.hint || ""}
         />
 
@@ -77,12 +78,12 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
         />
 
         {current.showAnswer && (
-          <div className="practice__session--answer m-block-3 p-3">
-            <p>
-              <strong>Correct Answer:</strong> {question?.answer}
-            </p>
-            <p>{question?.explanation}</p>
-          </div>
+          <InfoCard
+            display={current.showAnswer && question?.explanation !== ""}
+            classPrefix="explanation"
+            icon="info"
+            text={question?.explanation || ""}
+          />
         )}
 
         <NavButtons
