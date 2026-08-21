@@ -176,6 +176,7 @@ const useSession = () => {
       submit,
       toggleAnswer: () => setShowAnswer((s) => !s),
       revealHint,
+      setCurrentQuestionIndex,
       goToPractice: () => navigate("/practice"),
     },
   };

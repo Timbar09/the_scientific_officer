@@ -12,6 +12,8 @@ export interface PracticeSessionHeaderProps {
 export interface OverviewProps {
   questions: Question[];
   userAnswers: Map<number, UserAnswer>;
+  questionNum: number;
+  setCurrentQuestionIndex: (index: number) => void;
 }
 
 export interface InfoCardProps {

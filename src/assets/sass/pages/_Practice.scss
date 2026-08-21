@@ -299,6 +299,7 @@
     }
 
     &--overview {
+      position: relative;
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
 
@@ -313,6 +314,22 @@
         font-weight: 600;
         background-color: clr(primary, 200, 0.2);
         border-radius: radius(sm);
+        cursor: pointer;
+        transition:
+          background-color 250ms ease,
+          color 250ms ease,
+          border 250ms ease;
+
+        &--current {
+          border: 2px solid clr(primary, 500);
+        }
+
+        &--hover {
+          &:hover {
+            color: clr(primary, 600);
+            background-color: clr(primary, 200, 0.4);
+          }
+        }
 
         &--correct {
           color: clr(alert, 300);
@@ -344,8 +361,7 @@
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        padding-block: 0.5em;
-        background-color: clr(neutral, 100);
+        padding: 0.25em;
         color: clr(primary, 300);
         z-index: 1;
         transition: color 250ms ease;
@@ -356,12 +372,10 @@
 
         &:first-of-type {
           left: 0;
-          padding-inline-end: 0.25em;
         }
 
         &:last-of-type {
           right: 0;
-          padding-inline-start: 0.25em;
         }
       }
     }

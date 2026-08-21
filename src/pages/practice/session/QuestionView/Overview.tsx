@@ -1,13 +1,20 @@
 import { useEffect, useState } from "react";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 
 import type { OverviewProps } from "../types";
+import type { Swiper as SwiperType } from "swiper";
 
 import Icon from "../../../../components/Icon";
 
-const Overview = ({ questions, userAnswers }: OverviewProps) => {
+const Overview = ({
+  questions,
+  userAnswers,
+  questionNum,
+  setCurrentQuestionIndex,
+}: OverviewProps) => {
   const [slidesPerView, setSlidesPerView] = useState(3);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const isMobile = useMediaQuery({ breakpoint: "sm" });
   const isTablet = useMediaQuery({ breakpoint: "md" });
 
@@ -24,61 +31,82 @@ const Overview = ({ questions, userAnswers }: OverviewProps) => {
   // TODO: Add functionality for the current question  to be in view when the user navigates to it, and also for the user to be able to click on a question in the overview to navigate to that question.
 
   return (
-    <section className="practice__session--overview p-3 m-block-end-3">
+    <section className="practice__session--overview p-block-3 p-inline-5 m-block-end-3">
       <Swiper
         className="practice__session--overview__container"
         wrapperTag="ul"
-        wrapperClass="practice__session--overview__list p-inline-2"
+        wrapperClass="practice__session--overview__list"
         spaceBetween={10}
         slidesPerView={slidesPerView}
         onSlideChange={() => console.log("slide change")}
-        onSwiper={(swiper) => console.log(swiper)}
+        onSwiper={(swiper) => setSwiperInstance(swiper)}
       >
         {questions.map((q, i) => {
           const userAnswer = userAnswers.get(q.id);
-          const defaultClassName =
-            "practice__session--overview__question p-block-1 flex gap-1 jc-center ai-center";
+          const defaultClassName = "practice__session--overview__question";
+          const currentQuestionClass =
+            questionNum === i ? `${defaultClassName}--current` : "";
+          const layoutClassName = `${defaultClassName} p-block-1 flex gap-1 jc-center ai-center`;
           let isCorrectClass = "";
-
+          let hoverClass = `${defaultClassName}--hover`;
           let iconName = "radio_button_unchecked";
 
           if (userAnswer) {
+            hoverClass = "";
+
             if (userAnswer.isCorrect === true) {
               iconName = "check_small";
-              isCorrectClass = "practice__session--overview__question--correct";
+              isCorrectClass = `${defaultClassName}--correct`;
             } else if (userAnswer.isCorrect === false) {
               iconName = "close_small";
-              isCorrectClass =
-                "practice__session--overview__question--incorrect";
+              isCorrectClass = `${defaultClassName}--incorrect`;
             }
           }
 
-          const className = `${defaultClassName} ${isCorrectClass}`;
-          const iconClassName =
-            "practice__session--overview__question--icon grid";
+          const className = `${layoutClassName} ${isCorrectClass} ${currentQuestionClass} ${hoverClass}`;
+          const iconClassName = `${defaultClassName}--icon grid`;
 
           return (
-            <SwiperSlide key={q.id} tag="li" className={className}>
+            <SwiperSlide
+              key={q.id}
+              tag="li"
+              className={className}
+              onClick={() => setCurrentQuestionIndex(i)}
+            >
               <Icon name={iconName} className={iconClassName} />
               <span>{isTablet ? `Question ${i + 1}` : `Q ${i + 1}`}</span>
             </SwiperSlide>
           );
         })}
-
-        <SlideButton direction="prev" />
-        <SlideButton direction="next" />
       </Swiper>
+
+      <SlideButton direction="prev" swiperInstance={swiperInstance} />
+      <SlideButton direction="next" swiperInstance={swiperInstance} />
     </section>
   );
 };
 
-const SlideButton = ({ direction }: { direction: "next" | "prev" }) => {
-  const swiper = useSwiper();
+const SlideButton = ({
+  direction,
+  swiperInstance,
+}: {
+  direction: "next" | "prev";
+  swiperInstance: SwiperType | null;
+}) => {
   const isNext = direction === "next";
+
+  const handleClick = () => {
+    if (isNext) {
+      swiperInstance?.slideNext();
+    } else {
+      swiperInstance?.slidePrev();
+    }
+  };
+
   return (
     <button
       className="practice__session--overview__slideButton"
-      onClick={() => (isNext ? swiper.slideNext() : swiper.slidePrev())}
+      onClick={handleClick}
     >
       <Icon name={direction === "next" ? "chevron_right" : "chevron_left"} />
     </button>

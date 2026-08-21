@@ -23,6 +23,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     nextQuestion,
     previousQuestion,
     submit,
+    setCurrentQuestionIndex,
     toggleAnswer: onToggleAnswer,
   } = func;
   const { list, current, areAllAnswered } = questions;
@@ -48,7 +49,12 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     <div className="practice__session">
       <Summary topics={settings.topics} />
 
-      <Overview questions={list} userAnswers={userAnswers} />
+      <Overview
+        questions={list}
+        userAnswers={userAnswers}
+        questionNum={index}
+        setCurrentQuestionIndex={setCurrentQuestionIndex}
+      />
 
       <section className="practice__session--question p-5" ref={questionRef}>
         <p className="practice__session--question__label">

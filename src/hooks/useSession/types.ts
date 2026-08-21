@@ -30,6 +30,7 @@ export interface Session {
     submit: () => void;
     toggleAnswer: () => void;
     revealHint: () => void;
+    setCurrentQuestionIndex: (index: number) => void;
     goToPractice: () => void;
   };
   userAnswers: Map<number, UserAnswer>;
