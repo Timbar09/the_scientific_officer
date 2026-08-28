@@ -2,7 +2,7 @@ import { useRef, useEffect, useLayoutEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 
-import type { OverviewProps, TopOverviewProps } from "../types";
+import type { OverviewProps, RightOverviewProps } from "../types";
 import type { Swiper as SwiperType } from "swiper";
 
 import Icon from "../../../../components/Icon";
@@ -16,8 +16,9 @@ const Overview = ({
   questionNum,
   setCurrentQuestionIndex,
   questionCardRef,
+  swiperInstance,
+  setSwiperInstance,
 }: OverviewProps) => {
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const isDesktop = useMediaQuery({ breakpoint: "lg" });
 
   const layoutClassName = isDesktop ? "p-4" : "p-block-3 p-inline-5";
@@ -54,9 +55,8 @@ const TopOverview = ({
   setCurrentQuestionIndex,
   swiperInstance,
   setSwiperInstance,
-}: TopOverviewProps) => {
+}: OverviewProps) => {
   const [slidesPerView, setSlidesPerView] = useState(1);
-  // const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const isMobile = useMediaQuery({ breakpoint: "sm" });
   const isTablet = useMediaQuery({ breakpoint: "md" });
 
@@ -115,7 +115,7 @@ const RightOverview = ({
   questionNum,
   setCurrentQuestionIndex,
   questionCardRef,
-}: OverviewProps) => {
+}: RightOverviewProps) => {
   const listRef = useRef<HTMLUListElement>(null);
   const [height, setHeight] = useState<number | null>(
     questionCardRef?.current?.offsetHeight || null,

@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 
 import type { Session } from "../../../../hooks/useSession/types";
+import type { Swiper as SwiperType } from "swiper";
 
 import Summary from "./Summary";
 import Overview from "./Overview";
@@ -13,6 +14,7 @@ import "swiper/css";
 const PracticeQuestionView = ({ session }: { session: Session }) => {
   const questionRef = useRef<HTMLElement>(null);
   const [hideShowAnswerButton, setHideShowAnswerButton] = useState(false);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
     undefined,
   );
@@ -56,6 +58,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           questionNum={index}
           setCurrentQuestionIndex={setCurrentQuestionIndex}
           questionCardRef={questionRef as React.RefObject<HTMLElement>}
+          swiperInstance={swiperInstance}
+          setSwiperInstance={setSwiperInstance}
         />
 
         <section className="practice__session--question p-5" ref={questionRef}>

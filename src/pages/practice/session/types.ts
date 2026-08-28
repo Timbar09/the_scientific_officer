@@ -17,11 +17,16 @@ export interface OverviewProps {
   questionNum: number;
   setCurrentQuestionIndex: (index: number) => void;
   questionCardRef?: React.RefObject<HTMLElement>;
-}
-
-export interface TopOverviewProps extends OverviewProps {
   swiperInstance: SwiperType | null;
   setSwiperInstance: React.Dispatch<React.SetStateAction<SwiperType | null>>;
+}
+
+export interface RightOverviewProps {
+  questions: Question[];
+  userAnswers: Map<number, UserAnswer>;
+  questionNum: number;
+  setCurrentQuestionIndex: (index: number) => void;
+  questionCardRef?: React.RefObject<HTMLElement>;
 }
 
 export interface InfoCardProps {
