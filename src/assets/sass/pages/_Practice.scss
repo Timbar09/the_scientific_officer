@@ -300,8 +300,23 @@
 
     &--overview {
       position: relative;
+      width: 100%;
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
+
+      @include mq("lg") {
+        order: 2;
+        width: auto;
+      }
+
+      &__right {
+        height: 100%;
+        overflow-y: hidden;
+
+        &--list {
+          position: relative;
+        }
+      }
 
       &__list {
         border-radius: radius(sm);
@@ -313,7 +328,8 @@
         font-size: fs(sm);
         font-weight: 600;
         background-color: clr(primary, 200, 0.2);
-        border-radius: radius(sm);
+        border-radius: radius(md);
+        width: 100%;
         cursor: pointer;
         transition:
           background-color 250ms ease,
@@ -383,6 +399,12 @@
     &--question {
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
+      width: 100%;
+
+      @include mq("lg") {
+        order: 1;
+        flex: 1;
+      }
 
       &.answered {
         .answered {

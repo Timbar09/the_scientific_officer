@@ -49,62 +49,65 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     <div className="practice__session">
       <Summary topics={settings.topics} />
 
-      <Overview
-        questions={list}
-        userAnswers={userAnswers}
-        questionNum={index}
-        setCurrentQuestionIndex={setCurrentQuestionIndex}
-      />
-
-      <section className="practice__session--question p-5" ref={questionRef}>
-        <p className="practice__session--question__label">
-          Question {index + 1}/{list.length}
-        </p>
-
-        <h2 className="practice__session--question__text m-block-2">
-          {question?.text}
-        </h2>
-
-        <InfoCard
-          display={isHintRevealed && settings.hintsEnabled}
-          classPrefix="hint"
-          icon="lightbulb_2"
-          text={question?.hint || ""}
+      <div className="practice__session--content flex flex-col flex-@lg-row ai-start gap-3 gap-@lg-4">
+        <Overview
+          questions={list}
+          userAnswers={userAnswers}
+          questionNum={index}
+          setCurrentQuestionIndex={setCurrentQuestionIndex}
+          questionCardRef={questionRef as React.RefObject<HTMLElement>}
         />
 
-        <AnswerBox
-          options={question?.options || []}
-          selectedAnswer={selectedAnswer}
-          correctAnswer={question?.answer || ""}
-          onSelect={handleAnswerSelect}
-          selectedOptionId={selectedOptionId}
-          setSelectedOptionId={setSelectedOptionId}
-          setShowAnswerButton={setHideShowAnswerButton}
-          showAnswer={showAnswer}
-        />
+        <section className="practice__session--question p-5" ref={questionRef}>
+          <p className="practice__session--question__label">
+            Question {index + 1}/{list.length}
+          </p>
 
-        {current.showAnswer && (
+          <h2 className="practice__session--question__text m-block-2">
+            {question?.text}
+          </h2>
+
           <InfoCard
-            display={current.showAnswer && question?.explanation !== ""}
-            classPrefix="explanation"
-            icon="info"
-            text={question?.explanation || ""}
+            display={isHintRevealed && settings.hintsEnabled}
+            classPrefix="hint"
+            icon="lightbulb_2"
+            text={question?.hint || ""}
           />
-        )}
 
-        <NavButtons
-          onToggleAnswer={onToggleAnswer}
-          previousQuestion={previousQuestion}
-          nextQuestion={nextQuestion}
-          submit={submit}
-          setSelectedOptionId={setSelectedOptionId}
-          showAnswer={showAnswer}
-          displayNav={list.length > 1}
-          allQuestionsAnswered={areAllAnswered}
-          hideShowAnswerButton={hideShowAnswerButton}
-          setShowAnswerButton={setHideShowAnswerButton}
-        />
-      </section>
+          <AnswerBox
+            options={question?.options || []}
+            selectedAnswer={selectedAnswer}
+            correctAnswer={question?.answer || ""}
+            onSelect={handleAnswerSelect}
+            selectedOptionId={selectedOptionId}
+            setSelectedOptionId={setSelectedOptionId}
+            setShowAnswerButton={setHideShowAnswerButton}
+            showAnswer={showAnswer}
+          />
+
+          {current.showAnswer && (
+            <InfoCard
+              display={current.showAnswer && question?.explanation !== ""}
+              classPrefix="explanation"
+              icon="info"
+              text={question?.explanation || ""}
+            />
+          )}
+
+          <NavButtons
+            onToggleAnswer={onToggleAnswer}
+            previousQuestion={previousQuestion}
+            nextQuestion={nextQuestion}
+            submit={submit}
+            setSelectedOptionId={setSelectedOptionId}
+            showAnswer={showAnswer}
+            displayNav={list.length > 1}
+            allQuestionsAnswered={areAllAnswered}
+            hideShowAnswerButton={hideShowAnswerButton}
+            setShowAnswerButton={setHideShowAnswerButton}
+          />
+        </section>
+      </div>
     </div>
   );
 };

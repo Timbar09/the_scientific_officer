@@ -77,7 +77,7 @@ const PracticeSettingTimerOptionValue = ({
           className="practice__form--timer__value--display flex jc-center ai-center"
           htmlFor="practiceDuration"
         >
-          {timeDisplay}
+          {`${timeDisplay} mins`}
         </output>
 
         <TimerControlButton onClick={increaseTime} controlType="increase" />

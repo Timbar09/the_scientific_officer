@@ -1,5 +1,6 @@
 import type { Session } from "../../../hooks/useSession/types";
 import type { Question, UserAnswer } from "../types";
+import type { Swiper as SwiperType } from "swiper";
 
 export interface PracticeSessionHeaderProps {
   isSessionComplete: boolean;
@@ -10,10 +11,17 @@ export interface PracticeSessionHeaderProps {
 }
 
 export interface OverviewProps {
+  position?: "top" | "right";
   questions: Question[];
   userAnswers: Map<number, UserAnswer>;
   questionNum: number;
   setCurrentQuestionIndex: (index: number) => void;
+  questionCardRef?: React.RefObject<HTMLElement>;
+}
+
+export interface TopOverviewProps extends OverviewProps {
+  swiperInstance: SwiperType | null;
+  setSwiperInstance: React.Dispatch<React.SetStateAction<SwiperType | null>>;
 }
 
 export interface InfoCardProps {
