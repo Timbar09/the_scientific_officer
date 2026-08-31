@@ -93,6 +93,13 @@ const useSession = () => {
     }
   };
 
+  const jumpToQuestion = (index: number) => {
+    if (index < 0 || index >= list.length) return;
+    setCurrentQuestionIndex(index);
+    setShowAnswer(false);
+    setSelectedAnswer("");
+  };
+
   const onSelectAnswer = (answer: string) => {
     if (!currentQuestion) return;
 
@@ -110,7 +117,6 @@ const useSession = () => {
     });
 
     setSelectedAnswer(answer);
-    // setShowAnswer(true);
   };
 
   const previousQuestion = () => {
@@ -176,7 +182,7 @@ const useSession = () => {
       submit,
       toggleAnswer: () => setShowAnswer((s) => !s),
       revealHint,
-      setCurrentQuestionIndex,
+      jumpToQuestion,
       goToPractice: () => navigate("/practice"),
     },
   };
