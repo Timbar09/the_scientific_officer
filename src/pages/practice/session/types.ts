@@ -15,18 +15,20 @@ export interface OverviewProps {
   questions: Question[];
   userAnswers: Map<number, UserAnswer>;
   questionNum: number;
-  setCurrentQuestionIndex: (index: number) => void;
+  jumpToQuestion: (index: number) => void;
   questionCardRef?: React.RefObject<HTMLElement>;
   swiperInstance: SwiperType | null;
   setSwiperInstance: React.Dispatch<React.SetStateAction<SwiperType | null>>;
+  reset: () => void;
 }
 
 export interface RightOverviewProps {
   questions: Question[];
   userAnswers: Map<number, UserAnswer>;
   questionNum: number;
-  setCurrentQuestionIndex: (index: number) => void;
+  jumpToQuestion: (index: number) => void;
   questionCardRef?: React.RefObject<HTMLElement>;
+  reset: () => void;
 }
 
 export interface InfoCardProps {
@@ -48,14 +50,14 @@ export interface AnswerBoxProps {
 }
 
 export interface NavButtonsProps {
-  onToggleAnswer: () => void;
+  toggleAnswer: () => void;
   previousQuestion: () => void;
   nextQuestion: () => void;
   submit: () => void;
-  setSelectedOptionId: React.Dispatch<React.SetStateAction<number | undefined>>;
   showAnswer: boolean;
   displayNav: boolean;
   allQuestionsAnswered: boolean;
   hideShowAnswerButton: boolean;
-  setShowAnswerButton: React.Dispatch<React.SetStateAction<boolean>>;
+  reset: () => void;
+  swiperInstance: SwiperType | null;
 }
