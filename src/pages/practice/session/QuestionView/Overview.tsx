@@ -14,10 +14,11 @@ const Overview = ({
   questions,
   userAnswers,
   questionNum,
-  setCurrentQuestionIndex,
+  jumpToQuestion,
   questionCardRef,
   swiperInstance,
   setSwiperInstance,
+  reset,
 }: OverviewProps) => {
   const isDesktop = useMediaQuery({ breakpoint: "lg" });
 
@@ -31,17 +32,19 @@ const Overview = ({
           questions={questions}
           userAnswers={userAnswers}
           questionNum={questionNum}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
+          jumpToQuestion={jumpToQuestion}
           questionCardRef={questionCardRef}
+          reset={reset}
         />
       ) : (
         <TopOverview
           questions={questions}
           userAnswers={userAnswers}
           questionNum={questionNum}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
+          jumpToQuestion={jumpToQuestion}
           swiperInstance={swiperInstance}
           setSwiperInstance={setSwiperInstance}
+          reset={reset}
         />
       )}
     </section>
@@ -52,9 +55,10 @@ const TopOverview = ({
   questions,
   userAnswers,
   questionNum,
-  setCurrentQuestionIndex,
+  jumpToQuestion,
   swiperInstance,
   setSwiperInstance,
+  reset,
 }: OverviewProps) => {
   const [slidesPerView, setSlidesPerView] = useState(1);
   const isMobile = useMediaQuery({ breakpoint: "sm" });
@@ -96,7 +100,8 @@ const TopOverview = ({
                 index={i}
                 answer={userAnswer}
                 isCurrent={questionNum === i}
-                handleClick={() => setCurrentQuestionIndex(i)}
+                jumpToQuestion={jumpToQuestion}
+                reset={reset}
               />
             </SwiperSlide>
           );
@@ -113,7 +118,8 @@ const RightOverview = ({
   questions,
   userAnswers,
   questionNum,
-  setCurrentQuestionIndex,
+  jumpToQuestion,
+  reset,
   questionCardRef,
 }: RightOverviewProps) => {
   const listRef = useRef<HTMLUListElement>(null);
@@ -169,7 +175,8 @@ const RightOverview = ({
                 index={i}
                 answer={userAnswer}
                 isCurrent={isCurrent}
-                handleClick={() => setCurrentQuestionIndex(i)}
+                jumpToQuestion={jumpToQuestion}
+                reset={reset}
               />
             </li>
           );
@@ -210,12 +217,14 @@ const OverviewItem = ({
   index,
   answer,
   isCurrent,
-  handleClick,
+  jumpToQuestion,
+  reset,
 }: {
   index: number;
   answer: UserAnswer | undefined;
   isCurrent: boolean;
-  handleClick: () => void;
+  jumpToQuestion: (index: number) => void;
+  reset: () => void;
 }) => {
   const baseClassName = `${PARENT_CN}__question`;
   const currentQuestionClass = isCurrent ? `${baseClassName}--current` : "";
@@ -238,6 +247,11 @@ const OverviewItem = ({
 
   const className = `${layoutClassName} ${isCorrectClass} ${currentQuestionClass} ${hoverClass}`;
   const iconClassName = `${baseClassName}--icon grid`;
+
+  const handleClick = () => {
+    jumpToQuestion(index);
+    reset();
+  };
 
   return (
     <button className={className} onClick={handleClick}>
