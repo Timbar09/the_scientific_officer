@@ -4,30 +4,36 @@ import type { NavButtonsProps } from "../types";
 import Button from "../../../../components/Button";
 
 const NavButtons = ({
-  onToggleAnswer,
+  toggleAnswer,
   previousQuestion,
   nextQuestion,
   submit,
-  setSelectedOptionId,
   showAnswer,
   displayNav,
   allQuestionsAnswered,
   hideShowAnswerButton,
-  setShowAnswerButton,
+  reset,
+  swiperInstance,
 }: NavButtonsProps) => {
   const nextBtnIcon: IconProps = { name: "arrow_forward", position: "right" };
   const prevBtnIcon: IconProps = { name: "arrow_back" };
 
   const handleNextQuestionClick = () => {
-    setSelectedOptionId(undefined);
+    reset();
     nextQuestion();
-    setShowAnswerButton(false);
+
+    if (swiperInstance) {
+      swiperInstance.slideNext();
+    }
   };
 
   const handlePrevQuestionClick = () => {
-    setSelectedOptionId(undefined);
+    reset();
     previousQuestion();
-    setShowAnswerButton(false);
+
+    if (swiperInstance) {
+      swiperInstance.slidePrev();
+    }
   };
 
   return (
@@ -37,7 +43,7 @@ const NavButtons = ({
           <Button
             variant="secondary"
             className="btn--secondary"
-            onClick={onToggleAnswer}
+            onClick={toggleAnswer}
           >
             {showAnswer ? "Hide Answer" : "Show Answer"}
           </Button>
