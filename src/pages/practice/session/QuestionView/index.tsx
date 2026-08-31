@@ -25,8 +25,8 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     nextQuestion,
     previousQuestion,
     submit,
-    setCurrentQuestionIndex,
-    toggleAnswer: onToggleAnswer,
+    jumpToQuestion,
+    toggleAnswer,
   } = func;
   const { list, current, areAllAnswered } = questions;
   const { index, question, selectedAnswer, showAnswer } = current;
@@ -39,12 +39,16 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     return null;
   }
 
+  const isAnswered = userAnswers.has(question?.id || -1);
+  const currentQAnsweredClass = isAnswered ? "answered" : "";
+
+  const reset = () => {
+    setSelectedOptionId(undefined);
+    setHideShowAnswerButton(false);
+  };
+
   const handleAnswerSelect = (answer: string) => {
     onSelectAnswer(answer);
-
-    if (questionRef.current) {
-      questionRef.current.classList.add("answered");
-    }
   };
 
   return (
@@ -56,15 +60,19 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           questions={list}
           userAnswers={userAnswers}
           questionNum={index}
-          setCurrentQuestionIndex={setCurrentQuestionIndex}
+          jumpToQuestion={jumpToQuestion}
           questionCardRef={questionRef as React.RefObject<HTMLElement>}
           swiperInstance={swiperInstance}
           setSwiperInstance={setSwiperInstance}
+          reset={reset}
         />
 
-        <section className="practice__session--question p-5" ref={questionRef}>
+        <section
+          className={`practice__session--question p-5 ${currentQAnsweredClass}`}
+          ref={questionRef}
+        >
           <p className="practice__session--question__label">
-            Question {index + 1}/{list.length}
+            Question {index + 1}/{list.length} {"ID: " + question?.id || "N/A"}
           </p>
 
           <h2 className="practice__session--question__text m-block-2">
@@ -99,16 +107,16 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           )}
 
           <NavButtons
-            onToggleAnswer={onToggleAnswer}
+            toggleAnswer={toggleAnswer}
             previousQuestion={previousQuestion}
             nextQuestion={nextQuestion}
             submit={submit}
-            setSelectedOptionId={setSelectedOptionId}
             showAnswer={showAnswer}
             displayNav={list.length > 1}
             allQuestionsAnswered={areAllAnswered}
             hideShowAnswerButton={hideShowAnswerButton}
-            setShowAnswerButton={setHideShowAnswerButton}
+            reset={reset}
+            swiperInstance={swiperInstance}
           />
         </section>
       </div>
