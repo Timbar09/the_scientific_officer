@@ -8,8 +8,8 @@ import type {
 
 import Icon from "../../../components/Icon";
 
-const MIN_TIME = 5;
-const TIME_STEP = 5;
+const MIN_TIME = 2;
+const TIME_STEP = 2;
 const MAX_TIME = 120;
 
 interface ButtonProps {

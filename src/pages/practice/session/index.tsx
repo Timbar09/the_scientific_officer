@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useSession from "../../../hooks/useSession";
 
 import type { PracticeSessionHeaderProps } from "./types";
-// import type { Session } from "../../../hooks/useSession/types";
 
 import Icon from "../../../components/Icon";
 import Tooltip from "../../../components/Tooltip";
@@ -51,6 +50,7 @@ const PracticeSession = () => {
           onRevealHint={func.revealHint}
           settings={settings}
           questions={questions}
+          submit={func.submit}
         />
 
         {!session.isComplete ? (
@@ -69,6 +69,7 @@ const PracticeSessionHeader = ({
   onRevealHint,
   settings,
   questions,
+  submit,
 }: PracticeSessionHeaderProps) => {
   return (
     <header className="practice__header">
@@ -95,7 +96,10 @@ const PracticeSessionHeader = ({
             />
 
             {settings?.timerEnabled && (
-              <TimerBadge duration={settings?.sessionDuration} />
+              <TimerBadge
+                duration={settings?.sessionDuration}
+                submit={submit}
+              />
             )}
           </div>
         </div>
@@ -104,17 +108,37 @@ const PracticeSessionHeader = ({
   );
 };
 
-const TimerBadge = ({ duration }: { duration: number }) => {
+const TimerBadge = ({
+  duration,
+  submit,
+}: {
+  duration: number;
+  submit: () => void;
+}) => {
   const [secondsRemaining, setSecondsRemaining] = useState(duration * 60);
+  const hasSubmittedRef = useRef(false);
 
   useEffect(() => {
     setSecondsRemaining(duration * 60);
+    hasSubmittedRef.current = false;
+  }, [duration]);
+
+  useEffect(() => {
+    if (secondsRemaining <= 0) {
+      if (!hasSubmittedRef.current) {
+        hasSubmittedRef.current = true;
+        submit();
+      }
+      return;
+    }
+
     const id = window.setInterval(
       () => setSecondsRemaining((s) => Math.max(s - 1, 0)),
       1000,
     );
+
     return () => window.clearInterval(id);
-  }, [duration]);
+  }, [secondsRemaining, submit]);
 
   const timerWarning =
     secondsRemaining <= 30
