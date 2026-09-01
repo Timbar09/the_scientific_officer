@@ -49,8 +49,8 @@
       }
 
       &.timer--warning-red {
-        background-color: clr(alert, 700);
-        color: clr(alert, 900);
+        background-color: clr(alert, 800);
+        color: clr(primary, 100);
 
         &__icon {
           color: clr(alert, 900);

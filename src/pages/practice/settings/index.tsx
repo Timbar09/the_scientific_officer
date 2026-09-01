@@ -11,6 +11,8 @@ import PracticeSettingHintOption from "./PracticeSettingHintOption";
 import PracticeSettingTopicSection from "./PracticeSettingTopicSection";
 import PracticeSettingQuestionTypeSelection from "./PracticeSettingQuestionTypeSelection";
 
+const BASE_CN = "practice__form";
+
 // FORM DATA
 const fd = {
   topics: {
@@ -64,7 +66,7 @@ const PracticeSettingsForm = () => {
   const isHintEnabled = useWatch({ control, name: fd.hints.name }) ?? false;
   const isTimerEnabled = useWatch({ control, name: fd.timer.name }) ?? false;
 
-  const onSubmit = handleFormSubmit((formValues) => {
+  const submit = handleFormSubmit((formValues) => {
     handleSubmit(formValues);
   });
 
@@ -77,15 +79,13 @@ const PracticeSettingsForm = () => {
 
   fd.hints.hasHints = isHintEnabled;
 
+  const layoutClassName = "flex flex-col m-block-start-5";
+
+  const hasErrors = !!errors.topics?.message && selectedTopics.length === 0;
+
   return (
-    <Form
-      className="practice__form flex flex-col m-block-start-5"
-      onSubmit={onSubmit}
-    >
-      <FormSection
-        className="practice__form--topic"
-        hasError={!!errors.topics?.message && selectedTopics.length === 0}
-      >
+    <Form className={`${BASE_CN} ${layoutClassName}`} submit={submit}>
+      <FormSection className={`${BASE_CN}--topic`} hasError={hasErrors}>
         <PracticeSettingTopicSection
           register={register}
           setValue={setValue}
@@ -94,15 +94,15 @@ const PracticeSettingsForm = () => {
         />
       </FormSection>
 
-      <div className="practice__form--group flex flex-wrap gap-3">
-        <FormSection className="practice__form--questionType">
+      <div className={`${BASE_CN}--group flex flex-wrap gap-3`}>
+        <FormSection className={`${BASE_CN}--questionType`}>
           <PracticeSettingQuestionTypeSelection
             register={register}
             formSectionData={fd.qType}
           />
         </FormSection>
 
-        <FormSection className="practice__form--timer">
+        <FormSection className={`${BASE_CN}--timer`}>
           <PracticeSettingTimerOption
             register={register}
             setValue={setValue}
@@ -110,7 +110,7 @@ const PracticeSettingsForm = () => {
           />
         </FormSection>
 
-        <FormSection className="practice__form--hints">
+        <FormSection className={`${BASE_CN}--hints`}>
           <PracticeSettingHintOption
             register={register}
             setValue={setValue}
@@ -118,7 +118,7 @@ const PracticeSettingsForm = () => {
           />
         </FormSection>
 
-        <FormSection className="practice__form--submit flex ai-center">
+        <FormSection className={`${BASE_CN}--submit flex ai-center`}>
           <Button type="submit">Start Practice Session</Button>
         </FormSection>
       </div>
@@ -128,14 +128,9 @@ const PracticeSettingsForm = () => {
 
 const FormSection = ({ className, children, hasError }: FormSectionProps) => {
   const errorClass = hasError ? "form__field--error" : "";
+  const classNames = `${BASE_CN}--section ${className} ${errorClass} p-5`;
 
-  return (
-    <section
-      className={`practice__form--section ${className} ${errorClass} p-5`}
-    >
-      {children}
-    </section>
-  );
+  return <section className={classNames}>{children}</section>;
 };
 
 export default PracticeSettingsForm;

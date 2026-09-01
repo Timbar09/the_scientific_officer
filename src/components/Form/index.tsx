@@ -6,12 +6,12 @@ import type { ReactNode } from "react";
 interface FormProps {
   children?: ReactNode;
   className?: string;
-  onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+  submit: (event: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const Form = ({ children, onSubmit, className }: FormProps) => {
+const Form = ({ children, submit, className }: FormProps) => {
   return (
-    <form className={`form ${className || ""}`} onSubmit={onSubmit}>
+    <form className={`form ${className || ""}`} onSubmit={submit}>
       <div className="form__container">{children}</div>
     </form>
   );

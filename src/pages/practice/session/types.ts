@@ -1,4 +1,7 @@
-import type { Session } from "../../../hooks/useSession/types";
+import type {
+  Session,
+  SessionQuestionData,
+} from "../../../hooks/useSession/types";
 import type { Question, UserAnswer } from "../types";
 import type { Swiper as SwiperType } from "swiper";
 
@@ -7,7 +10,8 @@ export interface PracticeSessionHeaderProps {
   displayHint: boolean;
   onRevealHint: (value: boolean) => void;
   settings: Session["settings"];
-  questions: Session["questions"];
+  questions: SessionQuestionData;
+  submit: () => void;
 }
 
 export interface OverviewProps {
