@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import { NavLink } from "react-router";
+
 import useSession from "../../../hooks/useSession";
+import { useMediaQuery } from "../../../hooks/useMediaQuery";
 
 import type { PracticeSessionHeaderProps } from "./types";
 
@@ -42,24 +45,26 @@ const PracticeSession = () => {
   }
 
   return (
-    <div className="practice page">
-      <Container>
-        <PracticeSessionHeader
-          isSessionComplete={session.isComplete}
-          displayHint={settings.hintsEnabled && !isHintRevealed}
-          onRevealHint={func.revealHint}
-          settings={settings}
-          questions={questions}
-          submit={func.submit}
-        />
+    <>
+      <PracticeSessionHeader
+        isSessionComplete={session.isComplete}
+        displayHint={settings.hintsEnabled && !isHintRevealed}
+        onRevealHint={func.revealHint}
+        settings={settings}
+        questions={questions}
+        submit={func.submit}
+      />
 
-        {!session.isComplete ? (
-          <QuestionView session={session} />
-        ) : session.results ? (
-          <Results sessionResults={session.results} questions={list} />
-        ) : null}
-      </Container>
-    </div>
+      <div className="practice page">
+        <Container>
+          {!session.isComplete ? (
+            <QuestionView session={session} />
+          ) : session.results ? (
+            <Results sessionResults={session.results} questions={list} />
+          ) : null}
+        </Container>
+      </div>
+    </>
   );
 };
 
@@ -71,10 +76,18 @@ const PracticeSessionHeader = ({
   questions,
   submit,
 }: PracticeSessionHeaderProps) => {
+  const layoutClassName =
+    "flex flex-col flex-@md-row gap-3 gap-@lg-5 ai-start ai-@md-center jc-between";
+
   return (
-    <header className="practice__header">
-      <div className="practice__header--container flex flex-col flex-@md-row gap-3 gap-@lg-5 ai-start ai-@md-center jc-between p-3">
+    <header className="header p-block-3 practice__header">
+      <Container
+        className={`practice__header--container ${layoutClassName} p-3`}
+        size="lg"
+      >
         <div className="practice__header--left flex ai-center gap-3 gap-@lg-5">
+          <PracticeSessionHeaderNav />
+
           <h1 className="practice__title">
             {isSessionComplete ? "Practice Results" : "Practice Session"}
           </h1>
@@ -103,8 +116,68 @@ const PracticeSessionHeader = ({
             )}
           </div>
         </div>
-      </div>
+      </Container>
     </header>
+  );
+};
+
+const PracticeSessionHeaderNav = () => {
+  return (
+    <div className="practice__header--nav flex gap-2 ai-center">
+      <Badge iconName="home" value="Home" linkTo="/" />
+
+      <Badge iconName="add" value="New Session" linkTo="/practice" />
+    </div>
+  );
+};
+
+const Badge = ({
+  className = "",
+  iconName,
+  value,
+  linkTo,
+  onClick,
+}: {
+  className?: string;
+  iconName: string;
+  value: string;
+  linkTo?: string;
+  onClick?: () => void;
+}) => {
+  const isMediumScreen = useMediaQuery({ breakpoint: "md" });
+  const isClickable = !!linkTo || !!onClick;
+
+  const baseCN = "practice__header--badge";
+  const clickableClass = isClickable ? `${baseCN}__clickable` : "";
+  const displayValueClass = isMediumScreen ? "" : "sr-only";
+  const classNames = `${baseCN} ${clickableClass} ${className} flex ai-center gap-1 p-1`;
+
+  if (linkTo) {
+    return (
+      <NavLink to={linkTo} className={classNames}>
+        <Icon name={iconName} className={`${baseCN}__icon`} />
+
+        <span className={`${baseCN}__value ${displayValueClass}`}>{value}</span>
+      </NavLink>
+    );
+  }
+
+  if (onClick) {
+    return (
+      <button type="button" className={classNames} onClick={onClick}>
+        <Icon name={iconName} className={`${baseCN}__icon`} />
+
+        <span className={`${baseCN}__value ${displayValueClass}`}>{value}</span>
+      </button>
+    );
+  }
+
+  return (
+    <div className={classNames}>
+      <Icon name={iconName} className={`${baseCN}__icon`} />
+
+      <span className={`${baseCN}__value ${displayValueClass}`}>{value}</span>
+    </div>
   );
 };
 
@@ -163,12 +236,14 @@ const TimerBadge = ({
 
 const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
   return (
-    <div className="practice__header--badge flex ai-center gap-1 p-1">
-      <Icon name="quiz" className="practice__header--icon" />
+    <div className="practice__header--questionType">
+      <Badge iconName="quiz" value={titlize(questionType)} />
 
-      <span className="practice__header--badge__value">
-        {titlize(questionType)}
-      </span>
+      <Tooltip>
+        {questionType === "all"
+          ? "All available question types are included in this session."
+          : `Only ${titlize(questionType)} questions are included in this session.`}
+      </Tooltip>
     </div>
   );
 };
@@ -176,15 +251,11 @@ const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
 const HintBadge = ({ onClick }: { onClick: (value: boolean) => void }) => {
   return (
     <div className="practice__header--hint">
-      <button
-        type="button"
-        className="practice__header--hint__button practice__header--badge flex ai-center gap-1 p-1"
+      <Badge
+        iconName="lightbulb_2"
+        value="Hint"
         onClick={() => onClick(true)}
-      >
-        <Icon name="lightbulb_2" className="practice__header--icon" />
-
-        <span className="practice__header--badge__value">Hint</span>
-      </button>
+      />
 
       <Tooltip>Get a hint!</Tooltip>
     </div>

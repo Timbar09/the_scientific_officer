@@ -2,8 +2,9 @@
 
 .practice {
   &__header {
-    background-color: clr(neutral, 100);
-    border-radius: radius(lg);
+    .container {
+      background-color: clr(neutral, 100);
+    }
 
     &--left {
       flex: 1;
@@ -15,11 +16,23 @@
     }
 
     &--badge {
+      font-size: fs(md);
       background-color: clr(neutral, 200);
       border-radius: radius(md);
       transition:
         background-color 250ms ease,
         color 250ms ease;
+
+      &__clickable {
+        &:hover {
+          background-color: clr(neutral, 300);
+          color: clr(neutral, 900);
+        }
+      }
+
+      &__icon {
+        font-size: fs(xl);
+      }
 
       &__value {
         font-size: fs(sm);
@@ -27,14 +40,12 @@
       }
     }
 
-    &--hint {
+    &--hint,
+    &--questionType {
       position: relative;
 
-      &__button {
-        &:hover {
-          background-color: clr(neutral, 300);
-          color: clr(neutral, 900);
-        }
+      .tooltip__text {
+        font-size: fs(sm);
       }
     }
 
