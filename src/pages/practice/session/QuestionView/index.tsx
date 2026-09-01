@@ -72,7 +72,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           ref={questionRef}
         >
           <p className="practice__session--question__label">
-            Question {index + 1}/{list.length} {"ID: " + question?.id || "N/A"}
+            Question {index + 1}/{list.length}
           </p>
 
           <h2 className="practice__session--question__text m-block-2">
