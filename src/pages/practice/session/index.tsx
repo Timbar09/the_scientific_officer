@@ -69,38 +69,24 @@ const PracticeSession = () => {
 };
 
 const PracticeSessionHeader = ({
-  isSessionComplete,
   displayHint,
   onRevealHint,
   settings,
   questions,
   submit,
 }: PracticeSessionHeaderProps) => {
-  const layoutClassName =
-    "flex flex-col flex-@md-row gap-3 gap-@lg-5 ai-start ai-@md-center jc-between";
+  const layoutClassName = "flex flex-wrap gap-3 ai-center jc-between";
 
   return (
     <header className="header p-block-3 practice__header">
       <Container
         className={`practice__header--container ${layoutClassName} p-3`}
-        size="lg"
       >
         <div className="practice__header--left flex ai-center gap-3 gap-@lg-5">
           <PracticeSessionHeaderNav />
-
-          <h1 className="practice__title">
-            {isSessionComplete ? "Practice Results" : "Practice Session"}
-          </h1>
-
-          <div className="practice__header--left__progressbar">
-            <ProgressBar
-              unanswered={questions.unansweredCount}
-              total={questions.count}
-            />
-          </div>
         </div>
 
-        <div className="practice__header--right">
+        <div className="practice__header--middle">
           <div className="practice__header--badge__list flex ai-center gap-3">
             {displayHint && <HintBadge onClick={onRevealHint} />}
 
@@ -115,6 +101,19 @@ const PracticeSessionHeader = ({
               />
             )}
           </div>
+        </div>
+
+        <div className="practice__header--right">
+          <ProgressBar
+            unanswered={questions.unansweredCount}
+            total={questions.count}
+            variant="stepped"
+          />
+
+          <Tooltip>
+            {questions.count - questions.unansweredCount} out of{" "}
+            {questions.count} questions answered.
+          </Tooltip>
         </div>
       </Container>
     </header>
@@ -136,26 +135,33 @@ const Badge = ({
   iconName,
   value,
   linkTo,
+  responsiveItem = "value",
   onClick,
 }: {
   className?: string;
   iconName: string;
   value: string;
   linkTo?: string;
+  responsiveItem?: "value" | "icon";
   onClick?: () => void;
 }) => {
-  const isMediumScreen = useMediaQuery({ breakpoint: "md" });
+  const isSmallScreen = useMediaQuery({ breakpoint: "sm" });
   const isClickable = !!linkTo || !!onClick;
+  const isIconResponsive = responsiveItem === "icon";
 
   const baseCN = "practice__header--badge";
   const clickableClass = isClickable ? `${baseCN}__clickable` : "";
-  const displayValueClass = isMediumScreen ? "" : "sr-only";
+  const displayValueClass = isSmallScreen || isIconResponsive ? "" : "sr-only";
+  const displayIconClass = isSmallScreen || !isIconResponsive ? "" : "sr-only";
   const classNames = `${baseCN} ${clickableClass} ${className} flex ai-center gap-1 p-1`;
 
   if (linkTo) {
     return (
       <NavLink to={linkTo} className={classNames}>
-        <Icon name={iconName} className={`${baseCN}__icon`} />
+        <Icon
+          name={iconName}
+          className={`${baseCN}__icon ${displayIconClass}`}
+        />
 
         <span className={`${baseCN}__value ${displayValueClass}`}>{value}</span>
       </NavLink>
@@ -165,7 +171,10 @@ const Badge = ({
   if (onClick) {
     return (
       <button type="button" className={classNames} onClick={onClick}>
-        <Icon name={iconName} className={`${baseCN}__icon`} />
+        <Icon
+          name={iconName}
+          className={`${baseCN}__icon ${displayIconClass}`}
+        />
 
         <span className={`${baseCN}__value ${displayValueClass}`}>{value}</span>
       </button>
@@ -174,7 +183,7 @@ const Badge = ({
 
   return (
     <div className={classNames}>
-      <Icon name={iconName} className={`${baseCN}__icon`} />
+      <Icon name={iconName} className={`${baseCN}__icon ${displayIconClass}`} />
 
       <span className={`${baseCN}__value ${displayValueClass}`}>{value}</span>
     </div>
@@ -221,15 +230,12 @@ const TimerBadge = ({
         : "";
 
   return (
-    <div
-      className={`practice__header--timer practice__header--badge flex ai-center gap-1 p-1 ${timerWarning}`}
-      title="Time Remaining"
-    >
-      <Icon name="schedule" className="practice__header--timer__icon" />
-
-      <span className="practice__header--timer__value fw-bold">
-        {` ${formatTime(secondsRemaining)} Mins`}
-      </span>
+    <div className={`practice__header--timer ${timerWarning}`}>
+      <Badge
+        iconName="schedule"
+        value={`${formatTime(secondsRemaining)} Mins`}
+        responsiveItem="icon"
+      />
     </div>
   );
 };
@@ -237,7 +243,7 @@ const TimerBadge = ({
 const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
   return (
     <div className="practice__header--questionType">
-      <Badge iconName="quiz" value={titlize(questionType)} />
+      <Badge iconName="shield_question" value={titlize(questionType)} />
 
       <Tooltip>
         {questionType === "all"
@@ -265,25 +271,58 @@ const HintBadge = ({ onClick }: { onClick: (value: boolean) => void }) => {
 const ProgressBar = ({
   unanswered,
   total,
+  variant = "linear",
 }: {
   unanswered: number;
   total: number;
+  variant?: "linear" | "stepped";
 }) => {
   const progressPercentage = ((total - unanswered) / total) * 100;
   const progressLabel = `${total - unanswered} out of ${total} answered`;
+  const isStepped = variant === "stepped";
+
+  const baseCN = "practice__header--progress";
+  const typeBaseCN = `${baseCN}__${variant}`;
+  const stepOrRailCN = isStepped ? "step" : "rail";
 
   return (
-    <div className="practice__header--progress flex gap-1 ai-center">
-      <div className="practice__header--progress__rail">
-        <div
-          className="practice__header--progress__bar"
-          style={{ width: `${progressPercentage}%` }}
-          aria-label={progressLabel}
-          data-progress={progressLabel}
-        ></div>
+    <div className={`${baseCN} ${typeBaseCN} flex gap-1 ai-center`}>
+      <div
+        className={`${baseCN}__container ${typeBaseCN}--${stepOrRailCN}__container`}
+      >
+        {variant === "linear" ? (
+          <div className={`${typeBaseCN}--rail`}>
+            <div
+              className={`${typeBaseCN}--rail__bar`}
+              style={{ width: `${progressPercentage}%` }}
+              aria-label={progressLabel}
+              data-progress={progressLabel}
+            ></div>
+          </div>
+        ) : (
+          <>
+            <div className={`${typeBaseCN}--step__list flex jc-between`}>
+              {Array.from({ length: 50 }).map((_, index) => {
+                const stepPercentage = ((index + 1) / 50) * 100;
+                const isCompleted = stepPercentage <= progressPercentage;
+
+                const stepCN = isCompleted
+                  ? `${typeBaseCN}--step__item--completed`
+                  : "";
+
+                return (
+                  <div
+                    key={index}
+                    className={`${typeBaseCN}--step__item ${stepCN}`}
+                  />
+                );
+              })}
+            </div>
+          </>
+        )}
       </div>
 
-      <div className="practice__header--progress__value">
+      <div className={`${baseCN}__value`}>
         {`${Math.round(progressPercentage)}%`}
       </div>
     </div>

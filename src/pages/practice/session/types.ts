@@ -6,7 +6,7 @@ import type { Question, UserAnswer } from "../types";
 import type { Swiper as SwiperType } from "swiper";
 
 export interface PracticeSessionHeaderProps {
-  isSessionComplete: boolean;
+  isSessionComplete?: boolean;
   displayHint: boolean;
   onRevealHint: (value: boolean) => void;
   settings: Session["settings"];
