@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import type { Session } from "../../../../hooks/useSession/types";
 import type { Swiper as SwiperType } from "swiper";
 
-import Summary from "./Summary";
+import Topics from "./Topics";
 import Overview from "./Overview";
 import InfoCard from "./InfoCard";
 import AnswerBox from "./AnswerBox";
@@ -53,7 +53,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
 
   return (
     <div className="practice__session">
-      <Summary topics={settings.topics} />
+      <h2 className="sr-only">Practice Session</h2>
 
       <div className="practice__session--content flex flex-col flex-@lg-row ai-start gap-3 gap-@lg-4">
         <Overview
@@ -71,9 +71,13 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           className={`practice__session--question p-5 ${currentQAnsweredClass}`}
           ref={questionRef}
         >
-          <p className="practice__session--question__label">
-            Question {index + 1}
-          </p>
+          <div className="flex gap-2 ai-center">
+            <p className="practice__session--question__label">
+              Question {index + 1} of {list.length}
+            </p>
+
+            <Topics list={settings.topics} />
+          </div>
 
           <h2 className="practice__session--question__text m-block-2">
             {question?.text}

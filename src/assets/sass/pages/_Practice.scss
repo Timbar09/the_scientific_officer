@@ -360,21 +360,12 @@
   }
 
   &__session {
-    &--summary {
-      &__badge {
-        background-color: clr(neutral, 200);
-        border-radius: radius(sm);
-        font-size: fs(xs);
-        font-weight: 600;
-        padding: 0.25rem 0.5rem;
-      }
-    }
-
     &--overview {
       position: relative;
       width: 100%;
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
+      box-shadow: $shadow-lg;
 
       @include mq("lg") {
         order: 2;
@@ -472,6 +463,7 @@
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
       width: 100%;
+      box-shadow: $shadow-lg;
 
       @include mq("lg") {
         order: 1;
@@ -534,6 +526,82 @@
         border-bottom: 1px solid clr(primary, 200);
       }
 
+      &__label {
+        font-size: fs(sm);
+        font-weight: 500;
+        font-family: $ff-exo;
+      }
+
+      &__text {
+        font-size: fs("2xl");
+        color: clr(primary, 900);
+        font-weight: 500;
+      }
+
+      &__topic {
+        position: relative;
+        flex: 1;
+
+        &--tooltipToggle {
+          color: clr(primary, 600);
+          cursor: pointer;
+          transition: color 250ms ease;
+
+          &:hover {
+            color: clr(primary, 900);
+          }
+
+          .material-symbols-outlined {
+            font-size: fs("2xl");
+          }
+        }
+
+        &--container {
+          --pointer-dimension: 0.75em;
+
+          position: absolute;
+          top: calc(spacing(1) * 5);
+          left: calc(-1 * spacing(1));
+          width: 100%;
+          background-color: clr(neutral, 200);
+          border-radius: radius(md);
+          box-shadow: $shadow-md;
+          border: 1px solid clr(neutral, 300);
+          z-index: 1000;
+
+          &::after {
+            content: "";
+            position: absolute;
+            top: calc(-1 * (var(--pointer-dimension) / 2));
+            left: spacing(3);
+            width: var(--pointer-dimension);
+            height: var(--pointer-dimension);
+            transform: rotate(45deg);
+            background-color: clr(neutral, 200);
+            border-top: 1px solid clr(neutral, 300);
+            border-left: 1px solid clr(neutral, 300);
+          }
+        }
+
+        &--title {
+          font-size: fs(sm);
+          font-weight: 600;
+        }
+
+        &--list {
+          position: relative;
+        }
+
+        &--item {
+          background-color: clr(neutral, 100);
+          border-radius: radius(sm);
+          border: 1px solid clr(neutral, 200);
+          font-size: fs(xs);
+          font-weight: 600;
+          padding: 0.25rem 0.5rem;
+        }
+      }
+
       &__explanation {
         --border-clr: #{clr(alert, 100)};
         --bg-clr: #{clr(alert, 100, 0.05)};
@@ -546,12 +614,6 @@
         &--text {
           font-style: italic;
         }
-      }
-
-      &__text {
-        font-size: fs("2xl");
-        color: clr(primary, 900);
-        font-weight: 500;
       }
     }
 
