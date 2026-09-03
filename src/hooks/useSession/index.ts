@@ -22,20 +22,20 @@ const useSession = () => {
   const location = useLocation();
   const settings = location.state as SessionSettings | undefined;
 
-  const [questionData, setQuestionData] = useState<QuestionData[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [showAnswer, setShowAnswer] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState("");
   const [questionList, setQuestionList] = useState<Question[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [showAnswer, setShowAnswer] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
-    Set<number>
-  >(new Set());
+  const [results, setResults] = useState<SessionResults | null>(null);
+  const [questionData, setQuestionData] = useState<QuestionData[]>([]);
   const [userAnswers, setUserAnswers] = useState<Map<number, UserAnswer>>(
     new Map(),
   );
-  const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [isComplete, setIsComplete] = useState(false);
-  const [results, setResults] = useState<SessionResults | null>(null);
+  const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
+    Set<number>
+  >(new Set());
 
   const load = useCallback(async () => {
     if (!settings) return;
@@ -141,7 +141,7 @@ const useSession = () => {
     };
 
     setResults(r);
-    setIsComplete(true);
+    setIsSubmitted(true);
   };
 
   const revealHint = () => {
@@ -169,7 +169,7 @@ const useSession = () => {
 
   return {
     settings,
-    isComplete,
+    isSubmitted,
     results,
     questionData,
     questions,

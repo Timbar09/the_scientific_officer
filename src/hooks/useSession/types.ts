@@ -7,7 +7,7 @@ import type {
 
 export interface Session {
   settings: SessionSettings | undefined;
-  isComplete: boolean;
+  isSubmitted: boolean;
   results: SessionResults | null;
   revealedHintQuestionIds: Set<number>;
   questions: SessionQuestionData;
