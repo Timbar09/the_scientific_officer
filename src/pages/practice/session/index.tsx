@@ -203,32 +203,46 @@ const TimerBadge = ({
   submit: () => void;
   isSessionSubmitted: boolean;
 }) => {
-  const [secondsRemaining, setSecondsRemaining] = useState(duration * 60);
+  const [countdown, setCountdown] = useState(duration * 60);
+  const [timeLeft, setTimeLeft] = useState<number | null>(null);
 
   useEffect(() => {
-    setSecondsRemaining(duration * 60);
+    setCountdown(duration * 60);
+    setTimeLeft(null);
   }, [duration]);
 
   useEffect(() => {
-    if (secondsRemaining <= 0) {
-      if (!isSessionSubmitted) {
-        submit();
-      }
+    if (isSessionSubmitted) {
+      setTimeLeft(countdown);
+      return;
+    }
+  }, [isSessionSubmitted, countdown]);
+
+  useEffect(() => {
+    if (isSessionSubmitted) {
+      return;
+    }
+
+    if (countdown <= 0) {
+      submit();
       return;
     }
 
     const id = window.setInterval(
-      () => setSecondsRemaining((s) => Math.max(s - 1, 0)),
+      () => setCountdown((s) => Math.max(s - 1, 0)),
       1000,
     );
 
     return () => window.clearInterval(id);
-  }, [secondsRemaining, submit, isSessionSubmitted]);
+  }, [countdown, submit, isSessionSubmitted]);
+
+  const timeDisplay =
+    isSessionSubmitted && timeLeft !== null ? timeLeft : countdown;
 
   const timerWarning =
-    secondsRemaining <= 30 && !isSessionSubmitted
+    timeDisplay <= 30 && !isSessionSubmitted
       ? "timer--warning-red"
-      : secondsRemaining <= 60 && !isSessionSubmitted
+      : timeDisplay <= 60 && !isSessionSubmitted
         ? "timer--warning-yellow"
         : "";
 
@@ -236,13 +250,15 @@ const TimerBadge = ({
     <div className={`practice__header--timer ${timerWarning}`}>
       <Badge
         iconName="schedule"
-        value={formatTime(secondsRemaining)}
+        value={formatTime(timeDisplay)}
         responsiveItem="icon"
       />
 
-      {secondsRemaining === 0 && (
+      {isSessionSubmitted && (
         <Tooltip>
-          Time's up! Your session has been automatically submitted.
+          {timeLeft === null || timeLeft <= 0
+            ? "You have run out of time! Your session has been automatically submitted."
+            : `Session completed with "${formatTime(timeLeft || 0, true)}" remaining.`}
         </Tooltip>
       )}
     </div>
