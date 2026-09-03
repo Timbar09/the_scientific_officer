@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router";
 
 import useSession from "../../../hooks/useSession";
@@ -47,7 +47,7 @@ const PracticeSession = () => {
   return (
     <>
       <PracticeSessionHeader
-        isSessionComplete={session.isComplete}
+        isSessionSubmitted={session.isSubmitted}
         displayHint={settings.hintsEnabled && !isHintRevealed}
         onRevealHint={func.revealHint}
         settings={settings}
@@ -57,7 +57,7 @@ const PracticeSession = () => {
 
       <div className="practice page">
         <Container>
-          {!session.isComplete ? (
+          {!session.isSubmitted ? (
             <QuestionView session={session} />
           ) : session.results ? (
             <Results sessionResults={session.results} questions={list} />
@@ -74,7 +74,10 @@ const PracticeSessionHeader = ({
   settings,
   questions,
   submit,
+  isSessionSubmitted,
 }: PracticeSessionHeaderProps) => {
+  const isHintBadgeEnabled = displayHint && !isSessionSubmitted;
+
   const layoutClassName = "flex flex-wrap gap-3 ai-center jc-between";
 
   return (
@@ -88,7 +91,7 @@ const PracticeSessionHeader = ({
 
         <div className="practice__header--middle">
           <div className="practice__header--badge__list flex ai-center gap-3">
-            {displayHint && <HintBadge onClick={onRevealHint} />}
+            <HintBadge onClick={onRevealHint} enabled={isHintBadgeEnabled} />
 
             <QuestionsTypeBadge
               questionType={settings?.questionType || "all"}
@@ -98,6 +101,7 @@ const PracticeSessionHeader = ({
               <TimerBadge
                 duration={settings?.sessionDuration}
                 submit={submit}
+                isSessionSubmitted={isSessionSubmitted}
               />
             )}
           </div>
@@ -193,22 +197,21 @@ const Badge = ({
 const TimerBadge = ({
   duration,
   submit,
+  isSessionSubmitted,
 }: {
   duration: number;
   submit: () => void;
+  isSessionSubmitted: boolean;
 }) => {
   const [secondsRemaining, setSecondsRemaining] = useState(duration * 60);
-  const hasSubmittedRef = useRef(false);
 
   useEffect(() => {
     setSecondsRemaining(duration * 60);
-    hasSubmittedRef.current = false;
   }, [duration]);
 
   useEffect(() => {
     if (secondsRemaining <= 0) {
-      if (!hasSubmittedRef.current) {
-        hasSubmittedRef.current = true;
+      if (!isSessionSubmitted) {
         submit();
       }
       return;
@@ -220,12 +223,12 @@ const TimerBadge = ({
     );
 
     return () => window.clearInterval(id);
-  }, [secondsRemaining, submit]);
+  }, [secondsRemaining, submit, isSessionSubmitted]);
 
   const timerWarning =
-    secondsRemaining <= 30
+    secondsRemaining <= 30 && !isSessionSubmitted
       ? "timer--warning-red"
-      : secondsRemaining <= 60
+      : secondsRemaining <= 60 && !isSessionSubmitted
         ? "timer--warning-yellow"
         : "";
 
@@ -233,9 +236,15 @@ const TimerBadge = ({
     <div className={`practice__header--timer ${timerWarning}`}>
       <Badge
         iconName="schedule"
-        value={`${formatTime(secondsRemaining)} Mins`}
+        value={formatTime(secondsRemaining)}
         responsiveItem="icon"
       />
+
+      {secondsRemaining === 0 && (
+        <Tooltip>
+          Time's up! Your session has been automatically submitted.
+        </Tooltip>
+      )}
     </div>
   );
 };
@@ -254,7 +263,17 @@ const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
   );
 };
 
-const HintBadge = ({ onClick }: { onClick: (value: boolean) => void }) => {
+const HintBadge = ({
+  onClick,
+  enabled,
+}: {
+  onClick: (value: boolean) => void;
+  enabled: boolean;
+}) => {
+  if (!enabled) {
+    return null;
+  }
+
   return (
     <div className="practice__header--hint">
       <Badge

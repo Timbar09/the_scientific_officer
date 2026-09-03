@@ -58,7 +58,8 @@
     }
 
     &--hint,
-    &--questionType {
+    &--questionType,
+    &--timer {
       position: relative;
 
       .tooltip {
@@ -68,19 +69,22 @@
 
     &--timer {
       &.timer--warning-yellow {
-        color: clr(alert, 600);
-
         .practice__header--badge {
           background-color: clr(alert, 400);
           color: clr(alert, 600);
+          transition:
+            background-color 5000ms ease,
+            color 5000ms ease;
         }
       }
 
       &.timer--warning-red {
-        color: clr(primary, 100);
-
         .practice__header--badge {
           background-color: clr(alert, 800);
+          color: clr(alert, 900);
+          transition:
+            background-color 5000ms ease,
+            color 5000ms ease;
         }
       }
     }
@@ -150,7 +154,7 @@
 
           &__item {
             flex: 1;
-            height: 1.125em;
+            height: 1.25em;
             width: 1%;
             background-color: clr(neutral, 300);
             border-radius: radius(sm);

@@ -72,7 +72,7 @@ export const destructureQuestionData = (
   questionData: QuestionData[],
   availableTypes: Set<string>,
 ): Question[] => {
-  let uniqueIdCounter = 0;
+  let uniqueIdCounter = 1;
 
   const destructuredQuestions = questionData.map((q) => {
     const { variants, ...rest } = q;
