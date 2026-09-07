@@ -1,6 +1,8 @@
 @use "../abstracts" as *;
 
 .practice {
+  min-height: 100vh;
+
   &__header {
     .container {
       background-color: clr(neutral, 100);
@@ -460,8 +462,9 @@
     }
 
     &--question {
-      background-color: clr(neutral, 100);
-      border-radius: radius(lg);
+      --radius: #{radius(lg)};
+
+      border-radius: var(--radius);
       width: 100%;
       box-shadow: $shadow-lg;
 
@@ -490,6 +493,15 @@
         }
       }
 
+      &__header,
+      &__footer {
+        background-color: clr(neutral, 100);
+      }
+
+      &__header {
+        border-radius: var(--radius) var(--radius) 0 0;
+      }
+
       &__infoCard {
         --border-clr: #{clr(primary, 200)};
         --bg-clr: #{clr(primary, 200, 0.5)};
@@ -516,26 +528,10 @@
         }
       }
 
-      &__hint {
-        --border-clr: #{clr(alert, 500)};
-        --bg-clr: #{clr(alert, 500, 0.125)};
-        --icon-clr: #{clr(alert, 600)};
-        --icon-bg-clr: #{clr(alert, 400)};
-        --text-clr: #{clr(alert, 600)};
-
-        border-bottom: 1px solid clr(primary, 200);
-      }
-
-      &__label {
+      &__number {
         font-size: fs(sm);
         font-weight: 500;
         font-family: $ff-exo;
-      }
-
-      &__text {
-        font-size: fs("2xl");
-        color: clr(primary, 900);
-        font-weight: 500;
       }
 
       &__topic {
@@ -544,6 +540,7 @@
 
         &--tooltipToggle {
           color: clr(primary, 600);
+          max-width: min-content;
           cursor: pointer;
           transition: color 250ms ease;
 
@@ -558,15 +555,16 @@
 
         &--container {
           --pointer-dimension: 0.75em;
+          --border: 1px solid #{clr(neutral, 300)};
 
           position: absolute;
           top: calc(spacing(1) * 5);
           left: calc(-1 * spacing(1));
           width: 100%;
-          background-color: clr(neutral, 200);
+          background-color: clr(neutral, 100);
           border-radius: radius(md);
           box-shadow: $shadow-md;
-          border: 1px solid clr(neutral, 300);
+          border: var(--border);
           z-index: 1000;
 
           &::after {
@@ -578,8 +576,8 @@
             height: var(--pointer-dimension);
             transform: rotate(45deg);
             background-color: clr(neutral, 200);
-            border-top: 1px solid clr(neutral, 300);
-            border-left: 1px solid clr(neutral, 300);
+            border-top: var(--border);
+            border-left: var(--border);
           }
         }
 
@@ -593,12 +591,51 @@
         }
 
         &--item {
-          background-color: clr(neutral, 100);
+          color: clr(primary, 600);
+          background-color: clr(primary, 200);
           border-radius: radius(sm);
-          border: 1px solid clr(neutral, 200);
+          border: 1px solid clr(primary, 300);
           font-size: fs(xs);
           font-weight: 600;
           padding: 0.25rem 0.5rem;
+        }
+      }
+
+      &__hint {
+        --border-clr: #{clr(alert, 500)};
+        --bg-clr: #{clr(alert, 500, 0.125)};
+        --icon-clr: #{clr(alert, 600)};
+        --icon-bg-clr: #{clr(alert, 400)};
+        --text-clr: #{clr(alert, 600)};
+
+        border-bottom: 1px solid clr(primary, 200);
+      }
+
+      &__text {
+        font-size: fs("2xl");
+        color: clr(primary, 900);
+        font-weight: 500;
+      }
+
+      &__answerBox {
+        background-color: clr(neutral, 200);
+
+        &--disabled {
+          pointer-events: none;
+          user-select: none;
+          cursor: not-allowed;
+        }
+
+        &--truefalse {
+          .form__radio--default {
+            &__list {
+              flex-direction: row;
+            }
+
+            &__item--container {
+              flex: 1;
+            }
+          }
         }
       }
 
@@ -615,27 +652,9 @@
           font-style: italic;
         }
       }
-    }
 
-    &--answer {
-      &__disabled {
-        pointer-events: none;
-        user-select: none;
-        cursor: not-allowed;
-      }
-
-      &__options {
-        &--truefalse {
-          .form__radio--default {
-            &__list {
-              flex-direction: row;
-            }
-
-            &__item--container {
-              flex: 1;
-            }
-          }
-        }
+      &__footer {
+        border-radius: 0 0 var(--radius) var(--radius);
       }
     }
   }

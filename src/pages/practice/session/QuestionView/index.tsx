@@ -75,27 +75,29 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
         )}
 
         <section
-          className={`practice__session--question p-5 ${currentQAnsweredClass}`}
+          className={`practice__session--question ${currentQAnsweredClass}`}
           ref={questionRef}
         >
-          <div className="flex gap-2 ai-center">
-            <p className="practice__session--question__label">
-              Question {index + 1} of {list.length}
-            </p>
+          <header className="practice__session--question__header p-5">
+            <div className="flex gap-2 ai-center">
+              <p className="practice__session--question__number">
+                Question {index + 1} of {list.length}
+              </p>
 
-            <Topics list={settings.topics} />
-          </div>
+              <Topics list={settings.topics} />
+            </div>
 
-          <h2 className="practice__session--question__text m-block-2">
-            {question?.text}
-          </h2>
+            <h2 className="practice__session--question__text m-block-start-2">
+              {question?.text}
+            </h2>
 
-          <InfoCard
-            display={isHintRevealed && settings.hintsEnabled}
-            classPrefix="hint"
-            icon="lightbulb_2"
-            text={question?.hint || ""}
-          />
+            <InfoCard
+              display={isHintRevealed && settings.hintsEnabled}
+              classPrefix="hint"
+              icon="lightbulb_2"
+              text={question?.hint || ""}
+            />
+          </header>
 
           <AnswerBox
             options={question?.options || []}

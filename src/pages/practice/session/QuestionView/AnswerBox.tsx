@@ -20,7 +20,7 @@ const AnswerBox = ({
   showAnswer,
 }: AnswerBoxProps) => {
   const isAnswered = selectedAnswer?.length === 0 ? false : true;
-  let isTrueFalseVariant = false;
+  let isBinaryVariant = false;
 
   useEffect(() => {
     setShowAnswerButton(isAnswered && selectedAnswer !== correctAnswer);
@@ -32,13 +32,13 @@ const AnswerBox = ({
   };
 
   const data: FormFieldData[] = options.map((option, i) => {
-    if (
-      !isTrueFalseVariant &&
+    const hasBinaryOptions =
       options.length === 2 &&
-      option.toLowerCase() === "true" &&
-      options[1 - i].toLowerCase() === "false"
-    ) {
-      isTrueFalseVariant = true;
+      options.includes("True") &&
+      options.includes("False");
+
+    if (hasBinaryOptions) {
+      isBinaryVariant = true;
     }
 
     const isCorrect =
@@ -66,10 +66,6 @@ const AnswerBox = ({
     };
   });
 
-  const trueOrFalseVariantClass = isTrueFalseVariant
-    ? "practice__session--answer__options--truefalse"
-    : "";
-
   const typedInInput: InputData = {
     type: "textarea",
     variant: "default",
@@ -80,20 +76,19 @@ const AnswerBox = ({
     variant: "default",
   };
 
-  const disableAnswerBoxClass = isAnswered
-    ? "practice__session--answer__disabled"
-    : "";
+  const baseCN = "practice__session--question__answerBox";
+  const binaryVariantCN = isBinaryVariant ? `${baseCN}--truefalse` : "";
+  const disableAnswerBoxClass = isAnswered ? `${baseCN}--disabled` : "";
+  const className = `${baseCN} p-5 ${disableAnswerBoxClass}`;
 
   return (
-    <div
-      className={`practice__session--answer m-block-4 ${disableAnswerBoxClass}`}
-    >
+    <div className={className}>
       {options.length > 0 ? (
         <FormField
           id={0}
           name="answer"
           input={selectedOptionInput}
-          className={trueOrFalseVariantClass}
+          className={binaryVariantCN}
           label={label}
           options={data}
           activeRadio={selectedOptionId}
