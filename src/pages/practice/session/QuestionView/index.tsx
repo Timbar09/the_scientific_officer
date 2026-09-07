@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 import type { Session } from "../../../../hooks/useSession/types";
 import type { Swiper as SwiperType } from "swiper";
@@ -13,6 +13,7 @@ import "swiper/css";
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
   const questionRef = useRef<HTMLElement>(null);
+  const [isQuestionCardMounted, setIsQuestionCardMounted] = useState(false);
   const [hideShowAnswerButton, setHideShowAnswerButton] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
   const [selectedOptionId, setSelectedOptionId] = useState<number | undefined>(
@@ -35,6 +36,10 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     ? revealedHintQuestionIds.has(question.id)
     : false;
 
+  useLayoutEffect(() => {
+    setIsQuestionCardMounted(Boolean(questionRef.current));
+  }, [current, list]);
+
   if (!settings || !current || !list) {
     return null;
   }
@@ -56,16 +61,18 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
       <h2 className="sr-only">Practice Session</h2>
 
       <div className="practice__session--content flex flex-col flex-@lg-row ai-start gap-3 gap-@lg-4">
-        <Overview
-          questions={list}
-          userAnswers={userAnswers}
-          questionNum={index}
-          jumpToQuestion={jumpToQuestion}
-          questionCardRef={questionRef as React.RefObject<HTMLElement>}
-          swiperInstance={swiperInstance}
-          setSwiperInstance={setSwiperInstance}
-          reset={reset}
-        />
+        {isQuestionCardMounted && (
+          <Overview
+            questions={list}
+            userAnswers={userAnswers}
+            questionNum={index}
+            jumpToQuestion={jumpToQuestion}
+            questionCardRef={questionRef as React.RefObject<HTMLElement>}
+            swiperInstance={swiperInstance}
+            setSwiperInstance={setSwiperInstance}
+            reset={reset}
+          />
+        )}
 
         <section
           className={`practice__session--question p-5 ${currentQAnsweredClass}`}

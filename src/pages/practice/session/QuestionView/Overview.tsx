@@ -1,4 +1,10 @@
-import { useRef, useEffect, useLayoutEffect, useState } from "react";
+import {
+  useRef,
+  useEffect,
+  useLayoutEffect,
+  useState,
+  type CSSProperties,
+} from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useMediaQuery } from "../../../../hooks/useMediaQuery";
 
@@ -123,9 +129,7 @@ const RightOverview = ({
   questionCardRef,
 }: RightOverviewProps) => {
   const listRef = useRef<HTMLUListElement>(null);
-  const [height, setHeight] = useState<number | null>(
-    questionCardRef?.current?.offsetHeight || null,
-  );
+  const [height, setHeight] = useState<number | null>(null);
   const [listPosition, setListPosition] = useState(0);
 
   useLayoutEffect(() => {
@@ -147,8 +151,9 @@ const RightOverview = ({
     setListPosition(Math.min(Math.max(targetOffset, 0), clampMax));
   }, [questionCardRef, questionNum, questions.length]);
 
-  const rightOverviewStyle = {
-    maxHeight: height ? `${height}px` : "100%",
+  const rightOverviewStyle: CSSProperties = {
+    maxHeight: height !== null ? `${height}px` : "100%",
+    visibility: height !== null ? "visible" : "hidden",
   };
 
   const rightOverviewListStyle = {
