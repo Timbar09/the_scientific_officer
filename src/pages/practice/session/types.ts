@@ -63,5 +63,6 @@ export interface NavButtonsProps {
   allQuestionsAnswered: boolean;
   hideShowAnswerButton: boolean;
   reset: () => void;
+  answerExplanation: string;
   swiperInstance: SwiperType | null;
 }

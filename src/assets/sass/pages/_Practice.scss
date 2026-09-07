@@ -603,12 +603,12 @@
 
       &__hint {
         --border-clr: #{clr(alert, 500)};
-        --bg-clr: #{clr(alert, 500, 0.125)};
+        --bg-clr: #{clr(alert, 400, 0.05)};
         --icon-clr: #{clr(alert, 600)};
         --icon-bg-clr: #{clr(alert, 400)};
         --text-clr: #{clr(alert, 600)};
 
-        border-bottom: 1px solid clr(primary, 200);
+        padding-bottom: 0;
       }
 
       &__text {
@@ -646,7 +646,7 @@
         --icon-bg-clr: #{clr(alert, 100)};
         --text-clr: #{clr(alert, 300)};
 
-        border-top: 1px solid clr(primary, 200);
+        padding-top: 0;
 
         &--text {
           font-style: italic;

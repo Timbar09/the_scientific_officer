@@ -1,3 +1,5 @@
+import InfoCard from "./InfoCard";
+
 import type { IconProps } from "../../../../components/Button";
 import type { NavButtonsProps } from "../types";
 
@@ -13,6 +15,7 @@ const NavButtons = ({
   allQuestionsAnswered,
   hideShowAnswerButton,
   reset,
+  answerExplanation,
   swiperInstance,
 }: NavButtonsProps) => {
   const nextBtnIcon: IconProps = { name: "arrow_forward", position: "right" };
@@ -39,45 +42,54 @@ const NavButtons = ({
   };
 
   return (
-    <footer className="practice__session--question__footer p-5 flex jc-between flex-wrap gap-2">
-      <div>
-        {hideShowAnswerButton && (
-          <Button
-            variant="secondary"
-            className="btn--secondary"
-            onClick={toggleAnswer}
-          >
-            {showAnswer ? "Hide Answer" : "Show Answer"}
-          </Button>
-        )}
-      </div>
+    <footer className="practice__session--question__footer p-5">
+      <InfoCard
+        display={hideShowAnswerButton && showAnswer}
+        classPrefix="explanation"
+        icon="info"
+        text={answerExplanation}
+      />
 
-      <div>
-        {allQuestionsAnswered && (
-          <Button onClick={submit}>Submit Answers</Button>
-        )}
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {displayNav && (
-          <>
+      <div className="flex jc-between flex-wrap gap-2">
+        <div>
+          {hideShowAnswerButton && (
             <Button
-              variant={navButtonVariant}
-              onClick={handlePrevQuestionClick}
-              icon={prevBtnIcon}
+              variant="secondary"
+              className="btn--secondary"
+              onClick={toggleAnswer}
             >
-              Prev
+              {showAnswer ? "Hide Answer" : "Show Answer"}
             </Button>
+          )}
+        </div>
 
-            <Button
-              variant={navButtonVariant}
-              onClick={handleNextQuestionClick}
-              icon={nextBtnIcon}
-            >
-              Next
-            </Button>
-          </>
-        )}
+        <div>
+          {allQuestionsAnswered && (
+            <Button onClick={submit}>Submit Answers</Button>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-2">
+          {displayNav && (
+            <>
+              <Button
+                variant={navButtonVariant}
+                onClick={handlePrevQuestionClick}
+                icon={prevBtnIcon}
+              >
+                Prev
+              </Button>
+
+              <Button
+                variant={navButtonVariant}
+                onClick={handleNextQuestionClick}
+                icon={nextBtnIcon}
+              >
+                Next
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </footer>
   );

@@ -9,7 +9,7 @@ const InfoCard = ({
   text,
 }: InfoCardProps) => {
   const defaultClassName = "practice__session--question";
-  const className = `${defaultClassName}__infoCard p-block-3 ${defaultClassName}__${classPrefix}`;
+  const className = `${defaultClassName}__infoCard p-block-4 ${defaultClassName}__${classPrefix}`;
 
   const containerDefaultClassName =
     "practice__session--question__infoCard--container flex gap-1";

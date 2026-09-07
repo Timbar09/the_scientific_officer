@@ -110,24 +110,16 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
             showAnswer={showAnswer}
           />
 
-          {current.showAnswer && (
-            <InfoCard
-              display={current.showAnswer && question?.explanation !== ""}
-              classPrefix="explanation"
-              icon="info"
-              text={question?.explanation || ""}
-            />
-          )}
-
           <NavButtons
             toggleAnswer={toggleAnswer}
             previousQuestion={previousQuestion}
             nextQuestion={nextQuestion}
             submit={submit}
-            showAnswer={showAnswer}
             displayNav={list.length > 1}
             allQuestionsAnswered={areAllAnswered}
+            showAnswer={showAnswer}
             hideShowAnswerButton={hideShowAnswerButton}
+            answerExplanation={question?.explanation || ""}
             reset={reset}
             swiperInstance={swiperInstance}
           />
