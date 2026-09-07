@@ -18,6 +18,8 @@ const NavButtons = ({
   const nextBtnIcon: IconProps = { name: "arrow_forward", position: "right" };
   const prevBtnIcon: IconProps = { name: "arrow_back" };
 
+  const navButtonVariant = allQuestionsAnswered ? "tertiary" : "primary";
+
   const handleNextQuestionClick = () => {
     reset();
     nextQuestion();
@@ -37,7 +39,7 @@ const NavButtons = ({
   };
 
   return (
-    <div className="flex jc-between flex-wrap gap-2">
+    <footer className="practice__session--question__footer p-5 flex jc-between flex-wrap gap-2">
       <div>
         {hideShowAnswerButton && (
           <Button
@@ -52,26 +54,32 @@ const NavButtons = ({
 
       <div>
         {allQuestionsAnswered && (
-          <button type="button" className="btn btn--primary" onClick={submit}>
-            Submit Answers
-          </button>
+          <Button onClick={submit}>Submit Answers</Button>
         )}
       </div>
 
       <div className="flex flex-wrap gap-2">
         {displayNav && (
           <>
-            <Button onClick={handlePrevQuestionClick} icon={prevBtnIcon}>
+            <Button
+              variant={navButtonVariant}
+              onClick={handlePrevQuestionClick}
+              icon={prevBtnIcon}
+            >
               Prev
             </Button>
 
-            <Button onClick={handleNextQuestionClick} icon={nextBtnIcon}>
+            <Button
+              variant={navButtonVariant}
+              onClick={handleNextQuestionClick}
+              icon={nextBtnIcon}
+            >
               Next
             </Button>
           </>
         )}
       </div>
-    </div>
+    </footer>
   );
 };
 
