@@ -14,16 +14,22 @@ export interface PracticeSessionHeaderProps {
   submit: () => void;
 }
 
-export interface OverviewProps {
-  position?: "top" | "right";
-  questions: Question[];
-  userAnswers: Map<number, UserAnswer>;
-  questionNum: number;
-  jumpToQuestion: (index: number) => void;
-  questionCardRef?: React.RefObject<HTMLElement>;
-  swiperInstance: SwiperType | null;
-  setSwiperInstance: React.Dispatch<React.SetStateAction<SwiperType | null>>;
-  reset: () => void;
+export interface PracticeSessionHeaderProps {
+  isSessionSubmitted: boolean;
+  displayHint: boolean;
+  onRevealHint: (value: boolean) => void;
+  settings: Session["settings"];
+  questions: SessionQuestionData;
+  submit: () => void;
+}
+
+export interface QuestionHeaderProps {
+  questionNumber: number;
+  questionCount: number;
+  topicList: string[];
+  questionText: string;
+  displayHint: boolean;
+  hintText: string;
 }
 
 export interface RightOverviewProps {

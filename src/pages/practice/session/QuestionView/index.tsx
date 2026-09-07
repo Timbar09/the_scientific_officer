@@ -3,9 +3,10 @@ import { useLayoutEffect, useRef, useState } from "react";
 import type { Session } from "../../../../hooks/useSession/types";
 import type { Swiper as SwiperType } from "swiper";
 
-import Topics from "./Topics";
+import Header from "./Header";
+// import Topics from "./Topics";
 import Overview from "./Overview";
-import InfoCard from "./InfoCard";
+// import InfoCard from "./InfoCard";
 import AnswerBox from "./AnswerBox";
 import NavButtons from "./NavButtons";
 
@@ -78,26 +79,14 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
           className={`practice__session--question ${currentQAnsweredClass}`}
           ref={questionRef}
         >
-          <header className="practice__session--question__header p-5">
-            <div className="flex gap-2 ai-center">
-              <p className="practice__session--question__number">
-                Question {index + 1} of {list.length}
-              </p>
-
-              <Topics list={settings.topics} />
-            </div>
-
-            <h2 className="practice__session--question__text m-block-start-2">
-              {question?.text}
-            </h2>
-
-            <InfoCard
-              display={isHintRevealed && settings.hintsEnabled}
-              classPrefix="hint"
-              icon="lightbulb_2"
-              text={question?.hint || ""}
-            />
-          </header>
+          <Header
+            questionNumber={index + 1}
+            questionCount={list.length}
+            topicList={settings.topics}
+            questionText={question?.text || ""}
+            displayHint={isHintRevealed && settings.hintsEnabled}
+            hintText={question?.hint || ""}
+          />
 
           <AnswerBox
             options={question?.options || []}
