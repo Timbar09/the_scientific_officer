@@ -5,7 +5,7 @@ import type { NavButtonsProps } from "../types";
 
 import Button from "../../../../components/Button";
 
-const NavButtons = ({
+const Footer = ({
   toggleAnswer,
   previousQuestion,
   nextQuestion,
@@ -95,4 +95,4 @@ const NavButtons = ({
   );
 };
 
-export default NavButtons;
+export default Footer;
