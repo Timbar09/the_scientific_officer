@@ -117,9 +117,13 @@ const RadioButtonOption = ({
     ? register(name, {
         ...rules,
       })
-    : {};
+    : undefined;
+
+  const { onChange: rhfOnChange, ...inputProps } = rhfProps ?? {};
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    rhfOnChange?.(event);
+
     if (onChange) {
       onChange(event);
     }
@@ -140,9 +144,9 @@ const RadioButtonOption = ({
         type="radio"
         value={value}
         disabled={disabled}
+        {...inputProps}
         onChange={handleChange}
         checked={isActive}
-        {...rhfProps}
       />
 
       <span className={`form__radio--item__content ${contentVariantClass}`}>

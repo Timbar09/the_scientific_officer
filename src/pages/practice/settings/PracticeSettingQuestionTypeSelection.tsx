@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { UseFormRegister, FieldValues } from "react-hook-form";
 import type { FormFieldData } from "../../../components/Form/types";
@@ -18,8 +18,26 @@ const PracticeSettingQuestionTypeSelection = ({
   register,
   formSectionData,
 }: QuestionTypeSelectionProps) => {
-  const [selectedTypeId, setSelectedTypeId] = useState<number>(0);
   const { name, defaultValue, questionTypes } = formSectionData;
+
+  const [selectedTypeId, setSelectedTypeId] = useState<number>(
+    defaultValue === "all"
+      ? 0
+      : (questionTypes.find((questionType) => {
+          return questionType.name.toLowerCase() === defaultValue;
+        })?.id ?? 0),
+  );
+
+  useEffect(() => {
+    const nextSelectedTypeId =
+      defaultValue === "all"
+        ? 0
+        : (questionTypes.find((questionType) => {
+            return questionType.name.toLowerCase() === defaultValue;
+          })?.id ?? 0);
+
+    setSelectedTypeId(nextSelectedTypeId);
+  }, [defaultValue, questionTypes]);
 
   const label = {
     text: "Select Type of Questions",
@@ -29,7 +47,7 @@ const PracticeSettingQuestionTypeSelection = ({
   const allType = {
     id: 0,
     value: "all",
-    isChecked: defaultValue === "all",
+    isChecked: selectedTypeId === 0,
   };
 
   const options = questionTypes
@@ -37,7 +55,7 @@ const PracticeSettingQuestionTypeSelection = ({
     .map(({ id, name }) => ({
       id,
       value: name.toLowerCase(),
-      isChecked: false,
+      isChecked: selectedTypeId === id,
     }));
 
   options.unshift(allType);
