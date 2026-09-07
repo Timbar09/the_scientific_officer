@@ -4,11 +4,9 @@ import type { Session } from "../../../../hooks/useSession/types";
 import type { Swiper as SwiperType } from "swiper";
 
 import Header from "./Header";
-// import Topics from "./Topics";
 import Overview from "./Overview";
-// import InfoCard from "./InfoCard";
 import AnswerBox from "./AnswerBox";
-import NavButtons from "./NavButtons";
+import Footer from "./Footer";
 
 import "swiper/css";
 
@@ -99,7 +97,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
             showAnswer={showAnswer}
           />
 
-          <NavButtons
+          <Footer
             toggleAnswer={toggleAnswer}
             previousQuestion={previousQuestion}
             nextQuestion={nextQuestion}
