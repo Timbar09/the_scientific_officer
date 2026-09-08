@@ -2,6 +2,11 @@
 
 .practice {
   min-height: 100vh;
+  padding-top: calc(spacing(5) * 4);
+
+  @include mq("md") {
+    padding-top: calc(spacing(5) * 3);
+  }
 
   &__header {
     .container {
@@ -155,14 +160,20 @@
           }
 
           &__item {
-            flex: 1;
-            height: 1.25em;
-            width: 1%;
-            background-color: clr(neutral, 300);
-            border-radius: radius(sm);
+            width: 100%;
+            height: 100%;
+            border-radius: inherit;
+
+            &--container {
+              position: relative;
+              flex: 1;
+              height: 1.25em;
+              background-color: clr(neutral, 300);
+              border-radius: radius(sm);
+            }
 
             &--completed {
-              background-color: clr(primary, 500);
+              background-color: clr(alert, 200, var(--step-bg-opacity, 1));
             }
           }
         }
