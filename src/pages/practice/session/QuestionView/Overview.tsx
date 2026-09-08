@@ -67,18 +67,21 @@ const TopOverview = ({
   reset,
 }: OverviewProps) => {
   const [slidesPerView, setSlidesPerView] = useState(1);
-  const isMobile = useMediaQuery({ breakpoint: "sm" });
-  const isTablet = useMediaQuery({ breakpoint: "md" });
+  const isSmallScreen = useMediaQuery({ breakpoint: "xs" });
+  const isMediumScreen = useMediaQuery({ breakpoint: "sm" });
+  const isLargeScreen = useMediaQuery({ breakpoint: "md" });
 
   useEffect(() => {
-    if (isMobile) {
-      setSlidesPerView(4);
-    } else if (isTablet) {
+    if (isLargeScreen) {
       setSlidesPerView(6);
+    } else if (isMediumScreen) {
+      setSlidesPerView(4);
+    } else if (isSmallScreen) {
+      setSlidesPerView(2);
     } else {
       setSlidesPerView(1);
     }
-  }, [isMobile, isTablet]);
+  }, [isSmallScreen, isMediumScreen, isLargeScreen]);
 
   // TODO: Add functionality for the current question  to be in view when the user navigates to it, and also for the user to be able to click on a question in the overview to navigate to that question.
 

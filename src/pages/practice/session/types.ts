@@ -32,6 +32,17 @@ export interface QuestionHeaderProps {
   hintText: string;
 }
 
+export interface OverviewProps {
+  questions: Question[];
+  userAnswers: Map<number, UserAnswer>;
+  questionNum: number;
+  jumpToQuestion: (index: number) => void;
+  questionCardRef?: React.RefObject<HTMLElement>;
+  swiperInstance: SwiperType | null;
+  setSwiperInstance: React.Dispatch<React.SetStateAction<SwiperType | null>>;
+  reset: () => void;
+}
+
 export interface RightOverviewProps {
   questions: Question[];
   userAnswers: Map<number, UserAnswer>;

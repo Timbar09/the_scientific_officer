@@ -10,7 +10,8 @@ import { useEffect, useState } from "react";
  */
 
 export const BREAKPOINTS: { [key: string]: string } = {
-  sm: "30em",
+  xs: "25em",
+  sm: "35em",
   md: "45em",
   lg: "65em",
 };
