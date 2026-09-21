@@ -131,12 +131,14 @@ const useSession = () => {
     const all = Array.from(userAnswers.values());
     const correct = all.filter((a) => a.isCorrect).length;
     const wrong = all.filter((a) => !a.isCorrect);
+    const unanswered = all.filter((a) => a.selectedAnswer === "");
     const score = Math.round((correct / Math.max(list.length, 1)) * 100);
 
     const r: SessionResults = {
       totalQuestions: list.length,
-      correctAnswers: correct,
+      correctCount: correct,
       wrongAnswers: wrong,
+      unansweredQuestions: unanswered,
       score,
     };
 

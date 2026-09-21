@@ -71,7 +71,8 @@ export interface UserAnswer {
 // Results summary after session completes
 export interface SessionResults {
   totalQuestions: number;
-  correctAnswers: number;
+  correctCount: number;
   wrongAnswers: UserAnswer[];
+  unansweredQuestions: UserAnswer[];
   score: number;
 }
