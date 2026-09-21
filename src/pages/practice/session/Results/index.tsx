@@ -2,7 +2,9 @@ import { useNavigate } from "react-router";
 
 import type { SessionResults, Question } from "../../types";
 
+import Button, { type IconProps } from "../../../../components/Button";
 import Summary from "./Summary";
+// import Icon from "../../../../components/Icon";
 
 interface Props {
   sessionResults: SessionResults;
@@ -72,19 +74,18 @@ const WrongAnswersList = ({ wrongAnswers, questions }: WrongAnswersProps) => {
 
 const Footer = () => {
   const navigate = useNavigate();
+  const newSessionIcon: IconProps = { name: "add" };
+  const homeIcon: IconProps = { name: "home" };
 
   return (
-    <footer className="flex flex-wrap gap-2">
-      <button
-        type="button"
-        className="btn btn--primary"
-        onClick={() => navigate("/practice")}
-      >
-        Try Another Session
-      </button>
-      <button type="button" className="btn" onClick={() => navigate("/")}>
+    <footer className="flex flex-wrap jc-end gap-2">
+      <Button onClick={() => navigate("/practice")} icon={newSessionIcon}>
+        Try a New Session
+      </Button>
+
+      <Button onClick={() => navigate("/")} variant="secondary" icon={homeIcon}>
         Back to Home
-      </button>
+      </Button>
     </footer>
   );
 };
