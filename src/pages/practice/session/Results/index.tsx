@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router";
+
 import type { SessionResults, Question } from "../../types";
+
+import Summary from "./Summary";
 
 interface Props {
   sessionResults: SessionResults;
@@ -8,34 +11,23 @@ interface Props {
 
 const PracticeResults = ({ sessionResults, questions }: Props) => {
   const navigate = useNavigate();
+  const { wrongAnswers } = sessionResults;
+
+  const getWrongQuestion = (wrongAnswer: SessionResults["wrongAnswers"][0]) => {
+    return questions.find((q) => q.id === wrongAnswer.questionId);
+  };
 
   return (
     <div className="practice__results grid gap-4 m-block-start-4">
-      <section className="practice__results--summary p-3">
-        <h2 className="text-3xl m-block-end-2">
-          Final Score: {sessionResults.score}%
-        </h2>
-        <p className="text-lg">
-          <strong>Correct Answers:</strong> {sessionResults.correctAnswers} of{" "}
-          {sessionResults.totalQuestions}
-        </p>
-        <p className="text-lg">
-          <strong>Wrong Answers:</strong> {sessionResults.wrongAnswers.length}
-        </p>
-      </section>
+      <Summary {...sessionResults} />
 
-      {sessionResults.wrongAnswers.length > 0 ? (
+      {wrongAnswers.length > 0 && (
         <section className="practice__results--wrong-answers p-3">
           <h3 className="text-xl m-block-end-2">Review Wrong Answers:</h3>
           <ul className="grid gap-3">
-            {sessionResults.wrongAnswers.map((wrongAnswer) => {
-              const question = questions.find(
-                (q) => q.id === wrongAnswer.questionId,
-              );
-              // const variant =
-              //   question?.variants[
-              //     settings.questionType as keyof typeof question.variants
-              //   ];
+            {wrongAnswers.map((wrongAnswer) => {
+              const question = getWrongQuestion(wrongAnswer);
+
               return (
                 <li
                   key={wrongAnswer.questionId}
@@ -58,11 +50,6 @@ const PracticeResults = ({ sessionResults, questions }: Props) => {
               );
             })}
           </ul>
-        </section>
-      ) : (
-        <section className="practice__results--perfect p-3">
-          <h3 className="text-xl">Perfect Score! 🎉</h3>
-          <p>You got all questions correct!</p>
         </section>
       )}
 

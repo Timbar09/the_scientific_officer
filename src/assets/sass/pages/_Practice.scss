@@ -669,4 +669,120 @@
       }
     }
   }
+
+  &__results {
+    // * {
+    //   border: 1px solid clr(neutral, 300);
+    // }
+
+    &--summary {
+      background-color: clr(neutral, 100);
+      border-radius: radius(lg);
+      box-shadow: $shadow-lg;
+    }
+
+    &--title {
+      font-size: calc(fs("xs") * 0.875);
+    }
+
+    &--right {
+      width: 100%;
+    }
+
+    &--score {
+      border-radius: radius(lg);
+      &__value {
+        display: block;
+        font-size: calc(fs("3xl") * 1.5);
+      }
+
+      &__abysmal {
+        color: clr(alert, 900);
+        background-color: clr(alert, 800);
+      }
+
+      &__poor {
+        color: clr(alert, 800);
+        background-color: clr(alert, 700);
+      }
+
+      &__fair {
+        color: clr(alert, 600);
+        background-color: clr(alert, 400);
+      }
+
+      &__good {
+        color: clr(alert, 300);
+        background-color: clr(alert, 200, 0.25);
+      }
+
+      &__veryGood {
+        color: clr(alert, 300);
+        background-color: clr(alert, 200, 0.5);
+      }
+
+      &__excellent {
+        color: clr(alert, 300);
+        background-color: clr(alert, 200, 0.75);
+      }
+
+      &__perfect {
+        color: clr(alert, 300);
+        background-color: clr(alert, 200);
+      }
+    }
+
+    &--verdict {
+      padding-block-start: calc(spacing(3) * 1.25);
+      padding-block-end: 0;
+    }
+
+    &--detail {
+      &__item {
+        text-align: center;
+
+        &:nth-child(even) {
+          position: relative;
+
+          &::after,
+          &::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 2px;
+            height: 50%;
+            background-color: clr(neutral, 300);
+            border-radius: radius(pill);
+          }
+
+          &::after {
+            right: 0;
+          }
+
+          &::before {
+            left: 0;
+          }
+        }
+
+        &--value {
+          display: block;
+          font-size: fs("2xl");
+          font-weight: 600;
+
+          &__correct {
+            color: clr(alert, 200);
+          }
+
+          &__wrong {
+            color: clr(alert, 800);
+          }
+
+          &__unanswered {
+            color: clr(neutral, 500);
+          }
+        }
+      }
+    }
+  }
 }
