@@ -743,36 +743,43 @@
       &__abysmal {
         color: clr(alert, 900);
         background-color: clr(alert, 800);
+        border: 1px solid clr(alert, 900, 0.25);
       }
 
       &__poor {
         color: clr(alert, 800);
         background-color: clr(alert, 700);
+        border: 1px solid clr(alert, 800, 0.25);
       }
 
       &__fair {
         color: clr(alert, 600);
         background-color: clr(alert, 400);
+        border: 1px solid clr(alert, 500, 0.75);
       }
 
       &__good {
         color: clr(alert, 300);
         background-color: clr(alert, 200, 0.25);
+        border: 1px solid clr(alert, 300, 0.25);
       }
 
       &__veryGood {
         color: clr(alert, 300);
         background-color: clr(alert, 200, 0.5);
+        border: 1px solid clr(alert, 300, 0.5);
       }
 
       &__excellent {
         color: clr(alert, 300);
         background-color: clr(alert, 200, 0.75);
+        border: 1px solid clr(alert, 300, 0.75);
       }
 
       &__perfect {
         color: clr(alert, 300);
         background-color: clr(alert, 200);
+        border: 1px solid clr(alert, 300);
       }
     }
 
