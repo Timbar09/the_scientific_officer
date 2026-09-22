@@ -780,5 +780,74 @@
       padding-block-start: calc(spacing(3) * 1.25);
       padding-block-end: 0;
     }
+
+    &--wrongAnswer {
+      &__item {
+        &--number {
+          background-color: clr(neutral, 100);
+          border-radius: radius(lg);
+          cursor: pointer;
+
+          &:hover {
+            .practice__results--wrongAnswer__item--number {
+              &__value {
+                color: clr(primary, 600);
+              }
+
+              &__icon {
+                opacity: 1;
+              }
+            }
+          }
+
+          &.open {
+            .practice__results--wrongAnswer__item--number {
+              &__value {
+                color: clr(primary, 600);
+              }
+
+              &__icon {
+                opacity: 1;
+
+                > .material-symbols-outlined {
+                  transform: rotate(180deg);
+                }
+              }
+            }
+          }
+
+          &__value {
+            font-size: fs(lg);
+            font-weight: 800;
+          }
+
+          &__icon {
+            opacity: 0;
+            padding: calc(spacing(1) * 0.75);
+            border-radius: radius(md);
+            color: clr(primary, 500);
+            background-color: clr(neutral, 200);
+            transition: opacity 250ms ease;
+
+            > .material-symbols-outlined {
+              transition: transform 250ms ease;
+            }
+          }
+        }
+
+        &--explanation {
+          &__container {
+            background-color: clr(neutral, 200);
+            border-radius: 0 0 radius(lg) radius(lg);
+          }
+
+          &__correct {
+            > strong {
+              min-width: max-content;
+            }
+          }
+        }
+      }
+    }
   }
 }
