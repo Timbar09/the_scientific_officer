@@ -671,22 +671,66 @@
   }
 
   &__results {
-    // * {
-    //   border: 1px solid clr(neutral, 300);
-    // }
+    &--title {
+      font-size: calc(fs("xs") * 0.875);
+    }
 
     &--summary {
       background-color: clr(neutral, 100);
       border-radius: radius(lg);
       box-shadow: $shadow-lg;
-    }
 
-    &--title {
-      font-size: calc(fs("xs") * 0.875);
-    }
+      &__left {
+        width: 100%;
+      }
 
-    &--right {
-      width: 100%;
+      &__right {
+        &--item {
+          text-align: center;
+
+          &:nth-child(even) {
+            position: relative;
+
+            &::after,
+            &::before {
+              content: "";
+              position: absolute;
+              top: 50%;
+              transform: translateY(-50%);
+              width: 2px;
+              height: 50%;
+              background-color: clr(neutral, 300);
+              border-radius: radius(pill);
+            }
+
+            &::after {
+              right: 0;
+            }
+
+            &::before {
+              left: 0;
+            }
+          }
+
+          &__value {
+            display: block;
+            font-size: fs("2xl");
+            font-weight: 600;
+
+            &--correct {
+              color: clr(alert, 200);
+            }
+
+            &--wrong {
+              color: clr(alert, 800);
+            }
+
+            &--unanswered {
+              color: clr(neutral, 500);
+            }
+          }
+        }
+      }
     }
 
     &--score {
@@ -735,54 +779,6 @@
     &--verdict {
       padding-block-start: calc(spacing(3) * 1.25);
       padding-block-end: 0;
-    }
-
-    &--detail {
-      &__item {
-        text-align: center;
-
-        &:nth-child(even) {
-          position: relative;
-
-          &::after,
-          &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 2px;
-            height: 50%;
-            background-color: clr(neutral, 300);
-            border-radius: radius(pill);
-          }
-
-          &::after {
-            right: 0;
-          }
-
-          &::before {
-            left: 0;
-          }
-        }
-
-        &--value {
-          display: block;
-          font-size: fs("2xl");
-          font-weight: 600;
-
-          &__correct {
-            color: clr(alert, 200);
-          }
-
-          &__wrong {
-            color: clr(alert, 800);
-          }
-
-          &__unanswered {
-            color: clr(neutral, 500);
-          }
-        }
-      }
     }
   }
 }

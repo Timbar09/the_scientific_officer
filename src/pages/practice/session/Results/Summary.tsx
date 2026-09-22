@@ -14,12 +14,32 @@ interface ScoreCategory {
   message: string;
 }
 
+const BASE_CN = "practice__results";
+
 const Summary = ({
   score,
   correctCount,
   wrongAnswers,
   unansweredQuestions,
 }: SessionResults) => {
+  const metrics = [
+    {
+      id: "correct",
+      title: "Correct",
+      value: correctCount,
+    },
+    {
+      id: "wrong",
+      title: "Wrong",
+      value: wrongAnswers.length,
+    },
+    {
+      id: "unanswered",
+      title: "Unanswered",
+      value: unansweredQuestions.length,
+    },
+  ];
+
   const scoreData: Record<ScoreCategoryKey, ScoreCategory> = {
     abysmal: {
       id: "abysmal",
@@ -71,53 +91,41 @@ const Summary = ({
   const category = getCategory(score);
   const verdict = scoreData[category as keyof typeof scoreData];
 
-  return (
-    <section className="practice__results--summary flex flex-col flex-@md-row jc-between ai-center">
-      <div className="practice__results--right flex gap-1">
-        <div
-          className={`practice__results--score practice__results--score__${category} p-3`}
-        >
-          <h2>
-            <span className="practice__results--title">FINAL SCORE</span>
+  const baseCN = `${BASE_CN}--summary`;
+  const containerCN = `${baseCN} flex flex-col flex-@md-row jc-between ai-center`;
 
-            <span className="practice__results--score__value">{score}%</span>
+  return (
+    <section className={containerCN}>
+      <div className={`${baseCN}__left flex gap-1`}>
+        <div className={`${BASE_CN}--score ${BASE_CN}--score__${category} p-3`}>
+          <h2>
+            <span className={`${BASE_CN}--title`}>FINAL SCORE</span>
+
+            <span className={`${BASE_CN}--score__value`}>{score}%</span>
           </h2>
         </div>
 
-        <div className="practice__results--verdict p-3">
+        <div className={`${BASE_CN}--verdict p-3`}>
           <h3 className="fs-lg">{verdict.title}</h3>
           <p className="m-block-start-1">{verdict.message}</p>
         </div>
       </div>
 
-      <div className="practice__results--detail flex">
-        <div className="practice__results--detail__item p-3">
-          <h3>
-            <span className="practice__results--detail__item--value practice__results--detail__item--value__correct">
-              {correctCount}
-            </span>
+      <div className="practice__results--summary__right flex">
+        {metrics.map((metric) => {
+          const itemCN = `${baseCN}__right--item p-3`;
+          const valueCN = `${baseCN}__right--item__value ${baseCN}__right--item__value--${metric.id}`;
+          const titleCN = `${BASE_CN}--title`;
 
-            <span className="practice__results--title">CORRECT</span>
-          </h3>
-        </div>
-
-        <div className="practice__results--detail__item p-3">
-          <h3>
-            <span className="practice__results--detail__item--value practice__results--detail__item--value__wrong">
-              {wrongAnswers.length}
-            </span>
-            <span className="practice__results--title">WRONG</span>
-          </h3>
-        </div>
-
-        <div className="practice__results--detail__item p-3">
-          <h3>
-            <span className="practice__results--detail__item--value practice__results--detail__item--value__unanswered">
-              {unansweredQuestions.length}
-            </span>
-            <span className="practice__results--title">UNANSWERED</span>
-          </h3>
-        </div>
+          return (
+            <div key={metric.id} className={itemCN}>
+              <h3>
+                <span className={valueCN}>{metric.value}</span>
+                <span className={titleCN}>{metric.title.toUpperCase()}</span>
+              </h3>
+            </div>
+          );
+        })}
       </div>
     </section>
   );
