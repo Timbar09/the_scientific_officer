@@ -108,6 +108,7 @@ const useSession = () => {
 
       updated.set(currentQuestion.id, {
         questionId: currentQuestion.id,
+        questionNum: currentQuestionIndex + 1,
         selectedAnswer: answer,
         isCorrect: answer === currentQuestion.answer,
         correctAnswer: currentQuestion.answer,

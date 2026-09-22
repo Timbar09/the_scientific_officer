@@ -63,6 +63,7 @@ export interface SessionSettings {
 // Track user's answer for each question
 export interface UserAnswer {
   questionId: number;
+  questionNum: number;
   selectedAnswer: string;
   isCorrect: boolean;
   correctAnswer: string;
