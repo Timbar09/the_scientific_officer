@@ -60,7 +60,7 @@ export const getSessionQuestions = (
   }
 
   if (questionType && questionType.toLowerCase() !== "all") {
-    filteredQuestions = questionList.filter(
+    filteredQuestions = filteredQuestions.filter(
       (q) => q.variant.toLowerCase() === questionType.toLowerCase(),
     );
   }
@@ -112,6 +112,7 @@ export const getCurrentQuestion = (
 
 export const getAnswersWithCurrentSelection = (
   currentQuestion: Question | undefined,
+  currentQuestionNum: number,
   selectedAnswer: string,
   userAnswers: Map<number, UserAnswer>,
 ): Map<number, UserAnswer> => {
@@ -121,6 +122,7 @@ export const getAnswersWithCurrentSelection = (
   if (currentQuestion && selectedAnswer && selectedAnswer !== "") {
     map.set(currentQuestion.id, {
       questionId: currentQuestion.id,
+      questionNum: currentQuestionNum,
       selectedAnswer,
       isCorrect: selectedAnswer === answer,
       correctAnswer: answer || "",
