@@ -1,0 +1,71 @@
+{
+  "meta": {
+    "version": "0.1.0",
+    "description": "Top-level index for the split mock question bank"
+  },
+  "questionTypes": [
+    {
+      "id": 1,
+      "idPrefix": "mc",
+      "name": "Multiple Choice",
+      "slug": "multiple-choice",
+      "icon": "check_box",
+      "description": "Select the best answer from a list of options",
+      "available": true
+    },
+    {
+      "id": 2,
+      "idPrefix": "tf",
+      "name": "True/False",
+      "slug": "true-false",
+      "icon": "balance",
+      "description": "Indicate whether the statement is true or false",
+      "available": true
+    },
+    {
+      "id": 3,
+      "idPrefix": "sa",
+      "name": "Short Answer",
+      "slug": "short-answer",
+      "icon": "short_text",
+      "description": "Provide a brief written response to the question",
+      "available": false
+    },
+    {
+      "id": 4,
+      "idPrefix": "da",
+      "name": "Detailed Answer",
+      "slug": "detailed-answer",
+      "icon": "article",
+      "description": "Provide a detailed written response to the question",
+      "available": false
+    }
+  ],
+  "questionFiles": [
+    {
+      "id": "chapter-1-baits",
+      "title": "Chapter 1 - BAITS",
+      "file": "chapter-1-baits.questions.json"
+    },
+    {
+      "id": "chapter-2-diseases",
+      "title": "Chapter 2 - Diseases",
+      "file": "chapter-2-diseases.questions.json"
+    },
+    {
+      "id": "chapter-3-regulations-border-control",
+      "title": "Chapter 3 - Regulations and Border Control",
+      "file": "chapter-3-regulations-border-control.questions.json"
+    },
+    {
+      "id": "chapter-4-organizations-pharmacology",
+      "title": "Chapter 4 - Organizations and Pharmacology",
+      "file": "chapter-4-organizations-pharmacology.questions.json"
+    },
+    {
+      "id": "chapter-5-pharmacology",
+      "title": "Chapter 5 - Pharmacology",
+      "file": "chapter-5-pharmacology.questions.json"
+    }
+  ]
+}

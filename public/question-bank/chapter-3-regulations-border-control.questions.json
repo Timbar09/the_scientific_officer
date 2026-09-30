@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "id": "chapter-3-regulations-border-control",
+    "title": "Chapter 3 - Regulations and Border Control",
+    "version": "0.1.0",
+    "topicIds": [
+      "regulations",
+      "ethics",
+      "conduct",
+      "biosecurity",
+      "border-control",
+      "diseases"
+    ]
+  },
+  "questions": [
+    {
+      "id": "regulations-1",
+      "topics": ["regulations", "ethics", "conduct"],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "What should you NOT do if your supervisor tells you to ignore procedure?",
+          "options": [
+            "Seek clarification on the instructions and express concerns about the potential risks of ignoring procedure",
+            "Refer to official veterinary regulations and protocols",
+            "Document the directive and your concerns",
+            "Follow supervisor's instructions regardless of legality",
+            "Escalate the issue if necessary"
+          ],
+          "answer": "Follow supervisor's instructions regardless of legality",
+          "explanation": "Ignoring official veterinary regulations and protocols can compromise animal health and welfare, as well as legal compliance.",
+          "hint": "Think about the consequences of following unlawful instructions."
+        },
+        "true-false": {
+          "text": "If your supervisor tells you to ignore procedure, you should follow their instructions without question.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "Following official veterinary regulations and protocols is essential, even if it means challenging a supervisor's instruction.",
+          "hint": "Think about the importance of following regulations and protecting animal health, even if it means challenging a supervisor's instruction."
+        },
+        "short-answer": {
+          "text": "If your supervisor tells you to ignore procedure, what should you do?",
+          "answer": "Seek clarification, refer to official regulations, express concerns, document the directive, and escalate if necessary.",
+          "explanation": "Following official veterinary regulations and protocols is essential, even if it means challenging a supervisor's instruction.",
+          "hint": "Think about the importance of following regulations and protecting animal health, even if it means challenging a supervisor's instruction."
+        },
+        "detailed-answer": {
+          "text": "What do you do when your supervisor tells you not to follow the procedure when handling a consignment at the border?",
+          "answer": "Seek Clarification: I would politely and respectfully seek clarification from my supervisor, asking for the rationale behind deviating from the standard operating procedures (SOPs). There might be an exceptional circumstance or a new directive I am unaware of, Refer to SOPs/Legislation: I would refer to the official procedures, national legislation (e.g., Animal Diseases Act), and international standards (WOAH guidelines) that govern border control and disease prevention. These are in place to protect the country's animal health status, Express Concerns: I would express my professional concerns regarding the potential risks of not following procedure, especially concerning disease introduction, trade implications, and my professional responsibility as a veterinary officer, Document the Directive: If the supervisor insists on the deviation, I would respectfully request the directive in writing, or at least document the conversation, including the date, time, and specific instructions given. This is for my protection and to ensure accountability, Escalate (if necessary): If the directive clearly compromises animal health, public health, or violates established laws and I cannot resolve it with my immediate supervisor, I would escalate the matter through the appropriate chain of command within the Department of Veterinary Services, or to an ethics committee if one exists. My duty is to the health and safety of the nation's livestock and citizens.",
+          "explanation": "This is a critical ethical and professional dilemma. Your response should prioritize adherence to established procedures and professional integrity",
+          "hint": "Think about the importance of following regulations and protecting animal health, even if it means challenging a supervisor's instruction."
+        }
+      }
+    },
+    {
+      "id": "regulations-2",
+      "topics": [
+        "diseases",
+        "biosecurity",
+        "border-control",
+        "regulations",
+        "conduct"
+      ],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "What NOT to do when a consignment is non-compliant?",
+          "options": [
+            "Immediate Isolation",
+            "Detailed Assessment and Consultation",
+            "Options for Resolution (Rectification, Refusal of Entry/Re-export, Destruction)",
+            "Allow entry and leave to police officials",
+            "Documentation and Biosecurity Measures"
+          ],
+          "answer": "Allow entry and leave to police officials",
+          "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
+          "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
+        },
+        "true-false": {
+          "text": "A non-compliant consignment should be allowed entry and left to police officials.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
+          "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
+        },
+        "short-answer": {
+          "text": "What do you do when a consignment is non-compliant?",
+          "answer": "Immediate isolation, detailed assessment, consultation with authorities, options for resolution (rectification, refusal of entry/re-export, destruction), documentation, and biosecurity measures.",
+          "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
+          "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
+        },
+        "detailed-answer": {
+          "text": "What do you do when a consignment is non-compliant?",
+          "answer": "Immediate Isolation: The consignment would be immediately isolated from other animals and potential contamination sources, Detailed Assessment: Identify the specific nature of the non-compliance (e.g., missing documents, signs of disease, incorrect identification, unauthorized species), Consultation: Immediately inform my supervisor and relevant authorities (e.g., Customs, Department of Veterinary Services headquarters) for guidance, Options for Resolution: Depending on the non-compliance, options include; ( *Rectification - If minor (e.g., missing minor document that can be immediately provided), allow for rectification under strict supervision, *Refusal of Entry/Re-export - For significant non-compliance (e.g., disease suspicion, major document fraud), the consignment would be refused entry and, if feasible, ordered for re-export to the country of origin, *Destruction - In cases of high disease risk or inability to re-export, humane destruction of the animals or products may be necessary, following legal procedures), Documentation: Meticulously document all findings, actions taken, and communications with the importer and authorities, Biosecurity: Ensure thorough cleaning and disinfection of the area and equipment after handling the non-compliant consignment.",
+          "explanation": "Non-compliant consignments pose a risk to animal health and must be handled according to regulations to prevent disease introduction.",
+          "hint": "Think about the steps needed to protect the local livestock population from potential disease risks."
+        }
+      }
+    },
+    {
+      "id": "regulations-3",
+      "topics": ["border-control", "biosecurity", "regulations", "conduct"],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "Which one of the following is NOT a practice you should follow when handling imported cattle at the border?",
+          "options": [
+            "Verify documentation and identification",
+            "Inspection for clinical signs of disease",
+            "Do not engage with owners or handlers",
+            "Ensure quarantine requirements are met",
+            "Biosecurity Measures and record keeping"
+          ],
+          "answer": "Do not engage with owners or handlers",
+          "explanation": "Engaging with owners and handlers is important to gather information and ensure compliance with regulations.",
+          "hint": "Effective communication with owners and handlers is crucial for successful border control and biosecurity."
+        },
+        "true-false": {
+          "text": "When handling imported cattle at the border, you should not engage with owners or handlers.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "Engaging with owners and handlers is important to gather information and ensure compliance with regulations.",
+          "hint": "Effective communication with owners and handlers is crucial for successful border control and biosecurity."
+        },
+        "short-answer": {
+          "text": "What do you do when handling imported cattle at the border?",
+          "answer": "Verify documentation, inspect for clinical signs of disease, verify identification, ensure quarantine requirements are met, implement biosecurity measures, and maintain record keeping.",
+          "explanation": "Effective handling of imported cattle at the border involves a comprehensive approach to ensure compliance with regulations and prevent disease introduction.",
+          "hint": "Think about the steps involved in ensuring that imported cattle do not pose a risk to local livestock and comply with regulations."
+        },
+        "detailed-answer": {
+          "text": "How do you handle imported cattle at the border?",
+          "answer": "Verify Documentation: Check all import permits, health certificates, and animal identification (e.g., ear tags) to ensure they are valid and match the consignment. This includes verifying the origin, destination, and purpose of import, Physical Inspection: Conduct a thorough clinical examination of all animals for any signs of disease, injuries, or stress. I would pay close attention to any lesions, lameness, or abnormal behavior, Quarantine Requirements: Ensure that the animals meet the specified quarantine requirements, either at the border post or at an approved post-import quarantine facility. This includes verifying the duration and conditions of quarantine, Identification: Confirm that all animals are correctly identified according to national regulations (e.g., BAITS tags), Biosecurity Measures: Oversee the disinfection of vehicles and equipment used for transport. Ensure personnel adhere to strict biosecurity protocols, Record Keeping: Accurately record all details of the import, including inspection findings, any discrepancies, and the release or refusal of the consignment.",
+          "explanation": "Handling imported cattle at the border involves a strict protocol to prevent disease introduction and ensure compliance with regulations.",
+          "hint": "Think about the steps involved in ensuring that imported cattle do not pose a risk to local livestock and comply with regulations."
+        }
+      }
+    }
+  ]
+}

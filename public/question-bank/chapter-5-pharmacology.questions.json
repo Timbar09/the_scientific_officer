@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "id": "chapter-5-pharmacology",
+    "title": "Chapter 5 - Pharmacology",
+    "version": "0.1.0",
+    "topicIds": ["pharmacology", "animal-health"]
+  },
+  "questions": [
+    {
+      "id": "pharmacology-1",
+      "topics": ["pharmacology", "animal-health"],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "Which of the following is NOT a method of drug administration in animals?",
+          "options": [
+            "Oral Administration",
+            "Subcutaneous Injection",
+            "Intramuscular Injection",
+            "Intrauterine Infusion"
+          ],
+          "answer": "Intrauterine Infusion",
+          "explanation": "Intrauterine infusion is not a standard method of drug administration in animals.",
+          "hint": "Consider the common routes of drug administration and their applications."
+        },
+        "true-false": {
+          "text": "Intrauterine infusion is a standard method of drug administration in animals.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "Intrauterine infusion is not a standard method of drug administration in animals.",
+          "hint": "Consider the common routes of drug administration and their applications."
+        },
+        "short-answer": {
+          "text": "Name a method of drug administration in animals.",
+          "answer": "Oral Administration, Subcutaneous Injection, Intramuscular Injection",
+          "explanation": "There are various methods to administer drugs to animals, each with its own advantages and considerations based on the type of drug, the condition being treated, and the species of animal. Proper administration is crucial for ensuring the efficacy of the treatment and minimizing stress or harm to the animal.",
+          "hint": "Think about the different methods of drug administration based on the route of entry into the animal's body and the type of treatment needed."
+        },
+        "detailed-answer": {
+          "text": "State 5 ways to administer drugs to animals.",
+          "answer": "Oral Administration (PO): Administering drugs by mouth (e.g., drenching, feed additives, tablets). This is generally easy for farmers but absorption can be variable, Subcutaneous Injection (SC): Injecting drugs under the skin. This is a common route for vaccines and some antibiotics, offering slower absorption than intramuscular but generally less painful, Intramuscular Injection (IM): Injecting drugs directly into the muscle. This route provides faster absorption than SC and is used for many antibiotics and anti-inflammatories. Proper site selection is crucial to avoid nerve damage or carcass damage, Intravenous Injection (IV): Administering drugs directly into the bloodstream for immediate effect. This requires skill to avoid complications, Topical Application: Applying drugs directly to the skin or mucous membranes (e.g., pour-on for parasites, ointments for skin conditions). This is non-invasive but may have variable absorption depending on the formulation and site of application, Intra-mammary Infusion: Administering drugs directly into the mammary gland, commonly used for treating mastitis in dairy cattle. This allows for high local concentrations of the drug while minimizing systemic exposure.",
+          "explanation": "There are various methods to administer drugs to animals, each with its own advantages and considerations based on the type of drug, the condition being treated, and the species of animal. Proper administration is crucial for ensuring the efficacy of the treatment and minimizing stress or harm to the animal.",
+          "hint": "Think about the different methods of drug administration based on the route of entry into the animal's body and the type of treatment needed."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "id": "chapter-2-diseases",
+    "title": "Chapter 2 - Diseases",
+    "version": "0.1.0",
+    "topicIds": ["diseases", "FMD", "response"]
+  },
+  "questions": [
+    {
+      "id": "diseases-1",
+      "topics": ["diseases", "FMD"],
+      "difficulty": "easy",
+      "variants": {
+        "multiple-choice": {
+          "text": "Which of the following diseases is NOT a differential diagnosis for foot-and-mouth disease (FMD)?",
+          "options": [
+            "Vesicular Stomatitis (VS)",
+            "Swine Vesicular Disease (SVD)",
+            "Bovine Viral Diarrhea (BVD) / Mucosal Disease",
+            "Rabies",
+            "Chemical/Thermal Burns"
+          ],
+          "answer": "Rabies",
+          "explanation": "Rabies does not cause vesicular lesions and is not a differential diagnosis for FMD.",
+          "hint": "Focus on diseases that cause vesicular lesions in livestock."
+        },
+        "true-false": {
+          "text": "Foot-and-mouth disease (FMD) can be easily differentiated from other diseases based on clinical signs alone.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "FMD can present with clinical signs that are similar to other diseases, making laboratory diagnosis essential for accurate identification.",
+          "hint": "Think about the importance of laboratory testing in diagnosing diseases with similar clinical presentations."
+        },
+        "short-answer": {
+          "text": "Name one disease that can be confused with foot-and-mouth disease (FMD).",
+          "answer": "Vesicular Stomatitis (VS)",
+          "explanation": "Vesicular Stomatitis (VS) can cause clinical signs that are indistinguishable from FMD in cattle and pigs, making it a common differential diagnosis.",
+          "hint": "Think about diseases that cause vesicular lesions in livestock."
+        },
+        "detailed-answer": {
+          "text": "List 5 differential diagnoses of FMD.",
+          "answer": "Vesicular Stomatitis (VS): Affects horses, cattle, and pigs. Clinically indistinguishable from FMD in cattle and pigs, requiring laboratory diagnosis, Swine Vesicular Disease (SVD): Exclusively affects pigs. Causes vesicular lesions similar to FMD, Bovine Viral Diarrhea (BVD) / Mucosal Disease: Can cause oral erosions, but typically not true vesicles, and often accompanied by diarrhea and immunosuppression, Rinderpest (eradicated): Historically a differential, but now eradicated globally, Peste des Petits Ruminants (PPR): Affects small ruminants, causing oral lesions, diarrhea, and pneumonia. Not vesicular, Blue Tongue: Primarily sheep, but can affect cattle. Causes oral erosions, lameness, and cyanosis of the tongue, but not vesicles, Contagious Ecthyma (Orf): Affects small ruminants, causing proliferative lesions around the mouth, but not true vesicles, Chemical/Thermal Burns: Can cause oral lesions that might be mistaken for FMD.",
+          "explanation": "FMD can be confused with several other diseases that cause similar clinical signs, particularly vesicular lesions. Accurate diagnosis often requires laboratory testing to differentiate FMD from these other conditions.",
+          "hint": "Think about diseases that cause vesicular lesions in livestock, as well as other conditions that can cause oral lesions or lameness."
+        }
+      }
+    },
+    {
+      "id": "diseases-2",
+      "topics": ["diseases", "FMD", "response"],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "In an extension area, some animals display drooling and lameness. This is likely to be foot-and-mouth disease (FMD). What should you do next?",
+          "options": [
+            "Immediately report to your supervisor and the District Veterinary Officer",
+            "Collect samples for laboratory confirmation",
+            "Advise the farmer to isolate affected animals, restrict movement, and announce the situation",
+            "Conduct a thorough clinical examination of affected animals",
+            "Initiate local movement restrictions in the area",
+            "All of the above"
+          ],
+          "answer": "All of the above",
+          "explanation": "All of these steps are crucial in responding to a suspected FMD outbreak. Immediate reporting, sample collection, farmer instructions, clinical examination, movement restrictions, and community engagement are all essential components of an effective response.",
+          "hint": "Think about the comprehensive approach needed to manage a suspected FMD outbreak, including diagnosis, containment, and communication."
+        },
+        "true-false": {
+          "text": "In an extension area, some animals display drooling and lameness. This is likely to be foot-and-mouth disease (FMD).",
+          "options": ["True", "False"],
+          "answer": "True",
+          "explanation": "Drooling and lameness are classic clinical signs of FMD, especially in an endemic area like Botswana. However, a definitive diagnosis requires laboratory confirmation.",
+          "hint": "Consider the clinical signs and the endemic status of FMD in Botswana."
+        },
+        "short-answer": {
+          "text": "In one extension area, some animals display drooling and lameness. What is the most likely diagnosis?",
+          "answer": "Foot-and-mouth disease (FMD)",
+          "explanation": "Drooling and lameness are classic clinical signs of FMD, especially in an endemic area like Botswana. However, a definitive diagnosis requires laboratory confirmation.",
+          "hint": "Consider the clinical signs and the endemic status of FMD in Botswana."
+        },
+        "detailed-answer": {
+          "text": "In one extension area, some animals display drooling and lameness. How will you handle that?",
+          "answer": "Initial Information Gathering: Obtain precise location, number of affected animals, species, age, onset of signs, and any recent animal movements or introductions, Farmer Instructions: Advise the farmer to immediately isolate affected animals, stop all animal movements on and off the farm, and restrict access to the kraal/pasture, Field Visit Preparation: Gather necessary equipment: PPE (disposable overalls, boots, gloves, masks), sampling kit (sterile containers, viral transport media, scalpels, syringes), disinfectant, and camera, On-site Investigation: (*Biosecurity - Implement strict biosecurity upon arrival and departure from the farm. *Clinical Examination - Examine affected animals for characteristic FMD lesions (vesicles on tongue, dental pad, gums, interdigital spaces, coronary band, teats). Note the stage of lesions (intact vesicles, ruptured vesicles, erosions).*Epidemiological Assessment - Interview the farmer about animal history, movement, contact with other herds/wildlife, and vaccination status. Look for a pattern of spread.), Sample Collection: Collect appropriate samples (vesicular fluid, epithelial tissue from fresh lesions, probang samples if chronic) and ensure proper labeling, storage (cold chain), and transport to the laboratory (e.g., Botswana National Veterinary Laboratory), Provisional Diagnosis & Reporting: Based on clinical signs and epidemiological findings, make a provisional diagnosis. Immediately notify my supervisor and the District Veterinary Officer, providing a detailed report of the findings, Containment Measures: Initiate immediate local movement restrictions (standstill) in the affected area and surrounding farms. Begin preliminary trace-back and trace-forward investigations, Public Awareness: If confirmed, prepare for community engagement (Kgotla meetings) to inform farmers and enforce control measures.",
+          "explanation": "This scenario immediately raises suspicion of FMD, especially given Botswana's endemic status. Your response should be systematic and rapid",
+          "hint": "Think about the steps needed to confirm the diagnosis, contain the outbreak, and prevent further spread of the disease."
+        }
+      }
+    }
+  ]
+}

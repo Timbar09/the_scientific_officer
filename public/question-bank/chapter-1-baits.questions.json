@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "id": "chapter-1-baits",
+    "title": "Chapter 1 - BAITS",
+    "version": "0.1.0",
+    "topicIds": ["BAITS", "animal-health", "livestock-management"]
+  },
+  "questions": [
+    {
+      "id": "baits-1",
+      "topics": ["BAITS", "animal-health", "livestock-management"],
+      "difficulty": "easy",
+      "variants": {
+        "multiple-choice": {
+          "text": "What does BAITS stand for?",
+          "options": [
+            "Botswana Animal Identification and Traceability System",
+            "Botswana Agricultural Information and Tracking System",
+            "Botswana Animal Inspection and Testing Service",
+            "Botswana Agricultural Identification and Traceability System"
+          ],
+          "answer": "Botswana Animal Identification and Traceability System",
+          "explanation": "BAITS is the national system used in Botswana for identifying and tracing livestock. It is essential for disease control, traceability, and livestock management.",
+          "hint": "Think about the national system used in Botswana for identifying and tracing livestock."
+        },
+        "true-false": {
+          "text": "BAITS stands for Botswana Agricultural Information and Tracking System.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "BAITS stands for Botswana Animal Identification and Traceability System, which is the national system used in Botswana for identifying and tracing livestock. It is essential for disease control, traceability, and livestock management.",
+          "hint": "Think about the national system used in Botswana for identifying and tracing livestock."
+        },
+        "short-answer": {
+          "text": "What does BAITS stand for?",
+          "answer": "Botswana Animal Identification and Traceability System",
+          "explanation": "BAITS is the national system used in Botswana for identifying and tracing livestock. It is essential for disease control, traceability, and livestock management.",
+          "hint": "Think about the national system used in Botswana for identifying and tracing livestock."
+        },
+        "detailed-answer": {
+          "text": "What is BAITS and why is it important?",
+          "answer": "BAITS, or the Botswana Animal Identification and Traceability System, is a comprehensive system used to identify and trace livestock in Botswana. It is crucial for disease control, traceability, and livestock management. BAITS allows for the tracking of animal movements, helps in the early detection of disease outbreaks, and ensures that animals can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
+          "explanation": "BAITS plays a critical role in maintaining animal health and ensuring effective livestock management in Botswana. It provides a framework for identifying and tracing animals, which is essential for controlling diseases and ensuring the safety of the food supply.",
+          "hint": "Think about the national system used in Botswana for identifying and tracing livestock, and its importance for disease control and livestock management."
+        }
+      }
+    },
+    {
+      "id": "baits-2",
+      "topics": ["regulations", "livestock-management", "BAITS"],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "Which of the following statements about tag replacement procedures in BAITS is FALSE?",
+          "options": [
+            "Tag replacement is a common procedure in livestock management.",
+            "Proper documentation and system updates are crucial to maintain accurate traceability.",
+            "Tag replacement does not affect the animal's identification history.",
+            "The BAITS system must be updated to reflect any changes in ear tag numbers."
+          ],
+          "answer": "Tag replacement does not affect the animal's identification history.",
+          "explanation": "Tag replacement can affect the animal's identification history if not properly documented and updated in the BAITS system. It is essential to maintain accurate records to ensure traceability.",
+          "hint": "Think about the importance of maintaining accurate records and traceability in livestock management, and the steps needed to ensure that a lost or damaged tag does not compromise the animal's identification history."
+        },
+        "true-false": {
+          "text": "Tag replacement procedures in BAITS are not important for maintaining accurate traceability.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "Tag replacement is a common procedure in livestock management, essential for maintaining accurate traceability within the Botswana Animal Identification and Traceability System (BAITS). Proper documentation and system updates are crucial to ensure that the animal's identification history remains intact, even after a tag replacement.",
+          "hint": "Think about the importance of maintaining accurate records and traceability in livestock management, and the steps needed to ensure that a lost or damaged tag does not compromise the animal's identification history."
+        },
+        "short-answer": {
+          "text": "When do livestock owners need to update their BAITS records?",
+          "answer": "Livestock owners need to update their BAITS records whenever an animal's ear tag is lost or damaged and requires replacement, when there are changes in ownership, and also when there are changes in the animal's status (e.g., death, sale, movement).",
+          "explanation": "Updating BAITS records is essential for maintaining accurate traceability and ensuring that the animal's identification history is complete and up-to-date. This is particularly important when an ear tag is lost or damaged, as it can affect the ability to trace the animal's history and movements.",
+          "hint": "Think about the situations that would require changes to an animal's identification records, such as lost or damaged tags, changes in ownership, or changes in the animal's status."
+        },
+        "detailed-answer": {
+          "text": "Describe the tag replacement procedure in BAITS.",
+          "answer": "Farmer Notification: The farmer reports a lost or damaged ear tag to the nearest Veterinary Office, Verification: A Veterinary Officer or Animal Health Coordinator would verify the animal's identity (e.g., through brand marks, physical description, existing secondary tags) and the reason for replacement, BAITS System Update: The officer would access the BAITS system (either BAITS 2 or BAITS 3, depending on the current system in use) and initiate a tag replacement request. This involves deactivating the old tag number (if partially readable) and assigning a new, unique tag number to the animal, New Tag Application: A new, officially approved BAITS ear tag would be applied to the animal, Record Keeping: All details of the replacement, including the old tag number (if known), new tag number, date, and reason for replacement, are updated in the BAITS database. This ensures the animal's full traceability history is maintained.",
+          "explanation": "Tag replacement is a common procedure in livestock management, essential for maintaining accurate traceability within the Botswana Animal Identification and Traceability System (BAITS). Proper documentation and system updates are crucial to ensure that the animal's identification history remains intact, even after a tag replacement.",
+          "hint": "Think about the importance of maintaining accurate records and traceability in livestock management, and the steps needed to ensure that a lost or damaged tag does not compromise the animal's identification history."
+        }
+      }
+    },
+    {
+      "id": "baits-3",
+      "topics": ["BAITS", "livestock-management", "regulations"],
+      "difficulty": "medium",
+      "variants": {
+        "multiple-choice": {
+          "text": "Which of the following statements about holding registration for livestock owners in Botswana is FALSE?",
+          "options": [
+            "Registering a holding is a legal requirement for livestock owners in Botswana.",
+            "Holding registration is crucial for disease control and traceability.",
+            "Holding registration is optional and not necessary for livestock management.",
+            "Registered holdings are eligible for government support programs."
+          ],
+          "answer": "Holding registration is optional and not necessary for livestock management.",
+          "explanation": "Registering a holding is a fundamental requirement for livestock owners in Botswana, crucial for disease control, traceability, and eligibility for government programs. It ensures that all livestock are accounted for and can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
+          "hint": "Think about the legal and regulatory requirements for livestock management in Botswana, and the importance of traceability and record-keeping in ensuring animal health and disease control."
+        },
+        "true-false": {
+          "text": "Registering a holding is not necessary for livestock owners in Botswana.",
+          "options": ["True", "False"],
+          "answer": "False",
+          "explanation": "Registering a holding is a fundamental requirement for livestock owners in Botswana, crucial for disease control, traceability, and eligibility for government programs. It ensures that all livestock are accounted for and can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
+          "hint": "Think about the legal and regulatory requirements for livestock management in Botswana, and the importance of traceability and record-keeping in ensuring animal health and disease control."
+        },
+        "short-answer": {
+          "text": "Where can livestock owners in Botswana register their holdings?",
+          "answer": "Livestock owners in Botswana can register their holdings with the Department of Veterinary Services (DVS) through the Botswana Animal Identification and Traceability System (BAITS).",
+          "explanation": "The Department of Veterinary Services (DVS) is responsible for the registration of livestock holdings in Botswana. This process is facilitated through the Botswana Animal Identification and Traceability System (BAITS), which ensures that all livestock are properly identified and traceable for disease control and regulatory compliance.",
+          "hint": "Think about the government department responsible for veterinary services and livestock management in Botswana."
+        },
+        "detailed-answer": {
+          "text": "What are the requirements to register a holding?",
+          "answer": "Application: Submission of an application form to the Department of Veterinary Services, Proof of Ownership/Occupancy: Documentation proving legal ownership or occupancy of the land where the livestock are kept (e.g., land title, lease agreement, customary land rights certificate), Brand Certificate: A valid brand certificate for the livestock owner, as branding is a legal requirement for cattle in Botswana, Keeper ID: The individual responsible for the animals must have a valid Keeper ID within the BAITS system, Premises Inspection: The holding may undergo an inspection by a Veterinary Officer to ensure it meets basic biosecurity standards and is suitable for livestock, BAITS Registration: Once approved, the holding is registered in the BAITS system, receiving a unique holding identification number. This links the holding to the owner and the animals kept there.",
+          "explanation": "Registering a holding is a fundamental requirement for livestock owners in Botswana, crucial for disease control, traceability, and eligibility for government programs. It ensures that all livestock are accounted for and can be traced back to their source in the event of a disease outbreak or for regulatory compliance.",
+          "hint": "Think about the legal and regulatory requirements for livestock management in Botswana, and the importance of traceability and record-keeping in ensuring animal health and disease control."
+        }
+      }
+    }
+  ]
+}
