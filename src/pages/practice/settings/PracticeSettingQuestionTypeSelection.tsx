@@ -5,12 +5,14 @@ import type { FormFieldData } from "../../../components/Form/types";
 
 import { FormField } from "../../../components/Form";
 
+import type { QuestionType } from "../types";
+
 interface QuestionTypeSelectionProps {
   register: UseFormRegister<FieldValues>;
   formSectionData: {
     name: string;
     defaultValue: string;
-    questionTypes: { id: number; name: string; available: boolean }[];
+    questionTypes: QuestionType[];
   };
 }
 
@@ -28,14 +30,16 @@ const PracticeSettingQuestionTypeSelection = ({
 
   const allType = {
     id: 0,
-    value: "all",
+    label: { text: "All Types", visible: true },
+    value: "all-types",
   };
 
   const options = questionTypes
     .filter((qt) => qt.available)
-    .map(({ id, name }) => ({
+    .map(({ id, slug, name }) => ({
       id,
-      value: name.toLowerCase(),
+      label: { text: name, visible: true },
+      value: slug,
     }));
 
   options.unshift(allType);

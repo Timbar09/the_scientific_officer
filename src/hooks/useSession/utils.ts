@@ -1,6 +1,7 @@
 import type {
   Question,
   UserAnswer,
+  QuestionType,
   QuestionData,
   QuestionVariant,
   SessionSettings,
@@ -51,49 +52,44 @@ export const getSessionQuestions = (
   if (!questionList.length) return [];
 
   const { questionType, topics } = settings;
-  let filteredQuestions = questionList;
 
-  if (topics && topics.length > 0) {
-    filteredQuestions = questionList.filter((q) =>
-      q.topics.some((topic) => topics.includes(topic)),
+  return questionList
+    .filter(
+      (q) =>
+        !topics?.length || q.topics.some((topic) => topics.includes(topic)),
+    )
+    .filter(
+      (q) =>
+        !questionType ||
+        questionType.toLowerCase() === "all-types" ||
+        q.variant.toLowerCase() === questionType.toLowerCase(),
     );
-  }
-
-  if (questionType && questionType.toLowerCase() !== "all") {
-    filteredQuestions = filteredQuestions.filter(
-      (q) => q.variant.toLowerCase() === questionType.toLowerCase(),
-    );
-  }
-
-  return filteredQuestions.length > 0 ? filteredQuestions : [];
 };
 
 export const destructureQuestionData = (
   questionData: QuestionData[],
-  availableTypes: Set<string>,
+  availableTypes: QuestionType[],
 ): Question[] => {
-  let uniqueIdCounter = 1;
-
   const destructuredQuestions = questionData.map((q) => {
     const { variants, ...rest } = q;
 
-    const variantKeys = [...availableTypes];
+    const qList = availableTypes
+      .filter((availableType) => availableType.available)
+      .map((type) => {
+        const key = type.slug as keyof typeof variants;
+        const fallbackKey = Object.keys(variants)[0] as keyof typeof variants;
 
-    const qList = variantKeys.map((key) => {
-      const questionVariant =
-        variants[key as keyof typeof variants] ||
-        variants[Object.keys(variants)[0] as keyof typeof variants];
+        const questionVariant = variants[key] || variants[fallbackKey];
+        const variantId = q.id + "-" + type.idPrefix;
 
-      const result = {
-        variant: key as keyof typeof variants,
-        ...{ ...rest, id: uniqueIdCounter },
-        ...questionVariant,
-      };
+        const result = {
+          variant: key,
+          ...{ ...rest, id: variantId },
+          ...questionVariant,
+        };
 
-      uniqueIdCounter += 1;
-
-      return result;
-    });
+        return result;
+      });
 
     return qList;
   });
@@ -114,8 +110,8 @@ export const getAnswersWithCurrentSelection = (
   currentQuestion: Question | undefined,
   currentQuestionNum: number,
   selectedAnswer: string,
-  userAnswers: Map<number, UserAnswer>,
-): Map<number, UserAnswer> => {
+  userAnswers: Map<string, UserAnswer>,
+): Map<string, UserAnswer> => {
   const map = new Map(userAnswers);
   const { answer } = currentQuestion || {};
 
@@ -133,7 +129,7 @@ export const getAnswersWithCurrentSelection = (
 
 export const getUnansweredQuestionIndexes = (
   questions: Question[],
-  userAnswers: Map<number, UserAnswer>,
+  userAnswers: Map<string, UserAnswer>,
 ): number[] =>
   questions
     .map((q, i) => (userAnswers.has(q.id) ? -1 : i))

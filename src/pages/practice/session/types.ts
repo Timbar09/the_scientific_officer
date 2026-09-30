@@ -45,7 +45,7 @@ export interface OverviewProps {
 
 export interface RightOverviewProps {
   questions: Question[];
-  userAnswers: Map<number, UserAnswer>;
+  userAnswers: Map<string, UserAnswer>;
   questionNum: number;
   jumpToQuestion: (index: number) => void;
   questionCardRef?: React.RefObject<HTMLElement>;

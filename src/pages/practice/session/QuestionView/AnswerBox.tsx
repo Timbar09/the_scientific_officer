@@ -20,7 +20,10 @@ const AnswerBox = ({
   showAnswer,
 }: AnswerBoxProps) => {
   const isAnswered = selectedAnswer?.length === 0 ? false : true;
-  let isBinaryVariant = false;
+  const isBinaryVariant =
+    options.length === 2 &&
+    options.includes("True") &&
+    options.includes("False");
 
   useEffect(() => {
     setShowAnswerButton(isAnswered && selectedAnswer !== correctAnswer);
@@ -32,15 +35,6 @@ const AnswerBox = ({
   };
 
   const data: FormFieldData[] = options.map((option, i) => {
-    const hasBinaryOptions =
-      options.length === 2 &&
-      options.includes("True") &&
-      options.includes("False");
-
-    if (hasBinaryOptions) {
-      isBinaryVariant = true;
-    }
-
     const isCorrect =
       isAnswered &&
       option === correctAnswer &&
