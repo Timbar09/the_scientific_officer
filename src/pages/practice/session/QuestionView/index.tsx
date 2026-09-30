@@ -43,7 +43,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     return null;
   }
 
-  const isAnswered = userAnswers.has(question?.id || -1);
+  const isAnswered = userAnswers.has(question?.id || "-1");
   const currentQAnsweredClass = isAnswered ? "answered" : "";
 
   const reset = () => {

@@ -8,12 +8,12 @@ export const VARIANT_NAMES = [
 export type QuestionTypeName = (typeof VARIANT_NAMES)[number];
 
 export type Question = {
+  id: string;
   text: string;
   answer: string;
   explanation: string;
   hint?: string | undefined;
   options?: string[] | undefined;
-  id: number;
   topics: string[];
   difficulty: "easy" | "medium" | "hard";
   variant: QuestionTypeName;
@@ -21,8 +21,10 @@ export type Question = {
 
 export type QuestionType = {
   id: number;
-  name: QuestionTypeName;
-  icon: string;
+  idPrefix: string;
+  name: string;
+  slug: string;
+  icon?: string;
   available: boolean;
   description: string;
 };
@@ -62,7 +64,7 @@ export interface SessionSettings {
 
 // Track user's answer for each question
 export interface UserAnswer {
-  questionId: number;
+  questionId: string;
   questionNum: number;
   selectedAnswer: string;
   isCorrect: boolean;

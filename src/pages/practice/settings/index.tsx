@@ -11,6 +11,8 @@ import PracticeSettingHintOption from "./PracticeSettingHintOption";
 import PracticeSettingTopicSection from "./PracticeSettingTopicSection";
 import PracticeSettingQuestionTypeSelection from "./PracticeSettingQuestionTypeSelection";
 
+import type { QuestionType } from "../types";
+
 const BASE_CN = "practice__form";
 
 // FORM DATA
@@ -23,8 +25,8 @@ const fd = {
   },
   qType: {
     name: "questionType",
-    defaultValue: "all",
-    questionTypes: [] as { id: number; name: string; available: boolean }[],
+    defaultValue: "all-types",
+    questionTypes: [] as QuestionType[],
   },
   timer: {
     name: "timerEnabled",

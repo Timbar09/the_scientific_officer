@@ -9,10 +9,10 @@ export interface Session {
   settings: SessionSettings | undefined;
   isSubmitted: boolean;
   results: SessionResults | null;
-  revealedHintQuestionIds: Set<number>;
+  revealedHintQuestionIds: Set<string>;
   questions: SessionQuestionData;
   func: SessionFunc;
-  userAnswers: Map<number, UserAnswer>;
+  userAnswers: Map<string, UserAnswer>;
 }
 
 export interface SessionQuestionData {
