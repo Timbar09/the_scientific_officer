@@ -81,7 +81,7 @@ const PracticeSettingsForm = () => {
 
   fd.hints.hasHints = isHintEnabled;
 
-  const layoutClassName = "flex flex-col m-block-start-5";
+  const layoutClassName = "flex flex-col";
 
   const hasErrors = !!errors.topics?.message && selectedTopics.length === 0;
 

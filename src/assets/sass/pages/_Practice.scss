@@ -406,6 +406,7 @@
         background-color: clr(primary, 200, 0.2);
         border-radius: radius(md);
         width: 100%;
+        border: 2px solid clr(primary, 200, 0.1);
         cursor: pointer;
         transition:
           background-color 250ms ease,
@@ -413,7 +414,7 @@
           border 250ms ease;
 
         &--current {
-          border: 2px solid clr(primary, 500);
+          border-color: clr(primary, 500);
         }
 
         &--hover {

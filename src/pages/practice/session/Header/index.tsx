@@ -75,15 +75,18 @@ const PracticeSessionHeaderNav = () => {
 };
 
 const QuestionsTypeBadge = ({ questionType }: { questionType: string }) => {
+  const isAllTypes = questionType === "all-types";
+
+  const allTypesMessage = `All available question types are included in this session.`;
+  const typeMessage = `Only ${titlize(questionType)} questions are included in this session.`;
+
+  const toolTipMessage = isAllTypes ? allTypesMessage : typeMessage;
+
   return (
     <div className="practice__header--questionType">
       <HeaderBadge iconName="shield_question" value={titlize(questionType)} />
 
-      <Tooltip>
-        {questionType === "all"
-          ? "All available question types are included in this session."
-          : `Only ${titlize(questionType)} questions are included in this session.`}
-      </Tooltip>
+      <Tooltip>{toolTipMessage}</Tooltip>
     </div>
   );
 };
