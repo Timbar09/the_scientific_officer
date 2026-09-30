@@ -5,10 +5,11 @@ import type { FieldValues } from "react-hook-form";
 
 import type {
   SessionSettings,
-  QuestionsPayload,
   QuestionType,
   QuestionData,
 } from "../pages/practice/types";
+
+import { loadQuestionBank } from "./questionBank";
 
 export const usePracticeSettings = () => {
   const navigate = useNavigate();
@@ -46,15 +47,10 @@ export const usePracticeSettings = () => {
 
   const loadData = async () => {
     try {
-      const response = await fetch("/practice-questions.json");
-      const data = (await response.json()) as QuestionsPayload;
+      const { questionTypes, questions } = await loadQuestionBank();
       const topics = Array.from(
-        new Set(
-          data.questions?.flatMap((question) => question.topics ?? []) ?? [],
-        ),
+        new Set(questions.flatMap((question) => question.topics ?? [])),
       );
-      const questionTypes = data.questionTypes ?? [];
-      const questions = data.questions ?? [];
 
       setQuestions(questions);
       setPracticeTopics(topics);

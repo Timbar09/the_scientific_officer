@@ -15,7 +15,7 @@ import {
   getUnansweredQuestionIndexes,
 } from "./utils";
 
-import { fetchSessionData } from "./data";
+import { loadQuestionBank } from "../questionBank";
 
 const useSession = () => {
   const navigate = useNavigate();
@@ -30,18 +30,18 @@ const useSession = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [results, setResults] = useState<SessionResults | null>(null);
   const [questionData, setQuestionData] = useState<QuestionData[]>([]);
-  const [userAnswers, setUserAnswers] = useState<Map<number, UserAnswer>>(
+  const [userAnswers, setUserAnswers] = useState<Map<string, UserAnswer>>(
     new Map(),
   );
   const [revealedHintQuestionIds, setRevealedHintQuestionIds] = useState<
-    Set<number>
+    Set<string>
   >(new Set());
 
   const load = useCallback(async () => {
     if (!settings) return;
     try {
-      const { questions: qData, availableTypes } = await fetchSessionData();
-      const questions = destructureQuestionData(qData, availableTypes);
+      const { questions: qData, questionTypes } = await loadQuestionBank();
+      const questions = destructureQuestionData(qData, questionTypes);
 
       setQuestionData(qData);
       setQuestionList(questions);
