@@ -4,8 +4,6 @@ import FormFieldset from "./FormFieldSet";
 
 import type { RADIO_VARIANT, FormFieldData } from "./types";
 
-import { titlize } from "../../utils";
-
 const FormRadioButton = ({
   label = { text: "", visible: true },
   name,
@@ -49,6 +47,7 @@ const FormRadioButton = ({
                 input={input}
                 containerElement="li"
                 name={name}
+                label={option.label}
                 value={option.value}
                 checked={option.checked}
                 disabled={option.disabled}
@@ -76,6 +75,7 @@ const RadioButtonOption = ({
   id,
   className = "",
   input = { type: "radio", variant: "default" },
+  label,
   name,
   value,
   disabled = false,
@@ -133,6 +133,8 @@ const RadioButtonOption = ({
     }
   };
 
+  const hasLabel = label && label.text && label.visible;
+
   return (
     <label
       ref={variant !== "default" ? radioRef : null}
@@ -150,7 +152,9 @@ const RadioButtonOption = ({
       />
 
       <span className={`form__radio--item__content ${contentVariantClass}`}>
-        <span className={contentLabelVariantClass}>{titlize(value || "")}</span>
+        <span className={contentLabelVariantClass}>
+          {hasLabel ? label.text : value}
+        </span>
       </span>
     </label>
   );
