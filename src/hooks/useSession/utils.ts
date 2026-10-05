@@ -7,19 +7,7 @@ import type {
   SessionSettings,
 } from "../../pages/practice/types";
 
-export const shuffle = (qs: Question[]): Question[] => {
-  const shuffled = [...qs];
-
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[randomIndex]] = [
-      shuffled[randomIndex],
-      shuffled[index],
-    ];
-  }
-
-  return shuffled;
-};
+import { processOptions, shuffle } from "../../utils";
 
 export const ensureTrueFalseOptions = (
   variant: QuestionVariant,
@@ -63,7 +51,11 @@ export const getSessionQuestions = (
         !questionType ||
         questionType.toLowerCase() === "all-types" ||
         q.variant.toLowerCase() === questionType.toLowerCase(),
-    );
+    )
+    .map((q) => ({
+      ...q,
+      options: processOptions(q?.options || []) || q?.options || [],
+    }));
 };
 
 export const destructureQuestionData = (
