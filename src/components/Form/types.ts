@@ -37,10 +37,6 @@ export interface FormFieldData {
   isChecked?: boolean;
   disabled?: boolean;
   required?: boolean;
-  autoComplete?: string;
-  maxLength?: number;
-  min?: number;
-  max?: number;
   rows?: number;
   placeholder?: string;
   register?: UseFormRegister<FieldValues>;
@@ -52,6 +48,7 @@ export interface FormFieldData {
   activeRadio?: number;
   setActiveRadio?: (id: number) => void;
   options?: FormFieldData[];
+  numberOptions?: boolean;
 }
 
 export interface FormLabelData {

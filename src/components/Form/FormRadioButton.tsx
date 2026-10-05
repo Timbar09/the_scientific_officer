@@ -10,6 +10,7 @@ const FormRadioButton = ({
   className = "",
   input = { type: "radio", variant: "default" },
   options = [],
+  numberOptions,
   isChecked = false,
   register,
   rules,
@@ -52,6 +53,7 @@ const FormRadioButton = ({
                 checked={option.checked}
                 disabled={option.disabled}
                 onChange={option.onChange}
+                numberOptions={numberOptions}
                 setRadioSliderStyle={setSliderStyle}
                 activeRadio={activeRadio}
                 setActiveRadio={setActiveRadio}
@@ -80,6 +82,7 @@ const RadioButtonOption = ({
   value,
   disabled = false,
   onChange,
+  numberOptions,
   setRadioSliderStyle,
   activeRadio,
   setActiveRadio,
@@ -135,6 +138,8 @@ const RadioButtonOption = ({
 
   const hasLabel = label && label.text && label.visible;
 
+  const letter = numberOptions ? String.fromCharCode(65 + id) : null;
+
   return (
     <label
       ref={variant !== "default" ? radioRef : null}
@@ -153,6 +158,11 @@ const RadioButtonOption = ({
 
       <span className={`form__radio--item__content ${contentVariantClass}`}>
         <span className={contentLabelVariantClass}>
+          {letter && (
+            <span className="form__radio--item__content__letter">
+              {letter}.
+            </span>
+          )}{" "}
           {hasLabel ? label.text : value}
         </span>
       </span>

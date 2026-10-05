@@ -19,6 +19,8 @@ const AnswerBox = ({
   setShowAnswerButton,
   showAnswer,
 }: AnswerBoxProps) => {
+  const baseCN = "practice__session--question__answerBox";
+
   const isAnswered = selectedAnswer?.length === 0 ? false : true;
   const isBinaryVariant =
     options.length === 2 &&
@@ -51,7 +53,7 @@ const AnswerBox = ({
     return {
       id: i,
       name: "answer",
-      className: optionClass,
+      className: `${baseCN}--option ${optionClass}`,
       value: option,
       isChecked: selectedAnswer === option,
       activeRadio: selectedAnswer === option ? i : undefined,
@@ -70,7 +72,6 @@ const AnswerBox = ({
     variant: "default",
   };
 
-  const baseCN = "practice__session--question__answerBox";
   const binaryVariantCN = isBinaryVariant ? `${baseCN}--truefalse` : "";
   const disableAnswerBoxClass = isAnswered ? `${baseCN}--disabled` : "";
   const className = `${baseCN} p-5 ${disableAnswerBoxClass}`;
@@ -85,6 +86,7 @@ const AnswerBox = ({
           className={binaryVariantCN}
           label={label}
           options={data}
+          numberOptions={true}
           activeRadio={selectedOptionId}
           setActiveRadio={setSelectedOptionId}
         />

@@ -489,7 +489,6 @@
         .answered {
           &__correct {
             .form__radio--item__content {
-              font-weight: 900;
               color: clr(alert, 300);
               background-color: clr(alert, 200);
             }
@@ -497,7 +496,6 @@
 
           &__incorrect {
             .form__radio--item__content {
-              font-weight: 900;
               color: clr(alert, 900);
               background-color: clr(alert, 800);
             }
@@ -631,6 +629,12 @@
 
       &__answerBox {
         background-color: clr(neutral, 200);
+
+        &--option {
+          .form__radio--item__content {
+            font-weight: 700;
+          }
+        }
 
         &--disabled {
           pointer-events: none;

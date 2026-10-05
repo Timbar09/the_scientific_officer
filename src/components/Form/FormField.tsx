@@ -16,7 +16,6 @@ const FormField = ({
   value = "",
   isChecked,
   disabled = false,
-  autoComplete,
   rows,
   placeholder = "",
   register,
@@ -27,6 +26,7 @@ const FormField = ({
   activeRadio,
   setActiveRadio,
   options = [],
+  numberOptions = false,
 }: FormFieldData) => {
   const { type } = input;
   const Container = containerElement;
@@ -50,7 +50,6 @@ const FormField = ({
         label={label}
         isChecked={isChecked}
         disabled={disabled}
-        autoComplete={autoComplete}
         rows={rows}
         placeholder={placeholder}
         register={register}
@@ -60,6 +59,7 @@ const FormField = ({
         activeRadio={activeRadio}
         setActiveRadio={setActiveRadio}
         options={options}
+        numberOptions={numberOptions}
       />
 
       {errors && errors[name] && (
