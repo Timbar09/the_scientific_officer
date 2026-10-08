@@ -90,6 +90,7 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
             options={question?.options || []}
             selectedAnswer={selectedAnswer}
             correctAnswer={question?.answer || ""}
+            explanation={question?.explanation || undefined}
             onSelect={handleAnswerSelect}
             selectedOptionId={selectedOptionId}
             setSelectedOptionId={setSelectedOptionId}

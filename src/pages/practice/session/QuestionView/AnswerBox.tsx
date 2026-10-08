@@ -18,14 +18,11 @@ const AnswerBox = ({
   correctAnswer,
   setShowAnswerButton,
   showAnswer,
+  explanation,
 }: AnswerBoxProps) => {
   const baseCN = "practice__session--question__answerBox";
 
   const isAnswered = selectedAnswer?.length === 0 ? false : true;
-  const isBinaryVariant =
-    options.length === 2 &&
-    options.includes("True") &&
-    options.includes("False");
 
   useEffect(() => {
     setShowAnswerButton(isAnswered && selectedAnswer !== correctAnswer);
@@ -56,6 +53,7 @@ const AnswerBox = ({
       className: `${baseCN}--option ${optionClass}`,
       value: option,
       isChecked: selectedAnswer === option,
+      optionCorrectText: isCorrect ? explanation : undefined,
       activeRadio: selectedAnswer === option ? i : undefined,
       onChange: (event: React.ChangeEvent<HTMLInputElement>) =>
         onSelect(event.target.value),
@@ -72,7 +70,6 @@ const AnswerBox = ({
     variant: "default",
   };
 
-  const binaryVariantCN = isBinaryVariant ? `${baseCN}--truefalse` : "";
   const disableAnswerBoxClass = isAnswered ? `${baseCN}--disabled` : "";
   const className = `${baseCN} p-5 ${disableAnswerBoxClass}`;
 
@@ -83,7 +80,6 @@ const AnswerBox = ({
           id={0}
           name="answer"
           input={selectedOptionInput}
-          className={binaryVariantCN}
           label={label}
           options={data}
           numberOptions={true}

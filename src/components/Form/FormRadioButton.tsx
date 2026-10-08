@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
 
 import FormFieldset from "./FormFieldSet";
 
@@ -54,6 +55,7 @@ const FormRadioButton = ({
                 disabled={option.disabled}
                 onChange={option.onChange}
                 numberOptions={numberOptions}
+                optionCorrectText={option.optionCorrectText}
                 setRadioSliderStyle={setSliderStyle}
                 activeRadio={activeRadio}
                 setActiveRadio={setActiveRadio}
@@ -83,6 +85,7 @@ const RadioButtonOption = ({
   disabled = false,
   onChange,
   numberOptions,
+  optionCorrectText,
   setRadioSliderStyle,
   activeRadio,
   setActiveRadio,
@@ -112,7 +115,7 @@ const RadioButtonOption = ({
   const labelVariantClass = `form__radio--${variant}__item ${activeClass}`;
 
   const contentVariantClass = `form__radio--${variant}__item--content p-block-2 p-inline-3`;
-  const contentLabelVariantClass = `form__radio--${variant}__item--content__label`;
+  const contentLabelVariantClass = `form__radio--${variant}__item--content__label flex flex-col gap-1`;
 
   const isRHF = register && name;
 
@@ -140,6 +143,15 @@ const RadioButtonOption = ({
 
   const letter = numberOptions ? String.fromCharCode(65 + id) : null;
 
+  const animationProps = {
+    initial: { height: 0, opacity: 0 },
+    animate: { height: "auto", opacity: 1 },
+    transition: {
+      duration: 0.35,
+      opacity: { delay: 0.15, duration: 0.2 },
+    },
+  };
+
   return (
     <label
       ref={variant !== "default" ? radioRef : null}
@@ -158,12 +170,25 @@ const RadioButtonOption = ({
 
       <span className={`form__radio--item__content ${contentVariantClass}`}>
         <span className={contentLabelVariantClass}>
-          {letter && (
-            <span className="form__radio--item__content__letter">
-              {letter}.
-            </span>
-          )}{" "}
-          {hasLabel ? label.text : value}
+          <span>
+            {letter && (
+              <span className="form__radio--item__content__letter m-inline-end-1">
+                {letter}.
+              </span>
+            )}
+            {hasLabel ? label.text : value}
+          </span>
+
+          <AnimatePresence initial={false}>
+            {optionCorrectText && (
+              <motion.span
+                {...animationProps}
+                className="form__radio--item__content__correct-text fw-regular p-inline-start-4"
+              >
+                Correct! {optionCorrectText}
+              </motion.span>
+            )}
+          </AnimatePresence>
         </span>
       </span>
     </label>

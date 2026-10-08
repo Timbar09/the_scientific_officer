@@ -48,6 +48,7 @@ export interface FormFieldData {
   activeRadio?: number;
   setActiveRadio?: (id: number) => void;
   options?: FormFieldData[];
+  optionCorrectText?: string;
   numberOptions?: boolean;
 }
 
