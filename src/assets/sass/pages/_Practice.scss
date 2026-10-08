@@ -445,7 +445,7 @@
         }
 
         &--icon {
-          font-size: 1.75em;
+          font-size: 1.5em;
           border-radius: radius(circle);
         }
       }
@@ -490,14 +490,14 @@
           &__correct {
             .form__radio--item__content {
               color: clr(alert, 300);
-              background-color: clr(alert, 200);
+              background-color: clr(alert, 100);
             }
           }
 
           &__incorrect {
             .form__radio--item__content {
               color: clr(alert, 900);
-              background-color: clr(alert, 800);
+              background-color: clr(alert, 700);
             }
           }
         }
@@ -640,18 +640,6 @@
           pointer-events: none;
           user-select: none;
           cursor: not-allowed;
-        }
-
-        &--truefalse {
-          .form__radio--default {
-            &__list {
-              flex-direction: row;
-            }
-
-            &__item--container {
-              flex: 1;
-            }
-          }
         }
       }
 

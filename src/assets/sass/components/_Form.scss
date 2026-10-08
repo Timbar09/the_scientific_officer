@@ -14,7 +14,12 @@
     }
 
     &--error {
-      outline: 2px solid clr(alert, 800);
+      outline: 2px solid clr(alert, 800, 0.5);
+
+      &__message {
+        color: clr(alert, 800, 0.8);
+        font-size: 0.85em;
+      }
     }
   }
 

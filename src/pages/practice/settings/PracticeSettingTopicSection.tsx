@@ -91,7 +91,7 @@ const PracticeSettingTopicSection = ({
       </ul>
 
       {displayError ? (
-        <p className="form__field--error__message m-block-start-1 clr-alert-800 fw-bold">
+        <p className="form__field--error__message m-block-start-1 fw-bold">
           {errorMessage}
         </p>
       ) : null}
