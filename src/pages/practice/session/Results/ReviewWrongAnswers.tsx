@@ -66,12 +66,13 @@ const WrongAnswerItem = ({
   };
 
   const baseCN = "practice__results--wrongAnswer__item";
-  const numberClass = `${baseCN}--number flex jc-between ai-center gap-2 p-3 ${openClass}`;
+  const numberClass = `${baseCN}--number flex jc-between ai-center gap-2 ${openClass} p-block-1 p-inline-start-2 p-inline-end-1`;
   const numberValueClass = `${baseCN}--number__value text-lg`;
   const iconClass = `${baseCN}--number__icon p-1 flex ai-center`;
   const explanationClass = `${baseCN}--explanation p-block-end-4 p-inline-4`;
   const explanationContainerClass = `${baseCN}--explanation__container p-block-3 p-inline-3`;
-  const correctAnswerClass = `${baseCN}--explanation__correct flex flex-col flex-@sm-row gap-2`;
+  const wrongAnswerClass = `${baseCN}--explanation__wrong flex gap-1 ai-center flex-wrap p-1 m-block-end-1 bg-neutral-100`;
+  const correctAnswerClass = `${baseCN}--explanation__correct flex ai-start flex-col flex-@sm-row gap-2 bg-neutral-100 p-2`;
 
   return (
     <li className={baseCN}>
@@ -89,14 +90,19 @@ const WrongAnswerItem = ({
             <div className={explanationContainerClass}>
               <p className="p-block-end-2">{question.text}</p>
 
-              <p>
-                <strong>Your Answer:</strong> {wrongAnswer.selectedAnswer}
-              </p>
+              <div className={wrongAnswerClass}>
+                <Icon name="close_small" /> <strong>Your Answer:</strong>{" "}
+                {wrongAnswer.selectedAnswer}
+              </div>
 
               <div className={correctAnswerClass}>
-                <strong>Correct Answer:</strong>{" "}
+                <span className="flex ai-center gap-1">
+                  <Icon name="check_small" />
+                  <strong>Correct Answer:</strong>{" "}
+                </span>
+
                 <span className="flex flex-col gap-1">
-                  <span>{wrongAnswer.correctAnswer}.</span>{" "}
+                  <span>{wrongAnswer.correctAnswer}</span>{" "}
                   <span>{question.explanation}</span>
                 </span>
               </div>

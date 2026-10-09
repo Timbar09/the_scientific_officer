@@ -1048,7 +1048,7 @@
       &__item {
         &--number {
           background-color: clr(neutral, 100);
-          border-radius: radius(lg);
+          border-radius: calc(radius(lg) * 0.825);
           cursor: pointer;
 
           &:hover {
@@ -1070,7 +1070,7 @@
               }
 
               &__icon {
-                opacity: 1;
+                color: clr(primary, 500);
 
                 > .material-symbols-outlined {
                   transform: rotate(180deg);
@@ -1080,15 +1080,13 @@
           }
 
           &__value {
-            font-size: fs(lg);
+            font-size: fs(md);
             font-weight: 800;
           }
 
           &__icon {
-            opacity: 0;
             padding: calc(spacing(1) * 0.75);
             border-radius: radius(md);
-            color: clr(primary, 500);
             background-color: clr(neutral, 200);
             transition: opacity 250ms ease;
 
@@ -1104,9 +1102,25 @@
             border-radius: 0 0 radius(lg) radius(lg);
           }
 
+          &__wrong {
+            border-radius: radius(md);
+
+            .material-symbols-outlined {
+              color: clr(alert, 800);
+            }
+          }
+
           &__correct {
-            > strong {
-              min-width: max-content;
+            border-radius: radius(md);
+
+            .material-symbols-outlined {
+              color: clr(alert, 300);
+            }
+
+            > span {
+              &:first-child {
+                min-width: max-content;
+              }
             }
           }
         }
