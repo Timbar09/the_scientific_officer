@@ -21,7 +21,7 @@ const ReviewWrongAnswers = ({ wrongAnswers, questions }: WrongAnswersProps) => {
 
   return (
     <section className="practice__results--wrongAnswer">
-      <h3 className="text-xl m-block-end-4 m-block-start-2">
+      <h3 className="text-xl m-block-end-4 m-block-start-2 p-inline-2">
         Review Wrong Answers
       </h3>
 

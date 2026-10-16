@@ -9,7 +9,8 @@
     text-align: left;
   }
 
-  a {
+  &__link {
+    transition: color 150ms ease;
     &:hover {
       color: clr(neutral, 400);
     }
@@ -17,14 +18,12 @@
 
   &__top {
     &--group {
-      &__item {
-        &:first-child {
-          max-width: 15rem;
-          margin: 0 auto;
+      &:first-child {
+        max-width: 15rem;
+        margin: 0 auto;
 
-          @include mq(md) {
-            margin: 0;
-          }
+        @include mq(md) {
+          margin: 0;
         }
       }
     }
