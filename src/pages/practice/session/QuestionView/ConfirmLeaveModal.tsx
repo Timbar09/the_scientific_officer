@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import Button from "../../../../components/Button";
 
@@ -9,6 +9,16 @@ interface Props {
 }
 
 const ConfirmLeaveModal = ({ isOpen, confirmLeave, cancelLeave }: Props) => {
+  const [isLeaving, setIsLeaving] = useState(false);
+
+  const handleConfirmLeave = () => {
+    if (isLeaving) return;
+
+    setIsLeaving(true);
+
+    confirmLeave();
+  };
+
   useEffect(() => {
     if (!isOpen) return;
     const originalOverflow = document.body.style.overflow;
@@ -23,7 +33,7 @@ const ConfirmLeaveModal = ({ isOpen, confirmLeave, cancelLeave }: Props) => {
     if (!isOpen) return;
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
+      if (event.key === "Escape" && !isLeaving) {
         cancelLeave();
       }
     };
@@ -33,7 +43,7 @@ const ConfirmLeaveModal = ({ isOpen, confirmLeave, cancelLeave }: Props) => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isOpen, cancelLeave]);
+  }, [isOpen, cancelLeave, isLeaving]);
 
   if (!isOpen) return null;
 
@@ -64,9 +74,9 @@ const ConfirmLeaveModal = ({ isOpen, confirmLeave, cancelLeave }: Props) => {
           <Button
             className={`${baseCN}__leave`}
             variant="tertiary"
-            onClick={confirmLeave}
+            onClick={handleConfirmLeave}
           >
-            Yes, Leave
+            {isLeaving ? "Leaving..." : "Yes, Leave"}
           </Button>
 
           <Button onClick={cancelLeave}>Stay and Continue</Button>

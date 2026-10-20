@@ -15,6 +15,7 @@ interface ButtonProps {
   className?: string;
   icon?: IconProps;
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 /**
@@ -29,6 +30,7 @@ interface ButtonProps {
  * @param {string | null} props.icon.name - The name of the icon to display
  * @param {("left" | "right")} [props.icon.position="left"] - The position of the icon relative to the text
  * @param {() => void} [props.onClick] - Click event handler for the button
+ * @param {boolean} [props.disabled=false] - Whether the button is disabled
  * @returns
  */
 
@@ -40,6 +42,7 @@ const Button = ({
   className = "",
   icon,
   onClick,
+  disabled = false,
 }: ButtonProps) => {
   if (icon && !icon.position) {
     icon.position = "left";
@@ -59,7 +62,12 @@ const Button = ({
 
   if (to) {
     return (
-      <NavLink to={to} className={className} onClick={onClick}>
+      <NavLink
+        to={to}
+        className={className}
+        onClick={disabled ? undefined : onClick}
+        aria-disabled={disabled}
+      >
         {icon && (
           <span className="btn__icon grid">
             <Icon name={icon.name || ""} />
@@ -71,7 +79,12 @@ const Button = ({
   }
 
   return (
-    <button type={type} className={className} onClick={onClick}>
+    <button
+      type={type}
+      className={className}
+      onClick={disabled ? undefined : onClick}
+      disabled={disabled}
+    >
       {icon && (
         <span className="btn__icon grid">
           <Icon name={icon.name || ""} />
