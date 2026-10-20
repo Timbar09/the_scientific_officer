@@ -66,6 +66,21 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     }
   }, [blocker]);
 
+  useEffect(() => {
+    if (session.isSubmitted) return;
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = true;
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [session.isSubmitted]);
+
   const handleConfirmLeave = () => {
     setShowConfirmation(false);
     if (blocker.state === "blocked") {
