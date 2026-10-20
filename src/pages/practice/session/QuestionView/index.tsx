@@ -1,16 +1,19 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
+import { useBlocker } from "react-router";
 
 import type { Session } from "../../../../hooks/useSession/types";
 import type { Swiper as SwiperType } from "swiper";
 
 import Header from "./Header";
+import Footer from "./Footer";
 import Overview from "./Overview";
 import AnswerBox from "./AnswerBox";
-import Footer from "./Footer";
+import ConfirmLeaveModal from "./ConfirmLeaveModal";
 
 import "swiper/css";
 
 const PracticeQuestionView = ({ session }: { session: Session }) => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const questionRef = useRef<HTMLElement>(null);
   const [isQuestionCardMounted, setIsQuestionCardMounted] = useState(false);
   const [hideShowAnswerButton, setHideShowAnswerButton] = useState(false);
@@ -39,10 +42,6 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     setIsQuestionCardMounted(Boolean(questionRef.current));
   }, [current, list]);
 
-  if (!settings || !current || !list) {
-    return null;
-  }
-
   const isAnswered = userAnswers.has(question?.id || "-1");
   const currentQAnsweredClass = isAnswered ? "answered" : "";
 
@@ -55,65 +54,103 @@ const PracticeQuestionView = ({ session }: { session: Session }) => {
     onSelectAnswer(answer);
   };
 
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>
+      !session.isSubmitted &&
+      currentLocation.pathname !== nextLocation.pathname,
+  );
+
+  useEffect(() => {
+    if (blocker.state === "blocked") {
+      setShowConfirmation(true);
+    }
+  }, [blocker]);
+
+  const handleConfirmLeave = () => {
+    setShowConfirmation(false);
+    if (blocker.state === "blocked") {
+      blocker.proceed();
+    }
+  };
+
+  const handleCancelLeave = () => {
+    setShowConfirmation(false);
+    if (blocker.state === "blocked") {
+      blocker.reset();
+    }
+  };
+
+  if (!settings || !current || !list) {
+    return null;
+  }
+
   return (
-    <div className="practice__session">
-      <h2 className="sr-only">Practice Session</h2>
+    <>
+      <div className="practice__session">
+        <h2 className="sr-only">Practice Session</h2>
 
-      <div className="practice__session--content flex flex-col flex-@lg-row ai-start gap-3 gap-@lg-4">
-        {isQuestionCardMounted && (
-          <Overview
-            questions={list}
-            userAnswers={userAnswers}
-            questionNum={index}
-            jumpToQuestion={jumpToQuestion}
-            questionCardRef={questionRef as React.RefObject<HTMLElement>}
-            swiperInstance={swiperInstance}
-            setSwiperInstance={setSwiperInstance}
-            reset={reset}
-          />
-        )}
+        <div className="practice__session--content flex flex-col flex-@lg-row ai-start gap-3 gap-@lg-4">
+          {isQuestionCardMounted && (
+            <Overview
+              questions={list}
+              userAnswers={userAnswers}
+              questionNum={index}
+              jumpToQuestion={jumpToQuestion}
+              questionCardRef={questionRef as React.RefObject<HTMLElement>}
+              swiperInstance={swiperInstance}
+              setSwiperInstance={setSwiperInstance}
+              reset={reset}
+            />
+          )}
 
-        <section
-          className={`practice__session--question ${currentQAnsweredClass}`}
-          ref={questionRef}
-        >
-          <Header
-            questionNumber={index + 1}
-            questionCount={list.length}
-            topicList={settings.topics}
-            questionText={question?.text || ""}
-            displayHint={isHintRevealed && settings.hintsEnabled}
-            hintText={question?.hint || ""}
-          />
+          <section
+            className={`practice__session--question ${currentQAnsweredClass}`}
+            ref={questionRef}
+          >
+            <Header
+              questionNumber={index + 1}
+              questionCount={list.length}
+              topicList={settings.topics}
+              questionText={question?.text || ""}
+              displayHint={isHintRevealed && settings.hintsEnabled}
+              hintText={question?.hint || ""}
+            />
 
-          <AnswerBox
-            options={question?.options || []}
-            selectedAnswer={selectedAnswer}
-            correctAnswer={question?.answer || ""}
-            explanation={question?.explanation || undefined}
-            onSelect={handleAnswerSelect}
-            selectedOptionId={selectedOptionId}
-            setSelectedOptionId={setSelectedOptionId}
-            setShowAnswerButton={setHideShowAnswerButton}
-            showAnswer={showAnswer}
-          />
+            <AnswerBox
+              options={question?.options || []}
+              selectedAnswer={selectedAnswer}
+              correctAnswer={question?.answer || ""}
+              explanation={question?.explanation || undefined}
+              onSelect={handleAnswerSelect}
+              selectedOptionId={selectedOptionId}
+              setSelectedOptionId={setSelectedOptionId}
+              setShowAnswerButton={setHideShowAnswerButton}
+              showAnswer={showAnswer}
+            />
 
-          <Footer
-            toggleAnswer={toggleAnswer}
-            previousQuestion={previousQuestion}
-            nextQuestion={nextQuestion}
-            submit={submit}
-            displayNav={list.length > 1}
-            allQuestionsAnswered={areAllAnswered}
-            showAnswer={showAnswer}
-            hideShowAnswerButton={hideShowAnswerButton}
-            answerExplanation={question?.explanation || ""}
-            reset={reset}
-            swiperInstance={swiperInstance}
-          />
-        </section>
+            <Footer
+              toggleAnswer={toggleAnswer}
+              previousQuestion={previousQuestion}
+              nextQuestion={nextQuestion}
+              submit={submit}
+              displayNav={list.length > 1}
+              allQuestionsAnswered={areAllAnswered}
+              showAnswer={showAnswer}
+              hideShowAnswerButton={hideShowAnswerButton}
+              answerExplanation={question?.explanation || ""}
+              reset={reset}
+              swiperInstance={swiperInstance}
+            />
+          </section>
+        </div>
       </div>
-    </div>
+
+      <ConfirmLeaveModal
+        isOpen={showConfirmation}
+        confirmLeave={handleConfirmLeave}
+        cancelLeave={handleCancelLeave}
+      />
+    </>
   );
 };
 
