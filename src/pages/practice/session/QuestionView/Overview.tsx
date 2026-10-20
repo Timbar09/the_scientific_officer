@@ -72,18 +72,18 @@ const TopOverview = ({
   const isLargeScreen = useMediaQuery({ breakpoint: "md" });
 
   useEffect(() => {
-    if (isLargeScreen) {
-      setSlidesPerView(6);
-    } else if (isMediumScreen) {
-      setSlidesPerView(4);
-    } else if (isSmallScreen) {
-      setSlidesPerView(2);
-    } else {
-      setSlidesPerView(1);
-    }
-  }, [isSmallScreen, isMediumScreen, isLargeScreen]);
+    let slidesPerViewValue = 1;
 
-  // TODO: Add functionality for the current question  to be in view when the user navigates to it, and also for the user to be able to click on a question in the overview to navigate to that question.
+    if (isLargeScreen) {
+      slidesPerViewValue = 6;
+    } else if (isMediumScreen) {
+      slidesPerViewValue = 4;
+    } else if (isSmallScreen) {
+      slidesPerViewValue = 2;
+    }
+
+    setSlidesPerView(Math.min(slidesPerViewValue, Math.max(questions.length, 1)));
+  }, [isSmallScreen, isMediumScreen, isLargeScreen, questions.length]);
 
   return (
     <>
