@@ -327,6 +327,8 @@
       }
     }
 
+    &--home,
+    &--newSession,
     &--hint,
     &--questionType,
     &--timer {
@@ -1149,6 +1151,17 @@
             }
           }
         }
+      }
+    }
+
+    &--perfectScoreGif {
+      align-items: center;
+
+      img {
+        width: 75%;
+        min-width: 20em;
+        max-width: 50em;
+        height: auto;
       }
     }
   }

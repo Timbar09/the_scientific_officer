@@ -67,9 +67,17 @@ const PracticeSessionHeader = ({
 const PracticeSessionHeaderNav = () => {
   return (
     <div className="practice__header--nav flex gap-2 ai-center">
-      <HeaderBadge iconName="home" value="Home" linkTo="/" />
+      <div className="practice__header--home">
+        <HeaderBadge iconName="home" value="Home" linkTo="/" />
 
-      <HeaderBadge iconName="add" value="New Session" linkTo="/practice" />
+        <Tooltip>Return to the home page.</Tooltip>
+      </div>
+
+      <div className="practice__header--newSession">
+        <HeaderBadge iconName="add" value="New Session" linkTo="/practice" />
+
+        <Tooltip>Start a new practice session.</Tooltip>
+      </div>
     </div>
   );
 };

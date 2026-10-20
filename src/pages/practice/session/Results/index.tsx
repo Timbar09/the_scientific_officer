@@ -1,8 +1,5 @@
-import { useNavigate } from "react-router";
-
 import type { SessionResults, Question } from "../../types";
 
-import Button, { type IconProps } from "../../../../components/Button";
 import Summary from "./Summary";
 import ReviewWrongAnswers from "./ReviewWrongAnswers";
 
@@ -20,26 +17,24 @@ const PracticeResults = ({ sessionResults, questions }: Props) => {
 
       <ReviewWrongAnswers wrongAnswers={wrongAnswers} questions={questions} />
 
-      <Footer />
+      {sessionResults.score === 100 && <PerfectScoreGif />}
     </div>
   );
 };
 
-const Footer = () => {
-  const navigate = useNavigate();
-  const newSessionIcon: IconProps = { name: "add" };
-  const homeIcon: IconProps = { name: "home" };
+const PerfectScoreGif = () => {
+  const gifs = [
+    "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExazR3czExZTR6bjF2bWhuaWZyOHJjdGZ3MDcxZ3RtNXNyN2pqYnlrayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/BPJmthQ3YRwD6QqcVD/giphy.gif",
+    "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExeG91aHo2aTVhdmg5Z3d0YW51Z3VjcWpzbDBtMGN3b3NnM3FmcTQ2bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/11sBLVxNs7v6WA/giphy.gif",
+    "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExaDVkbHlrdGl6Y3dtY3ZtNnVscmVzaWZ1bzV6NnFhczc3a2VocXk2MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q9FGOQewX92eRRO9Qi/giphy.gif",
+    "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHIxZXZxM2l1NnU3ajFkeDYzbDdkcWE5ZjIzazlqczN3ZDA0YTlpdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ujTVMASREzuRbH6zy5/giphy.gif",
+  ];
 
+  const randomIndex = Math.floor(Math.random() * gifs.length);
   return (
-    <footer className="flex flex-wrap jc-end gap-2">
-      <Button onClick={() => navigate("/practice")} icon={newSessionIcon}>
-        Try a New Session
-      </Button>
-
-      <Button onClick={() => navigate("/")} variant="secondary" icon={homeIcon}>
-        Back to Home
-      </Button>
-    </footer>
+    <div className="practice__results--perfectScoreGif flex ai-center jc-center m-block-start-4">
+      <img src={gifs[randomIndex]} alt="Perfect Score" />
+    </div>
   );
 };
 
