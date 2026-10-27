@@ -31,6 +31,7 @@ export type QuestionType = {
 
 export interface QuestionVariant {
   text: string;
+  difficulty: "easy" | "medium" | "hard";
   answer: string;
   explanation: string;
   hint?: string;
@@ -40,7 +41,6 @@ export interface QuestionVariant {
 export interface QuestionData {
   id: number;
   topics: string[];
-  difficulty: "easy" | "medium" | "hard";
   variants: Record<QuestionTypeName, QuestionVariant>;
 }
 

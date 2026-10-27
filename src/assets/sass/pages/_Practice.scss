@@ -1017,7 +1017,8 @@
     }
 
     &--score {
-      border-radius: radius(lg);
+      border-radius: radius(lg) 0 0 radius(lg);
+
       &__value {
         display: block;
         font-size: calc(fs("3xl") * 1.5);
@@ -1162,6 +1163,7 @@
         min-width: 20em;
         max-width: 50em;
         height: auto;
+        border-radius: radius(lg);
       }
     }
   }

@@ -19,9 +19,9 @@
         "WOAH",
         "animal-health"
       ],
-      "difficulty": "easy",
       "variants": {
         "multiple-choice": {
+          "difficulty": "easy",
           "text": "What does WOAH stand for?",
           "options": [
             "World Organisation for Animal Health",
@@ -34,20 +34,22 @@
           "hint": "Think about the global organization that sets standards for animal health and disease control."
         },
         "true-false": {
+          "difficulty": "easy",
           "text": "WOAH stands for World Organisation for Animal Health.",
           "options": ["True", "False"],
           "answer": "True",
           "explanation": "WOAH, formerly known as OIE (Office International des Epizooties), is the intergovernmental organization responsible for improving animal health worldwide. It sets international standards for animal health and welfare, and provides guidance on disease control and prevention.",
           "hint": "Think about the global organization that sets standards for animal health and disease control."
         },
-
         "short-answer": {
+          "difficulty": "easy",
           "text": "What does WOAH stand for?",
           "answer": "World Organisation for Animal Health",
           "explanation": "WOAH, formerly known as OIE (Office International des Epizooties), is the intergovernmental organization responsible for improving animal health worldwide. It sets international standards for animal health and welfare, and provides guidance on disease control and prevention.",
           "hint": "Think about the global organization that sets standards for animal health and disease control."
         },
         "detailed-answer": {
+          "difficulty": "medium",
           "text": "What is WOAH and what is its role in animal health?",
           "answer": "WOAH, formerly known as OIE (Office International des Epizooties), is the intergovernmental organization responsible for improving animal health worldwide. It sets international standards for animal health and welfare, provides guidance on disease control and prevention, and facilitates cooperation among member countries to enhance global animal health security. WOAH also maintains a list of notifiable diseases and provides a platform for reporting outbreaks and sharing information.",
           "explanation": "WOAH plays a critical role in global animal health by setting standards, providing guidance, and facilitating cooperation among countries to prevent and control animal diseases.",
