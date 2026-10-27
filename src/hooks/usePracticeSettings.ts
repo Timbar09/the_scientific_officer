@@ -1,83 +1,24 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import type { FieldValues } from "react-hook-form";
 
-import type {
-  SessionSettings,
-  QuestionType,
-  QuestionData,
-} from "../pages/practice/types";
-
-import { loadQuestionBank } from "./questionBank";
+import type { SessionSettings } from "../pages/practice/types";
+import { useAppData } from "../context/useAppData";
 
 export const usePracticeSettings = () => {
   const navigate = useNavigate();
-  const [practiceTopics, setPracticeTopics] = useState<string[]>([]);
-  const [questionTypes, setQuestionTypes] = useState<QuestionType[]>([]);
-  const [questions, setQuestions] = useState<QuestionData[]>([]);
-  const [metrics, setMetrics] = useState([
-    {
-      title: "Total Questions",
-      value: 0,
-    },
-    {
-      title: "Total Topics",
-      value: 0,
-    },
-    {
-      title: "Total Resources",
-      value: 0,
-    },
-    {
-      title: "Total Articles",
-      value: 0,
-    },
-  ]);
+  const { questionBank, metrics, isDataLoading, error } = useAppData();
 
-  useEffect(() => {
-    loadData();
-  }, []);
+  const questions = questionBank?.questions ?? [];
+  const questionTypes = questionBank?.questionTypes ?? [];
+  const practiceTopics = Array.from(
+    new Set(questions.flatMap((question) => question.topics ?? [])),
+  );
 
   const handleSubmit = (formValues: FieldValues) => {
     const settings = getSessionSettings(formValues);
 
     navigate("/practice/session", { state: settings });
-  };
-
-  const loadData = async () => {
-    try {
-      const { questionTypes, questions } = await loadQuestionBank();
-      const topics = Array.from(
-        new Set(questions.flatMap((question) => question.topics ?? [])),
-      );
-
-      setQuestions(questions);
-      setPracticeTopics(topics);
-      setQuestionTypes(questionTypes);
-      setMetrics([
-        {
-          title: "Total Questions",
-          value: questions.reduce((total, question) => {
-            return total + Object.keys(question.variants).length;
-          }, 0),
-        },
-        {
-          title: "Total Topics",
-          value: topics.length,
-        },
-        {
-          title: "Total Resources",
-          value: 1_200, // Placeholder value
-        },
-        {
-          title: "Total Articles",
-          value: 500, // Placeholder value
-        },
-      ]);
-    } catch (error) {
-      console.error("Failed to load practice data:", error);
-    }
   };
 
   const getSessionSettings = (formValues: FieldValues): SessionSettings => {
@@ -97,5 +38,13 @@ export const usePracticeSettings = () => {
     };
   };
 
-  return { practiceTopics, questionTypes, questions, metrics, handleSubmit };
+  return {
+    practiceTopics,
+    questionTypes,
+    questions,
+    metrics,
+    isDataLoading,
+    error,
+    handleSubmit,
+  };
 };

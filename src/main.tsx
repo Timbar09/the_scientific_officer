@@ -12,6 +12,7 @@ import Books from "./pages/books";
 import Articles from "./pages/articles";
 import Videos from "./pages/videos";
 import About from "./pages/about";
+import { AppDataProvider } from "./context/AppDataProvider";
 
 import "./assets/sass/index.scss";
 
@@ -54,6 +55,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AppDataProvider>
+      <RouterProvider router={router} />
+    </AppDataProvider>
   </StrictMode>,
 );

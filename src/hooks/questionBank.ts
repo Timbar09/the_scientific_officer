@@ -55,8 +55,6 @@ export const loadQuestionBank = async (): Promise<LoadedQuestionBank> => {
   const index = await fetchJson<QuestionBankIndex>(INDEX_PATH);
   const questionFiles = index.questionFiles ?? [];
 
-  console.log("Question Types:", index.questionTypes);
-
   const chapters = await Promise.all(
     questionFiles.map(async (file) => {
       return fetchJson<QuestionBankChapter>(`/question-bank/${file.file}`);

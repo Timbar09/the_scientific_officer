@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate, useLocation } from "react-router";
 
 import type {
@@ -15,12 +15,13 @@ import {
   getUnansweredQuestionIndexes,
 } from "./utils";
 
-import { loadQuestionBank } from "../questionBank";
+import { useAppData } from "../../context/useAppData";
 
 const useSession = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const settings = location.state as SessionSettings | undefined;
+  const { questionBank, isDataLoading, error } = useAppData();
 
   const [isLoading, setIsLoading] = useState(true);
   const [showAnswer, setShowAnswer] = useState(false);
@@ -37,31 +38,31 @@ const useSession = () => {
     Set<string>
   >(new Set());
 
-  const load = useCallback(async () => {
-    if (!settings) return;
-    try {
-      const { questions: qData, questionTypes } = await loadQuestionBank();
-      const questions = destructureQuestionData(qData, questionTypes);
-
-      setQuestionData(qData);
-      setQuestionList(questions);
-    } catch {
-      setQuestionData([]);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [settings]);
-
   useEffect(() => {
     if (!settings) {
       navigate("/practice", { replace: true });
+    }
+  }, [navigate, settings]);
+
+  useEffect(() => {
+    if (!questionBank) {
+      setQuestionData([]);
+      setQuestionList([]);
       return;
     }
-    void load();
-  }, [navigate, settings, load]);
+
+    setQuestionData(questionBank.questions);
+    setQuestionList(
+      destructureQuestionData(
+        questionBank.questions,
+        questionBank.questionTypes,
+      ),
+    );
+    setIsLoading(false);
+  }, [questionBank]);
 
   const list = useMemo<Question[]>(() => {
-    return getSessionQuestions(questionList, settings as SessionSettings);
+    return settings ? getSessionQuestions(questionList, settings) : [];
   }, [questionList, settings]);
 
   useEffect(() => {
@@ -165,7 +166,8 @@ const useSession = () => {
     list,
     count: list.length,
     unansweredCount,
-    loading: isLoading,
+    loading: isDataLoading || isLoading,
+    error,
     areAllAnswered: allQuestionsAnswered,
     current,
   };
