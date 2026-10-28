@@ -7,7 +7,7 @@ import { useAppData } from "../context/useAppData";
 
 export const usePracticeSettings = () => {
   const navigate = useNavigate();
-  const { questionBank, metrics, isDataLoading, error } = useAppData();
+  const { questionBank } = useAppData();
 
   const questions = questionBank?.questions ?? [];
   const questionTypes = questionBank?.questionTypes ?? [];
@@ -41,10 +41,6 @@ export const usePracticeSettings = () => {
   return {
     practiceTopics,
     questionTypes,
-    questions,
-    metrics,
-    isDataLoading,
-    error,
     handleSubmit,
   };
 };

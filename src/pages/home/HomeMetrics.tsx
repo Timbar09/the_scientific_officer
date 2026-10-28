@@ -1,15 +1,26 @@
-import { usePracticeSettings } from "../../hooks/usePracticeSettings";
+import { useAppData } from "../../context/useAppData";
 
 import Container from "../../components/Container";
 
 const HomeMetrics = () => {
-  const { metrics } = usePracticeSettings();
+  const { metrics } = useAppData();
 
-  const formatValue = (value: number) => {
-    const roundedValue = Math.round(value / 10) * 10;
+  const formatNumber = (number: number, addPlus: boolean = true) => {
+    const isLessThanTen = number < 10;
 
-    return `${roundedValue.toLocaleString()}+`;
+    if (isLessThanTen) {
+      return number.toLocaleString();
+    }
+
+    const roundedNumber = Math.round(number / 10) * 10;
+
+    return `${roundedNumber.toLocaleString()}${addPlus ? "+" : ""}`;
   };
+
+  const totalResources = formatNumber(
+    metrics.reduce((acc, metric) => acc + metric.value, 0),
+    false,
+  );
 
   return (
     <section className="home__metric">
@@ -20,8 +31,8 @@ const HomeMetrics = () => {
           </h2>
 
           <p className="home__section--description m-block-end-5 clr-primary-200">
-            So far, we have over 5,000 material resources to help scientific
-            officers enhance their skills!
+            So far, we have over <strong>{totalResources}</strong> material
+            resources to help scientific officers enhance their skills!
           </p>
 
           <ul className="home__metric--list gap-4">
@@ -31,7 +42,7 @@ const HomeMetrics = () => {
                 key={metric.title}
               >
                 <h3 className="home__metric--item__value clr-primary-100 fw-bold">
-                  {formatValue(metric.value)}
+                  {formatNumber(metric.value)}
                 </h3>
                 <p className="home__metric--item__label clr-primary-300">
                   {metric.title}
