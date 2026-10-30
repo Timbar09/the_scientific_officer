@@ -1,0 +1,44 @@
+{
+  "language": {
+    "label": "Teme",
+    "english": "Seesemane",
+    "tswana": "Setswana"
+  },
+  "navigation": {
+    "home": "Gae",
+    "practice": "Ikatise",
+    "resources": "Didirisiwa",
+    "books": "Dibuka",
+    "articles": "Makwalo",
+    "videos": "Ditshwantsho tsa Motshikinyego",
+    "about": "Ka rona",
+    "contribute": "Tsenya letsogo"
+  },
+  "home": {
+    "hero": {
+      "title": "Nonofatsa Kitso ya Leruo ka go Ikatisa",
+      "cta": {
+        "primary": "Simolola go Ikatisa",
+        "secondary": "Sekaseka Didirisiwa"
+      }
+    },
+    "images": {
+      "image1": "Dikokwana",
+      "image2": "Morui o nosa dipotsane mashi",
+      "image3": "Ngaka ya diphologolo e tshwere mmutla",
+      "image4": "Morui 0 tshwere mae"
+    }
+  },
+  "footer": {
+    "description": "Re nonotsha badiredi ba saense ka didirisiwa le kitso ya katlego mo tirong.",
+    "quickLinks": "Dikgolagano tse di bonako",
+    "resources": "Didirisiwa",
+    "contact": "Ikgolaganye le rona",
+    "careers": "Ditiro",
+    "developedBy": "E tlhamilwe ke",
+    "allRightsReserved": "Ditshwanelo tsotlhe di sireleditswe."
+  },
+  "common": {
+    "loading": "E a laisa"
+  }
+}

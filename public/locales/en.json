@@ -1,0 +1,44 @@
+{
+  "language": {
+    "label": "Language",
+    "english": "English",
+    "tswana": "Setswana"
+  },
+  "navigation": {
+    "home": "Home",
+    "practice": "Practice",
+    "resources": "Resources",
+    "books": "Books",
+    "articles": "Articles",
+    "videos": "Videos",
+    "about": "About",
+    "contribute": "Contribute"
+  },
+  "home": {
+    "hero": {
+      "title": "Master Animal Science Through Practice",
+      "cta": {
+        "primary": "Start Practicing",
+        "secondary": "Explore Resources"
+      }
+    },
+    "images": {
+      "image1": "Chicks",
+      "image2": "Farmer feeding kids with milk",
+      "image3": "Veterinarian handling a rabbit",
+      "image4": "Farmer holding eggs"
+    }
+  },
+  "footer": {
+    "description": "Empowering scientific officers with tools and resources for career success.",
+    "quickLinks": "Quick Links",
+    "resources": "Resources",
+    "contact": "Contact Us",
+    "careers": "Careers",
+    "developedBy": "Developed by",
+    "allRightsReserved": "All rights reserved."
+  },
+  "common": {
+    "loading": "Loading"
+  }
+}
