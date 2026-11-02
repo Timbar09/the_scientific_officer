@@ -1,5 +1,8 @@
 import { motion, AnimatePresence } from "motion/react";
 
+import { useLanguage } from "../../context/useLanguage";
+
+import Button from "../Button";
 import { NavMenuItem, NavLinkItem } from "./NavItems";
 
 const navLinks = [
@@ -7,10 +10,6 @@ const navLinks = [
   {
     name: "Practice",
     path: "/practice",
-    // sub: [
-    //   { name: "Practice Questions", path: "/practice/questions" },
-    //   { name: "Mock Test", path: "/practice/mock-test" },
-    // ],
   },
   {
     name: "Resources",
@@ -25,31 +24,30 @@ const navLinks = [
 ];
 
 export interface Menu {
-  isNavOpen: boolean;
-  isTablet: boolean;
-  handleMenuItemClick: () => void;
+  display: boolean;
+  onClick: () => void;
 }
 
-export const MenuList = ({
-  isNavOpen,
-  isTablet,
-  handleMenuItemClick,
-}: Menu) => (
+const animationProps = {
+  initial: { top: 0, right: "-100%" },
+  animate: { top: 0, right: 0 },
+  exit: { top: 0, right: "-100%" },
+};
+
+export const MenuList = ({ display, onClick }: Menu) => (
   <AnimatePresence>
-    {isNavOpen && !isTablet && (
+    {display && (
       <motion.ul
         className="header__nav--menu flex flex-col"
         role="menu"
         id="menu"
-        initial={{ top: 0, right: "-100%" }}
-        animate={{ top: 0, right: 0 }}
-        exit={{ top: 0, right: "-100%" }}
+        {...animationProps}
       >
         {navLinks.map((link) => (
           <NavMenuItem
             key={link.path}
             item={link}
-            handleMenuItemClick={handleMenuItemClick}
+            handleMenuItemClick={onClick}
           />
         ))}
       </motion.ul>
@@ -57,18 +55,27 @@ export const MenuList = ({
   </AnimatePresence>
 );
 
-export const NavList = () => {
-  // const [isSubMenuOpen, setIsSubMenuOpen] = useState<boolean>(false);
+export const NavList = ({ display }: { display: boolean }) => {
+  const { t } = useLanguage();
+  const translationKey = "navigation.contribute";
+  const text = t(translationKey);
+  const translatedText = text === translationKey ? "Contribute" : text;
+
+  if (!display) return null;
 
   return (
-    <ul
-      className="header__nav--list flex gap-3"
-      role="navigation"
-      id="navigation-list"
-    >
-      {navLinks.map((link) => (
-        <NavLinkItem key={link.path} item={link} />
-      ))}
-    </ul>
+    <>
+      <ul
+        className="header__nav--list flex gap-3"
+        role="navigation"
+        id="navigation-list"
+      >
+        {navLinks.map((link) => (
+          <NavLinkItem key={link.path} item={link} />
+        ))}
+      </ul>
+
+      <Button icon={{ name: "heart_plus" }}>{translatedText}</Button>
+    </>
   );
 };

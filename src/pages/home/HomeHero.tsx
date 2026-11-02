@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 
+import { useLanguage } from "../../context/useLanguage";
+
 import Button from "../../components/Button";
 import Container from "../../components/Container";
 
@@ -9,11 +11,40 @@ import vetImage from "../../assets/images/hero/vet-examining-bunny-sm.jpg";
 import eggsImage from "../../assets/images/hero/woman-holding-eggs.jpg";
 
 const HomeHero = () => {
-  const images = [
-    { src: chicksImage, alt: "Chicks" },
-    { src: kidsImage, alt: "Kids" },
-    { src: vetImage, alt: "Vet Examining Bunny" },
-    { src: eggsImage, alt: "Woman Holding Eggs" },
+  const { translations, isLoading, error, t } = useLanguage();
+
+  if (isLoading && !translations?.home) {
+    return (
+      <section className="home__hero main__section">
+        <Container>
+          <p>{t("common.loading")}...</p>
+        </Container>
+      </section>
+    );
+  }
+
+  if (error && !translations?.home) {
+    return (
+      <section className="home__hero main__section">
+        <Container>
+          <p role="alert">Unable to load the home page: {error.message}</p>
+        </Container>
+      </section>
+    );
+  }
+
+  if (!translations?.home) {
+    return null;
+  }
+
+  const { home } = translations;
+  const { hero, images } = home;
+
+  const imageList = [
+    { src: chicksImage, alt: images.image1 },
+    { src: kidsImage, alt: images.image2 },
+    { src: vetImage, alt: images.image3 },
+    { src: eggsImage, alt: images.image4 },
   ];
 
   return (
@@ -23,14 +54,13 @@ const HomeHero = () => {
           <p className="clr-primary-500">For Animal Science Professionals</p>
 
           <h1 className="home__title fw-bold clr-primary-900 m-block-end-4 p-block-end-2">
-            <span>Master</span> <span>Animal Science</span>{" "}
-            <span>Through Practice</span>
+            {hero.title}
           </h1>
 
           <div className="flex jc-center ai-center jc-@md-start gap-3 flex-wrap">
             <Button icon={{ name: "neurology" }}>
               <Link to="/articles" className="clr-inherit">
-                Start Practicing
+                {hero.cta.primary}
               </Link>
             </Button>
 
@@ -39,7 +69,7 @@ const HomeHero = () => {
               icon={{ name: "menu_book", position: "left" }}
             >
               <Link to="/resources" className="clr-inherit">
-                Browse Resources
+                {hero.cta.secondary}
               </Link>
             </Button>
           </div>
@@ -47,7 +77,7 @@ const HomeHero = () => {
 
         <div className="home__hero--image">
           <ul className="home__hero--image__list flex gap-3">
-            {images.map((image, index) => (
+            {imageList.map((image, index) => (
               <li className="home__hero--image__item grid" key={index}>
                 <img
                   src={image.src}

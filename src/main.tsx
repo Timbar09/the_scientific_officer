@@ -13,6 +13,7 @@ import Articles from "./pages/articles";
 import Videos from "./pages/videos";
 import About from "./pages/about";
 import { AppDataProvider } from "./context/AppDataProvider";
+import { LanguageProvider } from "./context/LanguageProvider";
 
 import "./assets/sass/index.scss";
 
@@ -55,8 +56,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <AppDataProvider>
-      <RouterProvider router={router} />
-    </AppDataProvider>
+    <LanguageProvider>
+      <AppDataProvider>
+        <RouterProvider router={router} />
+      </AppDataProvider>
+    </LanguageProvider>
   </StrictMode>,
 );

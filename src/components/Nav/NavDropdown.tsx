@@ -2,6 +2,7 @@ import { NavLink } from "react-router";
 import { motion } from "motion/react";
 import type { Variants } from "motion/react";
 import type { NavItem } from "./NavItems";
+import { useLanguage } from "../../context/useLanguage";
 
 interface NavDropdownProps {
   subItems: NavItem[];
@@ -16,6 +17,14 @@ const NavDropdown = ({
   isMobileMenu,
   closeDropdown,
 }: NavDropdownProps) => {
+  const { t } = useLanguage();
+
+  const getText = (item: NavItem) => {
+    const translationKey = `navigation.${item.name.toLowerCase()}`;
+    const text = t(translationKey);
+    return text === translationKey ? item.name : text;
+  };
+
   return isMobileMenu ? (
     <div key="modal" className="header__nav--list__dropdown p-block-1">
       <ul
@@ -37,7 +46,7 @@ const NavDropdown = ({
               className="header__nav--list__link"
               onClick={closeDropdown}
             >
-              {item.name}
+              {getText(item)}
             </NavLink>
           </motion.li>
         ))}
@@ -67,7 +76,7 @@ const NavDropdown = ({
               className="header__nav--list__link"
               onClick={closeDropdown}
             >
-              {item.name}
+              {getText(item)}
             </NavLink>
           </li>
         ))}

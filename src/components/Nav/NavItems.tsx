@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import type { Variants } from "motion/react";
 
 import NavDropdown from "./NavDropdown";
+import { useLanguage } from "../../context/useLanguage";
 
 export interface NavItem {
   name: string;
@@ -65,6 +66,10 @@ const NavItem = ({
 }: NavItemProps) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { pathname } = useLocation();
+  const { t } = useLanguage();
+  const translationKey = `navigation.${item.name.toLowerCase()}`;
+  const text = t(translationKey);
+  const translatedText = text === translationKey ? item.name : text;
 
   const itemClassName = `header__nav--${isMobileMenu ? "menu" : "list"}`;
   const isItemActive =
@@ -95,7 +100,7 @@ const NavItem = ({
             aria-expanded={isOpen}
             onClick={isMobileMenu ? () => setIsOpen(!isOpen) : undefined}
           >
-            {item.name}{" "}
+            {translatedText}{" "}
             <motion.span
               className="material-symbols-outlined"
               initial={{ rotate: 0 }}
@@ -129,7 +134,7 @@ const NavItem = ({
           }
           {...(isMobileMenu ? { onClick: handleMenuItemClick } : {})}
         >
-          {item.name}
+          {translatedText}
         </NavLink>
       )}
     </li>
