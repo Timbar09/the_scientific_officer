@@ -45,9 +45,7 @@ export const LanguageProvider = ({
   children: React.ReactNode;
 }) => {
   const [language, setLanguageState] = useState<Language>(getStoredLanguage);
-  const [translations, setTranslations] = useState<Translations>(
-    {} as Translations,
-  );
+  const [translations, setTranslations] = useState<Translations | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -76,7 +74,7 @@ export const LanguageProvider = ({
               : new Error(`Failed to load translations for "${language}"`);
 
           console.error("Failed to load translations:", loadError);
-          setTranslations({} as Translations);
+          setTranslations(null);
           setError(loadError);
         }
       } finally {

@@ -45,7 +45,7 @@ export type Translations = {
 export type LanguageContextValue = {
   language: Language;
   setLanguage: (language: Language) => void;
-  translations: Translations;
+  translations: Translations | null;
   isLoading: boolean;
   error: Error | null;
   t: (key: string) => string;

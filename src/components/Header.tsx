@@ -1,6 +1,7 @@
 import Nav from "./Nav";
 import Container from "./Container";
 import Tooltip from "./Tooltip";
+import LanguageSelector from "./LanguageSelector";
 
 const Header = () => {
   return (
@@ -9,6 +10,8 @@ const Header = () => {
         <Logo />
 
         <Nav />
+
+        <LanguageSelector />
       </Container>
     </header>
   );

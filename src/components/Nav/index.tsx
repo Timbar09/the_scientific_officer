@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 import Icon from "../Icon";
-import Button from "../Button";
 import { MenuList, NavList } from "./NavLists";
 
 interface MenuButtonProps {
@@ -45,19 +44,9 @@ const Nav = () => {
     <nav className="header__nav flex ai-center gap-5" role="navigation">
       <MenuToggleButton isNavOpen={isNavOpen} toggleNavMenu={toggleNavMenu} />
 
-      <MenuList
-        isNavOpen={isNavOpen}
-        isTablet={isTablet}
-        handleMenuItemClick={toggleNavMenu}
-      />
+      <MenuList display={isNavOpen && !isTablet} onClick={toggleNavMenu} />
 
-      {isTablet && (
-        <>
-          <NavList />
-
-          <Button icon={{ name: "heart_plus" }}>Contribute</Button>
-        </>
-      )}
+      <NavList display={isTablet} />
     </nav>
   );
 };

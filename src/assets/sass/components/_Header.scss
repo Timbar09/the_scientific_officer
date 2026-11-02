@@ -210,4 +210,117 @@
       }
     }
   }
+
+  &__languageSelector {
+    position: relative;
+
+    &__trigger {
+      background-color: transparent;
+      border: 0;
+      border-radius: radius(md);
+      color: inherit;
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible {
+        background-color: clr(neutral, 200);
+      }
+
+      svg {
+        width: 1.5em;
+        height: 1em;
+        flex-shrink: 0;
+        border-radius: radius(xs);
+      }
+
+      span {
+        font-size: 1em;
+        font-weight: 600;
+      }
+
+      .tooltip {
+        font-size: 1.25em;
+      }
+    }
+
+    &__arrow {
+      width: 0;
+      height: 0;
+      border-inline-start: 0.3em solid transparent;
+      border-inline-end: 0.3em solid transparent;
+      border-top: 0.35em solid currentColor;
+    }
+
+    &__option {
+      &--list {
+        position: absolute;
+        z-index: 1;
+        top: 150%;
+        right: 0;
+        min-width: max-content;
+        margin: 0;
+        margin-top: spacing(1);
+        background-color: clr(neutral, 100);
+        border-radius: calc(radius(md) * 1.75);
+        box-shadow: $shadow-md;
+        list-style: none;
+      }
+
+      &--item {
+        display: flex;
+        align-items: center;
+        gap: spacing(1);
+        border-radius: radius(md);
+        cursor: pointer;
+
+        &:hover,
+        &:focus-visible {
+          color: clr(primary, 900);
+          background-color: clr(neutral, 200);
+        }
+
+        &[aria-selected="true"] {
+          --width: 0.25em;
+
+          position: relative;
+          color: clr(primary, 900);
+          background-color: clr(primary, 200, 0.5);
+
+          &::before {
+            content: "";
+            position: absolute;
+            top: 25%;
+            left: calc(-1 * var(--width) / 2);
+            width: var(--width);
+            bottom: 25%;
+            border-radius: radius(md);
+            background-color: clr(primary, 400);
+          }
+        }
+
+        svg {
+          width: 2em;
+          height: auto;
+          flex-shrink: 0;
+          border-radius: radius(xs);
+        }
+
+        &__label {
+          font-size: 0.75em;
+          line-height: 1em;
+
+          > span {
+            &:first-child {
+              font-weight: 700;
+            }
+
+            &:last-child {
+              font-weight: 500;
+              font-size: 0.625rem;
+            }
+          }
+        }
+      }
+    }
+  }
 }
