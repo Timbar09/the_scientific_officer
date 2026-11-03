@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-import { useLanguage } from "../../context/useLanguage";
+import type { HomeTranslations } from "../../context/LanguageContext";
 
 import Button from "../../components/Button";
 import Container from "../../components/Container";
@@ -10,35 +10,12 @@ import kidsImage from "../../assets/images/hero/man-feeding-kids.jpg";
 import vetImage from "../../assets/images/hero/vet-examining-bunny-sm.jpg";
 import eggsImage from "../../assets/images/hero/woman-holding-eggs.jpg";
 
-const HomeHero = () => {
-  const { translations, isLoading, error, t } = useLanguage();
+interface HomeHeroProps {
+  data: HomeTranslations["hero"];
+}
 
-  if (isLoading && !translations?.home) {
-    return (
-      <section className="home__hero main__section">
-        <Container>
-          <p>{t("common.loading")}...</p>
-        </Container>
-      </section>
-    );
-  }
-
-  if (error && !translations?.home) {
-    return (
-      <section className="home__hero main__section">
-        <Container>
-          <p role="alert">Unable to load the home page: {error.message}</p>
-        </Container>
-      </section>
-    );
-  }
-
-  if (!translations?.home) {
-    return null;
-  }
-
-  const { home } = translations;
-  const { hero, images } = home;
+const HomeHero = ({ data }: HomeHeroProps) => {
+  const { title, cta, images } = data;
 
   const imageList = [
     { src: chicksImage, alt: images.image1 },
@@ -54,13 +31,13 @@ const HomeHero = () => {
           <p className="clr-primary-500">For Animal Science Professionals</p>
 
           <h1 className="home__title fw-bold clr-primary-900 m-block-end-4 p-block-end-2">
-            {hero.title}
+            {title}
           </h1>
 
           <div className="flex jc-center ai-center jc-@md-start gap-3 flex-wrap">
             <Button icon={{ name: "neurology" }}>
               <Link to="/articles" className="clr-inherit">
-                {hero.cta.primary}
+                {cta.primary}
               </Link>
             </Button>
 
@@ -69,7 +46,7 @@ const HomeHero = () => {
               icon={{ name: "menu_book", position: "left" }}
             >
               <Link to="/resources" className="clr-inherit">
-                {hero.cta.secondary}
+                {cta.secondary}
               </Link>
             </Button>
           </div>

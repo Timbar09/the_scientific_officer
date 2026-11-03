@@ -20,13 +20,13 @@
       "cta": {
         "primary": "Simolola go Ikatisa",
         "secondary": "Sekaseka Didirisiwa"
+      },
+      "images": {
+        "image1": "Dikokwana",
+        "image2": "Morui o nosa dipotsane mashi",
+        "image3": "Ngaka ya diphologolo e tshwere mmutla",
+        "image4": "Morui 0 tshwere mae"
       }
-    },
-    "images": {
-      "image1": "Dikokwana",
-      "image2": "Morui o nosa dipotsane mashi",
-      "image3": "Ngaka ya diphologolo e tshwere mmutla",
-      "image4": "Morui 0 tshwere mae"
     }
   },
   "footer": {

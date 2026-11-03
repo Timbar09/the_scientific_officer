@@ -21,16 +21,16 @@ export type NavigationTranslations = {
 export type HomeTranslations = {
   hero: {
     title: string;
+    images: {
+      image1: string;
+      image2: string;
+      image3: string;
+      image4: string;
+    };
     cta: {
       primary: string;
       secondary: string;
     };
-  };
-  images: {
-    image1: string;
-    image2: string;
-    image3: string;
-    image4: string;
   };
 };
 

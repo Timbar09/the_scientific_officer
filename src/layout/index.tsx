@@ -1,5 +1,6 @@
 import { Outlet, useLocation } from "react-router";
 
+import Page from "../components/Page";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
@@ -12,7 +13,9 @@ const Layout = () => {
       <div id="overlay" className="overlay" />
       {isNotPracticeSessionPage && <Header />}
 
-      <Outlet />
+      <Page>
+        <Outlet />
+      </Page>
 
       <Footer />
     </div>

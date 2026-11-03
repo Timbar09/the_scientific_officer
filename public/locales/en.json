@@ -20,13 +20,13 @@
       "cta": {
         "primary": "Start Practicing",
         "secondary": "Explore Resources"
+      },
+      "images": {
+        "image1": "Chicks",
+        "image2": "Farmer feeding kids with milk",
+        "image3": "Veterinarian handling a rabbit",
+        "image4": "Farmer holding eggs"
       }
-    },
-    "images": {
-      "image1": "Chicks",
-      "image2": "Farmer feeding kids with milk",
-      "image3": "Veterinarian handling a rabbit",
-      "image4": "Farmer holding eggs"
     }
   },
   "footer": {
