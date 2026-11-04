@@ -24,6 +24,19 @@ const HomeHero = ({ data }: HomeHeroProps) => {
     { src: eggsImage, alt: images.image4 },
   ];
 
+  const processTitle = (title: string) => {
+    const phrases = title.split("-");
+    const topPhrase = phrases[0];
+    const middlePhrase = phrases[1];
+    const bottomPhrase = phrases[2];
+    return (
+      <>
+        <span>{topPhrase}</span> <span>{middlePhrase}</span>{" "}
+        <span>{bottomPhrase}</span>
+      </>
+    );
+  };
+
   return (
     <section className="home__hero main__section">
       <Container className="flex flex-col flex-@md-row jc-@md-between ai-center gap-5">
@@ -31,7 +44,7 @@ const HomeHero = ({ data }: HomeHeroProps) => {
           <p className="clr-primary-500">For Animal Science Professionals</p>
 
           <h1 className="home__title fw-bold clr-primary-900 m-block-end-4 p-block-end-2">
-            {title}
+            {processTitle(title)}
           </h1>
 
           <div className="flex jc-center ai-center jc-@md-start gap-3 flex-wrap">
