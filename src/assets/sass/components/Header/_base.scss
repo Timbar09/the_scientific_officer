@@ -1,0 +1,30 @@
+@use "../../abstracts" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  .container {
+    border-radius: radius(lg);
+
+    @include mq("md") {
+      background-color: clr(primary, 100);
+      box-shadow: $shadow-lg;
+      border: $border;
+    }
+  }
+
+  &__logo {
+    position: relative;
+    border-radius: radius(md);
+    background-color: clr(primary, 100);
+    box-shadow: $shadow-md;
+
+    @include mq("md") {
+      box-shadow: none;
+    }
+  }
+}
