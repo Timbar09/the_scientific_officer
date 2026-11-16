@@ -64,7 +64,7 @@ const NavItem = ({
   isMobileMenu,
   handleMenuItemClick = () => {},
 }: NavItemProps) => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const { pathname } = useLocation();
   const { t } = useLanguage();
   const translationKey = `navigation.${item.name.toLowerCase()}`;
@@ -86,8 +86,8 @@ const NavItem = ({
       key={item.path}
       className={`${itemClassName}__item p-block-@md-4`}
       role="listitem"
-      onMouseEnter={!isMobileMenu ? () => setIsOpen(true) : undefined}
-      onMouseLeave={!isMobileMenu ? () => setIsOpen(false) : undefined}
+      onMouseEnter={!isMobileMenu ? () => setIsExpanded(true) : undefined}
+      onMouseLeave={!isMobileMenu ? () => setIsExpanded(false) : undefined}
     >
       {item.sub ? (
         <>
@@ -95,29 +95,31 @@ const NavItem = ({
             type="button"
             className={`${itemClassName}__link flex ai-center jc-center ${
               isMobileMenu ? "p-2" : ""
-            } ${isDropdownActive ? "active" : ""}`}
+            } ${isDropdownActive ? "active" : ""} ${isExpanded ? "expanded" : ""}`}
             aria-haspopup="true"
-            aria-expanded={isOpen}
-            onClick={isMobileMenu ? () => setIsOpen(!isOpen) : undefined}
+            aria-expanded={isExpanded}
+            onClick={
+              isMobileMenu ? () => setIsExpanded(!isExpanded) : undefined
+            }
           >
             {translatedText}{" "}
             <motion.span
-              className="material-symbols-outlined"
+              className="icon material-symbols-outlined"
               initial={{ rotate: 0 }}
-              animate={{ rotate: isOpen ? 180 : 0 }}
+              animate={{ rotate: isExpanded ? 180 : 0 }}
             >
               keyboard_arrow_down
             </motion.span>
           </button>
 
           <AnimatePresence>
-            {isOpen && (
+            {isExpanded && (
               <NavDropdown
                 subItems={item.sub}
                 isMobileMenu={isMobileMenu}
                 motionVariants={motionVariants}
                 closeDropdown={() => {
-                  setIsOpen(false);
+                  setIsExpanded(false);
                   handleMenuItemClick();
                 }}
               />

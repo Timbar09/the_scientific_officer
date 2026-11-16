@@ -9,7 +9,7 @@ const Layout = () => {
   const isNotPracticeSessionPage = location.pathname !== "/practice/session";
 
   return (
-    <div className="App bg-neutral-200 clr-neutral-500 bg-pattern">
+    <div className="App bg-primary-100 clr-neutral-500 bg-pattern">
       <div id="overlay" className="overlay" />
       {isNotPracticeSessionPage && <Header />}
 

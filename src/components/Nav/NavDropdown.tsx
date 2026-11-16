@@ -1,9 +1,12 @@
 import { NavLink } from "react-router";
 import { motion } from "motion/react";
-import type { Variants } from "motion/react";
-import type { NavItem } from "./NavItems";
+
 import { useLanguage } from "../../context/useLanguage";
 
+import type { Variants } from "motion/react";
+import type { NavItem } from "./NavItems";
+
+import Icon from "../Icon";
 interface NavDropdownProps {
   subItems: NavItem[];
   isMobileMenu: boolean;
@@ -26,15 +29,15 @@ const NavDropdown = ({
   };
 
   return isMobileMenu ? (
-    <div key="modal" className="header__nav--list__dropdown p-block-1">
+    <div key="modal" className="header__nav--menu__dropdown">
       <ul
-        className="header__nav--list__dropdown--list p-block-2 p-inline-3"
+        className="header__nav--menu__dropdown--list p-block-start-0 p-block-end-2 p-inline-3"
         role="menu"
       >
         {subItems.map((item) => (
           <motion.li
             key={item.path}
-            className="header__nav--list__item"
+            className="header__nav--menu__dropdown__item"
             role="menuitem"
             initial="initial"
             animate="animate"
@@ -43,7 +46,7 @@ const NavDropdown = ({
           >
             <NavLink
               to={item.path}
-              className="header__nav--list__link"
+              className="header__nav--menu__dropdown__link p-1"
               onClick={closeDropdown}
             >
               {getText(item)}
@@ -61,10 +64,7 @@ const NavDropdown = ({
       exit="exit"
       variants={motionVariants}
     >
-      <ul
-        className="header__nav--list__dropdown--list p-block-2 p-inline-3"
-        role="menu"
-      >
+      <ul className="header__nav--list__dropdown--list p-2" role="menu">
         {subItems.map((item) => (
           <li
             key={item.path}
@@ -73,10 +73,15 @@ const NavDropdown = ({
           >
             <NavLink
               to={item.path}
-              className="header__nav--list__link"
+              className={({ isActive }) =>
+                `header__nav--list__link p-block-2 p-inline-3 flex ai-center gap-1 ${isActive ? "active removeArrowIcon" : ""}`
+              }
               onClick={closeDropdown}
             >
-              {getText(item)}
+              {getText(item)}{" "}
+              <span className="header__nav--list__dropdown--item__icon flex ai-center">
+                <Icon name="remove" /> <Icon name="arrow_right_alt" />
+              </span>
             </NavLink>
           </li>
         ))}
