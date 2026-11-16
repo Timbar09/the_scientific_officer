@@ -22,7 +22,7 @@ const MenuToggleButton = ({ isNavOpen, toggleNavMenu }: MenuButtonProps) => (
   </button>
 );
 
-const Nav = () => {
+const Nav = ({ type }: { type: "menu" | "list" }) => {
   const [isNavOpen, setIsNavOpen] = useState<boolean>(false);
   const isTablet: boolean = useMediaQuery({ breakpoint: "md" });
 
@@ -42,11 +42,17 @@ const Nav = () => {
 
   return (
     <nav className="header__nav flex ai-center gap-5" role="navigation">
-      <MenuToggleButton isNavOpen={isNavOpen} toggleNavMenu={toggleNavMenu} />
-
-      <MenuList display={isNavOpen && !isTablet} onClick={toggleNavMenu} />
-
-      <NavList display={isTablet} />
+      {type === "menu" ? (
+        <>
+          <MenuToggleButton
+            isNavOpen={isNavOpen}
+            toggleNavMenu={toggleNavMenu}
+          />
+          <MenuList display={isNavOpen && !isTablet} onClick={toggleNavMenu} />
+        </>
+      ) : (
+        <NavList display={isTablet} />
+      )}
     </nav>
   );
 };

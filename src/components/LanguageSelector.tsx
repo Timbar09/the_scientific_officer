@@ -116,7 +116,7 @@ const LanguageSelector = () => {
     >
       <button
         type="button"
-        className="header__languageSelector__trigger flex ai-center gap-1 p-block-3 p-inline-4"
+        className="header__languageSelector__trigger flex ai-center gap-1 p-block-2 p-inline-3"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
         aria-label={t("language.label")}

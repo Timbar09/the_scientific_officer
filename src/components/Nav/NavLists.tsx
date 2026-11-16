@@ -1,8 +1,5 @@
 import { motion, AnimatePresence } from "motion/react";
 
-import { useLanguage } from "../../context/useLanguage";
-
-import Button from "../Button";
 import { NavMenuItem, NavLinkItem } from "./NavItems";
 
 const navLinks = [
@@ -50,17 +47,17 @@ export const MenuList = ({ display, onClick }: Menu) => (
             handleMenuItemClick={onClick}
           />
         ))}
+
+        <NavMenuItem
+          item={{ name: "Contribute", path: "/contribute" }}
+          handleMenuItemClick={onClick}
+        />
       </motion.ul>
     )}
   </AnimatePresence>
 );
 
 export const NavList = ({ display }: { display: boolean }) => {
-  const { t } = useLanguage();
-  const translationKey = "navigation.contribute";
-  const text = t(translationKey);
-  const translatedText = text === translationKey ? "Contribute" : text;
-
   if (!display) return null;
 
   return (
@@ -74,8 +71,6 @@ export const NavList = ({ display }: { display: boolean }) => {
           <NavLinkItem key={link.path} item={link} />
         ))}
       </ul>
-
-      <Button icon={{ name: "heart_plus" }}>{translatedText}</Button>
     </>
   );
 };
